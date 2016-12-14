@@ -19,7 +19,7 @@ public class JHLocalSettingUtils {
         return context.getSharedPreferences(localSettingName, Context.MODE_PRIVATE);
     }
 
-    public static void setLocalSetting(Context context, JHObject object, String key) {
+    public static void setLocalSetting(Context context, String key, Object object) {
         SharedPreferences.Editor editor = getSharePreferences(context).edit();
         String value  = JSON.toJSONString(object);
         editor.putString(key, value);
@@ -34,9 +34,31 @@ public class JHLocalSettingUtils {
         editor.commit();
     }
 
-    public static JHObject getLocalSetting(Context context, String key, Class clazz) {
+    public static Object getLocalSetting(Context context, String key, Class clazz) {
         SharedPreferences sharedPreferences = getSharePreferences(context);
         String value = sharedPreferences.getString(key, "");
-        return (JHObject) JSON.parseObject(value, clazz);
+        return JSON.parseObject(value, clazz);
+    }
+
+    public static void setStringLocalSetting(Context context, String key, String value) {
+        SharedPreferences.Editor editor = getSharePreferences(context).edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String getStringLocalSetting(Context context, String key) {
+        SharedPreferences sharedPreferences = getSharePreferences(context);
+        return sharedPreferences.getString(key, "");
+    }
+
+    public static void setIntLocalSetting(Context context, String key, int value) {
+        SharedPreferences.Editor editor = getSharePreferences(context).edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+    public static int getIntLocalSetting(Context context, String key) {
+        SharedPreferences sharedPreferences = getSharePreferences(context);
+        return sharedPreferences.getInt(key, -1);
     }
 }

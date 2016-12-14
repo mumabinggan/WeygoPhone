@@ -1,11 +1,17 @@
 package com.weygo.weygophone;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +19,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHFontUtils;
+import com.weygo.common.tools.JHLanguageUtils;
+import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.request.SFSF;
 import com.weygo.weygophone.request.WGRequest;
 import com.weygo.weygophone.request.WGWeatherRequest;
@@ -29,9 +37,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class WGMainActivity extends Activity {
+public class WGMainActivity extends WGBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,30 @@ public class WGMainActivity extends Activity {
         //this.testProperty();
         //this.testLocalSetting();
         //this.testImageLoader();
+        //this.testLanguageSwitch();
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(WGMainActivity.this, TwoActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    void testLog() {
+        Log.e("fasd", "f");
+    }
+
+    void testLanguageSwitch() {
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        // 应用用户选择语言
+        config.locale = Locale.ITALY;
+        resources.updateConfiguration(config, dm);
+        //TextView textView = (TextView) findViewById(R.id.textView);
+        //textView.setText(R.string.hello);
     }
 
     void testFonts() {
@@ -59,7 +92,7 @@ public class WGMainActivity extends Activity {
     void testLocalSetting() {
         String name = "testLocalSetting_ss";
         WGRequest ss = new WGRequest();
-        JHLocalSettingUtils.setLocalSetting(this, ss, name);
+        JHLocalSettingUtils.setLocalSetting(this, name, ss);
         WGRequest object = (WGRequest) JHLocalSettingUtils.getLocalSetting(this, name, WGRequest.class);
         System.out.println("---------------------" + object.key);
     }
