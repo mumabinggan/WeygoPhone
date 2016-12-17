@@ -21,6 +21,7 @@ import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHFontUtils;
 import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.request.SFSF;
 import com.weygo.weygophone.request.WGRequest;
 import com.weygo.weygophone.request.WGWeatherRequest;
@@ -40,14 +41,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class WGMainActivity extends WGBaseActivity {
+public class WGMainActivity extends WGTitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wgmain);
+        setContentView(R.layout.title_activity);
 
-        this.testFonts();
+        //this.testFonts();
         //this.getAsyn();
         //printField();
         boolean s = true;
@@ -58,14 +59,6 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testLocalSetting();
         //this.testImageLoader();
         //this.testLanguageSwitch();
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(WGMainActivity.this, TwoActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     void testLog() {
@@ -81,6 +74,7 @@ public class WGMainActivity extends WGBaseActivity {
         resources.updateConfiguration(config, dm);
         //TextView textView = (TextView) findViewById(R.id.textView);
         //textView.setText(R.string.hello);
+
     }
 
     void testFonts() {

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.weygo.common.tools.JHActivityCollector;
+import com.weygo.common.widget.JHNavigationBar;
+import com.weygo.weygophone.R;
 
 /**
  * Created by muma on 2016/12/7.
