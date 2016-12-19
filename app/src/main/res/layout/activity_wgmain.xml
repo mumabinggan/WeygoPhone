@@ -6,16 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.weygo.weygophone.WGMainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="@dimen/x160"
-        android:layout_height="wrap_content"
-        android:text="@string/hello"
-        android:background="#ff0000"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+    <include
+        android:id="@+id/main_frame"
+        layout="@layout/main_tabbar" />
 
 </RelativeLayout>

@@ -6,10 +6,10 @@
     android:fitsSystemWindows="true" >
 
     <ImageView
-        android:id="@+id/titlebar_left"
+        android:id="@+id/titlebar_simpleIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="@dimen/x15"
         android:layout_centerVertical="true"
         android:src="@drawable/arrow_black"/>
 
@@ -24,12 +24,22 @@
         android:textColor="@color/navigationBar_title"/>
 
     <ImageView
-        android:id="@+id/titlebar_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/titlebar_cart"
+        android:layout_width="@dimen/x10"
+        android:layout_height="@dimen/x10"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="@dimen/x15"
         android:layout_centerVertical="true"
         android:src="@drawable/arrow_black"/>
+
+    <ImageView
+        android:id="@+id/titlebar_search"
+        android:layout_width="@dimen/x10"
+        android:layout_height="@dimen/x10"
+        android:layout_alignLeft="@+id/titlebar_cart"
+        android:layout_marginRight="@dimen/x18"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow_black"/>
+
 
 </com.weygo.common.widget.JHNavigationBar>

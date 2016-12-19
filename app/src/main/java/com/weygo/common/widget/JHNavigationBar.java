@@ -75,6 +75,10 @@ public class JHNavigationBar extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public void setLeftBtnVisible(int visible) {
+        mLeftImageView.setVisibility(visible);
+    }
+
     public void setRightBtnVisible(int visible) {
         mRightImageView.setVisibility(visible);
     }

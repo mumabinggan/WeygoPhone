@@ -1,6 +1,7 @@
 package com.weygo.weygophone;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -8,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -17,9 +19,11 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHFontUtils;
 import com.weygo.common.tools.JHLanguageUtils;
+import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.request.SFSF;
@@ -36,17 +40,20 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class WGMainActivity extends WGTitleActivity {
+public class WGMainActivity extends WGBaseActivity {
+
+    private JHTabBar mTabBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.title_activity);
+        setContentView(R.layout.activity_wgmain);
 
         //this.testFonts();
         //this.getAsyn();
@@ -59,6 +66,22 @@ public class WGMainActivity extends WGTitleActivity {
         //this.testLocalSetting();
         //this.testImageLoader();
         //this.testLanguageSwitch();
+        this.initTabBar(this);
+    }
+
+    void initTabBar(Context context) {
+        mTabBar = (JHTabBar) findViewById(R.id.main_frame);
+        mTabBar.setActivity(this);
+        int[] drawables = { R.drawable.tabbar_home_drawable,
+                R.drawable.tabbar_classify_drawable,
+                R.drawable.tabbar_benefit_drawable,
+                R.drawable.tabbar_foreign_drawable,
+                R.drawable.tabbar_mine_drawable};
+        mTabBar.setDrawables(drawables);
+        mTabBar.setTitleArray(Arrays.asList("首页", "分类", "优惠", "外国", "我的"));
+        mTabBar.setFragmentClassArray(Arrays.asList(JHFragment.class,
+                JHFragment.class, JHFragment.class,
+                JHFragment.class, JHFragment.class));
     }
 
     void testLog() {
@@ -77,11 +100,11 @@ public class WGMainActivity extends WGTitleActivity {
 
     }
 
-    void testFonts() {
-        TextView textView = (TextView) findViewById(R.id.textView);
-        Typeface face = JHFontUtils.getTypeface(this, JHFontUtils.JHFontType.JHFontOswaldHeavy);
-        textView.setTypeface(face);
-    }
+//    void testFonts() {
+//        TextView textView = (TextView) findViewById(R.id.textView);
+//        Typeface face = JHFontUtils.getTypeface(this, JHFontUtils.JHFontType.JHFontOswaldHeavy);
+//        textView.setTypeface(face);
+//    }
 
     void testLocalSetting() {
         String name = "testLocalSetting_ss";

@@ -24,7 +24,6 @@ public class WGApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         WGChangeAppLanguageLogic.initAppLanguage(context);
-        //JHLanguageUtils.setAppLanguage(context, Locale.SIMPLIFIED_CHINESE);
     }
 
     public static Context getContext() {
