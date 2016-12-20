@@ -1,45 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.weygo.common.widget.JHNavigationBar xmlns:android="http://schemas.android.com/apk/res/android"
+<com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="44dp"
     android:background="@color/navigationBar_background"
     android:fitsSystemWindows="true" >
 
     <ImageView
-        android:id="@+id/titlebar_simpleIntro"
+        android:id="@+id/navigationBar_simpleIntro"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/x15"
         android:layout_centerVertical="true"
-        android:src="@drawable/arrow_black"/>
+        android:src="@drawable/arrow_black" />
 
     <TextView
-        android:id="@+id/titlebar_title"
-        android:layout_width="match_parent"
+        android:id="@+id/navigationBar_title"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:gravity="center"
+        android:layout_centerInParent="true"
         android:textSize="16sp"
-        android:textColor="@color/navigationBar_title"/>
+        android:text="34834898394"
+        android:drawableRight="@drawable/home_navigationbar_jiantou"
+        android:drawablePadding="6dp"
+        android:textColor="@color/navigationBar_title" />
 
     <ImageView
-        android:id="@+id/titlebar_cart"
-        android:layout_width="@dimen/x10"
-        android:layout_height="@dimen/x10"
+        android:id="@+id/navigationBar_search"
+        android:layout_width="@dimen/x25"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x263"
+        android:layout_centerVertical="true"
+        android:src="@drawable/arrow_black"/>
+
+    <ImageView
+        android:id="@+id/navigationBar_cart"
+        android:layout_width="@dimen/x25"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/x15"
+        android:layout_marginRight="@dimen/x7"
         android:layout_centerVertical="true"
-        android:src="@drawable/arrow_black"/>
-
-    <ImageView
-        android:id="@+id/titlebar_search"
-        android:layout_width="@dimen/x10"
-        android:layout_height="@dimen/x10"
-        android:layout_alignLeft="@+id/titlebar_cart"
-        android:layout_marginRight="@dimen/x18"
-        android:layout_centerVertical="true"
-        android:src="@drawable/arrow_black"/>
+        android:src="@drawable/arrow_black" />
 
 
-</com.weygo.common.widget.JHNavigationBar>
+</com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar>

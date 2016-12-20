@@ -10,4 +10,10 @@
         android:id="@+id/main_frame"
         layout="@layout/main_tabbar" />
 
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#1A00ff00">-->
+    <!--</View>-->
+
 </RelativeLayout>

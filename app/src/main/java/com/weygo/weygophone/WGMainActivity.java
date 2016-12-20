@@ -26,6 +26,7 @@ import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
 import com.weygo.weygophone.request.SFSF;
 import com.weygo.weygophone.request.WGRequest;
 import com.weygo.weygophone.request.WGWeatherRequest;
@@ -78,10 +79,17 @@ public class WGMainActivity extends WGBaseActivity {
                 R.drawable.tabbar_foreign_drawable,
                 R.drawable.tabbar_mine_drawable};
         mTabBar.setDrawables(drawables);
-        mTabBar.setTitleArray(Arrays.asList("首页", "分类", "优惠", "外国", "我的"));
-        mTabBar.setFragmentClassArray(Arrays.asList(JHFragment.class,
-                JHFragment.class, JHFragment.class,
-                JHFragment.class, JHFragment.class));
+        mTabBar.setTitleIdArray(Arrays.asList(R.string.main_home,
+                R.string.main_classify, R.string.main_benefit,
+                R.string.main_foreign, R.string.main_mine));
+        List<Class> fragmentClassArray = new ArrayList<>();
+        fragmentClassArray.add(WGHomeFragment.class);
+        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(JHFragment.class);
+        mTabBar.setFragmentClassArray(fragmentClassArray);
+        mTabBar.setSelectIndex(0);
     }
 
     void testLog() {

@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">W</string>
     <string name="hello">你好</string>
+    <string name="main_home">首页</string>
+    <string name="main_classify">分类</string>
+    <string name="main_benefit">优惠</string>
+    <string name="main_foreign">外国</string>
+    <string name="main_mine">我的</string>
 </resources>

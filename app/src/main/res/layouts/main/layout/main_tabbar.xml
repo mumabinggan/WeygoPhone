@@ -9,11 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
+
     </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16px"
+            android:background="@color/baseBackgroundColor">
+        </View>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -23,7 +31,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
             
             <RelativeLayout
                 android:layout_width="match_parent"

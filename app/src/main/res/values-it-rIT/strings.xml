@@ -2,4 +2,9 @@
 <resources>
     <string name="app_name">Weygo</string>
     <string name="hello">helloItain</string>
+    <string name="main_home">home</string>
+    <string name="main_classify">classify</string>
+    <string name="main_benefit">benefit</string>
+    <string name="main_foreign">foreign</string>
+    <string name="main_mine">mine</string>
 </resources>

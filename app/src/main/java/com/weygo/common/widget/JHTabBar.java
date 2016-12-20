@@ -18,6 +18,7 @@ import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHFragment;
 import com.weygo.common.tools.JHArrayUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +64,7 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
     public JHTabBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        Log.e("----------------", "-----------------");
     }
 
     @Override
@@ -81,6 +83,7 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         }
 
         mFrameLayout = (FrameLayout) findViewById(R.id.tabBar_frameLayout);
+        Log.e("+++++++++++++++++", "+++++++++++++++++");
     }
 
     public void setActivity(JHActivity activity) {
@@ -104,17 +107,17 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         }
     }
 
-    public void setTitleArray(List<String> titleArray) {
-        for (int num = 0; num < titleArray.size(); ++num) {
+    public void setTitleIdArray(List<Integer> titleIdArray) {
+        for (int num = 0; num < titleIdArray.size(); ++num) {
             View item = mItemArray.get(num);
             if (item instanceof TextView) {
                 TextView textView = (TextView) item;
-                textView.setText(titleArray.get(num));
+                textView.setText(mContext.getResources().getText(titleIdArray.get(num)));
             }
         }
     }
 
-    public void setFragmentClassArray(List<Class<JHFragment>> fragmentClassArray) {
+    public void setFragmentClassArray(List<Class> fragmentClassArray) {
         if (JHArrayUtils.isNullOrEmpty(fragmentClassArray)) {
             return;
         }
@@ -124,6 +127,10 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         for (int num = 0; num < fragmentClassArray.size(); ++num) {
             mFragmentClassMap.put(mItemIdArray.get(num), fragmentClassArray.get(num));
         }
+    }
+
+    public void setSelectIndex(Integer index) {
+        mItemArray.get(index).performClick();
     }
 
     @Override
@@ -136,6 +143,7 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         }
         FragmentTransaction transaction = mActivity.getFragmentManager().beginTransaction();
         hideAllFragment(transaction);
+
         JHFragment fragment = mFragmentMap.get(view.getId());
         if (fragment == null) {
             Integer key = view.getId();
@@ -150,7 +158,11 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
-        transaction.show(fragment);
+        else {
+            transaction.show(fragment);
+        }
+
+        transaction.commit();
         view.setSelected(true);
     }
 
