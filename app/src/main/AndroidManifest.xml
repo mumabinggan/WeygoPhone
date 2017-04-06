@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".pages.test.WGTestActivity" android:theme="@style/Transparent">
+
+        </activity>
+        <activity android:name=".pages.slider.WGSliderActivity" android:theme="@style/Transparent">
+        </activity>
     </application>
 
     <!-- Include following permission if you load images from Internet -->

@@ -1,5 +1,7 @@
 package com.weygo.weygophone.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by muma on 2016/12/7.
  */

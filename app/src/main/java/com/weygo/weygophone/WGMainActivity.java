@@ -9,10 +9,16 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +32,10 @@ import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.models.JHTests;
+import com.weygo.weygophone.pages.slider.WGSliderActivity;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
+import com.weygo.weygophone.pages.test.WGTestActivity;
 import com.weygo.weygophone.request.SFSF;
 import com.weygo.weygophone.request.WGRequest;
 import com.weygo.weygophone.request.WGWeatherRequest;
@@ -39,6 +48,8 @@ import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 
+import org.parceler.Parcels;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,12 +61,13 @@ import java.util.Map;
 public class WGMainActivity extends WGBaseActivity {
 
     private JHTabBar mTabBar;
+    private View _sliderBgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wgmain);
-
+        overridePendingTransition(R.anim.trans_main, R.anim.trans_main);
         //this.testFonts();
         //this.getAsyn();
         //printField();
@@ -68,6 +80,8 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testImageLoader();
         //this.testLanguageSwitch();
         this.initTabBar(this);
+        this.testParcel();
+        getWindow();
     }
 
     void initTabBar(Context context) {
@@ -90,6 +104,27 @@ public class WGMainActivity extends WGBaseActivity {
         fragmentClassArray.add(JHFragment.class);
         mTabBar.setFragmentClassArray(fragmentClassArray);
         mTabBar.setSelectIndex(0);
+    }
+
+    void initSlider() {
+        _sliderBgView = (View)findViewById(R.id.slider_bg_view);
+        Animation sliderBgOpenAnimation =
+                AnimationUtils.loadAnimation(this, R.anim.slider_bg_open);
+        _sliderBgView.setAnimation(sliderBgOpenAnimation);
+    }
+
+    void openSliderActivity() {
+        Intent item = new Intent(WGMainActivity.this, WGSliderActivity.class);
+        startActivity(item);
+    }
+
+    void testParcel() {
+        JHTests s = new JHTests();
+        Parcelable wrapped = Parcels.wrap(s);
+        JHTests example = Parcels.unwrap(wrapped);
+        Log.e("fdasdf : ", example.mm);
+        Log.e("fdasdf : ", example.m + "");
+        Log.e("fdasdf : ", example.ss + "");
     }
 
     void testLog() {
