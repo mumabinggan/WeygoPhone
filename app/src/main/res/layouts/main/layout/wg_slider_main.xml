@@ -6,9 +6,17 @@
     android:background="#00ff0000">
 
     <View
-        android:layout_width="100dp"
+        android:id="@+id/slider_contentView"
+        android:layout_width="@dimen/x239"
         android:layout_height="match_parent"
         android:background="#ffff00">
+    </View>
+
+    <View
+        android:id="@+id/slider_blankView"
+        android:layout_width="@dimen/x81"
+        android:layout_height="match_parent"
+        android:background="#00ffffff">
     </View>
 
 
