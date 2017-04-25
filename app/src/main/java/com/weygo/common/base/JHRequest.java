@@ -22,7 +22,7 @@ import okhttp3.RequestBody;
 public class JHRequest extends JHObject {
 
     @JSONField(serialize=false)
-    boolean showsLoadingView = true;
+    public boolean showsLoadingView = true;
 
     @JSONField(serialize=false)
     String loadingMessage = null;
@@ -61,7 +61,9 @@ public class JHRequest extends JHObject {
         return scheme() + "://" + host() + ":" + port() + path() + api();
     };
 
-    //Set acceptContentTypes() {}
+    Set acceptContentTypes() {
+        return null;
+    }
 
     //public Map<String, String>
 }

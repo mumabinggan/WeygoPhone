@@ -2,6 +2,6 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
         android:fromXDelta="100%p"
-        android:toXDelta="50%p"
-        android:duration="@android:integer/config_shortAnimTime"/>
+        android:toXDelta="0%p"
+        android:duration="0"/>
 </set>

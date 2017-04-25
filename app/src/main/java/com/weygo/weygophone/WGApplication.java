@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
@@ -24,6 +26,8 @@ public class WGApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         WGChangeAppLanguageLogic.initAppLanguage(context);
+        Log.e("application", "fssss");
+        //SystemClock.sleep(8000);
     }
 
     public static Context getContext() {

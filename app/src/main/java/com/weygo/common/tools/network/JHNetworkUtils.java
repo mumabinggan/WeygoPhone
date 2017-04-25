@@ -11,11 +11,26 @@ import okhttp3.Call;
 
 public class JHNetworkUtils extends JHObject {
 
-    private static volatile JHNetworkUtils mInstance;//单利引用
+    private static final JHNetworkUtils ourInstance = new JHNetworkUtils();
 
-    static JHBaseNetworkInterface network = new JHOKHTTPNewwork();
+    public static JHNetworkUtils getInstance() {
+        return ourInstance;
+    }
 
-    public static Call getAsyn(JHRequest request, Class clazz, JHResponseCallBack callBack) {
+    JHBaseNetworkInterface network = null;
+
+    private JHNetworkUtils() {
+        super();
+        network = new JHOKHTTPNewwork();
+    }
+
+    public Call getAsyn(JHRequest request, Class clazz, JHResponseCallBack callBack) {
         return network.getAsync(request, clazz, callBack);
     }
+
+    public Call postAsyn(JHRequest request, Class clazz, JHResponseCallBack callBack) {
+        return network.postAsync(request, clazz, callBack);
+    }
+
+
 }

@@ -30,7 +30,6 @@ public class WGSliderActivity extends WGBaseActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public void onBackPressed() {

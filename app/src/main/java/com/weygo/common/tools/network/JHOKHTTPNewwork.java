@@ -3,16 +3,24 @@ package com.weygo.common.tools.network;
 import android.os.Handler;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHRequest;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHStringUtils;
+import com.weygo.weygophone.base.WGResponse;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -36,17 +44,24 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
     }
 
     @Override
-    public Call getAsync(JHRequest originRequest, Class clazz, final JHResponseCallBack callBack) {
-//        final Request request = new Request.Builder()
-//                .get()
-//                .tag(this)
-//                .url("http://apis.baidu.com/apistore/weatherservice/citylist")
-//                .build();
+    public Call getAsync(JHRequest originRequest, final Class clazz, final JHResponseCallBack callBack) {
+        StringBuffer paramsString = new StringBuffer();
+        String jsonString = JSON.toJSONString(originRequest);
+        Map<String, Object> paramsMap = JSON.parseObject(
+                jsonString,new TypeReference<Map<String, Object>>(){} );
+        for (Map.Entry<String, Object> m :paramsMap.entrySet()) {
+            paramsString.append("&");
+            paramsString.append(m.getKey());
+            paramsString.append(m.getValue() + "");
+        }
+        //补全请求地址
+        String requestUrl = String.format("%s%s", originRequest.url(), paramsString.toString());
         final Request request = new Request.Builder()
                 .get()
                 .tag(originRequest)
-                .url(originRequest.url())
+                .url(requestUrl)
                 .build();
+        //RequestBody.create(MEDIA_TYPE_JSON, params);
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -56,14 +71,50 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                successCallBack(call, response, callBack);
+                successCallBack(call, response, clazz, callBack);
+            }
+        });
+        return call;
+    }
+
+    @Override
+    public Call postAsync(JHRequest originRequest, final Class clazz, final JHResponseCallBack callBack) {
+        StringBuffer paramsString = new StringBuffer();
+        String jsonString = JSON.toJSONString(originRequest);
+        Map<String, Object> paramsMap = JSON.parseObject(
+                jsonString,new TypeReference<Map<String, Object>>(){} );
+        for (Map.Entry<String, Object> m :paramsMap.entrySet()) {
+            paramsString.append("&");
+            paramsString.append(m.getKey());
+            paramsString.append(m.getValue() + "");
+        }
+        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+        //补全请求地址
+        RequestBody body = RequestBody.create(mediaType, paramsString.toString());
+        final Request request = new Request.Builder()
+                .post(body)
+                .tag(originRequest)
+                .url(originRequest.url())
+                .build();
+        //RequestBody.create(MEDIA_TYPE_JSON, params);
+        final Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                failCallBack(call, callBack, e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                successCallBack(call, response, clazz, callBack);
             }
         });
         return call;
     }
 
     void failCallBack(Call call, final JHResponseCallBack callBack, IOException e) {
-        Log.e("failCallBack", "dasdfasdf");
+        Log.e("failCallBack", e.toString());
+        System.out.println(e);
         okHttpHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -74,24 +125,29 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
         });
     }
 
-    void successCallBack(Call call, Response response, final JHResponseCallBack callBack) {
+    void successCallBack(Call call, Response response, Class clazz, final JHResponseCallBack callBack) {
         if (response.code() == 200) {
+            String resultString = null;
             try {
-                Log.e("haha", response.body().string());
+                resultString = response.body().string();
             } catch (IOException e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
+            if (JHStringUtils.isNullOrEmpty(resultString)) {
+                callBack.onSuccess(null);
+                return;
+            }
+            final JHResponse resultResponse = (JHResponse) JSON.parseObject(resultString, clazz);
             okHttpHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     if (callBack != null) {
-                        callBack.onSuccess(new JHResponse());
+                        callBack.onSuccess(resultResponse);
                     }
                 }
             });
         }
         else {
-            Log.e("fail", "dasdfasdf");
             callBack.onFailure(new JHRequestError());
         }
     }

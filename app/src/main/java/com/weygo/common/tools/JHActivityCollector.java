@@ -2,6 +2,7 @@ package com.weygo.common.tools;
 
 import android.app.Activity;
 
+import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHObject;
 
 import java.util.LinkedList;
@@ -33,5 +34,13 @@ public class JHActivityCollector extends JHObject {
 
     public static LinkedList<Activity> getActivityList() {
         return activityList;
+    }
+
+    public static JHActivity firstActivity() {
+        return (JHActivity)activityList.getFirst();
+    }
+
+    public static JHActivity lastActivity() {
+        return (JHActivity)activityList.getLast();
     }
 }

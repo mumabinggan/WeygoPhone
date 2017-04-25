@@ -48,6 +48,9 @@ dependencies {
     //fastjson
     compile 'com.alibaba:fastjson:1.2.21'
 
+    //fastjson
+    compile 'com.alibaba:fastjson:1.2.21'
+
     //logger
     compile 'com.orhanobut:logger:1.15'
 

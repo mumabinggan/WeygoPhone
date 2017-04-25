@@ -5,6 +5,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="baseServiceActivity_Anim" parent="android:Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/fade</item>
+    </style>
+    <style name="fade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/s</item>
+        <item name="android:activityOpenExitAnimation">@anim/s</item>
+        <item name="android:activityCloseEnterAnimation">@anim/s</item>
+        <item name="android:activityCloseExitAnimation">@anim/s</item>
+    </style>
+
     <style
         name="Theme.IOSched"
         parent="android:style/Theme.Light">
@@ -28,6 +38,27 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+    //ShowDialog
+    <!-- my loading dialog -->
+    <!-- popup window 显示消失动画-->
+    <style name="PopWindowAnimStyle">
+        <item name="android:windowShowAnimation">@anim/loaddialog_enter</item>
+        <!-- 指定显示的动画xml  -->
+        <item name="android:windowHideAnimation">@anim/loaddialog_exit</item>
+        <!-- 指定消失的动画xml  -->
+    </style>
+
+    <style name="MyDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
 </resources>
