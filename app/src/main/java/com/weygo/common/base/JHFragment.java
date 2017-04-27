@@ -1,6 +1,7 @@
 package com.weygo.common.base;
 
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 
 import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHResponseCallBack;

@@ -18,5 +18,9 @@ public class WGConstants {
     public static final String WGAppkeyKey = "appkey";
     public static final String WGAppkeyValue = "JXEENBJCB8A3SEBZA";
 
+    //LocalSetting
+    public static final String WGLocalSettingUser = "WGLocalSettingUser";
+    public static final String WGLocalSettingUnLoginPostCode = "WGLocalSettingUnLoginPostCode";
+
 
 }

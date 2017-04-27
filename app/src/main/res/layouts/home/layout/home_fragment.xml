@@ -8,13 +8,14 @@
         android:id="@+id/home_navigationBar"
         layout="@layout/home_navigationbar" />
 
-    <TextView
-        android:id="@+id/txt_content"
+    <com.shizhefei.view.indicator.ScrollIndicatorView
+        android:id="@+id/home_segmentView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="呵呵"
-        android:textColor="#00ff00"
-        android:textSize="20sp"/>
+        android:layout_height="@dimen/x38" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

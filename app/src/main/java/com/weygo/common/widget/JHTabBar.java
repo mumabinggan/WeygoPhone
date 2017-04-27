@@ -1,24 +1,20 @@
 package com.weygo.common.widget;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHFragment;
 import com.weygo.common.tools.JHArrayUtils;
 import com.weygo.weygophone.R;
-import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,7 +137,8 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         if (mFragmentMap == null) {
             mFragmentMap = new HashMap<>();
         }
-        FragmentTransaction transaction = mActivity.getFragmentManager().beginTransaction();
+
+        FragmentTransaction transaction = mActivity.getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
 
         JHFragment fragment = mFragmentMap.get(view.getId());

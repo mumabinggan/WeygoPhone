@@ -3,6 +3,8 @@ package com.weygo.common.tools;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import com.weygo.weygophone.R;
+
 /**
  * Created by muma on 2016/12/14.
  */
@@ -82,5 +84,9 @@ public class JHFontUtils {
         }
         fontName += ".ttf";
         return Typeface.createFromAsset(context.getAssets(), fontName);
+    }
+
+    public static float font(Context context, float fontSize) {
+        return (JHAdaptScreenUtils.deviceDpWidth(context) * fontSize) / 320;
     }
 }

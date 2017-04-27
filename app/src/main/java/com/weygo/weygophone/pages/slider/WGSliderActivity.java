@@ -2,7 +2,6 @@ package com.weygo.weygophone.pages.slider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
@@ -18,7 +17,7 @@ public class WGSliderActivity extends WGBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wg_slider_main);
+        setContentView(R.layout.wgslider_main_activity);
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_main);
         Log.e("asdfasdfad", "asdfasdfasd");
         View blackView = (View) findViewById(R.id.slider_blankView);

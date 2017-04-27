@@ -10,4 +10,8 @@
 
     <string name="request_StoreValue">mobilecn</string>
 
+    <string name="PersonInfo_Sex_Select">选择</string>
+    <string name="PersonInfo_Sex_Man">男</string>
+    <string name="PersonInfo_Sex_Woman">女</string>
+
 </resources>

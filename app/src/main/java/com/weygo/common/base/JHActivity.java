@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.weygo.common.tools.JHActivityCollector;
 import com.weygo.common.tools.JHDialogUtils;
@@ -17,7 +18,7 @@ import com.weygo.weygophone.R;
  * Created by muma on 2016/12/7.
  */
 
-public class JHActivity extends Activity {
+public class JHActivity extends FragmentActivity {
 
     Dialog _showDialog;
 
@@ -106,5 +107,4 @@ public class JHActivity extends Activity {
             }
         });
     }
-
 }

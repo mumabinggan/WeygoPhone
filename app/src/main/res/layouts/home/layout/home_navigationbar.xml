@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/navigationBar_simpleIntro"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x20"
         android:layout_marginLeft="@dimen/x15"
         android:layout_centerVertical="true"
-        android:src="@drawable/arrow_black" />
+        android:src="@drawable/slider_while_icon" />
 
     <TextView
         android:id="@+id/navigationBar_title"

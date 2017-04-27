@@ -10,4 +10,8 @@
 
     <string name="request_StoreValue">mobileitaly</string>
 
+    <string name="PersonInfo_Sex_Select">Seleziona</string>
+    <string name="PersonInfo_Sex_Man">Maschile</string>
+    <string name="PersonInfo_Sex_Woman">Femminile</string>
+
 </resources>

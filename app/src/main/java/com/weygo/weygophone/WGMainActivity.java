@@ -1,63 +1,41 @@
 package com.weygo.weygophone;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.alibaba.fastjson.asm.Label;
-import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHResponse;
-import com.weygo.common.tools.JHActivityCollector;
-import com.weygo.common.tools.JHFontUtils;
-import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
-import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.models.JHTests;
-import com.weygo.weygophone.pages.base.model.WGBaseService;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
 import com.weygo.weygophone.pages.slider.WGSliderActivity;
 import com.weygo.weygophone.pages.tabs.classify.Model.Request.WGClassifyRequest;
 import com.weygo.weygophone.pages.tabs.classify.Model.Response.WGClassifyResponse;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
-import com.weygo.weygophone.pages.test.WGTestActivity;
-import com.weygo.common.tools.JHClassUtils;
-import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderEntity;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderListener;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
-import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.pages.test.WGTestRequest;
 
 import org.parceler.Parcels;
 
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -75,7 +53,7 @@ public class WGMainActivity extends WGBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wgmain);
+        setContentView(R.layout.wgmain_main_activity);
         overridePendingTransition(R.anim.trans_main, R.anim.trans_main);
         Log.e("mainActivity", "fssss");
         //this.testFonts();

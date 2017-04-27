@@ -4,8 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="baseColor">#EE7A3C</color>
-    <color name="baseGrayColor">#B0BEC5</color>
+    <color name="WGAppBaseColor">#FFEE7A3C</color>
+    <color name="WGAppBaseGrayColor">#FFB0BEC5</color>
+    <color name="WGAppBaseTitleAColor">#DE000000</color>
+    <color name="WGAppBaseTitleAAColor">#8A000000</color>
+    <color name="WGAppBaseTitleAAAColor">#61000000</color>
+    <color name="WGAppBaseTitleAAAAColor">#1F000000</color>
+
+    <color name="WGAppBlueButtonColor">#5677FC</color>
 
     <color name="baseBackgroundColor">#EBEEF0</color>
 
@@ -18,5 +24,7 @@
     <color name="separate_color">#1A000000</color>
 
     <color name="transparent">#00000000</color>
+
+
 
 </resources>

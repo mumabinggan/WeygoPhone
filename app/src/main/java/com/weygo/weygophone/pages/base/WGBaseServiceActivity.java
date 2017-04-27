@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.base.model;
+package com.weygo.weygophone.pages.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +22,11 @@ public class WGBaseServiceActivity extends WGBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_baseservice);
-        this.loadBaseService();
+        setContentView(R.layout.baseservice_activity);
+        //this.loadBaseService();
+
+        Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
+        startActivity(intent);
     }
 
     void loadBaseService() {
