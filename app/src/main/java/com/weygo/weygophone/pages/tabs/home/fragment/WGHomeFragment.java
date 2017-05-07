@@ -27,11 +27,14 @@ import com.weygo.common.tools.JHWarningUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.pages.slider.WGSliderActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar;
+
+import org.parceler.transfuse.annotations.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,13 +60,16 @@ public class WGHomeFragment extends JHFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment,container,false);
-
+        final WGMainActivity activity = (WGMainActivity) getActivity();
         mNavigationBar = (WGHomeNavigationBar) view.findViewById(R.id.home_navigationBar);
         mNavigationBar.setOnClickListener(new WGHomeNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
+                /*
                 Intent intent = new Intent(getActivity(), WGSliderActivity.class);
                 startActivity(intent);
+                */
+                activity.testActivity();
             }
 
             @Override

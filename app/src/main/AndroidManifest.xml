@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WGMainActivity" android:theme="@style/Transparent">
+        <activity android:name=".WGMainActivity" android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".pages.test.WGTestActivity" android:theme="@style/Transparent">
 

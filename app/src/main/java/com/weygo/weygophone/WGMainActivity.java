@@ -1,5 +1,6 @@
 package com.weygo.weygophone;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -7,12 +8,21 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -24,6 +34,7 @@ import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
 import com.weygo.weygophone.pages.slider.WGSliderActivity;
+import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.tabs.classify.Model.Request.WGClassifyRequest;
 import com.weygo.weygophone.pages.tabs.classify.Model.Response.WGClassifyResponse;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
@@ -48,7 +59,9 @@ import java.util.TreeMap;
 public class WGMainActivity extends WGBaseActivity {
 
     private JHTabBar mTabBar;
-    private View _sliderBgView;
+
+    private DrawerLayout mDrawerLayout;
+    private WGSliderFragmet mSliderFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +80,17 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testLocalSetting();
         //this.testImageLoader();
         //this.testLanguageSwitch();
-        this.initTabBar(this);
-        this.testParcel();
+        this.initTabBar();
+        this.initDrawerLayout();
+        this.initSlider();
 
         //this.testPrintDic();
         //this.testModelToMap();
-        this.testRequest();
         //this.testPostClassifyGetRequest();
         getWindow();
     }
 
-    void initTabBar(Context context) {
+    void initTabBar() {
         mTabBar = (JHTabBar) findViewById(R.id.main_frame);
         mTabBar.setActivity(this);
         int[] drawables = { R.drawable.tabbar_home_drawable,
@@ -99,11 +112,22 @@ public class WGMainActivity extends WGBaseActivity {
         mTabBar.setSelectIndex(0);
     }
 
+    void initDrawerLayout() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_wgmain);
+    }
+
     void initSlider() {
-        _sliderBgView = (View)findViewById(R.id.slider_bg_view);
-        Animation sliderBgOpenAnimation =
-                AnimationUtils.loadAnimation(this, R.anim.slider_bg_open);
-        _sliderBgView.setAnimation(sliderBgOpenAnimation);
+        mSliderFragment = (WGSliderFragmet) getSupportFragmentManager().
+                findFragmentById(R.id.slider_fragment);
+    }
+
+    void initDrawerContent() {
+
+    }
+
+    public void testActivity() {
+        Log.e("error", "testActivity");
+        mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
     void openSliderActivity() {
