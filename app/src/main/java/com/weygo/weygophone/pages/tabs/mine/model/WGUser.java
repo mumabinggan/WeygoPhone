@@ -60,13 +60,13 @@ public class WGUser extends WGObject {
     //for self use
     public int userAvatar() {
         if (sex == 1) {
-            return R.drawable.arrow_black;
+            return R.drawable.mine_boy_icon;
         }
         else if (sex == 2) {
-            return R.drawable.arrow_black;
+            return R.drawable.mine_girl_icon;
         }
         else {
-            return R.drawable.arrow_black;
+            return R.drawable.mine_unknown_icon;
         }
     }
 

@@ -14,4 +14,6 @@
     <string name="PersonInfo_Sex_Man">Maschile</string>
     <string name="PersonInfo_Sex_Woman">Femminile</string>
 
+    <string name="Request_Fail_Tip">网络不给力</string>
+
 </resources>

@@ -7,4 +7,16 @@ import com.weygo.common.base.JHResponse;
  */
 
 public class WGResponse extends JHResponse {
+
+    public int code;
+
+    public String message;
+
+    public boolean success() {
+        return code == 1;
+    }
+
+    public boolean reLogin() {
+        return code == -1;
+    }
 }

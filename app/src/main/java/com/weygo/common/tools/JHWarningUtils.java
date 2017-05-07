@@ -16,6 +16,11 @@ public class JHWarningUtils extends JHObject {
         Toast.makeText(ctx, message, shortTime ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show();
     }
 
+    public static void showToast(Context ctx, int messageId) {
+        String message = ctx.getResources().getString(messageId);
+        showToast(ctx, message, false);
+    }
+
     public static void showToast(Context ctx, String message) {
         showToast(ctx, message, false);
     }

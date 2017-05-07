@@ -18,16 +18,10 @@ public class WGTestActivity extends WGBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_info);
-        overridePendingTransition(R.anim.trans_right_in, R.anim.trans_main);
 //        JHTests book = Parcels.unwrap(getIntent().getParcelableExtra("book"));
 //        Log.e("ss : ", book.ss);
 //        Log.e("m : ", book.m + "");
 //        Log.e("mm : ", book.mm);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.trans_main, R.anim.trans_left_out);
-    }
 }

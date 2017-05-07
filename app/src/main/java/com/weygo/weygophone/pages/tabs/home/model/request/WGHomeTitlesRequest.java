@@ -7,4 +7,9 @@ import com.weygo.weygophone.base.WGRequest;
  */
 
 public class WGHomeTitlesRequest extends WGRequest {
+
+    public String api() {
+        return "catalogSearch/topMenus?";
+    }
+
 }

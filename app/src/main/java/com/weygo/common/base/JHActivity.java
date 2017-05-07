@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.weygo.common.tools.JHActivityCollector;
 import com.weygo.common.tools.JHDialogUtils;
 import com.weygo.common.tools.JHStatusBarUtils;
@@ -20,7 +22,7 @@ import com.weygo.weygophone.R;
 
 public class JHActivity extends FragmentActivity {
 
-    Dialog _showDialog;
+    Dialog mShowDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +57,14 @@ public class JHActivity extends FragmentActivity {
     public void getAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            _showDialog = JHDialogUtils.showLoadingDialog(this);
+            mShowDialog = JHDialogUtils.showLoadingDialog(this);
         }
         JHNetworkUtils.getInstance().getAsyn(request, clazz, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(_showDialog);
+                    JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -71,7 +74,7 @@ public class JHActivity extends FragmentActivity {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(_showDialog);
+                    JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);
@@ -83,13 +86,14 @@ public class JHActivity extends FragmentActivity {
     public void postAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            _showDialog = JHDialogUtils.showLoadingDialog(this);
+            mShowDialog = JHDialogUtils.showLoadingDialog(this);
         }
         JHNetworkUtils.getInstance().postAsyn(request, clazz, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(_showDialog);
+                    JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -99,7 +103,7 @@ public class JHActivity extends FragmentActivity {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(_showDialog);
+                    JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);

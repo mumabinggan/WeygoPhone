@@ -5,29 +5,36 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.shizhefei.view.indicator.FixedIndicatorView;
-import com.shizhefei.view.indicator.Indicator;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
-import com.viewpagerindicator.TabPageIndicator;
 import com.weygo.common.base.JHFragment;
+import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHFontUtils;
+import com.weygo.common.tools.JHWarningUtils;
+import com.weygo.common.tools.network.JHRequestError;
+import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.slider.WGSliderActivity;
-import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeSegmentPagerAdapter;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
+import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
+import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by muma on 2016/12/19.
@@ -35,15 +42,17 @@ import com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar;
 
 public class WGHomeFragment extends JHFragment {
 
+    //navigationbar
     WGHomeNavigationBar mNavigationBar;
 
+    //Segment and page
     ScrollIndicatorView mHomeSegmentView;
-
     ViewPager mViewPager;
+    MyAdapter mPagerAdapter;
+    IndicatorViewPager mIndicatorViewPager;
 
-    WGHomeSegmentPagerAdapter mPagerAdapter;
-
-    private IndicatorViewPager mIndicatorViewPager;
+    //data
+    List<WGHomeTitleItem> mTitleList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,17 +93,70 @@ public class WGHomeFragment extends JHFragment {
         mHomeSegmentView.setOnTransitionListener(new OnTransitionTextListener().setColor(selectColor, unSelectColor).setSize(selectSize, unSelectSize));
 
         mIndicatorViewPager = new IndicatorViewPager(mHomeSegmentView, mViewPager);
-        mIndicatorViewPager.setAdapter(new MyAdapter());
+        mPagerAdapter = new MyAdapter();
+        List versions = new ArrayList();
+        versions.add("Cupcake");
+        versions.add("Donut");
+        versions.add("Éclair");
+        versions.add("Froyo");
+        mPagerAdapter.versions = versions;
+
+        List names = new ArrayList();
+        names.add("Cupcake");
+        names.add("Donut");
+        names.add("Éclair");
+        names.add("Froyo");
+        mPagerAdapter.names = names;
+
+        mIndicatorViewPager.setAdapter(mPagerAdapter);
+
+        loadTitleData();
+
         return view;
     }
 
+    //Request
+    void loadTitleData() {
+        final WGHomeTitlesRequest request = new WGHomeTitlesRequest();
+        postAsyn(request, WGHomeTitlesResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleHomeTitlesSuccess((WGHomeTitlesResponse) response);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                JHWarningUtils.showToast(getContext(), R.string.app_name);
+            }
+        });
+    }
+
+    void handleHomeTitlesSuccess(WGHomeTitlesResponse response) {
+        if (response.success()) {
+            mTitleList = response.data;
+            mPagerAdapter.setTitleList(mTitleList);
+        }
+        else {
+            JHWarningUtils.showToast(getContext(), response.message);
+        }
+    }
+
     private class MyAdapter extends IndicatorViewPager.IndicatorViewPagerAdapter {
-        private String[] versions = {"Cupcake", "Donut", "Éclair", "Froyo"};
-        private String[] names = {"纸杯蛋糕", "甜甜圈", "闪电泡芙", "冻酸奶"};
+        public List<String> versions;
+        public List<String> names;
+
+        private List<WGHomeTitleItem> mTitleList;
+        public void setTitleList(List<WGHomeTitleItem> list) {
+            mTitleList = list;
+            notifyDataSetChanged();
+        }
 
         @Override
         public int getCount() {
-            return versions.length;
+            if (mTitleList == null) {
+                return 0;
+            }
+            return mTitleList.size();
         }
 
         @Override
@@ -104,11 +166,11 @@ public class WGHomeFragment extends JHFragment {
                 convertView = inflater.inflate(R.layout.common_segment_title, container, false);
             }
             TextView textView = (TextView) convertView;
-            textView.setText(versions[position]);
-            //因为wrap的布局 字体大小变化会导致textView大小变化产生抖动，这里通过设置textView宽度就避免抖动现象
-            //1.3f是根据上面字体大小变化的倍数1.3f设置
-            textView.setWidth(320 / getCount() * R.dimen.x1);
-
+            if (mTitleList != null && mTitleList.size() > position) {
+                WGHomeTitleItem item = mTitleList.get(position);
+                textView.setText(item.name);
+                textView.setWidth(320 / getCount() * R.dimen.x1);
+            }
             return convertView;
         }
 
@@ -118,7 +180,7 @@ public class WGHomeFragment extends JHFragment {
                 convertView = new TextView(container.getContext());
             }
             TextView textView = (TextView) convertView;
-            textView.setText(names[position]);
+            textView.setText(names.get(position));
             textView.setGravity(Gravity.CENTER);
             textView.setTextColor(Color.GRAY);
             return convertView;
@@ -142,10 +204,5 @@ public class WGHomeFragment extends JHFragment {
             int width = bounds.left + bounds.width();
             return width;
         }
-
-        public void loadTitle() {
-
-        }
-
     }
 }

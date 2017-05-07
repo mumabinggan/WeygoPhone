@@ -9,7 +9,7 @@ import com.weygo.common.base.JHResponse;
 
 public interface JHResponseCallBack extends JHInterface {
 
-    public void onSuccess(JHResponse result);
+    public void onSuccess(JHResponse response);
 
     public void onFailure(JHRequestError error);
 }
