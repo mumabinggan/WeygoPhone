@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x107"
+    android:layout_height="@dimen/x89">
+
+    <ImageView
+        android:layout_width="@dimen/x34"
+        android:layout_height="@dimen/x34"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_centerHorizontal="true"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x16"
+        android:layout_marginTop="@dimen/x58"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:textSize="@dimen/ft10"/>
+
+</RelativeLayout>

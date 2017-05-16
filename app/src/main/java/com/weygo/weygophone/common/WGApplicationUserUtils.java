@@ -23,6 +23,10 @@ public class WGApplicationUserUtils {
         return ourInstance;
     }
 
+    public static WGApplicationUserUtils getInstance() {
+        return ourInstance;
+    }
+
     private WGApplicationUserUtils() {
     }
 
@@ -115,6 +119,22 @@ public class WGApplicationUserUtils {
             }
         }
         return mCurrentPostCode;
+    }
+
+    public int orderCount() {
+        WGUser user = getmUser();
+        if (user != null) {
+            return user.orderCount;
+        }
+        return 0;
+    }
+
+    public int deliverOrderCount() {
+        WGUser user = getmUser();
+        if (user != null) {
+            return user.deliveringCount;
+        }
+        return 0;
     }
 
     public void reset() {

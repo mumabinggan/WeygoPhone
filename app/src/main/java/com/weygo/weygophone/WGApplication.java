@@ -10,6 +10,9 @@ import android.util.Log;
 
 import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
+import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.tools.loadwebimage.JHImageUtils;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 
 import java.util.Locale;
@@ -28,9 +31,18 @@ public class WGApplication extends Application {
         WGChangeAppLanguageLogic.initAppLanguage(context);
         Log.e("application", "fssss");
         //SystemClock.sleep(8000);
+
+        //initUtils
+        initRequireUtils();
     }
 
     public static Context getContext() {
         return context;
+    }
+
+    private void initRequireUtils() {
+        JHResourceUtils.getInstance(context);
+        JHImageUtils.getInstance(context);
+        WGApplicationRequestUtils.getInstance(context);
     }
 }

@@ -16,4 +16,38 @@
 
     <string name="Request_Fail_Tip">网络不给力</string>
 
+    <string name="Slider_All">全部</string>
+
+    <!--侧边栏-->
+    <string name="Slider_Mine_Order">我的订单</string>
+    <string name="Slider_Mine_FootPrint">我的足迹</string>
+    <string name="Slider_Mine_Coupon">优惠卷</string>
+    <string name="Slider_Mine_Message">消息</string>
+    <string name="Slider_Mine_Scan">扫一扫</string>
+    <string name="Slider_Mine_MessageCenter">消息中心</string>
+
+    //Tab Title
+    <string name="TabClassify">分类</string>
+    <string name="TabBenefit">优惠</string>
+    <string name="TabAsia">环球</string>
+    <string name="TabMine">我的</string>
+    <string name="Home_Title">米兰</string>
+
+    //分类 Tab
+    <string name="Hot_Sale">热卖推荐</string>
+
+    //我的
+    <string name="Mine_Title">我的Weygo</string>
+    <string name="Mine_Score">积分点数</string>
+    <string name="Mine_Coupon">优惠卷</string>
+    <string name="Mine_Footprint">我的足迹</string>
+    <string name="Mine_Collection">我的收藏</string>
+    <string name="Mine_Address">送货地址簿</string>
+    <string name="Mine_Service">客服中心</string>
+    <string name="Mine_UserInfo">个人信息</string>
+    <string name="Mine_Set">设置</string>
+    <string name="Mine_Logout">登出</string>
+    <string name="Mine_AllOrder">您的订单</string>
+    <string name="Mine_DeliverOrder">送货中</string>
+
 </resources>

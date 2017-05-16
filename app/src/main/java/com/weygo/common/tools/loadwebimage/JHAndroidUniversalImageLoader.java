@@ -3,6 +3,7 @@ package com.weygo.common.tools.loadwebimage;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -27,6 +28,20 @@ public class JHAndroidUniversalImageLoader implements JHBaseImageLoaderInterface
 
     //Android Universal Image Loader init class
     ImageLoaderConfiguration.Builder config = null;
+
+    @Override
+    public void loadImage(Context ctx, String imageUrl, int resId, ImageView imageView) {
+        this.initImageLoaderConfig(ctx);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(resId)         //加载开始默认的图片
+                .showImageForEmptyUri(resId)     //url爲空會显示该图片，自己放在drawable里面的
+                .showImageOnFail(resId)                //加载图片出现问题，会显示该图片
+                .cacheInMemory(true)                                               //缓存用
+                .cacheOnDisk(true)                                                    //缓存用
+                .displayer(new RoundedBitmapDisplayer(0))       //图片圆角显示，值为整数
+                .build();
+        ImageLoader.getInstance().displayImage(imageUrl, imageView, options);
+    }
 
     @Override
     public void loadImage(Context ctx, final JHImageLoaderEntity img) {

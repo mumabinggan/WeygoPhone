@@ -15,7 +15,7 @@
 
     <color name="baseBackgroundColor">#EBEEF0</color>
 
-    <color name="navigationBar_background">#EE7A3C</color>
+    <color name="navigationBar_background">#FFEE7A3C</color>
     <color name="navigationBar_title">#ffffff</color>
     <color name="navigaiotnBar_separate_color">#1A000000</color>
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/classify_navigationBar"
+        layout="@layout/classify_navigationbar" />
+
+    <RelativeLayout
+        android:id="@+id/contentRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/classifyRecyclerView"
+            android:divider="#ff000000"
+            android:dividerHeight="10dp"
+            android:layout_width="@dimen/x137"
+            android:layout_height="match_parent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/subClassifyRecyclerView"
+            android:divider="#ff000000"
+            android:dividerHeight="10dp"
+            android:layout_width="@dimen/x183"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

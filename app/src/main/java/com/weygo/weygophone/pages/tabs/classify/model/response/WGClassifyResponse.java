@@ -1,7 +1,7 @@
-package com.weygo.weygophone.pages.tabs.classify.Model.Response;
+package com.weygo.weygophone.pages.tabs.classify.model.response;
 
 import com.weygo.weygophone.base.WGResponse;
-import com.weygo.weygophone.pages.tabs.classify.Model.WGClassifyItem;
+import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 
 import java.util.List;
 

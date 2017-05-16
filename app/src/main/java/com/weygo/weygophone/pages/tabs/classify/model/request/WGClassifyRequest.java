@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.tabs.classify.Model.Request;
+package com.weygo.weygophone.pages.tabs.classify.model.request;
 
 import com.weygo.weygophone.base.WGRequest;
 

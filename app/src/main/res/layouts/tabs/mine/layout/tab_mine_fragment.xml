@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/sliderImageView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginLeft="@dimen/x14"
+        android:src="@drawable/slider_white"
+        />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x21"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:textSize="@dimen/ft14"
+        android:text="@string/Mine_Title"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/briefLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x225">
+
+                <ImageView
+                    android:id="@+id/headBackgroundImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/tab_mine_head_bg"
+                    android:scaleType="centerCrop"
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/headImageView"
+                    android:layout_width="@dimen/x68"
+                    android:layout_height="@dimen/x68"
+                    android:layout_marginTop="@dimen/x70"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/tab_mine_head_bg"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#ffffff"/>
+
+                <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                    <!--android:id="@+id/headImageView"-->
+                    <!--android:layout_width="96dp"-->
+                    <!--android:layout_height="96dp"-->
+                    <!--app:civ_border_width="2dp"-->
+                    <!--android:src="@drawable/mine_boy_icon"-->
+                    <!--app:civ_border_color="#FF000000"/>-->
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x20"
+                    android:layout_below="@+id/headImageView"
+                    android:layout_marginTop="@dimen/x5"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/localImageView"
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/x20"
+                    android:layout_below="@+id/nameTextView"
+                    android:layout_marginTop="@dimen/x13"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/tab_mine_location"/>
+
+                <TextView
+                    android:id="@+id/postCodeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x20"
+                    android:gravity="center"
+                    android:layout_below="@+id/localImageView"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/orderLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x68"
+                android:background="#f8fafa">
+
+                <TextView
+                    android:id="@+id/allOrderTextView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x45"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:textSize="@dimen/ft10"
+                    android:gravity="center"
+                    android:text="@string/Mine_AllOrder"
+                    android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+                <TextView
+                    android:id="@+id/allOrderCountTextView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x45"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="@dimen/ft14"
+                    android:gravity="center"
+                    android:textColor="@color/WGAppBaseTitleAColor"/>
+
+                <View
+                    android:id="@+id/allOrderView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/allOrderTextView"
+                    android:layout_alignRight="@+id/allOrderTextView"
+                    ></View>
+
+                <TextView
+                    android:id="@+id/deliverOrderTextView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x45"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x45"
+                    android:textSize="@dimen/ft10"
+                    android:gravity="center"
+                    android:text="@string/Mine_DeliverOrder"
+                    android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+                <TextView
+                    android:id="@+id/deliverOrderCountTextView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x45"
+                    android:layout_alignLeft="@+id/deliverOrderTextView"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="@dimen/ft14"
+                    android:gravity="center"
+                    android:textColor="@color/WGAppBaseTitleAColor"/>
+
+                <View
+                    android:id="@+id/deliverOrderView"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@id/deliverOrderTextView"
+                    android:layout_alignRight="@+id/deliverOrderTextView"></View>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/otherLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x266">
+
+                <RelativeLayout
+                    android:id="@+id/scoreLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_integral"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:text="@string/Mine_Score"
+                        android:gravity="center"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/collectionLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_below="@+id/scoreLayout">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_collection"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Collection"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/couponLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_centerHorizontal="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_coupon"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Coupon"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/footprintLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_toRightOf="@+id/couponLayout">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_footprint"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Footprint"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/addressLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_address"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Address"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/serviceLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_alignLeft="@+id/footprintLayout"
+                    android:layout_centerVertical="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_invoice"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Footprint"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/userInfoLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_below="@+id/collectionLayout">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_avatar"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_UserInfo"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/setLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_alignBottom="@+id/userInfoLayout"
+                    android:layout_centerHorizontal="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_set"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Set"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/logoutLayout"
+                    android:layout_width="@dimen/x107"
+                    android:layout_height="@dimen/x89"
+                    android:layout_alignRight="@+id/serviceLayout"
+                    android:layout_alignBottom="@+id/setLayout">
+
+                    <ImageView
+                        android:layout_width="@dimen/x28"
+                        android:layout_height="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/tab_mine_logout"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x16"
+                        android:layout_marginTop="@dimen/x58"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        android:textSize="@dimen/ft10"
+                        android:gravity="center"
+                        android:text="@string/Mine_Logout"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

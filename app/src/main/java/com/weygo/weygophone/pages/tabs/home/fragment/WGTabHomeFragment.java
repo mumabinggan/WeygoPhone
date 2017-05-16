@@ -1,6 +1,5 @@
 package com.weygo.weygophone.pages.tabs.home.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -11,16 +10,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
-import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHFontUtils;
 import com.weygo.common.tools.JHWarningUtils;
@@ -28,13 +23,11 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
-import com.weygo.weygophone.pages.slider.WGSliderActivity;
+import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
-import com.weygo.weygophone.pages.tabs.home.widget.WGHomeNavigationBar;
-
-import org.parceler.transfuse.annotations.Activity;
+import com.weygo.weygophone.pages.tabs.home.widget.WGTabNavigationBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +36,10 @@ import java.util.List;
  * Created by muma on 2016/12/19.
  */
 
-public class WGHomeFragment extends JHFragment {
+public class WGTabHomeFragment extends WGFragment {
 
     //navigationbar
-    WGHomeNavigationBar mNavigationBar;
+    WGTabNavigationBar mNavigationBar;
 
     //Segment and page
     ScrollIndicatorView mHomeSegmentView;
@@ -59,10 +52,10 @@ public class WGHomeFragment extends JHFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment,container,false);
+        View view = inflater.inflate(R.layout.tab_home_fragment,container,false);
         final WGMainActivity activity = (WGMainActivity) getActivity();
-        mNavigationBar = (WGHomeNavigationBar) view.findViewById(R.id.home_navigationBar);
-        mNavigationBar.setOnClickListener(new WGHomeNavigationBar.OnClickHomeNavigationBarListener() {
+        mNavigationBar = (WGTabNavigationBar) view.findViewById(R.id.home_navigationBar);
+        mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
                 /*

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by muma on 2016/12/17.
  */
 
-public class WGHomeNavigationBar extends RelativeLayout implements View.OnClickListener {
+public class WGTabNavigationBar extends RelativeLayout implements View.OnClickListener {
 
     OnClickHomeNavigationBarListener mListener;
 
@@ -26,15 +26,15 @@ public class WGHomeNavigationBar extends RelativeLayout implements View.OnClickL
         void onClickCart(View var1);
     }
 
-    public WGHomeNavigationBar(Context context) {
+    public WGTabNavigationBar(Context context) {
         super(context);
     }
 
-    public WGHomeNavigationBar(Context context, AttributeSet attrs) {
+    public WGTabNavigationBar(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public WGHomeNavigationBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WGTabNavigationBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

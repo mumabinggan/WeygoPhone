@@ -16,4 +16,37 @@
 
     <string name="Request_Fail_Tip">网络不给力</string>
 
+    <string name="Slider_All">Tutti i prodotti</string>
+
+    <!--侧边栏-->
+    <string name="Slider_Mine_Order">I miei ordini</string>
+    <string name="Slider_Mine_FootPrint">Cronologia</string>
+    <string name="Slider_Mine_Coupon">Coupon</string>
+    <string name="Slider_Mine_Message">Messaggi</string>
+    <string name="Slider_Mine_Scan">Scansione</string>
+    <string name="Slider_Mine_MessageCenter">Live chat</string>
+
+    <string name="TabClassify">Reparti</string>
+    <string name="TabBenefit">Go Promo</string>
+    <string name="TabAsia">Asia</string>
+    <string name="TabMine">My Weygo</string>
+    <string name="Home_Title">Milano</string>
+
+    //分类 Tab
+    <string name="Hot_Sale">PIÙ VENDUTI</string>
+
+    //我的
+    <string name="Mine_Title">My Weygo</string>
+    <string name="Mine_Score">Punti Spesa</string>
+    <string name="Mine_Coupon">Coupon</string>
+    <string name="Mine_Footprint">Cronologia</string>
+    <string name="Mine_Collection">Cronologia</string>
+    <string name="Mine_Address">Rubrica</string>
+    <string name="Mine_Service">Servizio Clienti</string>
+    <string name="Mine_UserInfo">Profilo</string>
+    <string name="Mine_Set">Impostazioni</string>
+    <string name="Mine_Logout">Esci</string>
+    <string name="Mine_AllOrder">I tuoi ordini</string>
+    <string name="Mine_DeliverOrder">In consegna</string>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.weygo.weygophone.base;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.weygo.common.base.JHActivity;
 import com.weygo.common.widget.JHNavigationBar;
@@ -32,5 +33,9 @@ public class WGBaseActivity extends JHActivity {
     @Override
     public boolean useActivityCollector() {
         return false;
+    }
+
+    public void showWarning(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 }

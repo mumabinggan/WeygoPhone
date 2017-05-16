@@ -37,6 +37,17 @@ public class JHActivity extends FragmentActivity {
         if (useActivityCollector()) {
             JHActivityCollector.addActivity(this);
         }
+
+        initData();
+        initSubView();
+    }
+
+    private void initData() {
+
+    }
+
+    private void initSubView() {
+
     }
 
     @Override

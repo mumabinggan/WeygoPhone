@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x181"
+    android:paddingLeft="@dimen/x7"
+    android:paddingRight="@dimen/x7"
+    android:paddingBottom="@dimen/x7"
+    android:background="#fff8fafa">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tab_classify_hotgood_corner"></View>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x109"
+        android:scaleType="centerCrop"
+        />
+
+    <ImageView
+        android:id="@+id/numberImageView"
+        android:layout_width="@dimen/x82"
+        android:layout_height="@dimen/x82"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:lines="2"
+        android:ellipsize="end"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginLeft="@dimen/x14"
+        android:layout_marginRight="@dimen/x14"
+        android:gravity="center"
+        android:textSize="@dimen/ft10" />
+
+    <TextView
+        android:id="@+id/currentPriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:textColor="@color/WGAppBaseColor"
+        android:layout_below="@+id/nameTextView"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginLeft="@dimen/x14"
+        android:gravity="center_vertical|left"
+        android:textSize="@dimen/ft12" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_below="@+id/nameTextView"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginRight="@dimen/x14"
+        android:gravity="center_vertical|right"
+        android:textSize="@dimen/ft10" />
+
+
+</RelativeLayout>

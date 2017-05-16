@@ -1,28 +1,16 @@
 package com.weygo.weygophone;
 
-import android.app.FragmentManager;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -33,16 +21,17 @@ import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
-import com.weygo.weygophone.pages.slider.WGSliderActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
-import com.weygo.weygophone.pages.tabs.classify.Model.Request.WGClassifyRequest;
-import com.weygo.weygophone.pages.tabs.classify.Model.Response.WGClassifyResponse;
-import com.weygo.weygophone.pages.tabs.home.fragment.WGHomeFragment;
+import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
+import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
+import com.weygo.weygophone.pages.tabs.classify.model.response.WGClassifyResponse;
+import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderEntity;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderListener;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.weygophone.pages.tabs.mine.fragment.WGTabMineFragment;
 import com.weygo.weygophone.pages.test.WGTestRequest;
 
 import org.parceler.Parcels;
@@ -103,11 +92,11 @@ public class WGMainActivity extends WGBaseActivity {
                 R.string.main_classify, R.string.main_benefit,
                 R.string.main_foreign, R.string.main_mine));
         List<Class> fragmentClassArray = new ArrayList<>();
-        fragmentClassArray.add(WGHomeFragment.class);
+        fragmentClassArray.add(WGTabHomeFragment.class);
+        fragmentClassArray.add(WGTabClassifyFragment.class);
         fragmentClassArray.add(JHFragment.class);
         fragmentClassArray.add(JHFragment.class);
-        fragmentClassArray.add(JHFragment.class);
-        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(WGTabMineFragment.class);
         mTabBar.setFragmentClassArray(fragmentClassArray);
         mTabBar.setSelectIndex(0);
     }
@@ -128,11 +117,6 @@ public class WGMainActivity extends WGBaseActivity {
     public void testActivity() {
         Log.e("error", "testActivity");
         mDrawerLayout.openDrawer(GravityCompat.START);
-    }
-
-    void openSliderActivity() {
-        Intent item = new Intent(WGMainActivity.this, WGSliderActivity.class);
-        startActivity(item);
     }
 
     public void setSelectedTab(int tabIndex) {
