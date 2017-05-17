@@ -1,5 +1,6 @@
 package com.weygo.weygophone;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
+import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
 import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
@@ -115,8 +117,10 @@ public class WGMainActivity extends WGBaseActivity {
     }
 
     public void testActivity() {
+        Intent intent = new Intent(WGMainActivity.this, WGRegisterActivity.class);
+        startActivity(intent);
         Log.e("error", "testActivity");
-        mDrawerLayout.openDrawer(GravityCompat.START);
+        //mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
     public void setSelectedTab(int tabIndex) {

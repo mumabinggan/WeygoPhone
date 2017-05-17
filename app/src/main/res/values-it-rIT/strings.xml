@@ -14,7 +14,7 @@
     <string name="PersonInfo_Sex_Man">Maschile</string>
     <string name="PersonInfo_Sex_Woman">Femminile</string>
 
-    <string name="Request_Fail_Tip">网络不给力</string>
+    <string name="Request_Fail_Tip">No Network</string>
 
     <string name="Slider_All">Tutti i prodotti</string>
 
@@ -48,5 +48,26 @@
     <string name="Mine_Logout">Esci</string>
     <string name="Mine_AllOrder">I tuoi ordini</string>
     <string name="Mine_DeliverOrder">In consegna</string>
+
+    //登录
+    <string name="Login_Title">Accedi</string>
+    <string name="Login_Register">Registrati</string>
+    <string name="Login_Email">E-mail / Cellulare</string>
+    <string name="Login_Password">Inserisci password</string>
+    <string name="Login_ForgetPW">Password dimenticata？</string>
+    <string name="Login_Facebook">Facebook</string>
+    <string name="Login_Wechat">WeChat</string>
+
+    //注册
+    <string name="Register_Title">Registrati</string>
+    <string name="Register_Login">Accedi</string>
+    <string name="Register_GetCodeText">Richiedi codice di verifica</string>
+    <string name="Register_GetCodeBtn">Invia codice</string>
+    <string name="Register_Phone">Cellulare</string>
+    <string name="Register_LastName">Cognome</string>
+    <string name="Register_FirstName">Nome</string>
+    <string name="Register_Email">e-mail地址</string>
+    <string name="Register_Password">Password</string>
+    <string name="Register_ConfirmPW">Conferma password</string>
 
 </resources>

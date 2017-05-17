@@ -21,7 +21,8 @@
         <activity android:name=".WGMainActivity" android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".pages.test.WGTestActivity" android:theme="@style/Transparent">
-
+        </activity>
+        <activity android:name=".pages.register.WGRegisterActivity" android:theme="@style/Transparent">
         </activity>
     </application>
 

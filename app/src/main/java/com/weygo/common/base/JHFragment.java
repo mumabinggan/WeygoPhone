@@ -2,18 +2,26 @@ package com.weygo.common.base;
 
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.tools.JHDialogUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+
+import java.util.List;
 
 /**
  * Created by muma on 2016/12/7.
@@ -21,7 +29,21 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 
 public class JHFragment extends Fragment {
 
+    //Dialog
     Dialog mShowDialog;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public void showWarning(int resId) {
+        showWarning(JHResourceUtils.getInstance().getString(resId));
+    }
+
+    public void showWarning(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+    }
 
     //Request
     public void getAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
@@ -81,5 +103,4 @@ public class JHFragment extends Fragment {
             }
         });
     }
-
 }

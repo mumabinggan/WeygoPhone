@@ -2,30 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <ImageView
-        android:id="@+id/sliderImageView"
-        android:layout_width="@dimen/x21"
-        android:layout_height="@dimen/x21"
-        android:layout_marginTop="@dimen/x9"
-        android:layout_marginLeft="@dimen/x14"
-        android:src="@drawable/slider_white"
-        />
-
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="@dimen/x240"
-        android:layout_height="@dimen/x21"
-        android:layout_marginTop="@dimen/x9"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:textSize="@dimen/ft14"
-        android:text="@string/Mine_Title"
-        />
 
     <ScrollView
         android:id="@+id/scrollView"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -54,18 +35,9 @@
                     android:layout_height="@dimen/x68"
                     android:layout_marginTop="@dimen/x70"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/tab_mine_head_bg"
                     app:civ_border_width="2dp"
                     app:civ_border_color="#ffffff"/>
 
-                <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                    <!--android:id="@+id/headImageView"-->
-                    <!--android:layout_width="96dp"-->
-                    <!--android:layout_height="96dp"-->
-                    <!--app:civ_border_width="2dp"-->
-                    <!--android:src="@drawable/mine_boy_icon"-->
-                    <!--app:civ_border_color="#FF000000"/>-->
 
                 <TextView
                     android:id="@+id/nameTextView"
@@ -161,7 +133,8 @@
             <RelativeLayout
                 android:id="@+id/otherLayout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x266">
+                android:layout_height="@dimen/x266"
+                android:background="#ffffff">
 
                 <RelativeLayout
                     android:id="@+id/scoreLayout"
@@ -387,5 +360,27 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/sliderImageView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginLeft="@dimen/x14"
+        android:src="@drawable/slider_white"
+        />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x21"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:textSize="@dimen/ft14"
+        android:text="@string/Mine_Title"
+        />
+
 
 </RelativeLayout>

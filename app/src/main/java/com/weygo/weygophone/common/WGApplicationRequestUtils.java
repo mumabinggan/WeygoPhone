@@ -3,7 +3,9 @@ package com.weygo.weygophone.common;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHActivity;
@@ -16,6 +18,9 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
+import com.weygo.weygophone.base.WGInterface;
+import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
+import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 
@@ -80,21 +85,25 @@ public class WGApplicationRequestUtils {
         return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
     }
 
-    public void loadUserInfoOnCompletion(final WGOnUserInfoCompletionInteface inteface) {
+    void showWarning(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG);
+    }
+
+    public void loadUserInfoOnCompletion(Context context, final WGOnUserInfoCompletionInteface inteface) {
         WGUserInfoRequest request = new WGUserInfoRequest();
-        final boolean showLoading = request.showsLoadingView;
-        if (showLoading) {
-            mShowDialog = JHDialogUtils.showLoadingDialog(mContext);
-        }
+//        final boolean showLoading = request.showsLoadingView;
+//        if (showLoading) {
+//            mShowDialog = JHDialogUtils.showLoadingDialog(context);
+//        }
         JHNetworkUtils.getInstance().postAsyn(request, WGUserInfoResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
                 Log.e("onSuccess", JSON.toJSONString(result));
                 WGUserInfoResponse response = (WGUserInfoResponse) result;
                 handleUserInfo(response);
-                if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
-                }
+//                if (showLoading) {
+//                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+//                }
                 if (inteface != null) {
                     inteface.onUserInfoCompletion(response);
                 }
@@ -102,9 +111,9 @@ public class WGApplicationRequestUtils {
 
             @Override
             public void onFailure(JHRequestError error) {
-                if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
-                }
+//                if (showLoading) {
+//                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+//                }
             }
         });
     }
@@ -112,6 +121,37 @@ public class WGApplicationRequestUtils {
     void handleUserInfo(WGUserInfoResponse response) {
         if (response.success()) {
             WGApplicationUserUtils.getInstance().setmUser(response.data);
+        }
+    }
+
+    public interface WGOnSendVerificationCodeCompletionInteface extends WGInterface {
+        void onSendCompletion(WGGetVerificationCodeResponse response);
+    }
+
+
+    public void loadSendVerificationCode(Context context, String  phone, String countryCode, final WGOnSendVerificationCodeCompletionInteface inteface) {
+        WGGetVerificationCodeRequest request = new WGGetVerificationCodeRequest();
+        request.username = phone;
+        JHNetworkUtils.getInstance().postAsyn(request, WGGetVerificationCodeResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
+                WGGetVerificationCodeResponse response = (WGGetVerificationCodeResponse) result;
+                handleGetVerificationCode(response);
+                if (inteface != null) {
+                    inteface.onSendCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+            }
+        });
+    }
+
+    void handleGetVerificationCode(WGGetVerificationCodeResponse response) {
+        if (response.success()) {
+            showWarning(response.message);
         }
     }
 

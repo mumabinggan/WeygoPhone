@@ -2,19 +2,28 @@ package com.weygo.common.base;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.tools.JHActivityCollector;
 import com.weygo.common.tools.JHDialogUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStatusBarUtils;
 import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by muma on 2016/12/7.
@@ -24,9 +33,26 @@ public class JHActivity extends FragmentActivity {
 
     Dialog mShowDialog;
 
+    public final String mRefreshAction = "com.muma.broadcast";
+    final String JHRefreshNotificationKey = "refreshNotificationKey";
+    public final String mBroadcastLoadTypeKey = "com.muma";
+    public final int JHBroadcastLoadTypeLazy = 1;
+    public final int JHBroadcastLoadTypeImmediately = 2;
+
+    List mRefreshNotificationList;
+
+    class JHBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive (Context context, Intent intent) {
+            handleBroadcastLoadType(context, intent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initContentView();
 
         //set screen orientation
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -40,14 +66,34 @@ public class JHActivity extends FragmentActivity {
 
         initData();
         initSubView();
+        initBroadcast();
     }
 
-    private void initData() {
+    private void initBroadcast() {
+        JHBroadcastReceiver refreshReceiver = new JHBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(mRefreshAction);
+        registerReceiver(refreshReceiver, filter);
+    }
+
+    public void initContentView() {
 
     }
 
-    private void initSubView() {
+    public void initData() {
+        mRefreshNotificationList = new ArrayList();
+    }
 
+    public void initSubView() {
+
+    }
+
+    public void showWarning(int resId) {
+        showWarning(JHResourceUtils.getInstance().getString(resId));
+    }
+
+    public void showWarning(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -60,11 +106,17 @@ public class JHActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkRefreshNotification();
+    }
+
     public boolean useActivityCollector() {
         return true;
     }
 
-    //Request
+
     public void getAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
@@ -121,5 +173,60 @@ public class JHActivity extends FragmentActivity {
                 }
             }
         });
+    }
+
+    private void handleBroadcastLoadType(Context context, Intent intent) {
+        if (intent.getIntExtra(mBroadcastLoadTypeKey, -1) == JHBroadcastLoadTypeLazy) {
+            //懒刷新
+            _didReceivedRefreshNotification(intent.getIntExtra(JHRefreshNotificationKey, -1));
+        }
+        else {
+            //立即刷新
+            handleImmediatelyLoadBroadcast(context, intent);
+        }
+    }
+
+    //子类重写
+    public void handleImmediatelyLoadBroadcast(Context context, Intent intent) {
+
+    }
+
+    void _didReceivedRefreshNotification(int notification) {
+        addRefreshNotification(notification);
+    }
+
+    void checkRefreshNotification() {
+        if (mRefreshNotificationList.size() > 0) {
+            for (int num = 0; num < mRefreshNotificationList.size(); ++num) {
+                int notification = Integer.parseInt(mRefreshNotificationList.get(num).toString());
+                didReceivedRefreshNotification(notification);
+            }
+            mRefreshNotificationList.clear();
+        }
+    }
+
+    void addRefreshNotification(int notification) {
+        if (!containsRefreshNotification(notification)) {
+            mRefreshNotificationList.add(notification);
+        }
+    }
+
+    public void sendRefreshNotification(int notification) {
+        Intent intent = new Intent(mRefreshAction);
+        intent.putExtra(JHRefreshNotificationKey, notification);
+        sendBroadcast(intent);
+    }
+
+    //接收到 Lazy加载后的处理
+    public void didReceivedRefreshNotification(int notification) {
+
+    }
+
+    public void didReceivedNotification(int notification) {
+
+    }
+
+    public boolean containsRefreshNotification(int notification) {
+        return mRefreshNotificationList.contains(notification);
     }
 }

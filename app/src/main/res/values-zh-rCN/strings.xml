@@ -50,4 +50,25 @@
     <string name="Mine_AllOrder">您的订单</string>
     <string name="Mine_DeliverOrder">送货中</string>
 
+    //登录
+    <string name="Login_Title">登陆</string>
+    <string name="Login_Register">注册</string>
+    <string name="Login_Email">E-mail / 手机号</string>
+    <string name="Login_Password">密码</string>
+    <string name="Login_ForgetPW">忘记密码了？</string>
+    <string name="Login_Facebook">Facebook</string>
+    <string name="Login_Wechat">微信</string>
+
+    //注册
+    <string name="Register_Title">注册</string>
+    <string name="Register_Login">登录</string>
+    <string name="Register_GetCodeBtn">获取验证码</string>
+    <string name="Register_GetCodeText">获取验证码</string>
+    <string name="Register_Phone">手机号</string>
+    <string name="Register_LastName">姓</string>
+    <string name="Register_FirstName">名</string>
+    <string name="Register_Email">e-mail地址</string>
+    <string name="Register_Password">密码</string>
+    <string name="Register_ConfirmPW">确认密码</string>
+
 </resources>

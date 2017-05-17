@@ -22,6 +22,15 @@ public class WGConstants {
     public static final String WGLocalSettingUser = "WGLocalSettingUser";
     public static final String WGLocalSettingUnLoginPostCode = "WGLocalSettingUnLoginPostCode";
 
+    //RefreshNotification
+    public static final int WGRefreshNotificationTypeLogin = 1;
+    public static final int WGRefreshNotificationTypeLogout = 2;
+
+
+    //Notification
+    public static final int WGNotificationTypeLogin = 1;
+    public static final int WGNotificationTypeLogout = 2;
+
     /*
 
         WGAppJumpTypeNone,
