@@ -13,6 +13,7 @@ import com.weygo.weygophone.R;
  */
 
 public class WGTitleActivity extends WGBaseActivity {
+
     protected JHNavigationBar mNavigationBar;
 
     @Override
@@ -21,14 +22,19 @@ public class WGTitleActivity extends WGBaseActivity {
     }
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        this.initNavigationBar();
+    public void initContentView() {
+        setContentView(R.layout.title_activity);
+    }
+
+    @Override
+    public void initSubView() {
+        super.initSubView();
+        Log.e("titel","------------------");
+        initNavigationBar();
     }
 
     protected void initNavigationBar() {
         mNavigationBar = (JHNavigationBar) findViewById(R.id.base_titlebar);
-        if (mNavigationBar == null) return;
         mNavigationBar.setLeftBarListener(new JHNavigationBar.OnClickLeftBarListener() {
             @Override
             public void onClick(View var1) {
@@ -38,13 +44,12 @@ public class WGTitleActivity extends WGBaseActivity {
         mNavigationBar.setRightBarListener(new JHNavigationBar.OnClickRightBarListener() {
             @Override
             public void onClick(View var1) {
-                setNavigationRightBarAction();
+                handleRightBarItem();
             }
         });
     }
 
-    public void setNavigationRightBarAction() {
-        System.out.println("-----------------");
-        Log.e("adsfas", "哎呀哎呀");
+    public void handleRightBarItem() {
+
     }
 }

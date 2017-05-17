@@ -24,6 +24,11 @@
         </activity>
         <activity android:name=".pages.register.WGRegisterActivity" android:theme="@style/Transparent">
         </activity>
+        <activity android:name=".pages.login.WGLoginActivity" android:theme="@style/Transparent">
+        </activity>
+        <activity android:name=".pages.clientCenter.list.WGClientServiceActivity"></activity>
+        <activity android:name=".base.WGTitleActivity"></activity>
+        <activity android:name=".pages.clientCenter.detail.WGClientServiceDetailActivity"></activity>
     </application>
 
     <!-- Include following permission if you load images from Internet -->

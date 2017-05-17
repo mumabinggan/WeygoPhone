@@ -7,4 +7,9 @@ import com.weygo.weygophone.base.WGGuestRequest;
  */
 
 public class WGUserInfoRequest extends WGGuestRequest {
+
+    public String api() {
+        return "customer/accountinfo?";
+    }
+
 }

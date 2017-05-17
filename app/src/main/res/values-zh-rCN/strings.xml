@@ -71,4 +71,7 @@
     <string name="Register_Password">密码</string>
     <string name="Register_ConfirmPW">确认密码</string>
 
+    //客服中心
+    <string name="ClientService_Title">客服中心</string>
+
 </resources>

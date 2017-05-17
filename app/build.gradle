@@ -33,6 +33,8 @@ android {
                     'src/main/res/layouts/home',
                     'src/main/res/layouts/login',
                     'src/main/res/layouts/register',
+                    'src/main/res/layouts/clientService/list',
+                    'src/main/res/layouts/clientService/detail',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]

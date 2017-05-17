@@ -3,6 +3,7 @@ package com.weygo.common.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,6 +23,18 @@ public class JHNavigationBar extends RelativeLayout implements View.OnClickListe
 
     OnClickLeftBarListener  leftListener;
     OnClickRightBarListener rightListener;
+
+    public void setTitle(String title) {
+        mTitleTextView.setText(title);
+    }
+
+    public void setTitle(int resId) {
+        mTitleTextView.setText(resId);
+    }
+
+    public void setRightBarItem(int resId) {
+        mRightImageView.setImageResource(resId);
+    }
 
     public interface OnClickLeftBarListener {
         void onClick(View var1);

@@ -19,9 +19,14 @@ import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
+import com.weygo.weygophone.pages.clientCenter.detail.WGClientServiceDetailActivity;
+import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
+import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
@@ -117,7 +122,13 @@ public class WGMainActivity extends WGBaseActivity {
     }
 
     public void testActivity() {
-        Intent intent = new Intent(WGMainActivity.this, WGRegisterActivity.class);
+        Intent intent = new Intent(WGMainActivity.this, WGClientServiceDetailActivity.class);
+        Bundle mBundle = new Bundle();
+        WGClientServiceItem item = new WGClientServiceItem();
+        item.name = "郑渊谦";
+        item.url = "http://baidu.com";
+        mBundle.putSerializable("key", item);
+        intent.putExtras(mBundle);
         startActivity(intent);
         Log.e("error", "testActivity");
         //mDrawerLayout.openDrawer(GravityCompat.START);

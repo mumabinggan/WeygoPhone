@@ -70,4 +70,7 @@
     <string name="Register_Password">Password</string>
     <string name="Register_ConfirmPW">Conferma password</string>
 
+    //客服中心
+    <string name="ClientService_Title">Servizio clienti</string>
+
 </resources>

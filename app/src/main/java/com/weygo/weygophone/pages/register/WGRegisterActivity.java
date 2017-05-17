@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.register.model.request.WGRegisterRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.register.model.response.WGRegisterResponse;
@@ -77,7 +79,6 @@ public class WGRegisterActivity extends WGBaseActivity {
 
     @Override
     public void initContentView() {
-        super.initContentView();
         setContentView(R.layout.wgregister_activity);
     }
 
@@ -157,7 +158,8 @@ public class WGRegisterActivity extends WGBaseActivity {
     }
 
     void handleLogin() {
-
+        Intent intent = new Intent(WGRegisterActivity.this, WGLoginActivity.class);
+        startActivity(intent);
     }
 
     void handleReturn() {
