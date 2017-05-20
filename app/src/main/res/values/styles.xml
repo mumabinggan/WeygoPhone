@@ -74,6 +74,7 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert" />
 
     <!--<style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">-->
         <!--<item name="android:background">#00ff00</item>-->

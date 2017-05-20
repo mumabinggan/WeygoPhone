@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -13,6 +16,8 @@ import com.weygo.common.widget.JHNavigationBar;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.logic.WGChangeLanguageCallBack;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -23,6 +28,10 @@ import java.util.Locale;
 public class WGBaseActivity extends JHActivity {
 
     final String WGNotificationTypeKey = "com.weygo";
+
+    ImageView mReturnImageView;
+
+    TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,26 @@ public class WGBaseActivity extends JHActivity {
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    @Override
+    public void initSubView() {
+        super.initSubView();
+        mReturnImageView = (ImageView) findViewById(R.id.returnImageView);
+        if (mReturnImageView != null) {
+            mReturnImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    handleReturn();
+                }
+            });
+        }
+
+        mTitleTextView = (TextView) findViewById(R.id.titleTextView);
+    }
+
+    public void handleReturn() {
+        finish();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.clientCenter.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.pages.clientCenter.detail.WGClientServiceDetailActivity;
 import com.weygo.weygophone.pages.clientCenter.list.adapter.WGClientServiceAdapter;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
 import com.weygo.weygophone.pages.clientCenter.list.model.request.WGClientServiceRequest;
@@ -64,6 +66,11 @@ public class WGClientServiceActivity extends WGTitleActivity {
 
     void handleItemClick(View view, int position) {
         WGClientServiceItem item = (WGClientServiceItem) mArray.get(position);
+        Intent intent = new Intent(WGClientServiceActivity.this, WGClientServiceDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("key", item);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void loadClientServiceList() {

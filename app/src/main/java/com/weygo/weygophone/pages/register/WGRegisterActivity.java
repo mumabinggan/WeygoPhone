@@ -69,7 +69,7 @@ public class WGRegisterActivity extends WGBaseActivity {
             handleTimer();
         }
     };
-    int mMaxSeconds = 4;
+    int mMaxSeconds = 60;
     int mCurrentSecond = 1;
 
     @Override
@@ -160,10 +160,6 @@ public class WGRegisterActivity extends WGBaseActivity {
     void handleLogin() {
         Intent intent = new Intent(WGRegisterActivity.this, WGLoginActivity.class);
         startActivity(intent);
-    }
-
-    void handleReturn() {
-        finish();
     }
 
     void handleWechat() {

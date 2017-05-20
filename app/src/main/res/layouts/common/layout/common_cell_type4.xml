@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.common.widget.WGCellStyle4View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x41"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/arrImageView"
+        android:layout_width="@dimen/x6"
+        android:layout_height="@dimen/x10"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight= "@dimen/x13"
+        android:layout_marginTop="@dimen/x15"
+        android:src="@drawable/common_right_arr"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/arrImageView"
+        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginRight="@dimen/x7"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        />
+
+    <TextView
+        android:id="@+id/detailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:gravity="center_vertical|right"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        />
+
+</com.weygo.weygophone.common.widget.WGCellStyle4View>

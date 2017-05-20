@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_toLeftOf="@+id/arrImageView"
         android:layout_marginLeft="@dimen/x13"
-        android:layout_marginRight="@dimen/x7"
+        android:layout_marginRight="@dimen/x13"
         android:gravity="center_vertical"
         android:textSize="@dimen/ft12"
         />

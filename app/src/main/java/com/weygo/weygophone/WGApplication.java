@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.weygo.common.tools.JHDeviceUtils;
 import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHResourceUtils;
@@ -41,6 +42,7 @@ public class WGApplication extends Application {
     }
 
     private void initRequireUtils() {
+        JHDeviceUtils.getInstance(context);
         JHResourceUtils.getInstance(context);
         JHImageUtils.getInstance(context);
         WGApplicationRequestUtils.getInstance(context);

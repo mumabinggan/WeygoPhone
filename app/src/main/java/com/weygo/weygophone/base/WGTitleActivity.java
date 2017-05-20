@@ -38,7 +38,7 @@ public class WGTitleActivity extends WGBaseActivity {
         mNavigationBar.setLeftBarListener(new JHNavigationBar.OnClickLeftBarListener() {
             @Override
             public void onClick(View var1) {
-                finish();
+                handleReturn();
             }
         });
         mNavigationBar.setRightBarListener(new JHNavigationBar.OnClickRightBarListener() {

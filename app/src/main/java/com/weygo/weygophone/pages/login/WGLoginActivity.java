@@ -122,10 +122,6 @@ public class WGLoginActivity extends WGBaseActivity {
         startActivity(intent);
     }
 
-    void handleReturn() {
-        finish();
-    }
-
     void handleWechat() {
 
     }

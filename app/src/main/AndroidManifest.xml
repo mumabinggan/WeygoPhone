@@ -29,6 +29,11 @@
         <activity android:name=".pages.clientCenter.list.WGClientServiceActivity"></activity>
         <activity android:name=".base.WGTitleActivity"></activity>
         <activity android:name=".pages.clientCenter.detail.WGClientServiceDetailActivity"></activity>
+        <activity android:name=".pages.findPassword.WGFindPasswordActivity"></activity>
+        <activity android:name=".pages.setting.WGSettingActivity"></activity>
+        <activity android:name=".pages.collection.WGCollectionActivity"></activity>
+        <activity android:name=".pages.footprint.WGFootprintActivity"></activity>
+
     </application>
 
     <!-- Include following permission if you load images from Internet -->

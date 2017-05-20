@@ -1,5 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Weygo</string>
-    <string name="hello">hellofs</string>
+    <string name="hello">helloItain</string>
+    <string name="main_home">home</string>
+    <string name="main_classify">classify</string>
+    <string name="main_benefit">benefit</string>
+    <string name="main_foreign">foreign</string>
+    <string name="main_mine">mine</string>
+
+    <string name="request_StoreValue">mobileitaly</string>
+
+    <string name="PersonInfo_Sex_Select">Seleziona</string>
+    <string name="PersonInfo_Sex_Man">Maschile</string>
+    <string name="PersonInfo_Sex_Woman">Femminile</string>
+
+    <string name="Request_Fail_Tip">No Network</string>
+
+    <string name="Slider_All">Tutti i prodotti</string>
+
+    <!--侧边栏-->
+    <string name="Slider_Mine_Order">I miei ordini</string>
+    <string name="Slider_Mine_FootPrint">Cronologia</string>
+    <string name="Slider_Mine_Coupon">Coupon</string>
+    <string name="Slider_Mine_Message">Messaggi</string>
+    <string name="Slider_Mine_Scan">Scansione</string>
+    <string name="Slider_Mine_MessageCenter">Live chat</string>
+
+    <string name="TabClassify">Reparti</string>
+    <string name="TabBenefit">Go Promo</string>
+    <string name="TabAsia">Asia</string>
+    <string name="TabMine">My Weygo</string>
+    <string name="Home_Title">Milano</string>
+
+    //分类 Tab
+    <string name="Hot_Sale">PIÙ VENDUTI</string>
+
+    //我的
+    <string name="Mine_Title">My Weygo</string>
+    <string name="Mine_Score">Punti Spesa</string>
+    <string name="Mine_Coupon">Coupon</string>
+    <string name="Mine_Footprint">Cronologia</string>
+    <string name="Mine_Collection">Cronologia</string>
+    <string name="Mine_Address">Rubrica</string>
+    <string name="Mine_Service">Servizio Clienti</string>
+    <string name="Mine_UserInfo">Profilo</string>
+    <string name="Mine_Set">Impostazioni</string>
+    <string name="Mine_Logout">Esci</string>
+    <string name="Mine_AllOrder">I tuoi ordini</string>
+    <string name="Mine_DeliverOrder">In consegna</string>
+
+    //登录
+    <string name="Login_Title">Accedi</string>
+    <string name="Login_Register">Registrati</string>
+    <string name="Login_Email">E-mail / Cellulare</string>
+    <string name="Login_Password">Inserisci password</string>
+    <string name="Login_ForgetPW">Password dimenticata？</string>
+    <string name="Login_Facebook">Facebook</string>
+    <string name="Login_Wechat">WeChat</string>
+
+    //注册
+    <string name="Register_Title">Registrati</string>
+    <string name="Register_Login">Accedi</string>
+    <string name="Register_GetCodeText">Richiedi codice di verifica</string>
+    <string name="Register_GetCodeBtn">Invia codice</string>
+    <string name="Register_Phone">Cellulare</string>
+    <string name="Register_LastName">Cognome</string>
+    <string name="Register_FirstName">Nome</string>
+    <string name="Register_Email">e-mail地址</string>
+    <string name="Register_Password">Password</string>
+    <string name="Register_ConfirmPW">Conferma password</string>
+
+    //客服中心
+    <string name="ClientService_Title">Servizio clienti</string>
+
+    //找回密码
+    <string name="FindPW_Title">Password dimenticata</string>
+    <string name="FindPW_Btn">Ripristino password</string>
+
+    //设置
+    <string name="Setting_Title">Setting</string>
+    <string name="Setting_UserInfo">Informazioni</string>
+    <string name="Setting_SystemMessage">System</string>
+    <string name="Setting_InputCap">Inserisci CAP</string>
+    <string name="Setting_Version">Versione</string>
+    <string name="Setting_CleanCache">Svuota cache</string>
+    <string name="Setting_SetLanguage">Seleziona lingua</string>
+    <string name="Setting_Italiano">Italiano</string>
+    <string name="Setting_China">China</string>
+    <string name="Setting_Logout">Log out</string>
+
+    //Footer
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
+
 </resources>

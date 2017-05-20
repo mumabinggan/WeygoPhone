@@ -27,4 +27,9 @@
 
     <color name="window_background">#FFF5F5F5</color>
 
+    <color name="WGViewBackgroundColor">#F8FAFA</color>
+
+    <color name="color_ff">#F0F0F0</color>
+    <color name="color_00">#8A000000</color>
+
 </resources>

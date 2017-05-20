@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/base_titlebar"
+        layout="@layout/common_navigationbar" />
+
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:divider="#ff000000"
+            android:dividerHeight="10dp"
+            android:layout_width="@dimen/x137"
+            android:layout_height="match_parent"/>
+
+    </com.baoyz.widget.PullRefreshLayout>
+
+</LinearLayout>

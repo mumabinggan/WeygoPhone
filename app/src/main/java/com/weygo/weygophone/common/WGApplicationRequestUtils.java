@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHDialogUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderEntity;
 import com.weygo.common.tools.network.JHNetworkUtils;
@@ -19,6 +20,9 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.base.WGInterface;
+import com.weygo.weygophone.base.WGResponse;
+import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
+import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
@@ -89,6 +93,10 @@ public class WGApplicationRequestUtils {
         Toast.makeText(mContext, message, Toast.LENGTH_LONG);
     }
 
+    void showWarning(int resId) {
+        showWarning(JHResourceUtils.getInstance().getString(resId));
+    }
+
     public void loadUserInfoOnCompletion(Context context, final WGOnUserInfoCompletionInteface inteface) {
         WGUserInfoRequest request = new WGUserInfoRequest();
 //        final boolean showLoading = request.showsLoadingView;
@@ -153,6 +161,37 @@ public class WGApplicationRequestUtils {
         if (response.success()) {
             showWarning(response.message);
         }
+    }
+
+    public interface WGOnCancelCollectGoodCompletionInteface extends WGInterface {
+        void onCancelCompletion(WGCancelCollectionGoodResponse response, long goodId);
+    }
+
+    public interface WGOnCompletionInteface extends WGInterface {
+
+        void onSuccessCompletion(WGResponse response);
+
+        void onFailCompletion(WGResponse response);
+    }
+
+    public void loadCancelCollectionRequest(final long goodId, final WGOnCancelCollectGoodCompletionInteface inteface) {
+        WGCancelCollectionGoodRequest request = new WGCancelCollectionGoodRequest();
+        request.id = goodId;
+        JHNetworkUtils.getInstance().postAsyn(request, WGCancelCollectionGoodResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
+                WGCancelCollectionGoodResponse response = (WGCancelCollectionGoodResponse) result;
+                if (inteface != null) {
+                    inteface.onCancelCompletion(response, goodId);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
     }
 
 }

@@ -1,17 +1,21 @@
 package com.weygo.weygophone;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -20,14 +24,18 @@ import com.weygo.common.base.JHResponse;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
 import com.weygo.weygophone.pages.clientCenter.detail.WGClientServiceDetailActivity;
 import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
+import com.weygo.weygophone.pages.collection.WGCollectionActivity;
+import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
+import com.weygo.weygophone.pages.setting.WGSettingActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
 import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
@@ -52,12 +60,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cn.qqtheme.framework.picker.NumberPicker;
+import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.widget.WheelView;
+
 public class WGMainActivity extends WGBaseActivity {
 
     private JHTabBar mTabBar;
 
     private DrawerLayout mDrawerLayout;
     private WGSliderFragmet mSliderFragment;
+
+    private AlertDialog alert = null;
+    private AlertDialog.Builder builder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,16 +136,60 @@ public class WGMainActivity extends WGBaseActivity {
 
     }
 
+    public void onOptionPicker(View view) {
+        OptionPicker picker = new WGOptionPickerView(this, new String[]{
+                "第一项", "第二项", "这是一个很", "长很长很长很长", "很长很长很长很长","很长的很长很长的很长很长的项"
+        });
+        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(int index, String item) {
+                Log.e("onOptionPicked", "" + index + "item" + "-----------");
+                showWarning("index=" + index + ", item=" + item);
+            }
+        });
+        picker.show();
+    }
+
+    void sss() {
+        builder = new AlertDialog.Builder(WGMainActivity.this);
+        alert = builder.setIcon(R.drawable.italian_icon)
+                .setTitle("系统提示：")
+                .setMessage("这是一个最普通的AlertDialog,\n带有三个按钮，分别是取消，中立和确定")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(WGMainActivity.this, "你点击了取消按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(WGMainActivity.this, "你点击了确定按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNeutralButton("中立", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(WGMainActivity.this, "你点击了中立按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                }).create();             //创建AlertDialog对象
+        alert.show();                    //显示对话框
+    }
+
     public void testActivity() {
-        Intent intent = new Intent(WGMainActivity.this, WGClientServiceDetailActivity.class);
-        Bundle mBundle = new Bundle();
-        WGClientServiceItem item = new WGClientServiceItem();
-        item.name = "郑渊谦";
-        item.url = "http://baidu.com";
-        mBundle.putSerializable("key", item);
-        intent.putExtras(mBundle);
+        //sss();
+        //onOptionPicker(null);
+        Intent intent = new Intent(WGMainActivity.this, WGCollectionActivity.class);
         startActivity(intent);
-        Log.e("error", "testActivity");
+//        Intent intent = new Intent(WGMainActivity.this, WGFindPasswordActivity.class);
+//        Bundle mBundle = new Bundle();
+//        WGClientServiceItem item = new WGClientServiceItem();
+//        item.name = "郑渊谦";
+//        item.url = "http://baidu.com";
+//        mBundle.putSerializable("key", item);
+//        intent.putExtras(mBundle);
+//        startActivity(intent);
+//        Log.e("error", "testActivity");
         //mDrawerLayout.openDrawer(GravityCompat.START);
     }
 

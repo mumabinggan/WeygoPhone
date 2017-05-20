@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -15,6 +16,8 @@ import java.util.Locale;
 
 public class JHLanguageUtils {
     static public void setAppLanguage(Context context, Locale locale) {
+        Log.e("setAppLanguage", Locale.getDefault().getLanguage() + ":" + Locale.getDefault().getLanguage());
+        //Locale newLocale = new Locale("zh");
         Resources resources = context.getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();

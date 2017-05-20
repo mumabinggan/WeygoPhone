@@ -18,7 +18,7 @@ public class WGHomeFloorContentGoodItem extends WGHomeFloorBaseContentItem {
 
     public String currentPrice;
 
-    public String specification;
+    public String specification;        //规格，在首页会grid 里面和分类详情 grid 模式下会显示
 
     public String discount;
 

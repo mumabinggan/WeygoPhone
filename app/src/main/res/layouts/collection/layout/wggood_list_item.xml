@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.collection.widget.WGGoodListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x106"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/x89"
+        android:layout_height="@dimen/x106"
+        android:layout_marginLeft="@dimen/x7"/>
+
+    <TextView
+        android:id="@+id/goodCountTextView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/ft9"
+        />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginLeft="@dimen/x11"
+        android:layout_marginRight="@dimen/x14"/>
+
+    <TextView
+        android:id="@+id/briefTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x14"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/nameTextView"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_marginTop="@dimen/x5"
+        android:layout_alignRight="@id/nameTextView" />
+
+    <TextView
+        android:id="@+id/chineseTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/briefTextView"
+        android:layout_marginTop="@dimen/x5"
+        android:layout_alignRight="@id/nameTextView" />
+
+    <RelativeLayout
+        android:id="@+id/priceView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x19"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_alignRight="@id/nameTextView"
+        android:layout_below="@+id/chineseTextView"
+        android:layout_marginTop="@dimen/x5"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/currentPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x19"
+            android:text="sdfsdfs"
+            android:textColor="@color/WGAppBaseColor"
+            android:textSize="@dimen/ft14"
+            android:gravity="center"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/reducePriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x19"
+            android:layout_toRightOf="@+id/currentPriceTextView"
+            android:layout_marginLeft="@dimen/x7"
+            android:text="三少"
+            android:textColor="@color/WGAppBaseTitleAAAColor"
+            android:textSize="@dimen/ft10"
+            android:gravity="center"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x14"
+            android:layout_toRightOf="@+id/reducePriceTextView"
+            android:layout_marginLeft="@dimen/x7"
+            android:text="三少"
+            android:textColor="@color/WGAppBaseTitleAAAColor"
+            android:textSize="@dimen/ft10"
+            android:background="@drawable/common_good_price_bg"
+            android:gravity="center"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/shopCartView"
+        android:layout_width="@dimen/x100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="#00ff00">
+    </View>
+    
+    <ImageView
+        android:id="@+id/shopCartBtn"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/x14"
+        android:layout_marginRight="@dimen/x14"
+        android:src="@drawable/common_add_cart"/>
+
+</com.weygo.weygophone.pages.collection.widget.WGGoodListView>

@@ -33,8 +33,13 @@ android {
                     'src/main/res/layouts/home',
                     'src/main/res/layouts/login',
                     'src/main/res/layouts/register',
+                    'src/main/res/layouts/setting',
+                    'src/main/res/layouts/findPassword',
                     'src/main/res/layouts/clientService/list',
                     'src/main/res/layouts/clientService/detail',
+                    'src/main/res/layouts/clientService',
+                    'src/main/res/layouts/collection',
+                    'src/main/res/layouts/footprint',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]
@@ -73,4 +78,10 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
 
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    compile 'com.jude:rollviewpager:1.4.6'
+
+    compile 'cn.qqtheme.framework:WheelPicker:1.5.1'
+
+    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
 }

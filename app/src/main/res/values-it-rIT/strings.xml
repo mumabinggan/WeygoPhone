@@ -73,4 +73,32 @@
     //客服中心
     <string name="ClientService_Title">Servizio clienti</string>
 
+    //找回密码
+    <string name="FindPW_Title">Password dimenticata</string>
+    <string name="FindPW_Btn">Ripristino password</string>
+
+    //设置
+    <string name="Setting_Title">Setting</string>
+    <string name="Setting_UserInfo">Informazioni</string>
+    <string name="Setting_SystemMessage">System</string>
+    <string name="Setting_InputCap">Inserisci CAP</string>
+    <string name="Setting_Version">Versione</string>
+    <string name="Setting_CleanCache">Svuota cache</string>
+    <string name="Setting_SetLanguage">Seleziona lingua</string>
+    <string name="Setting_Italiano">Italiano</string>
+    <string name="Setting_China">China</string>
+    <string name="Setting_Logout">Log out</string>
+
+    //Footer
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
+
+    //收藏
+    <string name="Collection_Title">Collection</string>
+
+    //足迹
+    <string name="Printfoot_Title">FootPrint</string>
+
 </resources>

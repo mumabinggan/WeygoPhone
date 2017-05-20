@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/base_titlebar"
+        layout="@layout/common_navigationbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:background="@color/WGViewBackgroundColor"
+        android:text="@string/Setting_UserInfo"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:gravity="center"
+        android:textSize="@dimen/ft12"/>
+
+    <include
+        android:id="@+id/postCodeView"
+        layout="@layout/common_cell_type4"
+        style="WGCellStyle4View.WGCellStyleTextAndDetailText"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:background="@color/WGViewBackgroundColor"
+        android:text="@string/Setting_SystemMessage"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:gravity="center"
+        android:textSize="@dimen/ft12"/>
+
+    <include
+        android:id="@+id/languageView"
+        layout="@layout/common_cell_type4"
+        style="WGCellStyle4View.WGCellStyleTextAndDetailAndArr"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigaiotnBar_separate_color"></View>
+
+    <include
+        android:id="@+id/versionView"
+        layout="@layout/common_cell_type4"
+        style="WGCellStyle4View.WGCellStyleTextAndDetailAndArr"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigaiotnBar_separate_color"></View>
+
+    <include
+        android:id="@+id/cleanCacheView"
+        layout="@layout/common_cell_type4"
+        style="WGCellStyle4View.WGCellStyleOnlyText"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigaiotnBar_separate_color"></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"></View>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/ft12"
+        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginRight="@dimen/x13"
+        android:background="@drawable/login_btn_bg"
+        android:text="@string/Setting_Logout"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"></View>
+
+</LinearLayout>

@@ -37,7 +37,7 @@ public class WGClientServiceAdapter extends JHRecyclerViewAdapter {
     void handleClickView(View view) {
         if (mOnItemClickListener != null) {
             int tag = (int) view.getTag();
-            mOnItemClickListener.onItemClick(view, (int)view.getTag());
+            mOnItemClickListener.onItemClick(view, tag);
         }
     }
 

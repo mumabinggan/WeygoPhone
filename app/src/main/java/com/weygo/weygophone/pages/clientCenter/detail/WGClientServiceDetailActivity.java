@@ -2,11 +2,15 @@ package com.weygo.weygophone.pages.clientCenter.detail;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.jude.rollviewpager.RollPagerView;
+import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
@@ -22,6 +26,8 @@ public class WGClientServiceDetailActivity extends WGTitleActivity {
     ProgressBar mProgressBar;
 
     WGClientServiceItem mItem;
+
+    RollPagerView mPagerView;
 
     @Override
     public void initContentView() {
@@ -69,5 +75,35 @@ public class WGClientServiceDetailActivity extends WGTitleActivity {
                 super.onProgressChanged(view, newProgress);
             }
         });
+
+        mPagerView = (RollPagerView) findViewById(R.id.banner);
+        mPagerView.setAdapter(new TestLoopAdapter(mPagerView));
+    }
+
+    private class TestLoopAdapter extends LoopPagerAdapter {
+        private int[] imgs = {
+                R.drawable.tab_mine_head_bg,
+                R.drawable.common_facebook,
+                R.drawable.common_wechat,
+                R.drawable.common_facebook,
+        };
+
+        public TestLoopAdapter(RollPagerView viewPager) {
+            super(viewPager);
+        }
+
+        @Override
+        public View getView(ViewGroup container, int position) {
+            ImageView view = new ImageView(container.getContext());
+            view.setImageResource(imgs[position]);
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            return view;
+        }
+
+        @Override
+        public int getRealCount() {
+            return imgs.length;
+        }
     }
 }

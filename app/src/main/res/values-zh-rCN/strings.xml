@@ -74,4 +74,31 @@
     //客服中心
     <string name="ClientService_Title">客服中心</string>
 
+    //找回密码
+    <string name="FindPW_Title">忘记密码</string>
+    <string name="FindPW_Btn">找回密码</string>
+
+    //设置
+    <string name="Setting_Title">设置中心</string>
+    <string name="Setting_UserInfo">帐户信息</string>
+    <string name="Setting_SystemMessage">系统信息</string>
+    <string name="Setting_InputCap">输入邮编</string>
+    <string name="Setting_Version">版本</string>
+    <string name="Setting_CleanCache">消除缓存</string>
+    <string name="Setting_SetLanguage">设置语言</string>
+    <string name="Setting_Italiano">意大利</string>
+    <string name="Setting_China">中国</string>
+    <string name="Setting_Logout">退出登录</string>
+
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
+
+    //收藏
+    <string name="Collection_Title">我的收藏</string>
+
+    //足迹
+    <string name="Printfoot_Title">我的足迹</string>
+
 </resources>
