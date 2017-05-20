@@ -74,7 +74,7 @@ public class WGGoodListView extends RelativeLayout {
         mChineseTextView = (TextView) findViewById(R.id.chineseTextView);
         mCurrentPriceTextView = (TextView) findViewById(R.id.currentPriceTextView);
         mReducePriceTextView = (TextView) findViewById(R.id.reducePriceTextView);
-        mReducePriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
+        mReducePriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
         mPriceTextView = (TextView) findViewById(R.id.priceTextView);
 
         mAddCartImageView = (ImageView) findViewById(R.id.shopCartBtn);
@@ -106,7 +106,7 @@ public class WGGoodListView extends RelativeLayout {
             mCurrentPriceTextView.setText(item.currentPrice);
             mReducePriceTextView.setText(item.reducePrice);
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.reducePrice) ? INVISIBLE : VISIBLE);
-            mPriceTextView.setText(item.price);
+            mPriceTextView.setText(" " + item.price + " ");
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
             if (data instanceof WGOrderGoodItem) {
                 WGOrderGoodItem orderItem = (WGOrderGoodItem) data;

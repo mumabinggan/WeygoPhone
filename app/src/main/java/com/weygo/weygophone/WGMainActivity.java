@@ -33,6 +33,7 @@ import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
 import com.weygo.weygophone.pages.collection.WGCollectionActivity;
 import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
+import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
@@ -148,32 +149,6 @@ public class WGMainActivity extends WGBaseActivity {
             }
         });
         picker.show();
-    }
-
-    void sss() {
-        builder = new AlertDialog.Builder(WGMainActivity.this);
-        alert = builder.setIcon(R.drawable.italian_icon)
-                .setTitle("系统提示：")
-                .setMessage("这是一个最普通的AlertDialog,\n带有三个按钮，分别是取消，中立和确定")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(WGMainActivity.this, "你点击了取消按钮~", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(WGMainActivity.this, "你点击了确定按钮~", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNeutralButton("中立", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(WGMainActivity.this, "你点击了中立按钮~", Toast.LENGTH_SHORT).show();
-                    }
-                }).create();             //创建AlertDialog对象
-        alert.show();                    //显示对话框
     }
 
     public void testActivity() {

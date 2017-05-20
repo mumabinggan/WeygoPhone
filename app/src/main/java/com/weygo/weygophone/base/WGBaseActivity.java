@@ -8,16 +8,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.weygo.common.base.JHActivity;
-import com.weygo.common.widget.JHNavigationBar;
+import com.weygo.common.base.recyclerview.LoadingFooter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.logic.WGChangeLanguageCallBack;
-
-import org.w3c.dom.Text;
 
 import java.util.Locale;
 

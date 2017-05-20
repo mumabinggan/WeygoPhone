@@ -97,8 +97,27 @@
 
     //收藏
     <string name="Collection_Title">Collection</string>
+    <string name="Collection_Delete_Tip">删除收藏提示</string>
+    <string name="Collection_Delete_OK">确定</string>
+    <string name="Collection_Delete_Cancel">取消</string>
+
 
     //足迹
     <string name="Printfoot_Title">FootPrint</string>
+
+    //我的积分
+    <string name="MyIntegral_Title">I miei Punti Spesa</string>
+    <string name="MyIntegral_Number">Saldo punti: </string>
+    <string name="MyIntegral_Use_Method_Btn">Come usarli</string>
+    <string name="MyIntegral_History">History</string>
+
+    //使用积分
+    <string name="UseIntegral_Title">Utilizza i punti spesa</string>
+    <string name="UseIntegral_Cancel">Cancella</string>
+    <string name="UseIntegral_OK">UTILIZZA PUNTI</string>
+    <string name="UseIntegral_Count_1"></string>
+    <string name="UseIntegral_Count_2"> punti spesa disponibili \n puoi utilizzare </string>
+    <string name="UseIntegral_Count_3"> punti = </string>
+    <string name="UseIntegral_Count_4"></string>
 
 </resources>

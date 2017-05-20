@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -96,6 +98,32 @@ public class JHActivity extends FragmentActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 
+    public interface OnTouchAlertListener extends JHInterface {
+        void onTouchIndex(int which);
+    }
+
+    public void showAlert(Context context, int messageResId, final OnTouchAlertListener listener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        AlertDialog alert = builder.setMessage(messageResId)
+                .setNegativeButton(R.string.Collection_Delete_Cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (listener != null) {
+                            listener.onTouchIndex(0);
+                        }
+                    }
+                })
+                .setPositiveButton(R.string.Collection_Delete_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (listener != null) {
+                            listener.onTouchIndex(1);
+                        }
+                    }
+                })
+                .create();
+        alert.show();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

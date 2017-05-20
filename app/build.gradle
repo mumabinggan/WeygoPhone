@@ -40,6 +40,8 @@ android {
                     'src/main/res/layouts/clientService',
                     'src/main/res/layouts/collection',
                     'src/main/res/layouts/footprint',
+                    'src/main/res/layouts/integral/myIntegral',
+                    'src/main/res/layouts/integral/useIntegral',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]
@@ -84,4 +86,6 @@ dependencies {
     compile 'cn.qqtheme.framework:WheelPicker:1.5.1'
 
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+
+    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
 }

@@ -1,25 +1,20 @@
 package com.weygo.weygophone.pages.collection;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.baoyz.widget.PullRefreshLayout;
-import com.weygo.common.base.JHDividerItemDecoration;
-import com.weygo.common.base.JHRecyclerViewAdapter;
-import com.weygo.common.widget.JHNavigationBar;
+import com.weygo.common.base.JHResponse;
+import com.weygo.common.base.recyclerview.LoadingFooter;
+import com.weygo.common.base.recyclerview.RecyclerViewUtils;
+import com.weygo.common.tools.network.JHRequestError;
+import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
-import com.weygo.weygophone.base.WGTitleActivity;
-import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
+import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
+import com.weygo.weygophone.pages.collection.model.request.WGCollectionListRequest;
+import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
+import com.weygo.weygophone.pages.collection.model.response.WGCollectionListResponse;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by muma on 2017/5/19.
@@ -27,40 +22,10 @@ import java.util.List;
 
 public class WGCollectionActivity extends WGGoodListActivity {
 
-    PullRefreshLayout mRefreshLayout;
-    RecyclerView mRecyclerView;
-    WGGoodListAdapter mAdapter;
-
-    protected List mList;
-
     @Override
     public void initContentView() {
         setContentView(R.layout.wgcollection_activity);
-    }
-
-    @Override
-    public void initData() {
-        super.initData();
-        mList = new ArrayList();
-        WGHomeFloorContentGoodItem item = new WGHomeFloorContentGoodItem();
-        item.pictureURL = "";
-        item.name = "郑少要";
-        item.chineseName = "sss";
-        item.briefDescription = "asdfasdfasdfas";
-        item.price = "12d";
-        item.currentPrice = "fss";
-        item.reducePrice = "fs2323";
-        mList.add(item);
-
-        WGHomeFloorContentGoodItem item2 = new WGHomeFloorContentGoodItem();
-        item2.pictureURL = "";
-        item2.name = "郑少要";
-        item2.chineseName = "sss";
-        item2.briefDescription = "asdfasdfasdfas";
-        item2.price = "12d";
-        item2.currentPrice = "fss";
-        item2.reducePrice = "fs2323";
-        mList.add(item);
+        loadGoodList(true, false);
     }
 
     @Override
@@ -68,70 +33,90 @@ public class WGCollectionActivity extends WGGoodListActivity {
         super.initSubView();
 
         mNavigationBar.setTitle(R.string.Collection_Title);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.addItemDecoration(new JHDividerItemDecoration(this,
-                JHDividerItemDecoration.VERTICAL_LIST));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new WGGoodListAdapter(this, mList);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new WGGoodListAdapter.WGGoodListOnItemClickListener() {
-            @Override
-            public void onTouchGoodItem(View view, WGHomeFloorContentGoodItem item) {
-                sss();
-            }
-            @Override
-            public void onTouchAddCart(View view, WGHomeFloorContentGoodItem item) {
-                sss();
-            }
-            @Override
-            public void onItemClick(View view, int position) {
-                sss();
-            }
-        });
+    }
 
-        mRefreshLayout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        mRefreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_RING);
-        mRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+    void handleLongTouchGoodItem(View view, final WGHomeFloorContentGoodItem item) {
+        showAlert(this, R.string.Collection_Delete_Tip, new OnTouchAlertListener() {
             @Override
-            public void onRefresh() {
-                mRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mRefreshLayout.setRefreshing(false);
-                    }
-                }, 3000);
+            public void onTouchIndex(int which) {
+                if (which == 1) {
+                    loadDeleteGood(item);
+                }
             }
         });
     }
 
-    @Override
-    public void handleRightBarItem() {
-        super.handleRightBarItem();
-    }
-
-    void handleItem() {
+    void handleTouchAddCart(View view, WGHomeFloorContentGoodItem item) {
 
     }
 
-    void sss() {
-        Log.e("dsasadfasdfasd", "----------------");
-//        return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        AlertDialog alert = builder.setMessage("这是一个最普通的AlertDialog,\n带有三个按钮，分别是取消，中立和确定")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(WGCollectionActivity.this, "你点击了取消按钮~", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(WGCollectionActivity.this, "你点击了确定按钮~", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .create();             //创建AlertDialog对象
-        alert.show();                    //显示对话框
+    void loadGoodList(final boolean refresh, final boolean pulling) {
+        final WGCollectionListRequest request = new WGCollectionListRequest();
+        request.pageId = refresh ? 0 : mList.size();
+        if (pulling) {
+            request.showsLoadingView = false;
+        }
+        this.postAsyn(request, WGCollectionListResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleCollectionListResponse((WGCollectionListResponse)response, refresh, pulling);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                handleCollectionListResponse(null, refresh, pulling);
+            }
+        });
     }
 
+    void handleCollectionListResponse(WGCollectionListResponse response, boolean refresh, boolean pulling) {
+        mRefreshLayout.finishRefreshing();
+        if (response == null) {
+            showWarning(R.string.Request_Fail_Tip);
+            return;
+        }
+        if (response.success()) {
+            if (mList == null) {
+                mList = new ArrayList();
+            }
+            mList.addAll(response.data);
+            mAdapter.setData(mList);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadDeleteGood(WGHomeFloorContentGoodItem item) {
+        final long goodId = item.id;
+        final WGCancelCollectionGoodRequest request = new WGCancelCollectionGoodRequest();
+        request.id = item.favoriteId;
+        this.postAsyn(request, WGCancelCollectionGoodResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleCancelCollectionResponse((WGCancelCollectionGoodResponse)response, goodId);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleCancelCollectionResponse(WGCancelCollectionGoodResponse response, long goodId) {
+        if (response.success()) {
+            for (int num = 0; num < mList.size(); ++num) {
+                WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem)mList.get(num);
+                if (item.id == goodId) {
+                    mList.remove(num);
+                    break;
+                }
+            }
+            mAdapter.setData(mList);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
 }

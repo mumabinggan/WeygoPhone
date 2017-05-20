@@ -60,23 +60,23 @@
         <TextView
             android:id="@+id/currentPriceTextView"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/x19"
-            android:text="sdfsdfs"
+            android:layout_height="match_parent"
             android:textColor="@color/WGAppBaseColor"
             android:textSize="@dimen/ft14"
             android:gravity="center"
+            android:layout_centerVertical="true"
             android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/reducePriceTextView"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/x19"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/currentPriceTextView"
             android:layout_marginLeft="@dimen/x7"
-            android:text="三少"
             android:textColor="@color/WGAppBaseTitleAAAColor"
             android:textSize="@dimen/ft10"
             android:gravity="center"
+            android:layout_centerVertical="true"
             android:textAlignment="center"/>
 
         <TextView
@@ -85,11 +85,10 @@
             android:layout_height="@dimen/x14"
             android:layout_toRightOf="@+id/reducePriceTextView"
             android:layout_marginLeft="@dimen/x7"
-            android:text="三少"
             android:textColor="@color/WGAppBaseTitleAAAColor"
             android:textSize="@dimen/ft10"
             android:background="@drawable/common_good_price_bg"
-            android:gravity="center"
+            android:layout_centerVertical="true"
             android:textAlignment="center"/>
 
     </RelativeLayout>
@@ -98,8 +97,7 @@
         android:id="@+id/shopCartView"
         android:layout_width="@dimen/x100"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="#00ff00">
+        android:layout_alignParentRight="true">
     </View>
     
     <ImageView

@@ -33,7 +33,8 @@
         <activity android:name=".pages.setting.WGSettingActivity"></activity>
         <activity android:name=".pages.collection.WGCollectionActivity"></activity>
         <activity android:name=".pages.footprint.WGFootprintActivity"></activity>
-
+        <activity android:name=".pages.integral.useIntegral.model.WGUseIntegralActivity"></activity>
+        <activity android:name=".pages.integral.myIntegral.WGMyIntegralActivity"></activity>
     </application>
 
     <!-- Include following permission if you load images from Internet -->
