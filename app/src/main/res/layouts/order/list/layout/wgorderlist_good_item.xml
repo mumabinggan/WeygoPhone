@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x116"
+    android:layout_height="@dimen/x198">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x7"
+        android:layout_marginTop="@dimen/x7"
+        android:layout_marginBottom="@dimen/x7"
+        android:background="@drawable/common_goodcolumn_item_bg"
+        android:clipChildren="true"
+        android:clipToPadding="true">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x109" />
+
+        <TextView
+            android:id="@+id/goodCountTextView"
+            android:layout_width="@dimen/x21"
+            android:layout_height="@dimen/x21"
+            android:layout_marginLeft="@dimen/x7"
+            android:layout_marginTop="@dimen/x7"
+            android:background="@drawable/common_orderlistcount_textview_bg"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="@dimen/ft9"
+            />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x27"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="@dimen/x10"
+            android:layout_marginLeft="@dimen/x7"
+            android:layout_marginRight="@dimen/x7"
+            android:lines="2"/>
+
+        <TextView
+            android:id="@+id/currentPriceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x18"
+            android:textColor="@color/WGAppBaseColor"
+            android:textSize="@dimen/ft14"
+            android:gravity="center_vertical|left"
+            android:layout_below="@+id/nameTextView"
+            android:layout_alignLeft="@+id/nameTextView"
+            android:layout_alignRight="@+id/nameTextView"
+            android:layout_marginTop="@dimen/x7"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x18"
+            android:layout_alignLeft="@+id/currentPriceTextView"
+            android:layout_alignRight="@+id/currentPriceTextView"
+            android:layout_alignTop="@+id/currentPriceTextView"
+            android:textColor="@color/WGAppBaseTitleAAAColor"
+            android:textSize="@dimen/ft10"
+            android:gravity="center_vertical|right"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+</com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemView>

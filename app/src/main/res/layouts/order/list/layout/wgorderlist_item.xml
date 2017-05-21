@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include
+        android:id="@+id/orderNumberView"
+        layout="@layout/common_order_number" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/separate_color"></View>
+
+    <include
+        android:id="@+id/orderGoodsView"
+        layout="@layout/wgorderlist_goods" />
+
+    <include
+        android:id="@+id/orderPriceView"
+        layout="@layout/wgorderlist_price_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/separate_color"></View>
+
+    <include
+        android:id="@+id/orderRebuy"
+        layout="@layout/common_rebuy_cell" />
+
+</LinearLayout>

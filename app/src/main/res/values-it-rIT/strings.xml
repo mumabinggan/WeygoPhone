@@ -120,4 +120,11 @@
     <string name="UseIntegral_Count_3"> punti = </string>
     <string name="UseIntegral_Count_4"></string>
 
+    //订单列表
+    <string name="OrderList_Title">Elenco ordini</string>
+    <string name="OrderList_How_Many_Good">"Totale %d prodotti"</string>
+    <string name="OrderList_Total">"Totale: %s"</string>
+    <string name="OrderList_Rebuy">Riordina</string>
+    <string name="OrderList_OrderNumber">"Numero ordine: %s"</string>
+
 </resources>

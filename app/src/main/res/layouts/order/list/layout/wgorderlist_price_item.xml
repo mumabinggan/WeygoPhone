@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.list.widget.WGOrderItemPriceView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x41"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginTop="@dimen/x10"
+        android:src="@drawable/common_deliver_icon"/>
+
+    <ImageView
+        android:id="@+id/arrImageView"
+        android:layout_width="@dimen/x6"
+        android:layout_height="@dimen/x10"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight= "@dimen/x13"
+        android:layout_marginTop="@dimen/x15"
+        android:src="@drawable/common_right_arr"/>
+
+    <TextView
+        android:id="@+id/deliverPriceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginLeft="@dimen/x7"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/ft12"
+        />
+
+    <TextView
+        android:id="@+id/totalPriceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/deliverPriceTV"
+        android:layout_marginLeft="@dimen/x7"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseColor"
+        android:textSize="@dimen/ft12"
+        />
+
+    <TextView
+        android:id="@+id/totalCountTV"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/arrImageView"
+        android:layout_marginRight="@dimen/x7"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/ft12"
+        />
+
+</com.weygo.weygophone.pages.order.list.widget.WGOrderItemPriceView>

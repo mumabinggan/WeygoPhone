@@ -119,4 +119,11 @@
     <string name="UseIntegral_Count_3">点积分=</string>
     <string name="UseIntegral_Count_4"></string>
 
+    //订单列表
+    <string name="OrderList_Title">订单列表</string>
+    <string name="OrderList_How_Many_Good">"总共 %d 件商品"</string>
+    <string name="OrderList_Total">"总价: %s"</string>
+    <string name="OrderList_Rebuy">重新下单</string>
+    <string name="OrderList_OrderNumber">"订单编号: %s"</string>
+
 </resources>

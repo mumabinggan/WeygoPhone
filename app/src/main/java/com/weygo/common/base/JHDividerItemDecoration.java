@@ -88,6 +88,11 @@ public class JHDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+//        if (mOrientation == VERTICAL_LIST) {
+//            outRect.set(0, 0, 0, 20);
+//        } else {
+//            outRect.set(0, 0, 20, 0);
+//        }
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {

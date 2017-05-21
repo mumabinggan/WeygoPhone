@@ -35,6 +35,8 @@
         <activity android:name=".pages.footprint.WGFootprintActivity"></activity>
         <activity android:name=".pages.integral.useIntegral.model.WGUseIntegrationActivity"></activity>
         <activity android:name=".pages.integral.myIntegral.WGMyIntegralActivity"></activity>
+        <activity android:name=".pages.order.list.WGOrderListActivity"></activity>
+
     </application>
 
     <!-- Include following permission if you load images from Internet -->
