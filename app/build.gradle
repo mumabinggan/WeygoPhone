@@ -40,8 +40,8 @@ android {
                     'src/main/res/layouts/clientService',
                     'src/main/res/layouts/collection',
                     'src/main/res/layouts/footprint',
-                    'src/main/res/layouts/integral/myIntegral',
-                    'src/main/res/layouts/integral/useIntegral',
+                    'src/main/res/layouts/integration/myIntegration',
+                    'src/main/res/layouts/integration/useIntegration',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]

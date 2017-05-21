@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.integral.myIntegral.widget.WGIntegrationHistoryItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x41">
+    
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="@dimen/x154"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft10"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_marginLeft="@dimen/x14"
+        android:lines="2"
+        android:text="232oiqiorweoirquwpeoirwqpoeiruwqoeiruqwoeirupoiwqeurpioeqwuroqweirpqweiruwqepor"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="@dimen/x43"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft10"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_toRightOf="@+id/titleTextView"
+        android:layout_marginLeft="@dimen/x14"
+        android:text="+444444"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft10"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_toRightOf="@+id/scoreTextView"
+        android:text="Mar 20,2017 "
+        android:layout_marginLeft="@dimen/x14"
+        android:layout_marginRight="@dimen/x14"
+        android:gravity="center"/>
+
+</com.weygo.weygophone.pages.integral.myIntegral.widget.WGIntegrationHistoryItemView>

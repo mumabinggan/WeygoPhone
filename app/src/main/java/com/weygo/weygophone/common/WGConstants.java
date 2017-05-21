@@ -31,6 +31,9 @@ public class WGConstants {
     public static final int WGNotificationTypeLogin = 1;
     public static final int WGNotificationTypeLogout = 2;
 
+    //Intent Data key
+    public static final String WGIntentDataKey = "WGIntentDataKey";
+
     /*
 
         WGAppJumpTypeNone,

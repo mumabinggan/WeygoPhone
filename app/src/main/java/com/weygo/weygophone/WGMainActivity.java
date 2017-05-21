@@ -34,6 +34,7 @@ import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
 import com.weygo.weygophone.pages.collection.WGCollectionActivity;
 import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
 import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
+import com.weygo.weygophone.pages.integral.myIntegral.WGMyIntegralActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
@@ -154,7 +155,7 @@ public class WGMainActivity extends WGBaseActivity {
     public void testActivity() {
         //sss();
         //onOptionPicker(null);
-        Intent intent = new Intent(WGMainActivity.this, WGCollectionActivity.class);
+        Intent intent = new Intent(WGMainActivity.this, WGMyIntegralActivity.class);
         startActivity(intent);
 //        Intent intent = new Intent(WGMainActivity.this, WGFindPasswordActivity.class);
 //        Bundle mBundle = new Bundle();

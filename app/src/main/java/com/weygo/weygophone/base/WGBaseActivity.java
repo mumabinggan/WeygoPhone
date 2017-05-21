@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHActivity;
-import com.weygo.common.base.recyclerview.LoadingFooter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.logic.WGChangeLanguageCallBack;

@@ -3,8 +3,6 @@ package com.weygo.weygophone.pages.collection;
 import android.view.View;
 
 import com.weygo.common.base.JHResponse;
-import com.weygo.common.base.recyclerview.LoadingFooter;
-import com.weygo.common.base.recyclerview.RecyclerViewUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
@@ -25,7 +23,6 @@ public class WGCollectionActivity extends WGGoodListActivity {
     @Override
     public void initContentView() {
         setContentView(R.layout.wgcollection_activity);
-        loadGoodList(true, false);
     }
 
     @Override

@@ -13,7 +13,6 @@ import com.baoyz.widget.PullRefreshLayout;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHDividerItemDecoration;
-import com.weygo.common.base.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
@@ -32,13 +31,12 @@ public class WGGoodListActivity extends WGTitleActivity {
     protected RecyclerView mRecyclerView;
     protected WGGoodListAdapter mAdapter;
 
-    HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter;
     protected List mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadGoodList(true, false);
+        loadGoodList(true, false);
     }
 
     @Override
