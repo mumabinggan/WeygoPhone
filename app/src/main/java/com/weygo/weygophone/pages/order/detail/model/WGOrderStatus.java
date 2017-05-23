@@ -10,7 +10,14 @@ import java.util.List;
 
 public class WGOrderStatus extends WGObject {
 
-    public List<WGOrderStatusItem> statusArray;
+    public List<WGOrderStatusItem> status;
 
     public int currentStatus;
+
+    public String curstatus() {
+        if (status != null && status.size() > currentStatus) {
+            return status.get(currentStatus).totalStatusText;
+        }
+        return null;
+    }
 }

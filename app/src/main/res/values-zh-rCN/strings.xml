@@ -126,4 +126,19 @@
     <string name="OrderList_Rebuy">重新下单</string>
     <string name="OrderList_OrderNumber">"订单编号: %s"</string>
 
+    //订单详情
+    <string name="OrderDetail_Title">订单详情</string>
+    <string name="OrderDetail_Deliver_Info">送货信息</string>
+    <string name="OrderDetail_Deliver_Name">客户姓名: %s</string>
+    <string name="OrderDetail_Deliver_Address">送货地址: %s</string>
+    <string name="OrderDetail_Deliver_Phone">电话 / 手机: %s</string>
+    <string name="OrderDetail_Deliver_Time">送货时间: %s</string>
+    <string name="OrderDetail_Fax_Info">发票</string>
+    <string name="OrderDetail_Fax_Number">增值税/税号: %s</string>
+    <string name="OrderDetail_Fax_Company">公司名称: %s</string>
+    <string name="OrderDetail_Fax_Cap">邮编: %s</string>
+    <string name="OrderDetail_Goods_More">查看所有</string>
+    <string name="OrderDetail_Pay_Info">付款详情</string>
+    <string name="OrderDetail_Rebuy">重新下单</string>
+
 </resources>

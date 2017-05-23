@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include
+        android:id="@+id/goodItemView"
+        layout="@layout/wggood_list_item" />
+
+    <TextView
+        android:id="@+id/totalPriceTV"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x34"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/goodItemView"
+        android:paddingLeft="@dimen/x14"
+        android:text="2323"
+        android:background="@color/WGAppBaseTitleAAAAColor"
+        android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+    <TextView
+        android:id="@+id/priceTV"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x34"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/totalPriceTV"
+        android:layout_below="@+id/goodItemView"
+        android:text="2323"
+        android:background="#FFFFFF"
+        android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+    <TextView
+        android:id="@+id/reducePriceTV"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x34"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/priceTV"
+        android:layout_below="@+id/goodItemView"
+        android:text="2323"
+        android:background="#FFFFFF"
+        android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodItemView>

@@ -36,6 +36,8 @@
         <activity android:name=".pages.integral.useIntegral.model.WGUseIntegrationActivity"></activity>
         <activity android:name=".pages.integral.myIntegral.WGMyIntegralActivity"></activity>
         <activity android:name=".pages.order.list.WGOrderListActivity"></activity>
+        <activity android:name=".pages.order.detail.WGOrderDetailActivity"></activity>
+        <activity android:name=".pages.order.commit.model.WGCommitOrderActivity"></activity>
 
     </application>
 

@@ -127,4 +127,19 @@
     <string name="OrderList_Rebuy">Riordina</string>
     <string name="OrderList_OrderNumber">"Numero ordine: %s"</string>
 
+    //订单详情
+    <string name="OrderDetail_Title">Elenco ordini</string>
+    <string name="OrderDetail_Deliver_Info">Consegna</string>
+    <string name="OrderDetail_Deliver_Name">Nome e cognome: %s</string>
+    <string name="OrderDetail_Deliver_Address">Indirizzo: %s</string>
+    <string name="OrderDetail_Deliver_Phone">Telefono / Cellulare: %s</string>
+    <string name="OrderDetail_Deliver_Time">Dati di consegna：%s</string>
+    <string name="OrderDetail_Fax_Info">Fattura</string>
+    <string name="OrderDetail_Fax_Number">P. IVA / Codice fiscale: %s</string>
+    <string name="OrderDetail_Fax_Company">Ragione sociale: %s</string>
+    <string name="OrderDetail_Fax_Cap">CAP: %s</string>
+    <string name="OrderDetail_Goods_More">Guardali tutti</string>
+    <string name="OrderDetail_Pay_Info">Dettagli pagamento</string>
+    <string name="OrderDetail_Rebuy">Riordina</string>
+
 </resources>

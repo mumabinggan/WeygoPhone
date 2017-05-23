@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailDeliverStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/orderNumberView"
+        layout="@layout/common_order_number" />
+
+    <View
+        android:id="@+id/confirmLineView"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignBottom="@+id/orderNumberView"
+        android:background="@color/separate_color"></View>
+
+    <TextView
+        android:id="@+id/confirmTimeTV"
+        android:layout_width="@dimen/x130"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/confirmLineView"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x14"
+        android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+    <TextView
+        android:id="@+id/confirmDesTV"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/confirmLineView"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseTitleAColor"/>
+
+
+    <View
+        android:id="@+id/deliverLineView"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignBottom="@+id/confirmDesTV"
+        android:background="@color/separate_color"></View>
+
+    <TextView
+        android:id="@+id/deliverTimeTV"
+        android:layout_width="@dimen/x130"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/deliverLineView"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x14"
+        android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+    <TextView
+        android:id="@+id/deliverDesTV"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/deliverLineView"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseTitleAColor"/>
+
+    <View
+        android:id="@+id/compeletionLineView"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignBottom="@+id/deliverDesTV"
+        android:background="@color/separate_color"></View>
+
+    <TextView
+        android:id="@+id/completionTimeTV"
+        android:layout_width="@dimen/x130"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/compeletionLineView"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x14"
+        android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+    <TextView
+        android:id="@+id/completionDesTV"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x41"
+        android:layout_below="@+id/compeletionLineView"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseTitleAColor"/>
+
+</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailDeliverStatusView>
