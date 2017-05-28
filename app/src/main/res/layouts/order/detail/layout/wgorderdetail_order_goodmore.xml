@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodsMoreView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/x34"
     android:gravity="center">
 
     <Button
+        android:id="@+id/moreBtn"
         android:layout_width="@dimen/x137"
         android:layout_height="@dimen/x20"
         android:text="@string/OrderDetail_Goods_More"
@@ -14,4 +15,4 @@
         android:background="@drawable/orderdetail_good_more_bg"
         android:textSize="@dimen/ft10"/>
 
-</LinearLayout>
+</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodsMoreView>

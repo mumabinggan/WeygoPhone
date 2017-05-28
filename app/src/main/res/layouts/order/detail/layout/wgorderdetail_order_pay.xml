@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailUserInfoView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailPayView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,8 +10,8 @@
         android:layout_height="@dimen/x34"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x14"
-        android:text="11111"
-        android:background="@color/WGAppBaseTitleAAAAColor"
+        android:text="@string/OrderDetail_Pay_Info"
+        android:background="#f8fafa"
         android:textColor="@color/WGAppBaseTitleAColor"/>
 
     <RelativeLayout
@@ -31,7 +31,6 @@
             android:gravity="center_vertical"
             android:layout_below="@+id/headerView"
             android:paddingLeft="@dimen/x14"
-            android:text="0000"
             android:visibility="gone"
             android:textColor="@color/WGAppBaseTitleAAColor"/>
 
@@ -113,4 +112,4 @@
 
     </RelativeLayout>
 
-</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailUserInfoView>
+</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailPayView>

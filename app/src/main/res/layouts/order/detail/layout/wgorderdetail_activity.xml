@@ -8,24 +8,33 @@
         android:id="@+id/base_titlebar"
         layout="@layout/common_navigationbar" />
 
-    <RelativeLayout
+    <!--<com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout-->
+        <!--android:id="@+id/refreshLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!---->
+
+    <!--</com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>-->
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-            android:id="@+id/refreshLayout"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:divider="#ff000000"
+            android:dividerHeight="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:divider="#ff000000"
-                android:dividerHeight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+    </LinearLayout>
 
-        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+    <include
+        android:id="@+id/rebuyView"
+        layout="@layout/wgorderdetail_order_rebuy" />
 
-    </RelativeLayout>
 
 </LinearLayout>

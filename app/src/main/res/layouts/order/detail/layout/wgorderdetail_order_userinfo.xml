@@ -10,8 +10,8 @@
         android:layout_height="@dimen/x34"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x14"
-        android:text="2323"
-        android:background="@color/WGAppBaseTitleAAAAColor"
+        android:text="@string/OrderDetail_Deliver_Info"
+        android:background="#f8fafa"
         android:textColor="@color/WGAppBaseTitleAColor"/>
 
     <RelativeLayout

@@ -14,9 +14,13 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
+    public String app = "com.weygo.weygo";
+
+    public String os = "Android";
+
     // eg. www.example.com, default ""
     public String host() {
-        return "m.delong6688.develop.weygo.com";
+        return "m.preview.weygo.com";
     }
 
     // eg. app/ default ""

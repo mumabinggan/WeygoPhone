@@ -134,6 +134,8 @@
     <string name="OrderDetail_Deliver_Address">Indirizzo: %s</string>
     <string name="OrderDetail_Deliver_Phone">Telefono / Cellulare: %s</string>
     <string name="OrderDetail_Deliver_Time">Dati di consegna：%s</string>
+    <string name="OrderDetail_Good_Info">Elenco prodotti</string>
+    <string name="OrderDetail_Good_Total_Price">"Totale: "</string>
     <string name="OrderDetail_Fax_Info">Fattura</string>
     <string name="OrderDetail_Fax_Number">P. IVA / Codice fiscale: %s</string>
     <string name="OrderDetail_Fax_Company">Ragione sociale: %s</string>

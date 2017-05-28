@@ -133,6 +133,8 @@
     <string name="OrderDetail_Deliver_Address">送货地址: %s</string>
     <string name="OrderDetail_Deliver_Phone">电话 / 手机: %s</string>
     <string name="OrderDetail_Deliver_Time">送货时间: %s</string>
+    <string name="OrderDetail_Good_Info">商品列表</string>
+    <string name="OrderDetail_Good_Total_Price">"总价: "</string>
     <string name="OrderDetail_Fax_Info">发票</string>
     <string name="OrderDetail_Fax_Number">增值税/税号: %s</string>
     <string name="OrderDetail_Fax_Company">公司名称: %s</string>

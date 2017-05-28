@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailDeliverStatusView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
 
     <include
         android:id="@+id/orderNumberView"
@@ -21,6 +22,7 @@
         android:layout_below="@+id/confirmLineView"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x14"
+        android:background="#ffffff"
         android:textColor="@color/WGAppBaseTitleAAColor"/>
 
     <TextView
@@ -29,6 +31,7 @@
         android:layout_height="@dimen/x41"
         android:layout_below="@+id/confirmLineView"
         android:layout_alignParentRight="true"
+        android:background="#ffffff"
         android:gravity="center_vertical"
         android:textColor="@color/WGAppBaseTitleAColor"/>
 

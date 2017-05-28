@@ -2,7 +2,9 @@ package com.weygo.weygophone.pages.order.detail.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.weygo.weygophone.R;
@@ -52,12 +54,14 @@ public class WGOrderDetailPayView extends LinearLayout {
         mTVList = Arrays.asList(mPayTV1, mPayTV2, mPayTV3, mPayTV4, mPayTV5, mPayTV6, mPayTV7);
     }
 
-    public void showWithData(List payList) {
+    public void showWithArray(List payList) {
+        Log.e("payList", payList.toString());
         if (payList != null) {
             for (int num = 0; num < payList.size(); ++num) {
                 String item = (String)payList.get(num);
                 TextView textView = (TextView)mTVList.get(num);
                 textView.setText(item);
+                textView.setVisibility(VISIBLE);
             }
         }
     }

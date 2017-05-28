@@ -37,7 +37,7 @@ public class WGOrderDetailFaxView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mFaxNumberTV = (TextView) findViewById(R.id.nameTV);
+        mFaxNumberTV = (TextView) findViewById(R.id.numberTV);
         mFaxCompanyTV = (TextView) findViewById(R.id.companyTV);
         mFaxCapTV = (TextView) findViewById(R.id.capTV);
     }

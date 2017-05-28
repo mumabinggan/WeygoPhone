@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailRebuyView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x61">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separate_color"></View>
+
+    <Button
+        android:id="@+id/moreBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:text="@string/OrderDetail_Rebuy"
+        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginRight="@dimen/x13"
+        android:layout_marginTop="@dimen/x13"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@drawable/register_btn_bg"
+        android:textSize="@dimen/ft10"/>
+
+</com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailRebuyView>

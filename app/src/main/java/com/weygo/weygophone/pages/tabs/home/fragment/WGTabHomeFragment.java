@@ -109,7 +109,7 @@ public class WGTabHomeFragment extends WGFragment {
 
         mIndicatorViewPager.setAdapter(mPagerAdapter);
 
-        loadTitleData();
+        //loadTitleData();
 
         return view;
     }
@@ -131,7 +131,7 @@ public class WGTabHomeFragment extends WGFragment {
     }
 
     void handleHomeTitlesSuccess(WGHomeTitlesResponse response) {
-        if (response.success()) {
+        if (response != null && response.success()) {
             mTitleList = response.data;
             mPagerAdapter.setTitleList(mTitleList);
         }

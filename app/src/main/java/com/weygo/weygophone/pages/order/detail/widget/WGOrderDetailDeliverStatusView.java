@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.order.detail.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.weygo.common.tools.JHResourceUtils;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by muma on 2017/5/22.
  */
 
-public class WGOrderDetailDeliverStatusView extends LinearLayout {
+public class WGOrderDetailDeliverStatusView extends RelativeLayout {
 
     WGOrderNumberView mOrderNumberTV;
 

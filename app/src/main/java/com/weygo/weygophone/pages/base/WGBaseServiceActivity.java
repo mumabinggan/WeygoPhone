@@ -23,7 +23,7 @@ public class WGBaseServiceActivity extends WGBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baseservice_activity);
-        this.loadBaseService();
+        //this.loadBaseService();
 
         Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
         startActivity(intent);

@@ -154,4 +154,15 @@
         <item name="fadeDelay">1000</item>
     </style>
 
+
+    <style name="OrderDetail_TotalPrice_Title">
+        <item name="android:textSize">@dimen/ft12</item>
+        <item name="android:textColor">@color/WGAppBaseTitleAAAColor</item>
+    </style>
+
+    <style name="OrderDetail_TotalPrice_Price">
+        <item name="android:textSize">@dimen/ft14</item>
+        <item name="android:textColor">@color/WGAppBaseColor</item>
+    </style>
+
 </resources>
