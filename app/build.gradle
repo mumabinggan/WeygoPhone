@@ -45,6 +45,7 @@ android {
                     'src/main/res/layouts/order/list',
                     'src/main/res/layouts/order/detail',
                     'src/main/res/layouts/order/commit',
+                    'src/main/res/layouts/personInfo',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]
@@ -86,7 +87,7 @@ dependencies {
 
     compile 'com.jude:rollviewpager:1.4.6'
 
-    compile 'cn.qqtheme.framework:WheelPicker:1.5.1'
+    compile 'cn.qqtheme.framework:WheelPicker:1.5.1'        //AndroidPicker
 
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
 

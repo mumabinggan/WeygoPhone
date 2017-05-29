@@ -96,14 +96,24 @@ public class WGCellStyle4View extends RelativeLayout {
     public void setStyle(int style) {
         mStyle = style;
         if (style == WGCellStyleOnlyText) {
+            mtextView.setVisibility(VISIBLE);
             mDetailTextView.setVisibility(GONE);
             mRightImageView.setVisibility(GONE);
         }
         else if (style == WGCellStyleTextAndArr) {
+            mtextView.setVisibility(VISIBLE);
             mDetailTextView.setVisibility(GONE);
+            mRightImageView.setVisibility(GONE);
         }
         else if (style == WGCellStyleTextAndDetailText) {
+            mtextView.setVisibility(VISIBLE);
+            mDetailTextView.setVisibility(VISIBLE);
             mRightImageView.setVisibility(GONE);
+        }
+        else if (style == WGCellStyleTextAndDetailAndArr) {
+            mtextView.setVisibility(VISIBLE);
+            mDetailTextView.setVisibility(VISIBLE);
+            mRightImageView.setVisibility(VISIBLE);
         }
     }
 }

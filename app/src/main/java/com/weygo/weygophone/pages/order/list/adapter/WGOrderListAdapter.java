@@ -22,7 +22,6 @@ import java.util.List;
  */
 
 public class WGOrderListAdapter extends JHRecyclerViewAdapter {
-    Context mContext;
 
     List mArray;
 

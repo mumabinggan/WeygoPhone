@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.mine.model;
 
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGObject;
 
@@ -39,20 +40,20 @@ public class WGUser extends WGObject {
     public int deliveringCount;
 
     //for self use
-    public int sexString() {
-        List<Integer> sexs = this.sexs();
+    public String sexString() {
+        List<String> sexs = this.sexs();
         return sexs.get(sex);
     };
 
     //for self use
-    List<Integer> mSexList;
+    List<String> mSexList;
 
-    public List<Integer> sexs() {
+    public List<String> sexs() {
         if (mSexList == null) {
             mSexList = new ArrayList();
-            mSexList.add(R.string.PersonInfo_Sex_Select);
-            mSexList.add(R.string.PersonInfo_Sex_Man);
-            mSexList.add(R.string.PersonInfo_Sex_Woman);
+            mSexList.add(JHResourceUtils.getInstance().getString(R.string.PersonInfo_Sex_Select));
+            mSexList.add(JHResourceUtils.getInstance().getString(R.string.PersonInfo_Sex_Man));
+            mSexList.add(JHResourceUtils.getInstance().getString(R.string.PersonInfo_Sex_Woman));
         }
         return mSexList;
     };

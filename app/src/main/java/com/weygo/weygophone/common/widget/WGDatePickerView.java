@@ -4,39 +4,44 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
-import java.util.List;
+import java.util.Calendar;
 
-import cn.qqtheme.framework.picker.OptionPicker;
-import cn.qqtheme.framework.widget.WheelView;
+import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.util.ConvertUtils;
 
 /**
- * Created by muma on 2017/5/18.
+ * Created by muma on 2017/5/29.
  */
 
-public class WGOptionPickerView extends OptionPicker {
-    protected static final int DURATION = 200;//动画延时，单位为毫秒
-    public WGOptionPickerView(Activity activity, String[] items) {
-        super(activity, items);
-        initConfig();
+public class WGDatePickerView extends DatePicker {
+    protected static final int DURATION = 100;//动画延时，单位为毫秒
+    Activity mActivity = null;
+
+    public WGDatePickerView(Activity activity) {
+        super(activity);
+        mActivity = activity;
+        init();
     }
 
-    public WGOptionPickerView(Activity activity, List<String> items) {
-        super(activity, items);
-        initConfig();
+    public WGDatePickerView(Activity activity, int mode) {
+        super(activity, mode);
+        mActivity = activity;
+        init();
     }
 
-    void initConfig() {
-        setHeight(400);
-        setCanceledOnTouchOutside(false);
-        setDividerRatio(WheelView.DividerConfig.FILL);
-        setShadowColor(Color.RED, 40);
-        setSelectedIndex(1);
-        setCycleDisable(true);
-        setTextSize(11);
+    void init() {
+        setCanceledOnTouchOutside(true);
+        setUseWeight(true);
+        setTopPadding(ConvertUtils.toPx(mActivity, 20));
+        Calendar c = Calendar.getInstance();
+        setRangeStart(1917, 1, 1);
+        setRangeEnd(c.get(Calendar.YEAR), (c.get(Calendar.MONTH) + 1), c.get(Calendar.DAY_OF_MONTH));
+        setSelectedItem(1975, 1, 1);
+        setLabel("", "", "");
     }
 
     @Override
@@ -48,7 +53,7 @@ public class WGOptionPickerView extends OptionPicker {
         ObjectAnimator translation = ObjectAnimator.ofFloat(view, "translationY", 300, 0);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(alpha, translation);
-        animatorSet.setDuration(200);
+        animatorSet.setDuration(DURATION);
         animatorSet.setInterpolator(new AccelerateInterpolator());
         animatorSet.start();
     }
@@ -60,7 +65,7 @@ public class WGOptionPickerView extends OptionPicker {
         ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 1, 0);
         ObjectAnimator translation = ObjectAnimator.ofFloat(view, "translationY", 0, 300);
         animatorSet.playTogether(alpha, translation);
-        animatorSet.setDuration(200);
+        animatorSet.setDuration(DURATION);
         animatorSet.setInterpolator(new AccelerateInterpolator());
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override

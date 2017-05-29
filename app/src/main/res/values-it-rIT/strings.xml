@@ -144,4 +144,18 @@
     <string name="OrderDetail_Pay_Info">Dettagli pagamento</string>
     <string name="OrderDetail_Rebuy">Riordina</string>
 
+    //个人信息
+    <string name="PersonInfo_Title">Profilo Account</string>
+    <string name="PersonInfo_Image">La tua icona</string>
+    <string name="PersonInfo_FirstName">Nome</string>
+    <string name="PersonInfo_LastName">Cognome</string>
+    <string name="PersonInfo_Number">Codice Cliente</string>
+    <string name="PersonInfo_Phone">Telefono / Cellulare</string>
+    <string name="PersonInfo_Email">E-mail</string>
+    <string name="PersonInfo_Sex">Sesso</string>
+    <string name="PersonInfo_Birthday">Data di nascita</string>
+    <string name="PersonInfo_Fax">P. IVA / Codice fiscale</string>
+    <string name="PersonInfo_ChangePW">Modifica password</string>
+    <string name="PersonInfo_Save">Salva</string>
+
 </resources>

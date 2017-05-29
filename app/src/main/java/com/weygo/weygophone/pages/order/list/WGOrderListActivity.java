@@ -36,7 +36,6 @@ public class WGOrderListActivity extends WGTitleActivity {
     RecyclerView mRecyclerView;
     WGOrderListAdapter mAdapter;
 
-
     List mArray;
 
     @Override

@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.order.commit.model;
+package com.weygo.weygophone.pages.order.commit;
 
 import com.weygo.weygophone.base.WGTitleActivity;
 

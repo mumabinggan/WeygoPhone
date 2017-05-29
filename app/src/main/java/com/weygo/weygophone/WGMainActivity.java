@@ -24,6 +24,7 @@ import com.weygo.common.base.JHResponse;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
@@ -38,6 +39,7 @@ import com.weygo.weygophone.pages.integral.myIntegral.WGMyIntegralActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.order.detail.WGOrderDetailActivity;
 import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
+import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
@@ -64,8 +66,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.NumberPicker;
 import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
 
 public class WGMainActivity extends WGBaseActivity {
@@ -154,10 +158,39 @@ public class WGMainActivity extends WGBaseActivity {
         picker.show();
     }
 
+    void setA() {
+        final DatePicker picker = new WGDatePickerView(this);
+        //picker.getTitleView().setVisibility(View.v);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                showWarning(year + "-" + month + "-" + day);
+            }
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                //picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                //picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                //picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
+    }
+
     public void testActivity() {
+        //setA();
         //sss();
         //onOptionPicker(null);
-        Intent intent = new Intent(WGMainActivity.this, WGOrderDetailActivity.class);
+        Intent intent = new Intent(WGMainActivity.this, WGPersonInfoActivity.class);
         startActivity(intent);
 //        Intent intent = new Intent(WGMainActivity.this, WGFindPasswordActivity.class);
 //        Bundle mBundle = new Bundle();

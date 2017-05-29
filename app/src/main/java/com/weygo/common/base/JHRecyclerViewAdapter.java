@@ -1,5 +1,6 @@
 package com.weygo.common.base;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
  */
 
 public class JHRecyclerViewAdapter extends RecyclerView.Adapter<JHBaseViewHolder> {
+
+    protected Context mContext;
 
     public OnItemClickListener mOnItemClickListener = null;
 

@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.integral.useIntegral.model;
+package com.weygo.weygophone.pages.integral.useIntegral;
 
 import android.content.Intent;
 import android.os.Bundle;
