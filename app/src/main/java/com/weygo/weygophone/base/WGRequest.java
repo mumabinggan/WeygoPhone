@@ -14,13 +14,14 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
-    public String app = "com.weygo.weygo";
+    public String app = "com.weygo.test";
 
-    public String os = "Android";
+    public String os = "iOS";
 
     // eg. www.example.com, default ""
+    //m.delong6688.develop.weygo.com
     public String host() {
-        return "m.preview.weygo.com";
+        return "m.delong6688.develop.weygo.com";
     }
 
     // eg. app/ default ""
@@ -31,6 +32,10 @@ public class WGRequest extends JHRequest {
     // no need to override, except your url is not format with: scheme://domain/path/api
     public String url() {
         return this.scheme() + "://" + this.host() + "/" + this.userPath() + "/" + this.api() + this.apiSuffix();
+    }
+
+    public String scheme() {
+        return "http";
     }
 
 //    public String apiSuffix() {

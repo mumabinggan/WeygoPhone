@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailImagesView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.weygo.weygophone.common.widget.WGRotationImagesView
+        android:id="@+id/scrollImageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x239"
+        app:rollviewpager_play_delay="3000"></com.weygo.weygophone.common.widget.WGRotationImagesView>
+
+</com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailImagesView>

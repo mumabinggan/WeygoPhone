@@ -157,4 +157,11 @@
     <string name="PersonInfo_ChangePW">更改密码</string>
     <string name="PersonInfo_Save">保存</string>
 
+    //产品详情
+    <string name="GoodDetail_Des">产品规格</string>
+    <string name="GoodDetail_Info">购买须知</string>
+    <string name="GoodDetail_Deliver">配送条款</string>
+    <string name="GoodDetail_CommodityInfo">商品描述</string>
+    <string name="GoodDetail_Add">加入购物车</string>
+
 </resources>

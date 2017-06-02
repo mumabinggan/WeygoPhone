@@ -46,6 +46,9 @@ android {
                     'src/main/res/layouts/order/detail',
                     'src/main/res/layouts/order/commit',
                     'src/main/res/layouts/personInfo',
+                    'src/main/res/layouts/goodDetail',
+                    'src/main/res/layouts/search/history',
+                    'src/main/res/layouts/search/result',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]

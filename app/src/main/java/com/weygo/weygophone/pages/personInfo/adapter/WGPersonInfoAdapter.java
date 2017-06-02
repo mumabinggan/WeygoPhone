@@ -107,6 +107,7 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
             });
         }
         WGPersonInfoItemViewHolder holder = new WGPersonInfoItemViewHolder(view);
+        Log.e("==============", "" + holder.itemView.getTag());
         return holder;
     }
 
@@ -156,6 +157,7 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
         @Override
         public void showWithData(Object object) {
             super.showWithData(object);
+
             WGUser item = (WGUser)object;
             int tag = (int) mView.getTag();
             if (tag == 0) {

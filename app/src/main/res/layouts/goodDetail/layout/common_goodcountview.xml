@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.goodDetail.widget.WGGoodCountView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="@dimen/x66"
+    android:layout_height="@dimen/x21">
+    
+    <ImageView
+        android:id="@+id/subImageView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:src="@drawable/common_sub"
+        />
+
+    <TextView
+        android:id="@+id/countTV"
+        android:layout_width="@dimen/x24"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="999"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseColor"/>
+
+    <ImageView
+        android:id="@+id/addImageView"
+        android:layout_width="@dimen/x21"
+        android:layout_height="@dimen/x21"
+        android:src="@drawable/common_add"
+        />
+
+</com.weygo.weygophone.pages.goodDetail.widget.WGGoodCountView>

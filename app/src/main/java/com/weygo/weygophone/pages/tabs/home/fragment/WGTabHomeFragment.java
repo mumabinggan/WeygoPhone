@@ -24,6 +24,7 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
@@ -42,7 +43,7 @@ public class WGTabHomeFragment extends WGFragment {
     WGTabNavigationBar mNavigationBar;
 
     //Segment and page
-    ScrollIndicatorView mHomeSegmentView;
+    WGSegmentView mHomeSegmentView;
     ViewPager mViewPager;
     MyAdapter mPagerAdapter;
     IndicatorViewPager mIndicatorViewPager;
@@ -81,15 +82,8 @@ public class WGTabHomeFragment extends WGFragment {
             }
         });
 
-        mHomeSegmentView = (ScrollIndicatorView) view.findViewById(R.id.home_segmentView);
+        mHomeSegmentView = (WGSegmentView) view.findViewById(R.id.home_segmentView);
         mViewPager = (ViewPager) view.findViewById(R.id.home_viewPager);
-
-        float unSelectSize = JHFontUtils.font(getContext(), 12);
-        float selectSize = unSelectSize;
-        int selectColor = getResources().getColor(R.color.WGAppBaseColor);
-        int unSelectColor = getResources().getColor(R.color.WGAppBaseTitleAColor);
-        mHomeSegmentView.setScrollBar(new ColorBar(getActivity(), selectColor, 5));
-        mHomeSegmentView.setOnTransitionListener(new OnTransitionTextListener().setColor(selectColor, unSelectColor).setSize(selectSize, unSelectSize));
 
         mIndicatorViewPager = new IndicatorViewPager(mHomeSegmentView, mViewPager);
         mPagerAdapter = new MyAdapter();

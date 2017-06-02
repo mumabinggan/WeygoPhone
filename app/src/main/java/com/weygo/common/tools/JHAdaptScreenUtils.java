@@ -42,6 +42,11 @@ public class JHAdaptScreenUtils {
         return screenWidth;
     }
 
+    public static int pxTodp(Context context, float px) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (px / scale + 0.5f);
+    }
+
     public static int deviceDpHeight(Context context) {
         return deviceDpWidth(context);
     }

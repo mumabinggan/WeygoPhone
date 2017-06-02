@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailConfigView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:padding="@dimen/x14">
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textSize="@dimen/ft14"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseTitleAColor"/>
+
+    <TextView
+        android:id="@+id/specificationTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x31"
+        android:maxLines="2"
+        android:textSize="@dimen/ft14"
+        android:gravity="center_vertical"
+        android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/currentPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/ft12"
+            android:textColor="@color/WGAppBaseColor"/>
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/ft12"
+            android:paddingLeft="@dimen/x7"
+            android:textColor="@color/WGAppBaseTitleAAAColor"/>
+
+        <TextView
+            android:id="@+id/expireTimeTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/ft12"
+            android:paddingLeft="@dimen/x7"
+            android:textAlignment="textEnd"
+            android:textColor="@color/WGAppBaseColor"/>
+
+    </LinearLayout>
+
+</com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailConfigView>

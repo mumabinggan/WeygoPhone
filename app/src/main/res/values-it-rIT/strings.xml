@@ -158,4 +158,11 @@
     <string name="PersonInfo_ChangePW">Modifica password</string>
     <string name="PersonInfo_Save">Salva</string>
 
+    //产品详情
+    <string name="GoodDetail_Des">Descrizione</string>
+    <string name="GoodDetail_Info">Info</string>
+    <string name="GoodDetail_Deliver">Spedizione</string>
+    <string name="GoodDetail_CommodityInfo">Descrizione</string>
+    <string name="GoodDetail_Add">Aggiungi</string>
+
 </resources>

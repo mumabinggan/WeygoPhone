@@ -86,6 +86,7 @@ public class WGApplicationRequestUtils {
                 buffer.append(m.getValue());
             }
         }
+        Log.e("----buffer----", buffer.toString());
         return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
     }
 

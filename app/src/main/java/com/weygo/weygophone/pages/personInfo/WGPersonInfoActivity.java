@@ -59,7 +59,7 @@ public class WGPersonInfoActivity extends WGTitleActivity {
 
     @Override
     public void initContentView() {
-        setContentView(R.layout.wgorderdetail_activity);
+        setContentView(R.layout.wgpersoninfo_activity);
     }
 
     @Override

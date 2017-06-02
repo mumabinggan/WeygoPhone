@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailCommodityDescriptionView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:background="#f8fafa"
+        android:paddingLeft="@dimen/x14"
+        android:text="12"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/commodityDescriptionTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/x14"
+        android:text="12"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:gravity="center_vertical"/>
+
+</com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailCommodityDescriptionView>
