@@ -51,11 +51,16 @@ public class JHAdaptScreenUtils {
         return deviceDpWidth(context);
     }
 
-    public static float width(float width) {
-        return R.dimen.x1 * width;
+    public static float pixelWidth(Context context, float pxScaleX) {
+        return devicePixelWidth(context) / 320 * pxScaleX;
     }
 
-    public static float height(float height) {
-        return width(height);
+    public static float pixelHeight(Context context, float pxScaleY) {
+        return pixelWidth(context, pxScaleY);
+    }
+
+    public static int dpWidth(Context context, float pxScaleX) {
+        float piexl = devicePixelWidth(context) / 320 * pxScaleX;
+        return pxTodp(context, piexl);
     }
 }

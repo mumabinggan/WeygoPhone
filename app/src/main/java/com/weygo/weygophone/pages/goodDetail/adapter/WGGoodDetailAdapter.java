@@ -19,6 +19,7 @@ import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -53,6 +54,15 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
         notifyDataSetChanged();
     }
 
+    boolean hasProductDes() {
+        if (mGoodDetail != null && mGoodDetail.productDes != null && mGoodDetail.productDes.size() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     @Override
     public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         super.onCreateViewHolder(parent, viewType);
@@ -75,10 +85,16 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
             view = commonView;
         }
         else if (viewType == Item_Type.ITEM_TYPE_GoodDetailCommityDes.ordinal()) {
-            WGGoodDetailCommodityDescriptionView commonView = (WGGoodDetailCommodityDescriptionView)LayoutInflater.from(
-                    mContext).inflate(R.layout.wggooddetail_commodity_description, parent,
-                    false);
-            view = commonView;
+            if (hasProductDes()) {
+                WGGoodDetailCommodityDescriptionView commonView = (WGGoodDetailCommodityDescriptionView)LayoutInflater.from(
+                        mContext).inflate(R.layout.wggooddetail_commodity_description, parent,
+                        false);
+                view = commonView;
+            }
+            else {
+                View emptyView = new View(mContext);
+                view = emptyView;
+            }
         }
         else if (viewType == Item_Type.ITEM_TYPE_GoodDetailRecommendGoods.ordinal()) {
             WGOrderListGoodsView commonView = (WGOrderListGoodsView)LayoutInflater.from(
@@ -154,11 +170,12 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
             }
             else if (tag == 2) {
                 WGGoodDetailDescriptionView view = (WGGoodDetailDescriptionView) mView;
-
             }
             else if (tag == 3) {
-                WGGoodDetailCommodityDescriptionView view = (WGGoodDetailCommodityDescriptionView) mView;
-                view.showWithData(item);
+                if (hasProductDes()) {
+                    WGGoodDetailCommodityDescriptionView view = (WGGoodDetailCommodityDescriptionView) mView;
+                    view.showWithData(item);
+                }
             }
             else if (tag == 4) {
                 WGOrderListGoodsView view = (WGOrderListGoodsView) mView;

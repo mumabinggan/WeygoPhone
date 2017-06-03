@@ -15,12 +15,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shizhefei.view.indicator.IndicatorViewPager;
+import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.network.JHRequestError;
+import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
+import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.goodDetail.adapter.WGGoodDetailAdapter;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
+import com.weygo.weygophone.pages.goodDetail.model.request.WGCollectGoodRequest;
+import com.weygo.weygophone.pages.goodDetail.model.request.WGGoodDetailRequest;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGCollectGoodResponse;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailResponse;
+import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailOperateView;
 import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
@@ -36,15 +47,20 @@ import java.util.List;
 
 public class WGGoodDetailActivity extends WGTitleActivity {
 
+    long mGoodId;
+
     RecyclerView mRecyclerView;
 
     WGGoodDetailAdapter mAdapter;
 
     WGGoodDetail mData;
 
+    WGGoodDetailOperateView mOperateView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //loadGoodDetail();
     }
 
     @Override
@@ -55,6 +71,10 @@ public class WGGoodDetailActivity extends WGTitleActivity {
     @Override
     public void initData() {
         super.initData();
+
+        Bundle bundle = getIntent().getExtras();
+        mGoodId = (int)bundle.getSerializable(WGConstants.WGIntentDataKey);
+
         mData = new WGGoodDetail();
         WGCarouselFigureItem carouseItem = new WGCarouselFigureItem();
         carouseItem.pictureURL = "https://www.weygo.com/media/catalog/product/1/2/120073.jpg";
@@ -71,7 +91,12 @@ public class WGGoodDetailActivity extends WGTitleActivity {
         WGGoodDetail.WGGoodDetailDesItem desItem = new WGGoodDetail.WGGoodDetailDesItem();
         desItem.name = "改名";
         desItem.value = "郑洒";
+        WGGoodDetail.WGGoodDetailDesItem desItem1 = new WGGoodDetail.WGGoodDetailDesItem();
+        desItem1.name = "改ss名";
+        desItem1.value = "郑ss洒";
         List desList = new ArrayList();
+        desList.add(desItem);
+        desList.add(desItem1);
         desList.add(desItem);
         mData.productDes = desList;
         mData.deliveryInfo = "Weygo.com è il tuo supermercato online con consegna a domicilio. \n" +
@@ -110,10 +135,103 @@ public class WGGoodDetailActivity extends WGTitleActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGGoodDetailAdapter(this, mData);
         mRecyclerView.setAdapter(mAdapter);
+
+        mOperateView = (WGGoodDetailOperateView) findViewById(R.id.operateView);
+        mOperateView.setListener(new WGGoodDetailOperateView.OnGoodOperateListener() {
+            @Override
+            public void onAddShopCart() {
+                //加购物车
+            }
+
+            @Override
+            public void onCollection() {
+                //加收藏
+            }
+        });
     }
 
     @Override
     public void handleRightBarItem() {
         super.handleRightBarItem();
+    }
+
+    void loadGoodDetail() {
+        WGGoodDetailRequest request = new WGGoodDetailRequest();
+        request.id = mGoodId;
+        this.postAsyn(request, WGGoodDetailResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleGoodDetailSuccessResponse((WGGoodDetailResponse )response);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleGoodDetailSuccessResponse(WGGoodDetailResponse response) {
+        if (response.success()) {
+            mData = response.data;
+            mAdapter.setData(mData);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadCollectGood(boolean collection) {
+        if (collection) {
+            WGCollectGoodRequest request = new WGCollectGoodRequest();
+            request.productId = mGoodId;
+            this.postAsyn(request, WGCollectGoodResponse.class, new JHResponseCallBack() {
+                @Override
+                public void onSuccess(JHResponse response) {
+                    handleCollectGoodSuccessResponse((WGCollectGoodResponse )response);
+                }
+
+                @Override
+                public void onFailure(JHRequestError error) {
+                    showWarning(R.string.Request_Fail_Tip);
+                }
+            });
+        }
+        else {
+            WGCancelCollectionGoodRequest request = new WGCancelCollectionGoodRequest();
+            request.id = mData.favoritedId;
+            this.postAsyn(request, WGCancelCollectionGoodResponse.class, new JHResponseCallBack() {
+                @Override
+                public void onSuccess(JHResponse response) {
+                    handleCancelCollectGoodSuccessResponse((WGCancelCollectionGoodResponse )response);
+                }
+
+                @Override
+                public void onFailure(JHRequestError error) {
+                    showWarning(R.string.Request_Fail_Tip);
+                }
+            });
+        }
+
+    }
+
+    void handleCollectGoodSuccessResponse(WGCollectGoodResponse response) {
+        if (response.success()) {
+            mData.favoritedId = response.data.favoriteId;
+            mOperateView.showWithData(mData);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void handleCancelCollectGoodSuccessResponse(WGCancelCollectionGoodResponse response) {
+        if (response.success()) {
+            mData.favoritedId = 0;
+            mOperateView.showWithData(mData);
+        }
+        else {
+            showWarning(response.message);
+        }
     }
 }

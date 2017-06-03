@@ -6,12 +6,14 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.shizhefei.view.indicator.Indicator;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
@@ -84,10 +86,27 @@ public class WGTabHomeFragment extends WGFragment {
 
         mHomeSegmentView = (WGSegmentView) view.findViewById(R.id.home_segmentView);
         mViewPager = (ViewPager) view.findViewById(R.id.home_viewPager);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+        });
 
         mIndicatorViewPager = new IndicatorViewPager(mHomeSegmentView, mViewPager);
         mPagerAdapter = new MyAdapter();
-        List versions = new ArrayList();
+        final List versions = new ArrayList();
         versions.add("Cupcake");
         versions.add("Donut");
         versions.add("Éclair");
@@ -101,8 +120,21 @@ public class WGTabHomeFragment extends WGFragment {
         names.add("Froyo");
         mPagerAdapter.names = names;
 
-        mIndicatorViewPager.setAdapter(mPagerAdapter);
+        WGHomeTitleItem item = new WGHomeTitleItem();
+        item.name = "郑";
+        List titles = new ArrayList();
+        titles.add(item);
+        titles.add(item);
+        titles.add(item);
+        mPagerAdapter.setTitleList(titles);
 
+        mIndicatorViewPager.setAdapter(mPagerAdapter);
+        mIndicatorViewPager.setOnIndicatorPageChangeListener(new IndicatorViewPager.OnIndicatorPageChangeListener() {
+            @Override
+            public void onIndicatorPageChange(int preItem, int currentItem) {
+                Log.e("+++++++-+++", preItem + ":" + currentItem + ":" + mViewPager.getCurrentItem());
+            }
+        });
         //loadTitleData();
 
         return view;
@@ -169,6 +201,7 @@ public class WGTabHomeFragment extends WGFragment {
 
         @Override
         public View getViewForPage(int position, View convertView, ViewGroup container) {
+            Log.e("=getViewForPage=", position + "");
             if (convertView == null) {
                 convertView = new TextView(container.getContext());
             }

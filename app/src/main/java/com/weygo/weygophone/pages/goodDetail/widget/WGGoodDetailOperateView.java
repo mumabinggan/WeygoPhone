@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.weygo.common.base.JHInterface;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
 
 /**
  * Created by muma on 2017/5/31.
@@ -24,7 +25,7 @@ public class WGGoodDetailOperateView extends RelativeLayout {
 
     OnGoodOperateListener mListener;
 
-    interface OnGoodOperateListener extends JHInterface {
+    public interface OnGoodOperateListener extends JHInterface {
         void onAddShopCart();
         void onCollection();
     }
@@ -61,6 +62,10 @@ public class WGGoodDetailOperateView extends RelativeLayout {
                 handleCollectionBtn();
             }
         });
+    }
+
+    public void showWithData(WGGoodDetail goodDetail) {
+
     }
 
     void handleAddShopCartBtn() {

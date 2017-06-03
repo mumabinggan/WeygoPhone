@@ -36,6 +36,7 @@ import com.weygo.weygophone.pages.collection.WGCollectionActivity;
 import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
 import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
 import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
+import com.weygo.weygophone.pages.goodDetail.WGTestViewPickerActivity;
 import com.weygo.weygophone.pages.integral.myIntegral.WGMyIntegralActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.order.detail.WGOrderDetailActivity;

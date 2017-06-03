@@ -20,15 +20,15 @@
             android:dividerHeight="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/x61"/>
+            android:layout_marginBottom="@dimen/x38"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
             <include
-                android:id="@+id/rebuyView"
-                layout="@layout/wgpersoninfo_save" />
+                android:id="@+id/operateView"
+                layout="@layout/wggooddetail_operate" />
         </LinearLayout>
 
     </RelativeLayout>

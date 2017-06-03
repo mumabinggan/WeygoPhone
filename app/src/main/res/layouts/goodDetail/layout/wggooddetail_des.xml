@@ -5,11 +5,18 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/x14">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0000ff"></TableLayout>
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        android:stretchMode="columnWidth"
+        android:numColumns="2"
+        android:gravity="center"
+        android:listSelector="@null"
+        android:background="@drawable/wggooddetail_des_grid_border"
+        android:padding="1dp"></GridView>
 
     <TextView
         android:id="@+id/contentTV"
@@ -17,7 +24,6 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/x14"
         android:textColor="@color/WGAppBaseTitleAAColor"
-        android:textSize="@dimen/ft12"
-        android:background="#ff00ff"/>
+        android:textSize="@dimen/ft12" />
 
 </LinearLayout>

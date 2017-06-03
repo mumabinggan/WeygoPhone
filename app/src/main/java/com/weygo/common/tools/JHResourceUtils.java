@@ -30,4 +30,8 @@ public class JHResourceUtils {
     public float getDimension(int resId) {
         return mContext.getResources().getDimension(resId);
     }
+
+    public int getColor(int resId) {
+        return mContext.getResources().getColor(resId);
+    }
 }

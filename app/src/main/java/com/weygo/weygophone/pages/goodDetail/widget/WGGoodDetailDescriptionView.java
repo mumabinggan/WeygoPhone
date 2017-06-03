@@ -1,16 +1,21 @@
 package com.weygo.weygophone.pages.goodDetail.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -21,7 +26,9 @@ import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 import com.weygo.common.base.JHLinearLayout;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHFontUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.widget.WGViewPager;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
@@ -76,7 +83,7 @@ public class WGGoodDetailDescriptionView extends JHLinearLayout {
 
             @Override
             public void onPageSelected(int position) {
-                //handleSelectViewPager(position);
+                handleSelectViewPager(position);
             }
 
             @Override
@@ -96,21 +103,107 @@ public class WGGoodDetailDescriptionView extends JHLinearLayout {
 
         mGoodDetail = goodDetail;
         mPagerAdapter.setGoodDetail(goodDetail);
+        handleSelectViewPager(0);
     }
 
-    void handleSelectViewPager(int index) {
+    void handleSelectViewPager(int position) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LinearLayout linearLayout = null;
+        if (position == 0) {
+            linearLayout = (LinearLayout) inflater.inflate(R.layout.wggooddetail_des, null);
+            if (mGoodDetail != null) {
+                TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
+                GridView gridView = (GridView) linearLayout.findViewById(R.id.gridView);
+                if (mGoodDetail.productDes != null && mGoodDetail.productDes.size() > 0) {
+                    GridViewAdapter adapter = new GridViewAdapter(getContext());
+                    List list = new ArrayList();
+                    for (int num = 0; num < mGoodDetail.productDes.size(); ++num) {
+                        WGGoodDetail.WGGoodDetailDesItem item = mGoodDetail.productDes.get(num);
+                        list.add(item.name);
+                        list.add(item.value);
+                    }
+                    gridView.setAdapter(adapter);
+                    adapter.setList(list);
+                    ViewGroup.LayoutParams params = gridView.getLayoutParams();
+                    params.height = (int) (list.size()/2 * JHAdaptScreenUtils.pixelWidth(getContext(), 41) +
+                            JHAdaptScreenUtils.pixelWidth(getContext(), 1));
+                    gridView.setLayoutParams(params);
+                    gridView.setVisibility(VISIBLE);
+                    textView.setVisibility(GONE);
+                }
+                else {
+                    textView.setText(mGoodDetail.productInfo);
+                    gridView.setVisibility(GONE);
+                    textView.setVisibility(VISIBLE);
+                }
+            }
+        }
+        else if (position == 1 || position == 2) {
+            linearLayout = (LinearLayout) inflater.inflate(R.layout.wggooddetail_delivertips, null);
+            TextView textView = (TextView) linearLayout.findViewById(R.id.contentTV);
+            if (position == 1) {
+                textView.setText(mGoodDetail.purchaseTip);
+            }
+            else {
+                textView.setText(mGoodDetail.deliveryInfo);
+            }
+        }
+        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        linearLayout.measure(w, h);
+        int height = linearLayout.getMeasuredHeight();
         ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
-        View view = mViewPager.getChildAt(index);
-        if (index == 0) {
-            params.height = view.getHeight();
-        }
-        else {
-            params.height = 200;
-        }
-        params.height = view.getHeight();
-
-        Log.e("---height--", view.getHeight() + ":" + view.getMeasuredHeight() + "+" + mViewPager.getChildCount());
+        params.height = height;
         mViewPager.setLayoutParams(params);
+    }
+
+    private class GridViewAdapter extends BaseAdapter {
+
+        private Context context;
+
+        List mList;
+        public void setList(List list) {
+            mList = list;
+            notifyDataSetChanged();
+        }
+
+        public GridViewAdapter(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            if (mList == null) {
+                return 0;
+            }
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView result = new TextView(context);
+            result.setText(mList.get(position) + "");
+            result.setTextColor(JHResourceUtils.getInstance().getColor(R.color.WGAppBaseTitleAAColor));
+            result.setTextSize(12);
+            float height = JHAdaptScreenUtils.pixelWidth(getContext(), 40);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, (int) height));
+            result.setLayoutParams(params);
+            result.setGravity(Gravity.CENTER_VERTICAL|Gravity.LEFT);
+            result.setPadding(14, 0, 14, 0);
+            result.setBackgroundColor(Color.WHITE); //设置背景颜色
+            return result;
+        }
+
     }
 
     private class MyAdapter extends IndicatorViewPager.IndicatorViewPagerAdapter {
@@ -165,53 +258,42 @@ public class WGGoodDetailDescriptionView extends JHLinearLayout {
 
         @Override
         public View getViewForPage(int position, View convertView, ViewGroup container) {
-            Log.e("---getViewForPage---", container.getClass().toString());
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 if (position == 0) {
+                    LinearLayout linearLayout = (LinearLayout)inflater.inflate(R.layout.wggooddetail_des, container, false);
+                    if (mGoodDetail != null) {
+                        GridView gridView = (GridView) linearLayout.findViewById(R.id.gridView);
+                        TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
+                        if (mGoodDetail.productDes != null && mGoodDetail.productDes.size() > 0) {
+                            GridViewAdapter adapter = new GridViewAdapter(getContext());
+                            List list = new ArrayList();
+                            for (WGGoodDetail.WGGoodDetailDesItem item : mGoodDetail.productDes) {
+                                list.add(item.name);
+                                list.add(item.value);
+                            }
+                            adapter.setList(list);
+                            gridView.setAdapter(adapter);
+                            gridView.setVisibility(VISIBLE);
+                            textView.setVisibility(GONE);
+                        }
+                        else {
+                            textView.setText(mGoodDetail.productInfo);
+                            gridView.setVisibility(GONE);
+                            textView.setVisibility(VISIBLE);
+                        }
+                        convertView = linearLayout;
+                    }
+                }
+                else if (position == 1 || position == 2) {
                     LinearLayout linearLayout = (LinearLayout)inflater.inflate(R.layout.wggooddetail_delivertips, container, false);
                     TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
-                    textView.setText(mGoodDetail.productInfo);
-                    convertView = linearLayout;
-//                    LinearLayout linearLayout = (LinearLayout)inflater.inflate(R.layout.wggooddetail_des, container, false);
-//                    if (mGoodDetail != null) {
-//                        TableLayout tableLayout = (TableLayout)linearLayout.findViewById(R.id.tableLayout);
-//                        TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
-//                        if (mGoodDetail.productDes != null && mGoodDetail.productDes.size() > 0) {
-//                            for (int x = 0; x < mGoodDetail.productDes.size(); x++) { // 循环设置表格行
-//                                TableRow row = new TableRow(getContext()); // 定义表格行
-//                                WGGoodDetail.WGGoodDetailDesItem item = mGoodDetail.productDes.get(x);
-//                                TextView keyText = new TextView(getContext());
-//                                keyText.setText(item.name);
-//                                row.addView(keyText, 0);
-//                                TextView valueText = new TextView(getContext());
-//                                valueText.setText(item.value);
-//                                row.addView(valueText, 1);
-//                                tableLayout.addView(row); // 向表格之中增加若干个表格行
-//                                tableLayout.setVisibility(VISIBLE);
-//                                textView.setVisibility(INVISIBLE);
-//                            }
-//                        }
-//                        else {
-//                            textView.setText(mGoodDetail.productInfo);
-//                            tableLayout.setVisibility(INVISIBLE);
-//                            textView.setVisibility(VISIBLE);
-//                        }
-//                        convertView = linearLayout;
-//                    }
-
-                }
-                else if (position == 1) {
-                    LinearLayout linearLayout = (LinearLayout)inflater.inflate(R.layout.wggooddetail_delivertips1, container, false);
-                    TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
-
-                    textView.setText(mGoodDetail.purchaseTip);
-                    convertView = linearLayout;
-                }
-                else {
-                    LinearLayout linearLayout = (LinearLayout)inflater.inflate(R.layout.wggooddetail_delivertips2, container, false);
-                    TextView textView = (TextView)linearLayout.findViewById(R.id.contentTV);
-                    textView.setText(mGoodDetail.deliveryInfo);
+                    if (position == 1) {
+                        textView.setText(mGoodDetail.purchaseTip);
+                    }
+                    else {
+                        textView.setText(mGoodDetail.deliveryInfo);
+                    }
                     convertView = linearLayout;
                 }
             }
