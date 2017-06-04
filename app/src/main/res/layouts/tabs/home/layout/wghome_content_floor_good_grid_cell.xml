@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/x7"
+    android:paddingRight="@dimen/x7"
+    android:paddingTop="@dimen/x4"
+    android:paddingBottom="@dimen/x3"
+    android:background="@color/separate_color">
+
+    <include
+        android:id="@+id/itemViewLeft"
+        layout="@layout/wghome_content_floor_good_grid_item" />
+
+    <View
+        android:layout_width="@dimen/x7"
+        android:layout_height="wrap_content"></View>
+
+    <include
+        android:id="@+id/itemViewRight"
+        layout="@layout/wghome_content_floor_good_grid_item" />
+
+</com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView>

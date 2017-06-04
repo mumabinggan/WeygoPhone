@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorCountryColumnItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x68"
+    android:layout_height="@dimen/x102">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/x48"
+        android:layout_height="@dimen/x45"
+        android:layout_marginTop="@dimen/x17"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x14"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="@dimen/x10"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:textAlignment="center"
+        android:lines="1"/>
+
+</com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorCountryColumnItemView>

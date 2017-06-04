@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorTitleView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/x10"
+    android:paddingBottom="@dimen/x10">
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:textAlignment="center"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/breifDesTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x17"
+        android:textSize="@dimen/ft10"
+        android:layout_below="@+id/nameTV"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:gravity="center"
+        android:textAlignment="center" />
+
+</com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorTitleView>

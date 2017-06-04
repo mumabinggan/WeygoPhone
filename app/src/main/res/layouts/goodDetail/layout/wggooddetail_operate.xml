@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/x38"
     android:paddingLeft="@dimen/x14"
-    android:paddingRight="@dimen/x14"
-    android:background="#00ff00">
+    android:paddingRight="@dimen/x14">
 
     <LinearLayout
         android:id="@+id/goodCountLayout"

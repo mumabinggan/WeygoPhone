@@ -34,18 +34,7 @@ public class WGConstants {
     //Intent Data key
     public static final String WGIntentDataKey = "WGIntentDataKey";
 
-    /*
-
-        WGAppJumpTypeNone,
-    WGAppJumpTypeRegister,          //注册
-    WGAppJumpTypeGoodDetail,        //商品详情
-    WGAppJumpTypeInvitation,        //邀请
-    WGAppJumpTypeClassifyDetail,    //分类详情
-    WGAppJumpTypeSpecailClassifyHomeTab,    //特殊专题:Home Tab
-    WGAppJumpTypeSpecailClassifyGoodBenefitTab, //特殊专题（只显示商品）：Benefit Tab
-    WGAppJumpTypeSpecailClassifyNoTab,          //没有 Tab 的特殊专题
-    WGAppJumpTypeSpecailClassifyGoodNoTab,      //没有 Tab 的特殊专题（只显示商品）
-     */
+    //跳转类型
     public static final int WGAppJumpTypeNone = 0;
     public static final int WGAppJumpTypeRegister = 1;          //注册
     public static final int WGAppJumpTypeGoodDetail = 3;        //商品详情
@@ -55,4 +44,14 @@ public class WGConstants {
     public static final int WGAppJumpTypeSpecailClassifyGoodBenefitTab = 7;     //特殊专题（只显示商品）：Benefit Tab
     public static final int WGAppJumpTypeSpecailClassifyNoTab = 8;              //没有 Tab 的特殊专题
     public static final int WGAppJumpTypeSpecailClassifyGoodNoTab = 9;          //没有 Tab 的特殊专题（只显示商品）
+
+    //Home floor数据类型
+    public static final int WGHomeFloorItemTypeNone = 0;
+    public static final int WGHomeFloorItemTypeGoodList = 1;
+    public static final int WGHomeFloorItemTypeGoodColumn = 2;
+    public static final int WGHomeFloorItemTypeGoodGrid = 3;
+    public static final int WGHomeFloorItemTypeClassifyList = 4;
+    public static final int WGHomeFloorItemTypeClassifyColumn = 5;
+    public static final int WGHomeFloorItemTypeClassifyGrid = 6;
+    public static final int WGHomeFloorItemTypeCountry = 7;
 }

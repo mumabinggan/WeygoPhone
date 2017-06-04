@@ -26,6 +26,8 @@ public class WGHomeFloorContentGoodItem extends WGHomeFloorBaseContentItem {
 
     public int inStock;     //有无货(1,有货;0,无货) ;
 
+    public String expiredTime;
+
     public boolean hasDiscount() {
         return !JHStringUtils.isNullOrEmpty(discount);
     }

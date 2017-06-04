@@ -73,7 +73,9 @@ public class WGGoodDetailActivity extends WGTitleActivity {
         super.initData();
 
         Bundle bundle = getIntent().getExtras();
-        mGoodId = (int)bundle.getSerializable(WGConstants.WGIntentDataKey);
+        if (bundle != null) {
+            mGoodId = (int)bundle.getSerializable(WGConstants.WGIntentDataKey);
+        }
 
         mData = new WGGoodDetail();
         WGCarouselFigureItem carouseItem = new WGCarouselFigureItem();

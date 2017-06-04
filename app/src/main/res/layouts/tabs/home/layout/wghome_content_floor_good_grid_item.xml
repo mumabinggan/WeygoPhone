@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x149"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_goodcolumn_item_bg"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:paddingBottom="@dimen/x14">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x109" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x27"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginLeft="@dimen/x7"
+        android:layout_marginRight="@dimen/x7"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        android:lines="2"/>
+
+    <TextView
+        android:id="@+id/currentPriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x18"
+        android:textColor="@color/WGAppBaseColor"
+        android:textSize="@dimen/ft14"
+        android:gravity="center_vertical|left"
+        android:layout_below="@+id/nameTextView"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_alignRight="@+id/nameTextView"
+        android:layout_marginTop="@dimen/x7"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x18"
+        android:layout_alignLeft="@+id/currentPriceTextView"
+        android:layout_alignRight="@+id/currentPriceTextView"
+        android:layout_alignTop="@+id/currentPriceTextView"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        android:textSize="@dimen/ft10"
+        android:gravity="center_vertical|right"
+        android:layout_centerVertical="true" />
+    
+    <TextView
+        android:id="@+id/specificationTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x18"
+        android:gravity="center_vertical|left"
+        android:layout_below="@+id/currentPriceTextView"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_alignLeft="@+id/currentPriceTextView"
+        android:layout_alignRight="@+id/currentPriceTextView"
+        android:layout_marginTop="@dimen/x4"/>
+
+    <TextView
+        android:id="@+id/purchaseTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x18"
+        android:gravity="center_vertical|left"
+        android:layout_below="@+id/specificationTV"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_alignLeft="@+id/currentPriceTextView"
+        android:layout_alignRight="@+id/currentPriceTextView"
+        android:layout_marginTop="@dimen/x8"
+        android:background="@drawable/wghome_content_floor_good_grid_item_purchase"/>
+
+    <TextView
+        android:id="@+id/unPurchaseTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x18"
+        android:gravity="center_vertical|left"
+        android:layout_below="@+id/specificationTV"
+        android:textColor="@color/WGAppBaseTitleAAColor"
+        android:layout_alignLeft="@+id/currentPriceTextView"
+        android:layout_alignRight="@+id/currentPriceTextView"
+        android:layout_marginTop="@dimen/x8"
+        android:background="@drawable/wghome_content_floor_good_grid_item_unpurchase"/>
+
+</com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridItemView>
