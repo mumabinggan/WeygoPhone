@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.order.list.adapter.WGOrderListGoodsAdapter;
@@ -20,7 +21,7 @@ import java.util.List;
  * Created by muma on 2017/5/21.
  */
 
-public class WGOrderListGoodItemView extends RelativeLayout {
+public class WGOrderListGoodItemView extends JHRelativeLayout {
 
     ImageView mImageView;
 

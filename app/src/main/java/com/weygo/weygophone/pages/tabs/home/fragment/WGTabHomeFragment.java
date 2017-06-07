@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -86,23 +88,6 @@ public class WGTabHomeFragment extends WGFragment {
 
         mHomeSegmentView = (WGSegmentView) view.findViewById(R.id.home_segmentView);
         mViewPager = (ViewPager) view.findViewById(R.id.home_viewPager);
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-
-        });
 
         mIndicatorViewPager = new IndicatorViewPager(mHomeSegmentView, mViewPager);
         mPagerAdapter = new MyAdapter();
@@ -166,11 +151,16 @@ public class WGTabHomeFragment extends WGFragment {
         }
     }
 
-    private class MyAdapter extends IndicatorViewPager.IndicatorViewPagerAdapter {
+    private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
         public List<String> versions;
         public List<String> names;
 
         private List<WGHomeTitleItem> mTitleList;
+
+        public MyAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
         public void setTitleList(List<WGHomeTitleItem> list) {
             mTitleList = list;
             notifyDataSetChanged();
@@ -200,17 +190,22 @@ public class WGTabHomeFragment extends WGFragment {
         }
 
         @Override
-        public View getViewForPage(int position, View convertView, ViewGroup container) {
-            Log.e("=getViewForPage=", position + "");
-            if (convertView == null) {
-                convertView = new TextView(container.getContext());
-            }
-            TextView textView = (TextView) convertView;
-            textView.setText(names.get(position));
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextColor(Color.GRAY);
-            return convertView;
+        public Fragment getFragmentForPage(int position) {
+            return null;
         }
+
+//        @Override
+//        public View getViewForPage(int position, View convertView, ViewGroup container) {
+//            Log.e("=getViewForPage=", position + "");
+//            if (convertView == null) {
+//                convertView = new TextView(container.getContext());
+//            }
+//            TextView textView = (TextView) convertView;
+//            textView.setText(names.get(position));
+//            textView.setGravity(Gravity.CENTER);
+//            textView.setTextColor(Color.GRAY);
+//            return convertView;
+//        }
 
         @Override
         public int getItemPosition(Object object) {

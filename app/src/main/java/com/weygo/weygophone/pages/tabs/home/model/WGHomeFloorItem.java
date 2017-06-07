@@ -35,4 +35,12 @@ public class WGHomeFloorItem extends WGObject {
         return JHStringUtils.isNullOrEmpty(breifDescription);
     }
 
+    public boolean hasTitle() {
+        return !JHStringUtils.isNullOrEmpty(name);
+    }
+
+    public boolean hasImageTitle() {
+        return !JHStringUtils.isNullOrEmpty(pictureURL);
+    }
+
 }

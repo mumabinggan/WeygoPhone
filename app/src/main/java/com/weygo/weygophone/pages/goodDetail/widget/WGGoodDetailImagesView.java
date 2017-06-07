@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jude.rollviewpager.RollPagerView;
+import com.weygo.common.base.JHLinearLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.widget.WGRotationImagesView;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by muma on 2017/5/31.
  */
 
-public class WGGoodDetailImagesView extends LinearLayout {
+public class WGGoodDetailImagesView extends JHLinearLayout {
 
     List mlist;
 

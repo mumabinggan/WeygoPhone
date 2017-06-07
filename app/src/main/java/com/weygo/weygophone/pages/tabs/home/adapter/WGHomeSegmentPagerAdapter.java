@@ -18,14 +18,12 @@ public class WGHomeSegmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
-
     @Override
     public Fragment getItem(int arg0)
     {
         Fragment fragment = new Fragment();
         return fragment;
     }
-
 
     @Override
     public CharSequence getPageTitle(int position)

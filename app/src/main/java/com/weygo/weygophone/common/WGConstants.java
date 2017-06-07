@@ -53,5 +53,5 @@ public class WGConstants {
     public static final int WGHomeFloorItemTypeClassifyList = 4;
     public static final int WGHomeFloorItemTypeClassifyColumn = 5;
     public static final int WGHomeFloorItemTypeClassifyGrid = 6;
-    public static final int WGHomeFloorItemTypeCountry = 7;
+    public static final int WGHomeFloorItemTypeCountryColumn = 7;
 }

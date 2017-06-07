@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.weygo.common.base.JHLinearLayout;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.common.adapter.JHCommonHorizontalListAdapter;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by muma on 2017/6/4.
  */
 
-public class WGCommonHorizontalListView extends LinearLayout {
+public class WGCommonHorizontalListView extends JHLinearLayout {
 
     RecyclerView mRecyclerView;
     JHCommonHorizontalListAdapter mAdapter;
