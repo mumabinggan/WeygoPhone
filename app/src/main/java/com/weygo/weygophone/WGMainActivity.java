@@ -192,8 +192,8 @@ public class WGMainActivity extends WGBaseActivity {
         //setA();
         //sss();
         //onOptionPicker(null);
-        Intent intent = new Intent(WGMainActivity.this, WGGoodDetailActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(WGMainActivity.this, WGGoodDetailActivity.class);
+//        startActivity(intent);
 //        Intent intent = new Intent(WGMainActivity.this, WGFindPasswordActivity.class);
 //        Bundle mBundle = new Bundle();
 //        WGClientServiceItem item = new WGClientServiceItem();
@@ -203,7 +203,7 @@ public class WGMainActivity extends WGBaseActivity {
 //        intent.putExtras(mBundle);
 //        startActivity(intent);
 //        Log.e("error", "testActivity");
-        //mDrawerLayout.openDrawer(GravityCompat.START);
+        mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
     public void setSelectedTab(int tabIndex) {

@@ -23,19 +23,19 @@ public class WGBaseServiceActivity extends WGBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baseservice_activity);
-        //this.loadBaseService();
+        this.loadBaseService();
 
         Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
-        startActivity(intent);
+        //startActivity(intent);
     }
 
     void loadBaseService() {
         WGBaseServiceRequest request = new WGBaseServiceRequest();
         request.showsLoadingView = false;
-        this.getAsyn(request, WGBaseServiceResponse.class, new JHResponseCallBack() {
+        this.postAsyn(request, WGBaseServiceResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
-                //handleBaseServiceCompletion((WGBaseServiceResponse) result);
+                handleBaseServiceCompletion((WGBaseServiceResponse) result);
             }
 
             @Override
@@ -51,5 +51,10 @@ public class WGBaseServiceActivity extends WGBaseActivity {
         startActivity(intent);
         finish();
         //overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

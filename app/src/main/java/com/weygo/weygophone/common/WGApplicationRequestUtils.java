@@ -28,6 +28,8 @@ import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeR
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 
+import org.parceler.apache.commons.collections.map.HashedMap;
+
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -61,14 +63,32 @@ public class WGApplicationRequestUtils {
                 WGConstants.WGAppkeyKey + JHStringUtils.md5(WGConstants.WGAppkeyValue);
     }
 
+    public Map<String, Object> addModifiedMap(Map<String, Object> map) {
+        Map<String, Object> newMap = new HashedMap(map);
+        newMap.put("os", "Android");
+        newMap.put("app", "com.weygo.test");
+        return newMap;
+    }
+
+    public Map<String, Object> versionMap() {
+        Map<String, Object> map = new HashedMap();
+        map.put("os", "Android");
+        map.put("app", "com.weygo.test");
+        return map;
+    }
+
     public String sign(Map<String, Object> map) {
         StringBuffer buffer = new StringBuffer(this.signPrefix());
         buffer.append("___store");
         Log.e("___store", "___store");
-        String storeValue = "mobilecn";
+        String storeValue = "mobileitaly";
+        //String storeValue = "mobilecn";
         //String storeValue = getResources().getString(R.string.request_StoreValue);
         Log.e("storeValue", storeValue);
         buffer.append(storeValue);
+
+        //map.putAll(versionMap());
+
         Map<String, Object> sortMap = new TreeMap<String, Object>(
                 new Comparator<String>() {
                     public int compare(String obj1, String obj2) {
@@ -77,7 +97,7 @@ public class WGApplicationRequestUtils {
                     }
                 });
         sortMap.putAll(map);
-        for (Map.Entry<String, Object> m :map.entrySet())  {
+        for (Map.Entry<String, Object> m :sortMap.entrySet())  {
             buffer.append(m.getKey());
             if (m.getValue() instanceof Number) {
                 buffer.append(m.getValue() + "");
@@ -87,7 +107,16 @@ public class WGApplicationRequestUtils {
             }
         }
         Log.e("----buffer----", buffer.toString());
-        return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
+        sortMap.clear();
+        String baseString = "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
+        return baseString;
+//        sortMap.putAll(versionMap());
+//        StringBuffer versionString = new StringBuffer(baseString);
+//        for (Map.Entry<String, Object> m :sortMap.entrySet())  {
+//            versionString.append("&" + m.getKey() + "=" + m.getValue());
+//        }
+//        return versionString.toString();
+        //return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue + "&app=" + "";
     }
 
     void showWarning(String message) {

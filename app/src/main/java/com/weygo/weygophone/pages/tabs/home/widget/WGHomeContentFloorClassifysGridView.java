@@ -50,6 +50,7 @@ public class WGHomeContentFloorClassifysGridView extends JHRelativeLayout {
         super.onFinishInflate();
         mGridView = (GridView) findViewById(R.id.gridView);
         mAdapter = new GridViewAdapter(getContext());
+        mGridView.setAdapter(mAdapter);
     }
 
     public void showWithArray(List data) {
@@ -61,13 +62,17 @@ public class WGHomeContentFloorClassifysGridView extends JHRelativeLayout {
         mList = data;
         mAdapter.setList(mList);
         ViewGroup.LayoutParams params = mGridView.getLayoutParams();
-        params.height = (int) (mList.size()/4 * JHAdaptScreenUtils.pixelWidth(getContext(), 114));
+        int count = 0;
+        if (mList.size() > 0) {
+            count = ((mList.size() - 1)/4 + 1);
+        }
+        params.height = (int) (count * JHAdaptScreenUtils.pixelWidth(getContext(), 114));
         mGridView.setLayoutParams(params);
     }
 
     private class GridViewAdapter extends BaseAdapter {
 
-        private Context context;
+        protected Context mContext;
 
         List mList;
         public void setList(List list) {
@@ -76,7 +81,7 @@ public class WGHomeContentFloorClassifysGridView extends JHRelativeLayout {
         }
 
         public GridViewAdapter(Context context) {
-            this.context = context;
+            this.mContext = context;
         }
 
         @Override

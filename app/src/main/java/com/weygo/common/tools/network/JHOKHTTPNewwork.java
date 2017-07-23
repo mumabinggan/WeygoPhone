@@ -5,12 +5,14 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.StringCodec;
 import com.weygo.common.base.JHRequest;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.base.WGResponse;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +63,7 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
                 .tag(originRequest)
                 .url(requestUrl)
                 .build();
+        Log.e("-requestUrl-", requestUrl);
         //RequestBody.create(MEDIA_TYPE_JSON, params);
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -81,12 +84,26 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
     public Call postAsync(JHRequest originRequest, final Class clazz, final JHResponseCallBack callBack) {
         StringBuffer paramsString = new StringBuffer();
         String jsonString = JSON.toJSONString(originRequest);
-        Map<String, Object> paramsMap = JSON.parseObject(
-                jsonString,new TypeReference<Map<String, Object>>(){} );
-        for (Map.Entry<String, Object> m :paramsMap.entrySet()) {
-            paramsString.append("&");
-            paramsString.append(m.getKey());
-            paramsString.append(m.getValue() + "");
+        Map<String, String> paramsMap = JSON.parseObject(
+                jsonString,new TypeReference<Map<String, String>>(){} );
+//        for (Map.Entry<String, Object> m :paramsMap.entrySet()) {
+//            paramsString.append("&");
+//            paramsString.append(m.getKey());
+//            paramsString.append(m.getValue() + "");
+//        }
+        //StringBuilder tempParams = new StringBuilder();
+        int pos = 0;
+        for (String key : paramsMap.keySet()) {
+            if (pos > 0) {
+                paramsString.append("&");
+            }
+            //String string = (String) paramsMap.get(key);
+            try {
+                paramsString.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            pos++;
         }
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
         //补全请求地址
@@ -96,6 +113,7 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
                 .tag(originRequest)
                 .url(originRequest.url())
                 .build();
+        Log.e("==originUrl==", originRequest.url());
         //RequestBody.create(MEDIA_TYPE_JSON, params);
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {

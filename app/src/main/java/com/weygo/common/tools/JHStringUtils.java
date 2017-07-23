@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 public class JHStringUtils extends JHObject {
 
     public static boolean isNullOrEmpty(String string) {
-        return (string == null || string == "");
+        return (string == null || string.equals("") || string.isEmpty() || string.length() == 0);
     }
 
     public static String md5(String str) {

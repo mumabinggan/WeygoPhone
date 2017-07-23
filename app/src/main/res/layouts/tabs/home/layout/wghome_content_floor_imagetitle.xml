@@ -31,12 +31,13 @@
 
     <TextView
         android:id="@+id/moreTV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/x20"
         android:textSize="@dimen/ft12"
         android:layout_below="@+id/breifDesTV"
         android:layout_marginTop="@dimen/x10"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:background="@drawable/wghome_content_floor_imagetitle_more"
         android:textAlignment="center" />

@@ -36,16 +36,12 @@ public class WGTabMineFragment extends WGFragment {
     TextView mDeliverTextView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_mine_fragment, container, false);
-
-
-        initSubView(view);
-
-        return view;
+    public int fragmentResId() {
+        return R.layout.tab_mine_fragment;
     }
 
-    void initSubView(View view) {
+    @Override
+    public void initSubView(View view) {
 
         //Slider
         final WGMainActivity activity = (WGMainActivity) getActivity();

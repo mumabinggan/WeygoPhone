@@ -57,7 +57,11 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
             mNameTV.setText(item.pictureName);
             mBreifDesTV.setText(item.pictureBriefDescription);
             if (JHStringUtils.isNullOrEmpty(item.pictureBtnName)) {
-                String moreString = "  " + item.pictureBtnName + "  ";
+                mMoreTV.setVisibility(INVISIBLE);
+            }
+            else {
+                mMoreTV.setVisibility(VISIBLE);
+                String moreString = "    " + item.pictureBtnName + "    ";
                 mMoreTV.setText(moreString);
             }
         }

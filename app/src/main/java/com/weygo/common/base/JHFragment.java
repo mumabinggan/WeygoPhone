@@ -20,6 +20,7 @@ import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.weygophone.R;
 
 import java.util.List;
 
@@ -34,7 +35,27 @@ public class JHFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        initData();
+        View view = inflater.inflate(fragmentResId(), container, false);
+        initSubView(view);
+        loadRequest();
+        return view;
+    }
+
+    public int fragmentResId() {
+        return 0;
+    }
+
+    public void initData() {
+
+    }
+
+    public void initSubView(View view) {
+
+    }
+
+    public void loadRequest() {
+
     }
 
     public void showWarning(int resId) {

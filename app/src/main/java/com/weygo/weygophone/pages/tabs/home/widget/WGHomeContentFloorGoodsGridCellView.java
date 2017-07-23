@@ -9,6 +9,8 @@ import com.weygo.common.base.JHLinearLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
+import java.util.List;
+
 /**
  * Created by muma on 2017/6/5.
  */
@@ -63,5 +65,31 @@ public class WGHomeContentFloorGoodsGridCellView extends JHLinearLayout {
                 handlePurchase(item);
             }
         });
+    }
+
+    @Override
+    public void showWithArray(List list) {
+        super.showWithArray(list);
+        int count = list.size();
+        for (int num = 0; num < 2; ++num) {
+            if (num == 0) {
+                if (count > num) {
+                    mLeftItemView.showWithData(list.get(num));
+                    mLeftItemView.setVisibility(VISIBLE);
+                }
+                else {
+                    mLeftItemView.setVisibility(GONE);
+                }
+            }
+            if (num == 1) {
+                if (count > num) {
+                    mRightItemView.showWithData(list.get(num));
+                    mRightItemView.setVisibility(VISIBLE);
+                }
+                else {
+                    mRightItemView.setVisibility(GONE);
+                }
+            }
+        }
     }
 }

@@ -29,13 +29,18 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
+import com.weygo.weygophone.pages.tabs.home.model.WGHome;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
+import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
+import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTabContentResponse;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGTabNavigationBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by muma on 2016/12/19.
@@ -54,10 +59,25 @@ public class WGTabHomeFragment extends WGFragment {
 
     //data
     List<WGHomeTitleItem> mTitleList;
+    Map<Integer, WGHome> mContentMap;
+
+    Map<Integer, WGTabHomeItemFragment> mContentFragmentMap;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_home_fragment,container,false);
+    public int fragmentResId() {
+        return R.layout.tab_home_fragment;
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        mContentMap = new HashMap<>();
+        mContentFragmentMap = new HashMap<>();
+    }
+
+    @Override
+    public void initSubView(View view) {
+        super.initSubView(view);
         final WGMainActivity activity = (WGMainActivity) getActivity();
         mNavigationBar = (WGTabNavigationBar) view.findViewById(R.id.home_navigationBar);
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
@@ -90,39 +110,23 @@ public class WGTabHomeFragment extends WGFragment {
         mViewPager = (ViewPager) view.findViewById(R.id.home_viewPager);
 
         mIndicatorViewPager = new IndicatorViewPager(mHomeSegmentView, mViewPager);
-        mPagerAdapter = new MyAdapter();
-        final List versions = new ArrayList();
-        versions.add("Cupcake");
-        versions.add("Donut");
-        versions.add("Éclair");
-        versions.add("Froyo");
-        mPagerAdapter.versions = versions;
-
-        List names = new ArrayList();
-        names.add("Cupcake");
-        names.add("Donut");
-        names.add("Éclair");
-        names.add("Froyo");
-        mPagerAdapter.names = names;
-
-        WGHomeTitleItem item = new WGHomeTitleItem();
-        item.name = "郑";
-        List titles = new ArrayList();
-        titles.add(item);
-        titles.add(item);
-        titles.add(item);
-        mPagerAdapter.setTitleList(titles);
+        mPagerAdapter = new MyAdapter(getFragmentManager());
 
         mIndicatorViewPager.setAdapter(mPagerAdapter);
         mIndicatorViewPager.setOnIndicatorPageChangeListener(new IndicatorViewPager.OnIndicatorPageChangeListener() {
             @Override
             public void onIndicatorPageChange(int preItem, int currentItem) {
-                Log.e("+++++++-+++", preItem + ":" + currentItem + ":" + mViewPager.getCurrentItem());
+                Log.e("-onPageChange--", "" + preItem + ":" + currentItem);
+                loadTabContentData(currentItem);
+                //Log.e("+++++++-+++", preItem + ":" + currentItem + ":" + mViewPager.getCurrentItem());
             }
         });
-        //loadTitleData();
+    }
 
-        return view;
+    @Override
+    public void loadRequest() {
+        super.loadRequest();
+        loadTitleData();
     }
 
     //Request
@@ -145,6 +149,47 @@ public class WGTabHomeFragment extends WGFragment {
         if (response != null && response.success()) {
             mTitleList = response.data;
             mPagerAdapter.setTitleList(mTitleList);
+            loadTabContentData(0);
+        }
+        else {
+            JHWarningUtils.showToast(getContext(), response.message);
+        }
+    }
+
+    //Request
+    public void loadTabContentData(final int index) {
+        final WGHomeTabContentRequest request = new WGHomeTabContentRequest();
+        final WGHomeTitleItem item = mTitleList.get(index);
+        request.menuId = item.id;
+        Log.e("loadTabContentData", "" + item.id);
+        postAsyn(request, WGHomeTabContentResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleTabContentDataSuccess((WGHomeTabContentResponse) response, index);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                JHWarningUtils.showToast(getContext(), R.string.app_name);
+            }
+        });
+    }
+
+    void handleTabContentDataSuccess(WGHomeTabContentResponse response, int index) {
+        WGTabHomeItemFragment fragment = mContentFragmentMap.get(index);
+        if (fragment != null) {
+            fragment.stopRefreshing();
+        }
+        if (response != null && response.success()) {
+            if (response.data != null) {
+                mContentMap.put(index, response.data);
+            }
+            else {
+                mContentMap.remove(index);
+            }
+            if (fragment != null) {
+                fragment.refresh(response.data);
+            }
         }
         else {
             JHWarningUtils.showToast(getContext(), response.message);
@@ -152,8 +197,6 @@ public class WGTabHomeFragment extends WGFragment {
     }
 
     private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
-        public List<String> versions;
-        public List<String> names;
 
         private List<WGHomeTitleItem> mTitleList;
 
@@ -191,7 +234,14 @@ public class WGTabHomeFragment extends WGFragment {
 
         @Override
         public Fragment getFragmentForPage(int position) {
-            return null;
+            Log.e("-getFragmentForPage--", "" + position);
+            WGTabHomeItemFragment fragment = mContentFragmentMap.get(position);
+            if (fragment == null) {
+                Log.e("fragment=null", "frag");
+                fragment = new WGTabHomeItemFragment();
+                mContentFragmentMap.put(position, fragment);
+            }
+            return fragment;
         }
 
 //        @Override

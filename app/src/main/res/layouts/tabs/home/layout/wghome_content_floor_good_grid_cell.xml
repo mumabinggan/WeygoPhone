@@ -2,7 +2,7 @@
 <com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="@dimen/x7"
     android:paddingRight="@dimen/x7"
     android:paddingTop="@dimen/x4"

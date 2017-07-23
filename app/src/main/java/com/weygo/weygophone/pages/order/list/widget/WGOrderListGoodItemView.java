@@ -14,6 +14,7 @@ import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.order.list.adapter.WGOrderListGoodsAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -56,7 +57,8 @@ public class WGOrderListGoodItemView extends JHRelativeLayout {
         mPriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
     }
 
-    public void showWithData(WGOrderGoodItem data) {
+    @Override
+    public void showWithData(Object data) {
         if (data instanceof WGOrderGoodItem) {
             WGOrderGoodItem item = (WGOrderGoodItem) data;
             JHImageUtils.getInstance().loadImage(item.pictureURL,
@@ -66,6 +68,15 @@ public class WGOrderListGoodItemView extends JHRelativeLayout {
             mPriceTextView.setText(item.price);
             mCountTextView.setText("x" + item.goodCount);
             mCountTextView.setVisibility(item.goodCount > 0 ? VISIBLE : INVISIBLE);
+        }
+        else if (data instanceof WGHomeFloorContentGoodItem) {
+            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem)data;
+            JHImageUtils.getInstance().loadImage(item.pictureURL,
+                    R.drawable.common_image_loading_small, mImageView);
+            mNameTextView.setText(item.name);
+            mCurrentPriceTextView.setText(item.currentPrice);
+            mPriceTextView.setText(item.price);
+            mCountTextView.setVisibility(INVISIBLE);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.home.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
@@ -29,6 +31,11 @@ import java.util.Map;
  */
 
 public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
+
+    public WGHomeFragmentAdapter(Context context, WGHome data) {
+        this.mHome = data;
+        this.mContext = context;
+    }
 
     public enum Item_Type {
         ITEM_TYPE_None,
@@ -72,7 +79,11 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
 
         int key = 0;
         if (home.carouselFigures != null && home.carouselFigures.size() > 0) {
-            HomeCellData value = new HomeCellData(Item_Type.ITEM_TYPE_HomeCarouselFigures, home.carouselFigures);
+            List list = new ArrayList();
+            for (WGCarouselFigureItem item : home.carouselFigures) {
+                list.add(item.pictureURL);
+            }
+            HomeCellData value = new HomeCellData(Item_Type.ITEM_TYPE_HomeCarouselFigures, list);
             mPostionValueMap.put(key, value);
             key += 1;
         }
@@ -112,7 +123,6 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                     }
                 }
                 else if (item.type == WGConstants.WGHomeFloorItemTypeGoodColumn ||
-                        item.type == WGConstants.WGHomeFloorItemTypeGoodGrid ||
                         item.type == WGConstants.WGHomeFloorItemTypeClassifyColumn ||
                         item.type == WGConstants.WGHomeFloorItemTypeClassifyGrid ||
                         item.type == WGConstants.WGHomeFloorItemTypeCountryColumn) {
@@ -126,9 +136,6 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                         HomeCellData value = null;
                         if (item.type == WGConstants.WGHomeFloorItemTypeGoodColumn) {
                             value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorGoodColumn, list);
-                        }
-                        else if (item.type == WGConstants.WGHomeFloorItemTypeGoodGrid) {
-                            value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorGoodGrid, list);
                         }
                         else if (item.type == WGConstants.WGHomeFloorItemTypeClassifyColumn) {
                             value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorClassifyColumn, list);
@@ -145,7 +152,32 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                         }
                     }
                 }
+                else if (item.type == WGConstants.WGHomeFloorItemTypeGoodGrid) {
+                    List list = new ArrayList();
+                    HomeCellData value = null;
+                    int count = item.content.size();
+                    for (int num = 0; num < Math.ceil(count/2.0); ++num) {
+                        list.clear();
+                        WGHomeFloorBaseContentItem goodItem = null;
+                        WGHomeFloorContentItem contentItem = null;
+                        if (count > 2 * num) {
+                            contentItem = item.content.get(2 * num);
+                            goodItem = contentItem
+                                    .contentItemWithType(item.type);
+                            list.add(goodItem);
+                        }
+                        if (count > 2 * num + 1) {
+                            contentItem = item.content.get(2 * num + 1);
+                            goodItem = contentItem
+                                    .contentItemWithType(item.type);
+                            list.add(goodItem);
+                        }
+                        value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorGoodGrid, list);
+                        mPostionValueMap.put(key, value);
+                        key += 1;
+                    }
 
+                }
                 //加分隔线
                 HomeCellData value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorSeparateLine, null);
                 mPostionValueMap.put(key, value);
@@ -166,7 +198,7 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                     false);
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeTopics.ordinal()) {
-            resourceId = R.layout.common_horizontal_list;
+            resourceId = R.layout.wghome_content_topics;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
@@ -196,7 +228,7 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
             });
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorGoodListItem.ordinal()) {
-            resourceId = R.layout.wgorderlist_good_item;
+            resourceId = R.layout.wggood_list_item;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
@@ -208,7 +240,7 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
             });
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorGoodColumn.ordinal()) {
-            resourceId = R.layout.common_horizontal_list;
+            resourceId = R.layout.wghome_content_goods_column;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
@@ -238,13 +270,13 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                     false);
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorClassifyColumn.ordinal()) {
-            resourceId = R.layout.common_horizontal_list;
+            resourceId = R.layout.wghome_content_classify_column;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorCountryColumn.ordinal()) {
-            resourceId = R.layout.common_horizontal_list;
+            resourceId = R.layout.wghome_content_country_column;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
@@ -272,6 +304,15 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
             return 0;
         }
         return mPostionValueMap.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mPostionValueMap != null && mPostionValueMap.size() > position) {
+            HomeCellData data = mPostionValueMap.get(position);
+            return data.mType.ordinal();
+        }
+        return Item_Type.ITEM_TYPE_None.ordinal();
     }
 
     //Classify

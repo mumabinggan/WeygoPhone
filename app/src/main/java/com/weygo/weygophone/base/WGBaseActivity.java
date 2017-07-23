@@ -94,4 +94,6 @@ public class WGBaseActivity extends JHActivity {
         intent.putExtra(WGNotificationTypeKey, notification);
         sendBroadcast(intent);
     }
+
+
 }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
@@ -24,7 +25,7 @@ import org.w3c.dom.Text;
  * Created by muma on 2017/5/19.
  */
 
-public class WGGoodListView extends RelativeLayout {
+public class WGGoodListView extends JHRelativeLayout {
 
     public interface GoodListItemOnListener extends WGInterface {
         void onTouchShopCart();
@@ -95,9 +96,10 @@ public class WGGoodListView extends RelativeLayout {
         mListener = listener;
     }
 
-    public void showWithData(WGObject data) {
-        if (data instanceof WGHomeFloorContentGoodItem) {
-            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) data;
+    @Override
+    public void showWithData(Object object) {
+        if (object instanceof WGHomeFloorContentGoodItem) {
+            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) object;
             JHImageUtils.getInstance().loadImage(item.pictureURL,
                     R.drawable.common_image_loading_small, mImageView);
             mNameTextView.setText(item.name);
@@ -107,9 +109,9 @@ public class WGGoodListView extends RelativeLayout {
             mReducePriceTextView.setText(item.reducePrice);
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.reducePrice) ? INVISIBLE : VISIBLE);
             mPriceTextView.setText(" " + item.price + " ");
-            mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
-            if (data instanceof WGOrderGoodItem) {
-                WGOrderGoodItem orderItem = (WGOrderGoodItem) data;
+            mPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
+            if (object instanceof WGOrderGoodItem) {
+                WGOrderGoodItem orderItem = (WGOrderGoodItem) object;
                 mCountTextView.setText("x" + orderItem.goodCount);
                 mCountTextView.setVisibility(orderItem.goodCount > 0 ? VISIBLE : INVISIBLE);
             }

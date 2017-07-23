@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/x10"
-    android:paddingBottom="@dimen/x10">
+    android:paddingBottom="@dimen/x10"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/nameTV"
@@ -12,7 +13,7 @@
         android:textSize="@dimen/ft12"
         android:textColor="@color/WGAppBaseTitleAColor"
         android:textAlignment="center"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/breifDesTV"

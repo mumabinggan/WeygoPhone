@@ -10,6 +10,7 @@ import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentCountryItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
@@ -45,8 +46,8 @@ public class WGHomeContentFloorCountryColumnItemView extends JHRelativeLayout {
     }
 
     public void showWithData(Object data) {
-        if (data instanceof WGHomeFloorContentClassifyItem) {
-            WGHomeFloorContentClassifyItem item = (WGHomeFloorContentClassifyItem) data;
+        if (data instanceof WGHomeFloorContentCountryItem) {
+            WGHomeFloorContentCountryItem item = (WGHomeFloorContentCountryItem) data;
             JHImageUtils.getInstance().loadImage(item.pictureURL, R.drawable.common_image_loading_small, mImageView);
             mNameTV.setText(item.name);
         }

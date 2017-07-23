@@ -29,19 +29,31 @@ public class WGSliderFragmet extends WGFragment {
     RecyclerView mRecyclerView;
     WGSliderAdapter mAdapter;
 
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.wgslider_fragment, container, false);
+//
+//        initData();
+//
+//        initRecyclerView(view);
+//
+//        return view;
+//    }
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.wgslider_fragment, container, false);
-
-        initData();
-
-        initRecyclerView(view);
-
-        return view;
+    public int fragmentResId() {
+        return R.layout.wgslider_fragment;
     }
 
-    private void initData() {
+    @Override
+    public void initSubView(View view) {
+        initRecyclerView(view);
+    }
+
+    @Override
+    public void initData() {
         mData = new WGHomeSlider();
         List topics = new ArrayList();
         WGTopicItem topicItem0 = new WGTopicItem();

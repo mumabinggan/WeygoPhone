@@ -47,8 +47,24 @@ public class WGTabClassifyFragment extends WGFragment {
     WGSubClassifyAdapter mSubClassifyAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_classify_fragment, container, false);
+    public int fragmentResId() {
+        return R.layout.tab_classify_fragment;
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+    }
+
+    @Override
+    public void loadRequest() {
+        super.loadRequest();
+        loadClassify();
+    }
+
+    @Override
+    public void initSubView(View view) {
+
         final WGMainActivity activity = (WGMainActivity) getActivity();
         mNavigationBar = (WGTabNavigationBar) view.findViewById(R.id.classify_navigationBar);
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
@@ -76,15 +92,6 @@ public class WGTabClassifyFragment extends WGFragment {
 
             }
         });
-
-        initSubView(view);
-
-        loadClassify();
-
-        return view;
-    }
-
-    void initSubView(View view) {
 
         initRecyclerView(view);
 

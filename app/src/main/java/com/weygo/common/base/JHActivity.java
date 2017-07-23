@@ -41,6 +41,8 @@ public class JHActivity extends FragmentActivity {
     public final int JHBroadcastLoadTypeLazy = 1;
     public final int JHBroadcastLoadTypeImmediately = 2;
 
+    JHBroadcastReceiver mRefreshReceiver;
+
     List mRefreshNotificationList;
 
     class JHBroadcastReceiver extends BroadcastReceiver {
@@ -72,10 +74,12 @@ public class JHActivity extends FragmentActivity {
     }
 
     private void initBroadcast() {
-        JHBroadcastReceiver refreshReceiver = new JHBroadcastReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(mRefreshAction);
-        registerReceiver(refreshReceiver, filter);
+        if (mRefreshReceiver == null) {
+            mRefreshReceiver = new JHBroadcastReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(mRefreshAction);
+            registerReceiver(mRefreshReceiver, filter);
+        }
     }
 
     public void initContentView() {
@@ -138,6 +142,12 @@ public class JHActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         checkRefreshNotification();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mRefreshReceiver);
     }
 
     public boolean useActivityCollector() {

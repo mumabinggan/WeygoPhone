@@ -1,5 +1,7 @@
 package com.weygo.weygophone.base;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHRequest;
@@ -14,14 +16,14 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
-    public String app = "com.weygo.test";
+    public String app = "com_weygo_test";
 
     public String os = "iOS";
 
     // eg. www.example.com, default ""
     //m.delong6688.develop.weygo.com
     public String host() {
-        return "m.delong6688.develop.weygo.com";
+        return "m.preview.weygo.com";
     }
 
     // eg. app/ default ""
@@ -31,7 +33,9 @@ public class WGRequest extends JHRequest {
 
     // no need to override, except your url is not format with: scheme://domain/path/api
     public String url() {
-        return this.scheme() + "://" + this.host() + "/" + this.userPath() + "/" + this.api() + this.apiSuffix();
+        String url = this.scheme() + "://" + this.host() + "/" + this.userPath() + "/" + this.api() + this.apiSuffix();
+        Log.e("--url--", url);
+        return url;
     }
 
     public String scheme() {

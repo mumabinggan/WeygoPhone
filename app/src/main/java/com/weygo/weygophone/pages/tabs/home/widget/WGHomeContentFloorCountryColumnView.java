@@ -23,7 +23,7 @@ public class WGHomeContentFloorCountryColumnView extends WGCommonHorizontalListV
     public WGHomeContentFloorCountryColumnView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
+    @Override
     protected int itemResId() {
         return R.layout.wghome_content_floor_country_column_item;
     }

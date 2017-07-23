@@ -23,6 +23,7 @@ public class WGHomeTopicsView extends WGCommonHorizontalListView {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
     protected int itemResId() {
         return R.layout.wghome_content_topic_item;
     }
