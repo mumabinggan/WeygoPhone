@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +12,10 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHDividerItemDecoration;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
 import com.weygo.weygophone.pages.tabs.home.model.WGHome;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
@@ -28,6 +31,15 @@ public class WGTabHomeItemFragment extends WGFragment {
     protected WGHomeFragmentAdapter mAdapter;
 
     protected WGHome mData;
+
+    public interface HomeItemOnItemClickListener {
+        void onRefresh();
+    }
+
+    HomeItemOnItemClickListener mListener;
+    public void setListener(HomeItemOnItemClickListener listener) {
+        mListener = listener;
+    }
 
     //@Override
     public int fragmentResId() {
@@ -72,7 +84,7 @@ public class WGTabHomeItemFragment extends WGFragment {
         mRefreshLayout.setOnRefreshListener(new RefreshListenerAdapter(){
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
-
+                handleOnRefresh();
             }
         });
     }
@@ -83,5 +95,11 @@ public class WGTabHomeItemFragment extends WGFragment {
 
     public void refresh(WGHome data) {
         mAdapter.setHome(data);
+    }
+
+    public void handleOnRefresh() {
+        if (mListener != null) {
+            mListener.onRefresh();
+        }
     }
 }

@@ -11,4 +11,7 @@ public class WGHomeTitleItem extends WGObject {
     public long id;
 
     public String name;
+
+    //for self use
+    public WGHome data;
 }

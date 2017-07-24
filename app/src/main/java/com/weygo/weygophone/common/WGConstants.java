@@ -21,11 +21,17 @@ public class WGConstants {
     //LocalSetting
     public static final String WGLocalSettingUser = "WGLocalSettingUser";
     public static final String WGLocalSettingUnLoginPostCode = "WGLocalSettingUnLoginPostCode";
+    public static final String WGLocalSettingHomeCache = "WGLocalSettingHomeCache";
+    public static final String WGLocalSettingClassifyCache = "WGLocalSettingClassifyCache";
 
     //RefreshNotification
     public static final int WGRefreshNotificationTypeLogin = 1;
     public static final int WGRefreshNotificationTypeLogout = 2;
 
+    //CacheType
+    public static final int WGCacheTypeBoth = 0;
+    public static final int WGCacheTypeCachePrior = 1;
+    public static final int WGCacheTypeNetwork = 2;
 
     //Notification
     public static final int WGNotificationTypeLogin = 1;
