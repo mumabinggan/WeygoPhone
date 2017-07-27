@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.alibaba.fastjson.asm.Label;
 import com.weygo.common.base.JHInterface;
 import com.weygo.weygophone.R;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class WGTabNavigationBar extends RelativeLayout implements View.OnClickListener {
 
     OnClickHomeNavigationBarListener mListener;
+
+    TextView mTitleLabel;
 
     public interface OnClickHomeNavigationBarListener extends JHInterface {
         void onClickBriefIntro(View var1);
@@ -41,6 +45,8 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
+        mTitleLabel = (TextView) findViewById(R.id.navigationBar_title);
 
         List<Integer> itemIdArray = Arrays.asList(R.id.navigationBar_simpleIntro,
                 R.id.navigationBar_search, R.id.navigationBar_cart,
@@ -71,5 +77,9 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
 
     public void setOnClickListener(OnClickHomeNavigationBarListener listener) {
         mListener = listener;
+    }
+
+    public void setTitle(int resId) {
+        mTitleLabel.setText(resId);
     }
 }

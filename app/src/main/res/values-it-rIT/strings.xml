@@ -164,5 +164,7 @@
     <string name="GoodDetail_Deliver">Spedizione</string>
     <string name="GoodDetail_CommodityInfo">Descrizione</string>
     <string name="GoodDetail_Add">Aggiungi</string>
+    <string name="GoodDetail_Without">缺货</string>
+
 
 </resources>

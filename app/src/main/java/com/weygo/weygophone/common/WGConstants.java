@@ -23,6 +23,7 @@ public class WGConstants {
     public static final String WGLocalSettingUnLoginPostCode = "WGLocalSettingUnLoginPostCode";
     public static final String WGLocalSettingHomeCache = "WGLocalSettingHomeCache";
     public static final String WGLocalSettingClassifyCache = "WGLocalSettingClassifyCache";
+    public static final String WGLocalSettingAsiaCache = "WGLocalSettingAsiaCache";
 
     //RefreshNotification
     public static final int WGRefreshNotificationTypeLogin = 1;

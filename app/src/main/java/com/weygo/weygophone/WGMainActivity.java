@@ -48,6 +48,7 @@ import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
 import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
 import com.weygo.weygophone.pages.tabs.classify.model.response.WGClassifyResponse;
+import com.weygo.weygophone.pages.tabs.foreign.fragment.WGTabAsiaFragment;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderEntity;
 import com.weygo.common.tools.loadwebimage.JHImageLoaderListener;
@@ -127,7 +128,7 @@ public class WGMainActivity extends WGBaseActivity {
         fragmentClassArray.add(WGTabHomeFragment.class);
         fragmentClassArray.add(WGTabClassifyFragment.class);
         fragmentClassArray.add(JHFragment.class);
-        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(WGTabAsiaFragment.class);
         fragmentClassArray.add(WGTabMineFragment.class);
         mTabBar.setFragmentClassArray(fragmentClassArray);
         mTabBar.setSelectIndex(0);

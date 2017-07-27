@@ -152,7 +152,7 @@ public class WGTabClassifyFragment extends WGFragment {
     void loadClassify() {
         WGClassifyRequest request = new WGClassifyRequest();
         request.is_hot = 0;
-        this.getAsyn(request, WGClassifyResponse.class, new JHResponseCallBack() {
+        this.postAsyn(request, WGClassifyResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
                 handleSuccessClassify((WGClassifyResponse) result);
