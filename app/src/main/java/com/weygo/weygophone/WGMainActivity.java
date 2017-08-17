@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
@@ -45,7 +46,10 @@ import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
+import com.weygo.weygophone.pages.slider.model.SliderOnItemClickListener;
+import com.weygo.weygophone.pages.tabs.benefit.fragment.WGTabBenefitFragment;
 import com.weygo.weygophone.pages.tabs.classify.fragment.WGTabClassifyFragment;
+import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
 import com.weygo.weygophone.pages.tabs.classify.model.response.WGClassifyResponse;
 import com.weygo.weygophone.pages.tabs.foreign.fragment.WGTabAsiaFragment;
@@ -55,6 +59,7 @@ import com.weygo.common.tools.loadwebimage.JHImageLoaderListener;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 import com.weygo.weygophone.pages.tabs.mine.fragment.WGTabMineFragment;
 import com.weygo.weygophone.pages.test.WGTestRequest;
 
@@ -110,6 +115,9 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testModelToMap();
         //this.testPostClassifyGetRequest();
         getWindow();
+
+        Log.e("--width---", "width : " + JHAdaptScreenUtils.devicePixelWidth(this) + "height:" +
+                JHAdaptScreenUtils.devicePixelHeight(this));
     }
 
     void initTabBar() {
@@ -127,7 +135,7 @@ public class WGMainActivity extends WGBaseActivity {
         List<Class> fragmentClassArray = new ArrayList<>();
         fragmentClassArray.add(WGTabHomeFragment.class);
         fragmentClassArray.add(WGTabClassifyFragment.class);
-        fragmentClassArray.add(JHFragment.class);
+        fragmentClassArray.add(WGTabBenefitFragment.class);
         fragmentClassArray.add(WGTabAsiaFragment.class);
         fragmentClassArray.add(WGTabMineFragment.class);
         mTabBar.setFragmentClassArray(fragmentClassArray);
@@ -141,10 +149,62 @@ public class WGMainActivity extends WGBaseActivity {
     void initSlider() {
         mSliderFragment = (WGSliderFragmet) getSupportFragmentManager().
                 findFragmentById(R.id.slider_fragment);
-    }
-
-    void initDrawerContent() {
-
+//        mSliderFragment.setListener(new SliderOnItemClickListener() {
+//            @Override
+//            public void onLoginClick(View view) {
+//                mDrawerLayout.closeDrawer(GravityCompat.START);
+//            }
+//
+//            @Override
+//            public void onPersonInfoClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onScanClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onPostCodeClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onOrderClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onCouponClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onMessageCenterClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onFootPrintsClick(View view) {
+//
+//            }
+//
+//            @Override
+//            public void onTopicItemClick(View view, WGTopicItem item) {
+//
+//            }
+//
+//            @Override
+//            public void onSubClassifyItemClick(View view, WGClassifyItem item) {
+//
+//            }
+//
+//            @Override
+//            public void onItemClick(View view, int position) {
+//
+//            }
+//        });
     }
 
     public void onOptionPicker(View view) {
@@ -189,7 +249,7 @@ public class WGMainActivity extends WGBaseActivity {
         picker.show();
     }
 
-    public void testActivity() {
+    public void openSlider() {
         //setA();
         //sss();
         //onOptionPicker(null);
@@ -205,6 +265,11 @@ public class WGMainActivity extends WGBaseActivity {
 //        startActivity(intent);
 //        Log.e("error", "testActivity");
         mDrawerLayout.openDrawer(GravityCompat.START);
+        mSliderFragment.refresh();
+    }
+
+    public void closeSlider() {
+        mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     public void setSelectedTab(int tabIndex) {

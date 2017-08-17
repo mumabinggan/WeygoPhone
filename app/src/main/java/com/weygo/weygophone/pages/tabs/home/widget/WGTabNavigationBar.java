@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.tabs.home.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,15 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
     OnClickHomeNavigationBarListener mListener;
 
     TextView mTitleLabel;
+
+    ImageView mLeftImageView;
+
+    public void setLeftImage(int resId) {
+        if (mLeftImageView == null) {
+            mLeftImageView = (ImageView) findViewById(R.id.navigationBar_simpleIntro);
+        }
+        mLeftImageView.setImageResource(resId);
+    }
 
     public interface OnClickHomeNavigationBarListener extends JHInterface {
         void onClickBriefIntro(View var1);

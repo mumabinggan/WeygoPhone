@@ -5,19 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-        android:id="@+id/refreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:tr_enable_loadmore="false">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:divider="#ff000000"
-            android:dividerHeight="10dp"
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:tr_enable_loadmore="false">
 
-    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ff000000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+        <ImageView
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="#00ff00"/>
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

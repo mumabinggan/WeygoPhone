@@ -1,20 +1,9 @@
 package com.weygo.weygophone.pages.goodDetail;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -23,7 +12,6 @@ import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
-import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.goodDetail.adapter.WGGoodDetailAdapter;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
@@ -32,12 +20,8 @@ import com.weygo.weygophone.pages.goodDetail.model.request.WGGoodDetailRequest;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGCollectGoodResponse;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailResponse;
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailOperateView;
-import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
-import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

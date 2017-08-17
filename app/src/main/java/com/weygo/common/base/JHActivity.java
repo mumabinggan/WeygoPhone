@@ -131,7 +131,10 @@ public class JHActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        //unregisterReceiver(mRefreshReceiver);
+        if (mRefreshReceiver != null) {
+            unregisterReceiver(mRefreshReceiver);
+        }
         //remove activity to Collector
         if (useActivityCollector()) {
             JHActivityCollector.removeActivity(this);
@@ -147,7 +150,9 @@ public class JHActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mRefreshReceiver);
+//        if (mRefreshReceiver != null) {
+//            unregisterReceiver(mRefreshReceiver);
+//        }
     }
 
     public boolean useActivityCollector() {
@@ -267,4 +272,5 @@ public class JHActivity extends FragmentActivity {
     public boolean containsRefreshNotification(int notification) {
         return mRefreshNotificationList.contains(notification);
     }
+
 }

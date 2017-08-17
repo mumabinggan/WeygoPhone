@@ -35,7 +35,7 @@ public class WGSubClassifyAdapter extends JHRecyclerViewAdapter {
         ITEM_TYPE_HotGood,
     }
 
-    public static interface SubClassifyOnItemClickListener extends OnItemClickListener {
+    public static interface SubClassifyOnItemClickListener extends OnBaseItemClickListener {
 
         void onSubClassifyHotGoodItemClick(View view, WGClassifyHotGoodItem item);
 

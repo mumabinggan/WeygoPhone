@@ -41,7 +41,7 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
         ITEM_TYPE_PersonInfoCannotEdit,     //不可编辑，或者没有 Edit
     }
 
-    public static interface PersonInfoOnItemClickListener extends OnItemClickListener {
+    public static interface PersonInfoOnItemClickListener extends OnBaseItemClickListener {
 
         void onSexItemClick(View view, WGUser user);
 

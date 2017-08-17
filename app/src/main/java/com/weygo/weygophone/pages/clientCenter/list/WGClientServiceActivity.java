@@ -56,7 +56,7 @@ public class WGClientServiceActivity extends WGTitleActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGClientServiceAdapter(this, null);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnBaseItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 handleItemClick(view, position);

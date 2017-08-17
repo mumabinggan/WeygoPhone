@@ -25,6 +25,7 @@
     <string name="Slider_Mine_Message">Messaggi</string>
     <string name="Slider_Mine_Scan">Scansione</string>
     <string name="Slider_Mine_MessageCenter">Live chat</string>
+    <string name="Slider_Mine_Register">Accedi/Registrati</string>
 
     <string name="TabClassify">Reparti</string>
     <string name="TabBenefit">Go Promo</string>
@@ -166,5 +167,18 @@
     <string name="GoodDetail_Add">Aggiungi</string>
     <string name="GoodDetail_Without">缺货</string>
 
+    //分类详情
+    <string name="ClassifyDetail_Sort">Default</string>
+    <string name="ClassifyDetail_Filter">Filtro</string>
+    <string name="ClassifyDetail_Vista">Vista</string>
+    <string name="ClassifyDetail_Brand">marchi</string>
+    <string name="ClassifyDetail_Price_Down">prezzo crescente</string>
+    <string name="ClassifyDetail_Price_Up">prezzo decrescente</string>
+    <string name="ClassifyDetail_Key">Parola chiave</string>
+
+    //邮编填写
+    <string name="Insert_Cap_Des">Indicaci la tua \n posizione attuale</string>
+    <string name="Insert_Cap">Inserisci CAP</string>
+    <string name="Insert_Cap_Error">Il tuo CAP non è servito al momento, torna a trovarci!</string>
 
 </resources>

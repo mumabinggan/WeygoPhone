@@ -1,17 +1,15 @@
 package com.weygo.weygophone.pages.tabs.home.widget;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 /**
@@ -20,7 +18,7 @@ import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 public class WGHomeContentTopicItemView extends JHRelativeLayout {
 
-    WGHomeTitleItem mData;
+    WGTitleItem mData;
 
     ImageView mImageView;
 

@@ -47,12 +47,17 @@ public class JHAdaptScreenUtils {
         return (int) (px / scale + 0.5f);
     }
 
+    public static int dpTopx(Context context, float dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int)(dp * scale + 0.5);
+    }
+
     public static int deviceDpHeight(Context context) {
         return deviceDpWidth(context);
     }
 
     public static float pixelWidth(Context context, float pxScaleX) {
-        return devicePixelWidth(context) / 320 * pxScaleX;
+        return devicePixelWidth(context) / 320.0f * pxScaleX;
     }
 
     public static float pixelHeight(Context context, float pxScaleY) {
@@ -60,7 +65,7 @@ public class JHAdaptScreenUtils {
     }
 
     public static int dpWidth(Context context, float pxScaleX) {
-        float piexl = devicePixelWidth(context) / 320 * pxScaleX;
+        float piexl = devicePixelWidth(context) / 320.0f * pxScaleX;
         return pxTodp(context, piexl);
     }
 }

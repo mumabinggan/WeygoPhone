@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x150"
+    android:background="@drawable/slider_background">
+
+    <LinearLayout
+        android:id="@+id/scanMessageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/scanLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:src="@drawable/slider_scan" />
+            
+            <View
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x20"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/ft12"
+                android:text="扫一扫" />
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/messageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:src="@drawable/slider_messagecenter" />
+
+            <View
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/x3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x20"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/ft12"
+                android:text="客服中心" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loginLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scanMessageView">
+
+        <ImageView
+            android:id="@+id/headImageView"
+            android:layout_width="@dimen/x68"
+            android:layout_height="@dimen/x68"
+            android:src="@drawable/mine_unknown_icon"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Slider_Mine_Register"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/ft12"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/headImageView"
+            android:layout_marginTop="@dimen/x10"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

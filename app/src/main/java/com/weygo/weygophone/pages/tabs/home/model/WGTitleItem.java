@@ -6,7 +6,7 @@ import com.weygo.weygophone.base.WGObject;
  * Created by muma on 2017/4/27.
  */
 
-public class WGHomeTitleItem extends WGObject {
+public class WGTitleItem extends WGObject {
 
     public long id;
 

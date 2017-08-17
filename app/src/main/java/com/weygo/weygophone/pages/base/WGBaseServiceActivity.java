@@ -11,6 +11,7 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
 
@@ -26,7 +27,7 @@ public class WGBaseServiceActivity extends WGBaseActivity {
         this.loadBaseService();
 
         Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
-        //startActivity(intent);
+        startActivity(intent);
     }
 
     void loadBaseService() {
@@ -46,11 +47,15 @@ public class WGBaseServiceActivity extends WGBaseActivity {
     }
 
     void handleBaseServiceCompletion(WGBaseServiceResponse response) {
-        Log.e("onSuccess", JSON.toJSONString(response));
-        Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
-        startActivity(intent);
-        finish();
-        //overridePendingTransition(0, 0);
+        if (response != null) {
+            WGApplicationGlobalUtils.getInstance().setBaseService(response.data);
+            if (response.success()) {
+                Log.e("onSuccess", JSON.toJSONString(response));
+                Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);
+                //startActivity(intent);
+                finish();
+            }
+        }
     }
 
     @Override

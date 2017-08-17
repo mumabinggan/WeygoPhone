@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.classify.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,9 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
+import com.weygo.weygophone.pages.classifyFilter.WGClassifyDetailFilterActivity;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyHotGoodItem;
@@ -74,7 +78,7 @@ public class WGTabClassifyFragment extends WGFragment {
                 Intent intent = new Intent(getActivity(), WGSliderActivity.class);
                 startActivity(intent);
                 */
-                activity.testActivity();
+                activity.openSlider();
             }
 
             @Override
@@ -103,7 +107,7 @@ public class WGTabClassifyFragment extends WGFragment {
         mClassifyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mClassifyAdapter = new WGClassifyAdapter(getContext(), null);
         mClassifyRecyclerView.setAdapter(mClassifyAdapter);
-        mClassifyAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnItemClickListener() {
+        mClassifyAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnBaseItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 handleClassifyItemClick(view, position);
@@ -143,6 +147,11 @@ public class WGTabClassifyFragment extends WGFragment {
 
     void handleSubClassifyItemClick(View view, WGClassifyItem item) {
         Log.e("handle", "handleSubClassifyItemClick" + item.name);
+        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void handleSubClassifyHotGoodItem(View view, WGClassifyHotGoodItem item) {

@@ -32,25 +32,25 @@ public class WGApplicationUserUtils {
 
     //user
     private WGUser mUser;
-    public WGUser getmUser() {
+    public WGUser getUser() {
         if (mUser == null) {
             WGUser user = (WGUser) JHLocalSettingUtils.getLocalSetting(mContext, WGConstants.WGLocalSettingUser, WGUser.class);
             mUser = user;
         }
         return mUser;
     }
-    public void setmUser(WGUser user) {
+    public void setUser(WGUser user) {
         mUser = user;
         if (user == null) {
             JHLocalSettingUtils.removeLocalSetting(mContext, WGConstants.WGLocalSettingUser);
         }
         else {
-            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUser, WGUser.class);
+            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUser, user);
         }
     }
 
     public String sessionKey() {
-        WGUser user = this.getmUser();
+        WGUser user = this.getUser();
         if (user != null) {
             return user.sessionKey;
         }
@@ -58,7 +58,7 @@ public class WGApplicationUserUtils {
     }
 
     public boolean isLogined() {
-        WGUser user = this.getmUser();
+        WGUser user = this.getUser();
         if (user != null) {
             return true;
         }
@@ -66,7 +66,7 @@ public class WGApplicationUserUtils {
     }
 
     public boolean isBoy() {
-        WGUser user = this.getmUser();
+        WGUser user = this.getUser();
         if (user != null) {
             return user.isBoy();
         }
@@ -74,7 +74,7 @@ public class WGApplicationUserUtils {
     }
 
     public boolean isGirl() {
-        WGUser user = this.getmUser();
+        WGUser user = this.getUser();
         if (user != null) {
             return user.isGirl();
         }
@@ -82,7 +82,7 @@ public class WGApplicationUserUtils {
     }
 
     public int userAvatar() {
-        WGUser user = this.getmUser();
+        WGUser user = this.getUser();
         if (user != null) {
             return user.userAvatar();
         }
@@ -90,9 +90,14 @@ public class WGApplicationUserUtils {
     }
 
     public String fullName() {
-        WGUser user = getmUser();
+        WGUser user = getUser();
         if (user != null) {
-            return user.fullName;
+            if (JHStringUtils.isNullOrEmpty(user.fullName)) {
+                return user.surname + user.name;
+            }
+            else {
+                return user.fullName;
+            }
         }
         return null;
     }
@@ -102,17 +107,17 @@ public class WGApplicationUserUtils {
     public void setCurrentPostCode(String postCode) {
         if (isLogined()) {
             mUser.cap = postCode;
-            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUser, WGUser.class);
+            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUser, mUser);
         }
         else {
-            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUnLoginPostCode, String.class);
+            JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingUnLoginPostCode, mCurrentPostCode);
         }
         mCurrentPostCode = postCode;
     }
     public String currentPostCode() {
         if (JHStringUtils.isNullOrEmpty(mCurrentPostCode)) {
             if (isLogined()) {
-                mCurrentPostCode = getmUser().cap;
+                mCurrentPostCode = getUser().cap;
             }
             else {
                 mCurrentPostCode = (String) JHLocalSettingUtils.getLocalSetting(mContext, WGConstants.WGLocalSettingUnLoginPostCode, String.class);
@@ -122,7 +127,7 @@ public class WGApplicationUserUtils {
     }
 
     public int orderCount() {
-        WGUser user = getmUser();
+        WGUser user = getUser();
         if (user != null) {
             return user.orderCount;
         }
@@ -130,7 +135,7 @@ public class WGApplicationUserUtils {
     }
 
     public int deliverOrderCount() {
-        WGUser user = getmUser();
+        WGUser user = getUser();
         if (user != null) {
             return user.deliveringCount;
         }
@@ -138,7 +143,7 @@ public class WGApplicationUserUtils {
     }
 
     public void reset() {
-        this.setmUser(null);
+        this.setUser(null);
         this.setCurrentPostCode(null);
         JHLocalSettingUtils.removeLocalSetting(mContext, WGConstants.WGLocalSettingUnLoginPostCode);
         JHLocalSettingUtils.removeLocalSetting(mContext, WGConstants.WGLocalSettingUser);

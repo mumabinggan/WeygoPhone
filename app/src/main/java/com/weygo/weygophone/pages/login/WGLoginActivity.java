@@ -68,14 +68,6 @@ public class WGLoginActivity extends WGBaseActivity {
 
         mForgetPWBtn = (TextView) findViewById(R.id.forgetPWTextView);
 
-        mWechatView = findViewById(R.id.wechatView);
-        mWechatView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleWechat();
-            }
-        });
-
         mFacebookView = findViewById(R.id.facebookView);
         mFacebookView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +124,8 @@ public class WGLoginActivity extends WGBaseActivity {
 
     void loadLogin() {
         WGLoginRequest request = new WGLoginRequest();
+        request.username = mPhoneEditText.getText().toString();
+        request.password = mPasswordEditText.getText().toString();
         this.postAsyn(request, WGLoginResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {
@@ -148,7 +142,7 @@ public class WGLoginActivity extends WGBaseActivity {
     void handleLoginSuccessResponse(WGLoginResponse response) {
         if (response.success()) {
             WGApplicationUserUtils.getInstance().reset();
-            WGApplicationUserUtils.getInstance().setmUser(response.data);
+            WGApplicationUserUtils.getInstance().setUser(response.data);
             sendRefreshNotification(WGConstants.WGRefreshNotificationTypeLogin);
             sendNotification(WGConstants.WGNotificationTypeLogin);
             finish();

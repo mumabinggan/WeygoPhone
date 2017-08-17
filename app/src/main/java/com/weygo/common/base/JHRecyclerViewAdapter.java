@@ -13,10 +13,10 @@ public class JHRecyclerViewAdapter extends RecyclerView.Adapter<JHBaseViewHolder
 
     protected Context mContext;
 
-    public OnItemClickListener mOnItemClickListener = null;
+    public OnBaseItemClickListener mOnItemClickListener = null;
 
     //define interface
-    public static interface OnItemClickListener {
+    public static interface OnBaseItemClickListener {
         void onItemClick(View view , int position);
     }
 
@@ -35,7 +35,7 @@ public class JHRecyclerViewAdapter extends RecyclerView.Adapter<JHBaseViewHolder
         return 0;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnBaseItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 }

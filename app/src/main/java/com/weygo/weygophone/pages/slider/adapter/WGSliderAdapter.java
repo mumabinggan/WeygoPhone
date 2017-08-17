@@ -12,9 +12,12 @@ import android.widget.TextView;
 import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.pages.slider.model.SliderOnItemClickListener;
 import com.weygo.weygophone.pages.slider.model.WGHomeSlider;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
@@ -39,6 +42,7 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
     public enum Item_Type {
         ITEM_TYPE_None,
         ITEM_TYPE_Head,
+        ITEM_TYPE_RegisterHead,
         ITEM_TYPE_PostCode,
         ITEM_TYPE_Order,
         ITEM_TYPE_FootPrints,
@@ -47,26 +51,6 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
         ITEM_TYPE_Topics,
         ITEM_TYPE_Classify,
         ITEM_TYPE_SubClassify,
-    }
-
-    public static interface SliderOnItemClickListener extends OnItemClickListener {
-        void onPersonInfoClick(View view);
-
-        void onScanClick(View view);
-
-        void onPostCodeClick(View view);
-
-        void onOrderClick(View view);
-
-        void onCouponClick(View view);
-
-        void onMessageCenterClick(View view);
-
-        void onFootPrintsClick(View view);
-
-        void onTopicItemClick(View view, WGTopicItem item);
-
-        void onSubClassifyItemClick(View view, WGClassifyItem item);
     }
 
     public void handleClickView(View view) {
@@ -103,17 +87,40 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
         mCurrentSelectedIndex = -1;
     }
 
+    public void setData(WGHomeSlider data) {
+        mData = data;
+        notifyDataSetChanged();
+    }
+
     public void setCurrentSelectedIndex(int currentIndex) {
         mCurrentSelectedIndex = currentIndex;
-        for (int num = 0; num < mData.classifys.size(); ++num) {
-            WGClassifyItem item = mData.classifys.get(num);
+        for (int num = 0; num < mData.classify.size(); ++num) {
+            WGClassifyItem item = mData.classify.get(num);
             item.isSelected = (num == currentIndex);
         }
         notifyDataSetChanged();
     }
 
+    boolean isLogin() {
+        return WGApplicationUserUtils.getInstance().isLogined();
+    }
+
+    int maxClassifyTopCount() {
+        int count = 0;
+        if (isLogin()) {
+            count = 6;
+        }
+        else {
+            count = 3;
+        }
+        if (mData == null) {
+            count -= count;
+        }
+        return count;
+    }
+
     int classifyIndex(int position) {
-        return (position - 7) / 2;
+        return (position - maxClassifyTopCount()) / 2;
     }
 
     int subClassifyIndex(int position) {
@@ -121,7 +128,7 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
     }
 
     boolean isClassifyItem(int position) {
-        return (position >= 7 && position % 2 == 0);
+        return (position >= maxClassifyTopCount() && (position-maxClassifyTopCount()) % 2 == 1);
     }
 
     boolean isCommonItem(int type) {
@@ -156,6 +163,13 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
                     mContext).inflate(resourceId, parent,
                     false);
             holder = new HeadViewHolder(view);
+        }
+        else if (viewType == Item_Type.ITEM_TYPE_RegisterHead.ordinal()) {
+            resourceId = R.layout.wgslider_registerpersoninfo;
+            view = LayoutInflater.from(
+                    mContext).inflate(resourceId, parent,
+                    false);
+            holder = new RegisterHeadViewHolder(view);
         }
         else if (viewType == Item_Type.ITEM_TYPE_PostCode.ordinal()) {
             resourceId = R.layout.wgslider_postcode;
@@ -206,7 +220,11 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
         super.onBindViewHolder(holder, position);
         if (holder instanceof HeadViewHolder) {
             holder.showWithData(WGApplicationUserUtils.
-                    getInstance(mContext).getmUser());
+                    getInstance(mContext).getUser());
+        }
+        else if (holder instanceof RegisterHeadViewHolder) {
+            holder.showWithData(WGApplicationUserUtils.
+                    getInstance(mContext).getUser());
         }
         else if (holder instanceof PostCodeViewHolder) {
             holder.showWithData(WGApplicationUserUtils.
@@ -226,14 +244,14 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
         }
         else if (holder instanceof ClassifyViewHolder) {
             int index = classifyIndex(position);
-            if (mData.classifys.size() > index) {
-                holder.showWithData(mData.classifys.get(index));
+            if (mData.classify.size() > index) {
+                holder.showWithData(mData.classify.get(index));
             }
         }
         else if (holder instanceof ClassifyItemViewHolder) {
             int index = subClassifyIndex(position);
             if (index == mCurrentSelectedIndex) {
-                WGClassifyItem item = mData.classifys.get(index);
+                WGClassifyItem item = mData.classify.get(index);
                 holder.showWithArray(item.allArray());
             }
             else {
@@ -244,10 +262,10 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
 
     @Override
     public int getItemCount() {
-        int count = 7;
+        int count = maxClassifyTopCount();
         if (mData != null) {
-            if (mData.classifys != null) {
-                count += mData.classifys.size() * 2;
+            if (mData.classify != null) {
+                count += mData.classify.size() * 2;
             }
         }
         return count;
@@ -260,36 +278,100 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
 
     Item_Type getItemViewTypeAfterOrdinal(int position) {
         Item_Type type = Item_Type.ITEM_TYPE_None;
-        if (position == 0) {
-            type = Item_Type.ITEM_TYPE_Head;
-        }
-        else if (position == 1) {
-            type = Item_Type.ITEM_TYPE_PostCode;
-        }
-        else if (position == 2) {
-            type = Item_Type.ITEM_TYPE_Order;
-        }
-        else if (position == 3) {
-            type = Item_Type.ITEM_TYPE_FootPrints;
-        }
-        else if (position == 4) {
-            type = Item_Type.ITEM_TYPE_Coupon;
-        }
-        else if (position == 5) {
-            type = Item_Type.ITEM_TYPE_Message;
-        }
-        else if (position == 6) {
-            type = Item_Type.ITEM_TYPE_Topics;
-        }
-        else {
-            if (isClassifyItem(position)) {
-                type = Item_Type.ITEM_TYPE_SubClassify;
+        if (isLogin()) {
+            if (position == 0) {
+                type = Item_Type.ITEM_TYPE_Head;
+            }
+            else if (position == 1) {
+                type = Item_Type.ITEM_TYPE_PostCode;
+            }
+            else if (position == 2) {
+                type = Item_Type.ITEM_TYPE_Order;
+            }
+            else if (position == 3) {
+                type = Item_Type.ITEM_TYPE_FootPrints;
+            }
+            else if (position == 4) {
+                type = Item_Type.ITEM_TYPE_Coupon;
+            }
+            else if (position == 5) {
+                type = Item_Type.ITEM_TYPE_Topics;
             }
             else {
-                type = Item_Type.ITEM_TYPE_Classify;
+                if (isClassifyItem(position)) {
+                    type = Item_Type.ITEM_TYPE_SubClassify;
+                }
+                else {
+                    type = Item_Type.ITEM_TYPE_Classify;
+                }
             }
         }
+        else {
+            if (position == 0) {
+                type = Item_Type.ITEM_TYPE_RegisterHead;
+            }
+            else if (position == 1) {
+                type = Item_Type.ITEM_TYPE_PostCode;
+            }
+            else if (position == 2) {
+                type = Item_Type.ITEM_TYPE_Topics;
+            }
+            else {
+                if (isClassifyItem(position)) {
+                    type = Item_Type.ITEM_TYPE_SubClassify;
+                }
+                else {
+                    type = Item_Type.ITEM_TYPE_Classify;
+                }
+            }
+        }
+
         return type;
+    }
+
+    class RegisterHeadViewHolder extends JHBaseViewHolder {
+
+        LinearLayout mScanLayout;
+        LinearLayout mMessageCenterLayout;
+        RelativeLayout mLoginLayout;
+
+        public RegisterHeadViewHolder(View view) {
+            super(view);
+            mScanLayout = (LinearLayout) view.findViewById(R.id.scanLayout);
+            mScanLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SliderOnItemClickListener listener = sliderClickListener();
+                    if (listener != null) {
+                        listener.onScanClick(v);
+                    }
+                }
+            });
+            mMessageCenterLayout = (LinearLayout) view.findViewById(R.id.messageLayout);
+            mMessageCenterLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SliderOnItemClickListener listener = sliderClickListener();
+                    if (listener != null) {
+                        listener.onMessageCenterClick(v);
+                    }
+                }
+            });
+            mLoginLayout = (RelativeLayout) view.findViewById(R.id.loginLayout);
+            mLoginLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SliderOnItemClickListener listener = sliderClickListener();
+                    if (listener != null) {
+                        listener.onLoginClick(v);
+                    }
+                }
+            });
+        }
+        @Override
+        public void showWithData(Object object) {
+            super.showWithData(object);
+        }
     }
 
     //Head
@@ -320,9 +402,8 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
         public void showWithData(Object object) {
             super.showWithData(object);
             if (object instanceof WGUser) {
-                WGUser user = (WGUser)object;
-                mNameTextView.setText(user.fullName);
-                mHeadImageView.setImageResource(user.userAvatar());
+                mNameTextView.setText(WGApplicationUserUtils.getInstance().fullName());
+                mHeadImageView.setImageResource(WGApplicationUserUtils.getInstance().userAvatar());
             }
         }
     }
@@ -334,15 +415,13 @@ public class WGSliderAdapter extends JHRecyclerViewAdapter
 
         public PostCodeViewHolder(View view) {
             super(view);
-            textView = (TextView) view.findViewById(R.id.nameTextView);
+            textView = (TextView) view.findViewById(R.id.textView);
         }
 
         @Override
         public void showWithData(Object object) {
             super.showWithData(object);
-            if (object instanceof WGUser) {
-                textView.setText(((WGUser) object).cap);
-            }
+            textView.setText((String )object);
         }
     }
 

@@ -7,5 +7,12 @@ import java.util.List;
  */
 
 public class WGBaseService {
-    List<String> postcodes;
+    public List<String> postcodes;
+
+    public boolean contain(String cap) {
+        if (postcodes != null) {
+            return postcodes.contains(cap);
+        }
+        return false;
+    }
 }

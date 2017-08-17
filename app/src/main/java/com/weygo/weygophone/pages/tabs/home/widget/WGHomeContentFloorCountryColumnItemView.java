@@ -9,10 +9,8 @@ import android.widget.TextView;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentCountryItem;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
-import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 
 /**
  * Created by muma on 2017/6/4.
@@ -20,7 +18,7 @@ import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 public class WGHomeContentFloorCountryColumnItemView extends JHRelativeLayout {
 
-    WGHomeTitleItem mData;
+    WGTitleItem mData;
 
     ImageView mImageView;
 

@@ -15,7 +15,9 @@ import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 
 import java.util.Collection;
@@ -60,5 +62,7 @@ public class WGApplication extends Application {
         JHResourceUtils.getInstance(context);
         JHImageUtils.getInstance(context);
         WGApplicationRequestUtils.getInstance(context);
+        WGApplicationUserUtils.getInstance(context);
+        WGApplicationGlobalUtils.getInstance(context);
     }
 }

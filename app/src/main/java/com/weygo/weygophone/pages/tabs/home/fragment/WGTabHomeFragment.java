@@ -1,29 +1,20 @@
 package com.weygo.weygophone.pages.tabs.home.fragment;
 
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.shizhefei.view.indicator.Indicator;
 import com.shizhefei.view.indicator.IndicatorViewPager;
-import com.shizhefei.view.indicator.ScrollIndicatorView;
-import com.shizhefei.view.indicator.slidebar.ColorBar;
-import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
-import com.weygo.common.base.JHObject;
 import com.weygo.common.base.JHResponse;
-import com.weygo.common.tools.JHFontUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHWarningUtils;
 import com.weygo.common.tools.network.JHRequestError;
@@ -33,15 +24,13 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
-import com.weygo.weygophone.pages.tabs.home.model.WGHome;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTabContentResponse;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGTabNavigationBar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,12 +50,7 @@ public class WGTabHomeFragment extends WGFragment {
     MyAdapter mPagerAdapter;
     IndicatorViewPager mIndicatorViewPager;
 
-    //data
-    //List<WGHomeTitleItem> mTitleList;
-    //Map<Integer, WGHome> mContentMap;
-
     Map<Integer, WGTabHomeItemFragment> mContentFragmentMap;
-
 
     WGHomeTitlesResponse mDataResponse;
 
@@ -87,7 +71,6 @@ public class WGTabHomeFragment extends WGFragment {
     @Override
     public void initData() {
         super.initData();
-        //mContentMap = new HashMap<>();
         mContentFragmentMap = new HashMap<>();
         mHadReadContentCacheMap = new HashMap<>();
     }
@@ -104,7 +87,7 @@ public class WGTabHomeFragment extends WGFragment {
                 Intent intent = new Intent(getActivity(), WGSliderActivity.class);
                 startActivity(intent);
                 */
-                activity.testActivity();
+                activity.openSlider();
             }
 
             @Override
@@ -133,26 +116,23 @@ public class WGTabHomeFragment extends WGFragment {
         mIndicatorViewPager.setOnIndicatorPageChangeListener(new IndicatorViewPager.OnIndicatorPageChangeListener() {
             @Override
             public void onIndicatorPageChange(int preItem, int currentItem) {
-                Log.e("-onPageChange--", "" + preItem + ":" + currentItem);
                 loadTabContentDataWithMenuId(menuIdWithIndex(currentItem), WGConstants.WGCacheTypeCachePrior);
-                //loadTabContentData(currentItem);
-                //Log.e("+++++++-+++", preItem + ":" + currentItem + ":" + mViewPager.getCurrentItem());
             }
         });
     }
 
     long menuIdWithIndex(int index) {
-        WGHomeTitleItem item = dataWithIndex(index);
+        WGTitleItem item = dataWithIndex(index);
         if (item != null) {
             return item.id;
         }
         return -1;
     }
 
-    WGHomeTitleItem dataWithMenuId(long menuId) {
-        List<WGHomeTitleItem> list = mDataResponse.data;
+    WGTitleItem dataWithMenuId(long menuId) {
+        List<WGTitleItem> list = mDataResponse.data;
         for (int num = 0; num < list.size(); ++num) {
-            WGHomeTitleItem item = list.get(num);
+            WGTitleItem item = list.get(num);
             if (item.id == menuId) {
                 return item;
             }
@@ -161,9 +141,9 @@ public class WGTabHomeFragment extends WGFragment {
     }
 
     int indexWithMenuId(long menuId) {
-        List<WGHomeTitleItem> list = mDataResponse.data;
+        List<WGTitleItem> list = mDataResponse.data;
         for (int num = 0; num < list.size(); ++num) {
-            WGHomeTitleItem item = list.get(num);
+            WGTitleItem item = list.get(num);
             if (item.id == menuId) {
                 return num;
             }
@@ -171,11 +151,11 @@ public class WGTabHomeFragment extends WGFragment {
         return 0;
     }
 
-    WGHomeTitleItem dataWithIndex(int index) {
+    WGTitleItem dataWithIndex(int index) {
         if (mDataResponse.data.size() <= index) {
             index = 0;
         }
-        WGHomeTitleItem item = mDataResponse.data.get(index);
+        WGTitleItem item = mDataResponse.data.get(index);
         return item;
     }
 
@@ -271,7 +251,7 @@ public class WGTabHomeFragment extends WGFragment {
     public void loadTabContentDataWithMenuId(final long menuId, int cacheType,
                                              OnRequestCompletion completion) {
         if (cacheType != WGConstants.WGCacheTypeNetwork) {
-            WGHomeTitleItem item = dataWithMenuId(menuId);
+            WGTitleItem item = dataWithMenuId(menuId);
             Boolean readBool = mHadReadContentCacheMap.get(new Long(menuId));
             if (item != null) {
                 if (readBool != null && readBool.booleanValue()) {
@@ -312,7 +292,7 @@ public class WGTabHomeFragment extends WGFragment {
         }
         final WGHomeTabContentRequest request = new WGHomeTabContentRequest();
         request.menuId = menuId;
-        WGHomeTitleItem item = dataWithMenuId(menuId);
+        WGTitleItem item = dataWithMenuId(menuId);
         if (item.data != null) {
             request.showsLoadingView = false;
         }
@@ -336,7 +316,7 @@ public class WGTabHomeFragment extends WGFragment {
         stopRefreshing(index);
         if (response != null && response.success()) {
             if (mDataResponse.data.size() > index) {
-                WGHomeTitleItem item = mDataResponse.data.get(index);
+                WGTitleItem item = mDataResponse.data.get(index);
                 item.data = response.data;
                 JHLocalSettingUtils.setStringLocalSetting(getContext(),
                         WGConstants.WGLocalSettingHomeCache, JSON.toJSONString(mDataResponse));
@@ -359,13 +339,13 @@ public class WGTabHomeFragment extends WGFragment {
 
     private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
 
-        private List<WGHomeTitleItem> mTitleList;
+        private List<WGTitleItem> mTitleList;
 
         public MyAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
-        public void setTitleList(List<WGHomeTitleItem> list) {
+        public void setTitleList(List<WGTitleItem> list) {
             mTitleList = list;
             notifyDataSetChanged();
         }
@@ -386,7 +366,7 @@ public class WGTabHomeFragment extends WGFragment {
             }
             TextView textView = (TextView) convertView;
             if (mTitleList != null && mTitleList.size() > position) {
-                WGHomeTitleItem item = mTitleList.get(position);
+                WGTitleItem item = mTitleList.get(position);
                 textView.setText(item.name);
                 textView.setWidth(320 / getCount() * R.dimen.x1);
             }
@@ -400,7 +380,7 @@ public class WGTabHomeFragment extends WGFragment {
             if (fragment == null) {
                 Log.e("fragment=null", "frag");
                 fragment = new WGTabHomeItemFragment();
-                fragment.setListener(new WGTabHomeItemFragment.HomeItemOnItemClickListener() {
+                fragment.setListener(new WGTabHomeItemFragment.RefreshListener() {
                     @Override
                     public void onRefresh() {
                         loadTabContentDataWithMenuId(menuIdWithIndex(position), WGConstants.WGCacheTypeCachePrior);

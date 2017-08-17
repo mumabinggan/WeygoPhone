@@ -28,7 +28,7 @@ public class JHCommonHorizontalListAdapter extends JHRecyclerViewAdapter {
 
     int mLayoutResId;
 
-    public interface OnCommonListItemClickListener extends OnItemClickListener {
+    public interface OnCommonListItemClickListener extends OnBaseItemClickListener {
         void onItemClick(View view, WGObject object);
     }
 

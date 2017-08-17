@@ -81,7 +81,7 @@
                     android:layout_height="@dimen/x34"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/ft12"
-                    android:background="@drawable/login_btn_bg"
+                    android:background="@drawable/register_btn_bg"
                     android:text="@string/Login_Title"/>
 
                 <View
@@ -95,7 +95,7 @@
                     android:layout_height="@dimen/x34"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/ft12"
-                    android:background="@drawable/register_btn_bg"
+                    android:background="@drawable/login_btn_bg"
                     android:text="@string/Register_Title"/>
 
                 <View
@@ -104,40 +104,41 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
-                    <RelativeLayout
-                        android:id="@+id/wechatView"
-                        android:layout_width="@dimen/x125"
-                        android:layout_height="@dimen/x34"
-                        android:layout_alignParentLeft="true"
-                        android:background="@drawable/common_wechat_btn_bg"
-                        android:gravity="center">
+                    <!--<RelativeLayout-->
+                        <!--android:id="@+id/wechatView"-->
+                        <!--android:layout_width="@dimen/x125"-->
+                        <!--android:layout_height="@dimen/x34"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:background="@drawable/common_wechat_btn_bg"-->
+                        <!--android:gravity="center">-->
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true">
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_centerInParent="true">-->
 
-                            <ImageView
-                                android:layout_width="@dimen/x20"
-                                android:layout_height="@dimen/x20"
-                                android:src="@drawable/common_wechat"/>
+                            <!--<ImageView-->
+                                <!--android:layout_width="@dimen/x20"-->
+                                <!--android:layout_height="@dimen/x20"-->
+                                <!--android:src="@drawable/common_wechat"/>-->
 
-                            <Spinner
-                                android:layout_width="@dimen/x7"
-                                android:layout_height="@dimen/x20"></Spinner>
+                            <!--<Spinner-->
+                                <!--android:layout_width="@dimen/x7"-->
+                                <!--android:layout_height="@dimen/x20"></Spinner>-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/x17"
-                                android:text="@string/Login_Wechat"
-                                android:gravity="center"
-                                android:textColor="@color/WGAppBaseTitleAAColor"/>
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="@dimen/x17"-->
+                                <!--android:text="@string/Login_Wechat"-->
+                                <!--android:gravity="center"-->
+                                <!--android:textColor="@color/WGAppBaseTitleAAColor"/>-->
 
-                        </LinearLayout>
+                        <!--</LinearLayout>-->
 
-                    </RelativeLayout>
+                    <!--</RelativeLayout>-->
 
                     <RelativeLayout
                         android:id="@+id/facebookView"

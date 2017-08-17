@@ -80,4 +80,5 @@ public class WGUser extends WGObject {
     public boolean isGirl() {
         return (sex == 2);
     };
+
 }

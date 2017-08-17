@@ -14,5 +14,5 @@ public class WGHomeSlider extends WGObject {
 
     public List<WGTopicItem> topics;
 
-    public List<WGClassifyItem> classifys;
+    public List<WGClassifyItem> classify;
 }

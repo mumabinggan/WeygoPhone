@@ -61,7 +61,7 @@ public class WGTabAsiaFragment extends WGFragment {
                 Intent intent = new Intent(getActivity(), WGSliderActivity.class);
                 startActivity(intent);
                 */
-                activity.testActivity();
+                activity.openSlider();
             }
 
             @Override

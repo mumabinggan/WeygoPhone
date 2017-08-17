@@ -42,6 +42,8 @@
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
         <activity android:name=".pages.goodDetail.WGGoodDetailActivity"></activity>
         <activity android:name=".pages.goodDetail.WGTestViewPickerActivity"></activity>
+        <activity android:name=".pages.classifyDetail.WGClassifyDetailActivity"></activity>
+        <activity android:name=".pages.classifyFilter.WGClassifyDetailFilterActivity"></activity>
 
     </application>
 

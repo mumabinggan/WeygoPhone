@@ -25,7 +25,7 @@ public class WGGoodListAdapter extends JHRecyclerViewAdapter {
 
     List<WGHomeFloorContentGoodItem> mArray;
 
-    public interface WGGoodListOnItemClickListener extends OnItemClickListener {
+    public interface WGGoodListOnItemClickListener extends OnBaseItemClickListener {
 
         void onTouchGoodItem(View view, WGHomeFloorContentGoodItem item);
 

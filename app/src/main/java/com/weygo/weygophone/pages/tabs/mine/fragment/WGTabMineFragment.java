@@ -50,7 +50,7 @@ public class WGTabMineFragment extends WGFragment {
             @Override
             public void onClick(View view) {
                 //打开 Slider
-                activity.testActivity();
+                activity.openSlider();
             }
         });
 

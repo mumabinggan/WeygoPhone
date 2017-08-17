@@ -24,6 +24,7 @@ public class WGConstants {
     public static final String WGLocalSettingHomeCache = "WGLocalSettingHomeCache";
     public static final String WGLocalSettingClassifyCache = "WGLocalSettingClassifyCache";
     public static final String WGLocalSettingAsiaCache = "WGLocalSettingAsiaCache";
+    public static final String WGLocalSettingBenefitCache = "WGLocalSettingBenefitCache";
 
     //RefreshNotification
     public static final int WGRefreshNotificationTypeLogin = 1;
@@ -61,4 +62,10 @@ public class WGConstants {
     public static final int WGHomeFloorItemTypeClassifyColumn = 5;
     public static final int WGHomeFloorItemTypeClassifyGrid = 6;
     public static final int WGHomeFloorItemTypeCountryColumn = 7;
+
+    //分类详情排序类型
+    public static final int WGClassifySortTypeDefault = 0;
+    public static final int WGClassifySortTypeBranch = 1;
+    public static final int WGClassifySortTypePriceDown = 2;
+    public static final int WGClassifySortTypePriceUp = 3;
 }

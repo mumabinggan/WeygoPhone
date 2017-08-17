@@ -21,7 +21,7 @@ public class JHLocalSettingUtils {
 
     public static void setLocalSetting(Context context, String key, Object object) {
         SharedPreferences.Editor editor = getSharePreferences(context).edit();
-        String value  = JSON.toJSONString(object);
+        String value = JSON.toJSONString(object);
         editor.putString(key, value);
         if (!editor.commit()) {
             JHWarningUtils.showToast(context, "Save error");
@@ -36,7 +36,7 @@ public class JHLocalSettingUtils {
 
     public static Object getLocalSetting(Context context, String key, Class clazz) {
         SharedPreferences sharedPreferences = getSharePreferences(context);
-        String value = sharedPreferences.getString(key, "");
+        String value = sharedPreferences.getString(key, null);
         return JSON.parseObject(value, clazz);
     }
 

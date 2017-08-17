@@ -23,6 +23,8 @@ import com.weygo.weygophone.base.WGInterface;
 import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
+import com.weygo.weygophone.pages.common.model.request.WGSetPostCodeRequest;
+import com.weygo.weygophone.pages.common.model.response.WGSetPostCodeResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
@@ -158,7 +160,7 @@ public class WGApplicationRequestUtils {
 
     void handleUserInfo(WGUserInfoResponse response) {
         if (response.success()) {
-            WGApplicationUserUtils.getInstance().setmUser(response.data);
+            WGApplicationUserUtils.getInstance().setUser(response.data);
         }
     }
 
@@ -224,4 +226,30 @@ public class WGApplicationRequestUtils {
         });
     }
 
+    public void loadSetPostCodeRequest(final String cap, final WGOnCompletionInteface inteface) {
+        WGSetPostCodeRequest request = new WGSetPostCodeRequest();
+        request.cap = cap;
+        JHNetworkUtils.getInstance().postAsyn(request, WGSetPostCodeResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
+                WGSetPostCodeResponse response = (WGSetPostCodeResponse) result;
+                handleSetPostCodeResponse(response, cap);
+                if (inteface != null) {
+                    inteface.onSuccessCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleSetPostCodeResponse(WGSetPostCodeResponse response, String cap) {
+        if (response.success()) {
+            WGApplicationUserUtils.getInstance().setCurrentPostCode(cap);
+        }
+    }
 }

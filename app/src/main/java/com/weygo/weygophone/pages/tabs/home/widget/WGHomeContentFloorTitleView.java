@@ -3,17 +3,12 @@ package com.weygo.weygophone.pages.tabs.home.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.JHStringUtils;
-import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorItem;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeTitleItem;
-import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 /**
  * Created by muma on 2017/6/4.

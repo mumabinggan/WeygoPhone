@@ -39,7 +39,7 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
         ITEM_TYPE_GoodDetailRecommendGoods
     }
 
-    public static interface GoodDetailItemClickListener extends OnItemClickListener {
+    public static interface GoodDetailItemClickListener extends OnBaseItemClickListener {
 
         void onGoodItemClick(View view, WGHomeFloorContentGoodItem item);
     }

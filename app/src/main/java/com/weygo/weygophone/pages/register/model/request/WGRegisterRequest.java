@@ -13,7 +13,7 @@ public class WGRegisterRequest extends WGRequest {
 
     public String password;
 
-    public String cap;
+    public String cap = WGApplicationUserUtils.getInstance().currentPostCode();
 
     public String verifyCode;
 
@@ -25,7 +25,7 @@ public class WGRegisterRequest extends WGRequest {
 
     public String email;
 
-    public String countryCode;      ////国家code(+39默认, +86)
+    public String countryCode = "+39";      ////国家code(+39默认, +86)
 
     public WGRegisterRequest() {
         super();

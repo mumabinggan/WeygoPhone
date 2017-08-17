@@ -108,14 +108,6 @@ public class WGRegisterActivity extends WGBaseActivity {
             }
         });
 
-        mWechatView = findViewById(R.id.wechatView);
-        mWechatView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleWechat();
-            }
-        });
-
         mFacebookView = findViewById(R.id.facebookView);
         mFacebookView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +164,13 @@ public class WGRegisterActivity extends WGBaseActivity {
 
     void loadRegister() {
         WGRegisterRequest request = new WGRegisterRequest();
+        request.username = mPhoneEditText.getText().toString();
+        request.verifyCode = mCodeEditText.getText().toString();
+        request.password = mPasswordEditText.getText().toString();
+        request.confirmPassword = mConfirmPWEditText.getText().toString();
+        request.firstname = mFirstNameEditText.getText().toString();
+        request.lastname = mLastNameEditText.getText().toString();
+        request.email = mEmailEditText.getText().toString();
         this.postAsyn(request, WGRegisterResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {
@@ -188,7 +187,7 @@ public class WGRegisterActivity extends WGBaseActivity {
     void handleRegisterSuccessResponse(WGRegisterResponse response) {
         if (response.success()) {
             WGApplicationUserUtils.getInstance().reset();
-            WGApplicationUserUtils.getInstance().setmUser(response.data);
+            WGApplicationUserUtils.getInstance().setUser(response.data);
             sendRefreshNotification(WGConstants.WGRefreshNotificationTypeLogin);
             sendNotification(WGConstants.WGNotificationTypeLogin);
             finish();
@@ -199,6 +198,7 @@ public class WGRegisterActivity extends WGBaseActivity {
     }
 
     void handleSendCode() {
+        mCurrentSecond = mMaxSeconds;
         mCodeBtn.setEnabled(false);
         mHandler.postDelayed(mRunnable, 1000);
         WGApplicationRequestUtils.getInstance().
@@ -208,7 +208,7 @@ public class WGRegisterActivity extends WGBaseActivity {
     }
 
     void handleTimer() {
-        if (mCurrentSecond == mMaxSeconds) {
+        if (mCurrentSecond == 0) {
             mCodeBtn.setEnabled(true);
             mCurrentSecond = 0;
             mCodeBtn.setText(R.string.Register_GetCodeBtn);
@@ -219,6 +219,6 @@ public class WGRegisterActivity extends WGBaseActivity {
             mCodeBtn.setText(mCurrentSecond + "s");
             mHandler.postDelayed(mRunnable, 1000);
         }
-        mCurrentSecond++;
+        mCurrentSecond--;
     }
 }

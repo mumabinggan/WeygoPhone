@@ -71,12 +71,11 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
 
     public void setHome(WGHome home) {
         mHome = home;
+        mPostionValueMap.clear();
         if (mHome == null) {
-            mPostionValueMap.clear();
             notifyDataSetChanged();
             return;
         }
-
         int key = 0;
         if (home.carouselFigures != null && home.carouselFigures.size() > 0) {
             List list = new ArrayList();

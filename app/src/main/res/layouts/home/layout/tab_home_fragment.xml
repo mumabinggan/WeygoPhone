@@ -12,11 +12,6 @@
         android:id="@+id/home_segmentView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x38" ></com.weygo.weygophone.pages.common.widget.WGSegmentView>
-    
-    <!--<com.shizhefei.view.indicator.ScrollIndicatorView-->
-        <!--android:id="@+id/home_segmentView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/x38" />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/home_viewPager"

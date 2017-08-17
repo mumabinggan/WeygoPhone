@@ -32,13 +32,21 @@ public class WGTabHomeItemFragment extends WGFragment {
 
     protected WGHome mData;
 
-    public interface HomeItemOnItemClickListener {
+    public interface RefreshListener {
         void onRefresh();
     }
 
-    HomeItemOnItemClickListener mListener;
-    public void setListener(HomeItemOnItemClickListener listener) {
-        mListener = listener;
+    RefreshListener mRefreshListener;
+    public void setListener(RefreshListener listener) {
+        mRefreshListener = listener;
+    }
+
+    public interface ItemOnClickListener {
+
+    }
+    ItemOnClickListener mItemClickListener;
+    public void setItemClickListener(ItemOnClickListener listener) {
+        mItemClickListener = listener;
     }
 
     //@Override
@@ -98,8 +106,8 @@ public class WGTabHomeItemFragment extends WGFragment {
     }
 
     public void handleOnRefresh() {
-        if (mListener != null) {
-            mListener.onRefresh();
+        if (mRefreshListener != null) {
+            mRefreshListener.onRefresh();
         }
     }
 }

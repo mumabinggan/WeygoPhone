@@ -105,6 +105,7 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
             }
             pos++;
         }
+        Log.e("---paramsString----", paramsString.toString());
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
         //补全请求地址
         RequestBody body = RequestBody.create(mediaType, paramsString.toString());

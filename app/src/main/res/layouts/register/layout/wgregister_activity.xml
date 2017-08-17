@@ -11,7 +11,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <ImageView
                 android:id="@+id/headBackgroundImageView"
@@ -21,51 +22,53 @@
                 android:scaleType="centerCrop"
                 />
 
-            <RelativeLayout
-                android:id="@+id/wechatView"
-                android:layout_width="@dimen/x125"
-                android:layout_height="@dimen/x34"
-                android:layout_below="@+id/headBackgroundImageView"
-                android:layout_marginLeft="@dimen/x27"
-                android:layout_marginTop="@dimen/x13"
-                android:background="@drawable/common_wechat_btn_bg"
-                android:gravity="center">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/wechatView"-->
+                <!--android:layout_width="@dimen/x125"-->
+                <!--android:layout_height="@dimen/x34"-->
+                <!--android:layout_below="@+id/headBackgroundImageView"-->
+                <!--android:layout_marginLeft="@dimen/x27"-->
+                <!--android:layout_marginTop="@dimen/x13"-->
+                <!--android:background="@drawable/common_wechat_btn_bg"-->
+                <!--android:gravity="center">-->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
-                    
-                    <ImageView
-                        android:layout_width="@dimen/x20"
-                        android:layout_height="@dimen/x20"
-                        android:src="@drawable/common_wechat"/>
-                    
-                    <Spinner
-                        android:layout_width="@dimen/x7"
-                        android:layout_height="@dimen/x20"></Spinner>
-                    
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/x17"
-                        android:text="@string/Login_Wechat"
-                        android:gravity="center"
-                        android:textColor="@color/WGAppBaseTitleAAColor"/>
-                    
-                </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true">-->
 
-            </RelativeLayout>
+                    <!--<ImageView-->
+                        <!--android:layout_width="@dimen/x20"-->
+                        <!--android:layout_height="@dimen/x20"-->
+                        <!--android:src="@drawable/common_wechat"/>-->
+
+                    <!--<Spinner-->
+                        <!--android:layout_width="@dimen/x7"-->
+                        <!--android:layout_height="@dimen/x20"></Spinner>-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="@dimen/x17"-->
+                        <!--android:text="@string/Login_Wechat"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textColor="@color/WGAppBaseTitleAAColor"/>-->
+
+                <!--</LinearLayout>-->
+
+            <!--</RelativeLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headBackgroundImageView"
+            android:gravity="center">
 
             <RelativeLayout
                 android:id="@+id/facebookView"
                 android:layout_width="@dimen/x125"
                 android:layout_height="@dimen/x34"
-                android:layout_below="@+id/headBackgroundImageView"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/x27"
                 android:layout_marginTop="@dimen/x13"
-                android:background="@drawable/common_wechat_btn_bg"
-                android:gravity="center">
+                android:background="@drawable/common_wechat_btn_bg">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -91,6 +94,8 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
+        </RelativeLayout>
 
             <LinearLayout
                 android:orientation="vertical"

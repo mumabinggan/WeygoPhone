@@ -15,6 +15,15 @@ public class JHStringUtils extends JHObject {
         return (string == null || string.equals("") || string.isEmpty() || string.length() == 0);
     }
 
+    public static String safeString(String string) {
+        if (isNullOrEmpty(string)) {
+            return "";
+        }
+        else {
+            return string;
+        }
+    }
+
     public static String md5(String str) {
         if (str == null) return null;
         StringBuffer hexValue = null;
