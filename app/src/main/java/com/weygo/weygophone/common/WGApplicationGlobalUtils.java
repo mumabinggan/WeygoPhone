@@ -39,4 +39,8 @@ public class WGApplicationGlobalUtils extends Object {
         }
         return false;
     }
+
+    public void handleShopCartGoodCount(int count) {
+
+    }
 }

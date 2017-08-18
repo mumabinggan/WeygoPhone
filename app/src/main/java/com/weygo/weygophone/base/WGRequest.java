@@ -25,7 +25,7 @@ public class WGRequest extends JHRequest {
     //m.delong6688.develop.weygo.com
     //m.weygo.com
     public String host() {
-        return "m.preview.weygo.com";
+        return "m.weygo.com";
     }
 
     // eg. app/ default ""
@@ -41,7 +41,7 @@ public class WGRequest extends JHRequest {
     }
 
     public String scheme() {
-        return "http";
+        return "https";
     }
 
 //    public String apiSuffix() {

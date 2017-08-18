@@ -180,4 +180,19 @@
     <string name="Insert_Cap">请输入邮编</string>
     <string name="Insert_Cap_Error">您的当前邮编不在我们的\n服务范围，请重新填写</string>
 
+    //购物车
+    <string name="ShopCart_Title">购物车</string>
+    <string name="ShopCart_Totle">总价:</string>
+    <string name="ShopCart_Confirm">进入支付页面</string>
+    <string name="ShopCart_Clean">清空</string>
+    <string name="ShopCart_Clean_Tip">您确定要清空所有购物车中的商品么？</string>
+    <string name="ShopCart_Clean_One_Tip">您确定要删除此商品么？</string>
+    <string name="ShopCart_DeleteFailGood">移除该商品</string>
+    <string name="ShopCart_ChangeFailGood">更改至我们所能\n提供的数量</string>
+    <string name="ShopCart_GiftGoodOne">好的，我想品尝</string>
+    <string name="ShopCart_GiftGoodTwo">不，我不想品尝</string>
+    <string name="ShopCart_GiftGoodThree">邀您品尝：\n 我们将随单附赠以下产品</string>
+    <string name="ShopCart_DeliverPrice_Title">运费说明</string>
+    <string name="ShopCart_DeliverPrice_Ok">关闭</string>
+
 </resources>

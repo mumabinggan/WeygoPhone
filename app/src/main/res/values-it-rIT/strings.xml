@@ -181,4 +181,19 @@
     <string name="Insert_Cap">Inserisci CAP</string>
     <string name="Insert_Cap_Error">Il tuo CAP non è servito al momento, torna a trovarci!</string>
 
+    //购物车
+    <string name="ShopCart_Title">Carrello</string>
+    <string name="ShopCart_Totle">Totale:</string>
+    <string name="ShopCart_Confirm">conferma</string>
+    <string name="ShopCart_Clean">Svuota</string>
+    <string name="ShopCart_Clean_Tip">Tutti i prodotti verranno eliminati dal carrello. Vuoi procedere?</string>
+    <string name="ShopCart_DeleteFailGood">ELIMINA I PRODOTTI</string>
+    <string name="ShopCart_Clean_One_Tip">您确定要删除此商品么？</string>
+    <string name="ShopCart_ChangeFailGood">PROCEDI CON LE QUANTITA\' DISPONIBILI</string>
+    <string name="ShopCart_GiftGoodOne">Sì, desidero l\'omaggio</string>
+    <string name="ShopCart_GiftGoodTwo">No, non desidero l\'omaggio</string>
+    <string name="ShopCart_GiftGoodThree">INVITO ALL\'ASSAGGIO:PER OGNI SPESA EFFETTUATAWEYGO REGALA</string>
+    <string name="ShopCart_DeliverPrice_Title">Informazioni per la consegna</string>
+    <string name="ShopCart_DeliverPrice_Ok">Chiudi</string>
+
 </resources>

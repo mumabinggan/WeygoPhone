@@ -1,5 +1,8 @@
 package com.weygo.weygophone.pages.slider;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
@@ -14,9 +18,13 @@ import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.common.widget.JHBasePopupWindow;
+import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.widget.WGPostPopView;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
 import com.weygo.weygophone.pages.slider.adapter.WGSliderAdapter;
 import com.weygo.weygophone.pages.slider.model.SliderOnItemClickListener;
 import com.weygo.weygophone.pages.slider.model.WGHomeSlider;
@@ -68,17 +76,17 @@ public class WGSliderFragmet extends WGFragment {
 
             @Override
             public void onPersonInfoClick(View view) {
-
+                handleSliderPersonInfoClick(view);
             }
 
             @Override
             public void onScanClick(View view) {
-
+                handleSliderScanClick(view);
             }
 
             @Override
             public void onPostCodeClick(View view) {
-
+                handleSliderPostCodeClick(view);
             }
 
             @Override
@@ -118,38 +126,85 @@ public class WGSliderFragmet extends WGFragment {
         });
     }
 
-    void handleSliderLoginClick(View view) {
-        WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+    void tests() {
+        WGCommonAlertView builder = new WGCommonAlertView(getActivity(), R.style.MyDialogTheme)
+                .setCustomMessage("看看什么情况")
+                .setCustomCancelEnable(true)
+                .setCustomPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getActivity(), "确认",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setCustomNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getActivity(), "取消",Toast.LENGTH_SHORT).show();            }
+                })
+                .showAlert();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+//        builder.setMessage("看看什么情况");
+//        //监听下方button点击事件
+//        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(getActivity(), "确认",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(getActivity(), "取消",Toast.LENGTH_SHORT).show();            }
+//        });
+//
+//        //设置对话框是可取消的
+//        builder.setCancelable(true);
+//        AlertDialog dialog=builder.create();
+//        dialog.show();
+    }
+
+    void  test() {
+//        WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+////        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+////                JHAdaptScreenUtils.deviceDpWidth(getContext()),
+////                JHAdaptScreenUtils.deviceDpHeight(getContext()));
 //        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
-//                JHAdaptScreenUtils.deviceDpWidth(getContext()),
-//                JHAdaptScreenUtils.deviceDpHeight(getContext()));
+//                JHAdaptScreenUtils.devicePixelWidth(getContext()),
+//                JHAdaptScreenUtils.devicePixelHeight(getContext()));
+//        popupView.setPopupWindow(window);
+//        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+        WGShopCartFailurePopView popupView = (WGShopCartFailurePopView) getActivity()
+                .getLayoutInflater()
+                .inflate(R.layout.shopcart_failure_pop, null);
         JHBasePopupWindow window = new JHBasePopupWindow(popupView,
                 JHAdaptScreenUtils.devicePixelWidth(getContext()),
                 JHAdaptScreenUtils.devicePixelHeight(getContext()));
         popupView.setPopupWindow(window);
-        window.showAtLocation(view, Gravity.CENTER, 0, 0);
-        //window.showAsDropDown(view, 50, 100);
-        //window.showAtLocation();
-//        WGMainActivity activity = (WGMainActivity)getActivity();
-//        activity.closeSlider();
-//        Intent intent = new Intent(getContext(), WGLoginActivity.class);
-//        startActivity(intent);
+        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+    }
+
+    void handleSliderLoginClick(View view) {
+        WGMainActivity activity = (WGMainActivity)getActivity();
+        activity.closeSlider();
+        Intent intent = new Intent(getContext(), WGLoginActivity.class);
+        startActivity(intent);
     }
 
     void handleSliderPersonInfoClick(View view) {
-
+        test();
     }
 
     void handleSliderScanClick(View view) {
-
+        test();
     }
 
     void handleSliderPostCodeClick(View view) {
-
+        tests();
     }
 
     void handleSliderOrderClick(View view) {
-
+        tests();
     }
 
     void handleSliderCouponClick(View view) {

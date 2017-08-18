@@ -1,0 +1,439 @@
+package com.weygo.weygophone.pages.shopcart;
+
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.alibaba.fastjson.JSON;
+import com.weygo.common.base.JHDividerItemDecoration;
+import com.weygo.common.base.JHRecyclerViewAdapter;
+import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.tools.JHStringUtils;
+import com.weygo.common.tools.network.JHRequestError;
+import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
+import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGApplication;
+import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.SwipeItemLayout;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGCommonAlertView;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.shopcart.adapter.WGShopCartListAdater;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCart;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
+import com.weygo.weygophone.pages.shopcart.model.request.WGCheckFailureProductsRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGCleanShopCartRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGDealFailureProductsRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGDeleteGoodFromShopCartRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGShopCartGiftRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGShopCartListRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGUpdateProductsRequest;
+import com.weygo.weygophone.pages.shopcart.model.response.WGCheckFailureProductsResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGCleanShopCartResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGDealFailureProductsResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGDeleteGoodFromShopCartResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGShopCartGiftResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGShopCartListResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGUpdateProductsResponse;
+import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
+import com.weygo.weygophone.pages.shopcart.widget.WGShopCartItemView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by muma on 2017/8/18.
+ */
+
+public class WGShopCartListActivity extends WGTitleActivity {
+
+    RecyclerView mRecyclerView;
+    WGShopCart mData;
+    WGShopCartListAdater mAdapter;
+
+    LinearLayout mCleanLayout;
+    TextView mDeliverPriceTV;
+    TextView mTotalPriceTV;
+
+    @Override
+    public void initContentView() {
+        setContentView(R.layout.wgshopcart_list);
+    }
+
+    @Override
+    public void initSubView() {
+        super.initSubView();
+        mNavigationBar.setTitle(R.string.ShopCart_Title);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mAdapter = new WGShopCartListAdater(this, null);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new JHDividerItemDecoration(this,
+                JHDividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addOnItemTouchListener(new SwipeItemLayout.OnSwipeItemTouchListener(this));
+        mAdapter.setOnItemClickListener(new WGShopCartListAdater.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onGoodItemClick(View view, WGShopCartGoodItem item) {
+
+            }
+
+            @Override
+            public void onDeleteGoodItem(View view, WGShopCartGoodItem item) {
+                handleDelete(item);
+            }
+
+            @Override
+            public void onUpdateGoodItem(WGShopCartGoodItem item) {
+
+            }
+        });
+        mCleanLayout = (LinearLayout) findViewById(R.id.cleanLayout);
+        mCleanLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCleanBtn();
+            }
+        });
+        mDeliverPriceTV = (TextView) findViewById(R.id.deliverPriceTV);
+        mTotalPriceTV = (TextView) findViewById(R.id.totalPriceTV);
+    }
+
+    void handleDelete(final WGShopCartGoodItem item) {
+        WGCommonAlertView builder = new WGCommonAlertView(getBaseContext(), R.style.MyDialogTheme)
+                .setCustomMessage(R.string.ShopCart_Clean_One_Tip)
+                .setCustomCancelEnable(true)
+                .setCustomPositiveButton(R.string.Collection_Delete_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        handleConfirmDelete(item);
+                    }
+                })
+                .setCustomNegativeButton(R.string.Collection_Delete_Cancel, null)
+                .showAlert();
+    }
+
+    void handleConfirmDelete(WGShopCartGoodItem item) {
+        loadDeleteShopCartItem(item);
+    }
+
+    void handleCleanBtn() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        builder.setMessage(R.string.ShopCart_Clean_Tip);
+        builder.setPositiveButton(R.string.Collection_Delete_OK, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                loadCleanShopCart();
+            }
+        });
+        builder.setNegativeButton(R.string.Collection_Delete_Cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    void handleInCommitOrder() {
+        if (!enableConfirm()) {
+            return;
+        }
+        else {
+            if (WGApplicationUserUtils.getInstance().isLogined()) {
+
+            }
+            else {
+
+            }
+        }
+    }
+
+    public void didReceivedRefreshNotification(int notification) {
+        if (notification == WGConstants.WGRefreshNotificationTypeLogin) {
+            loadShopCartList();
+        }
+        else if (notification == WGConstants.WGRefreshNotificationTypeLogout) {
+            loadShopCartList();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadShopCartList();
+    }
+
+    void refreshFooter() {
+        if (mData != null) {
+            mDeliverPriceTV.setText(mData.shopCartPrice.deliveryPrice);
+            mTotalPriceTV.setText(JHResourceUtils.getInstance().getString(R.string.ShopCart_Totle) +
+                    mData.shopCartPrice.totalePrice);
+        }
+    }
+
+    void refreshUI() {
+        mAdapter.notifyDataSetChanged();
+        refreshFooter();
+    }
+
+    boolean enableConfirm() {
+        return JHStringUtils.isNullOrEmpty(mData.minPriceTips);
+    }
+
+    void loadShopCartList() {
+        WGShopCartListRequest request = new WGShopCartListRequest();
+        this.postAsyn(request, WGShopCartListResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessShopCartResponse((WGShopCartListResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessShopCartResponse(WGShopCartListResponse response) {
+        Log.e("onSuccess", JSON.toJSONString(response));
+        if (response.success()) {
+            mData = response.data;
+            mAdapter.setData(mData);
+            refreshFooter();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadCleanShopCart() {
+        WGCleanShopCartRequest request = new WGCleanShopCartRequest();
+        this.postAsyn(request, WGCleanShopCartResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessCleanShopCartResponse((WGCleanShopCartResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessCleanShopCartResponse(WGCleanShopCartResponse response) {
+        Log.e("onSuccess", JSON.toJSONString(response));
+        if (response.success()) {
+            loadShopCartList();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadDeleteShopCartItem(final WGShopCartGoodItem item) {
+        WGDeleteGoodFromShopCartRequest request = new WGDeleteGoodFromShopCartRequest();
+        request.id = item.shopCartId;
+        this.postAsyn(request, WGDeleteGoodFromShopCartResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessDeleteGoodShopCartResponse((WGDeleteGoodFromShopCartResponse) result, item.id);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessDeleteGoodShopCartResponse(WGDeleteGoodFromShopCartResponse response, long goodId) {
+        Log.e("onSuccess", JSON.toJSONString(response));
+        if (response.success()) {
+            mData.shopCartPrice = response.data.shopCartPrice;
+            mData.minPriceTips = response.data.minPriceTips;
+            mData.deliverPriceDescription = response.data.deliverPriceDescription;
+            List<WGShopCartGoodItem> list = new ArrayList<>();
+            list.addAll(mData.goods);
+            for (WGShopCartGoodItem item : list) {
+                if (item.id == goodId) {
+                    list.remove(item);
+                    break;
+                }
+            }
+            mData.goods = list;
+            int count = 0;
+            for (WGShopCartGoodItem item : list) {
+                count += item.goodCount;
+            }
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(count);
+            refreshUI();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadCheckFailureGood() {
+        WGCheckFailureProductsRequest request = new WGCheckFailureProductsRequest();
+        this.postAsyn(request, WGCheckFailureProductsResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessCheckFailureGoodResponse((WGCheckFailureProductsResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessCheckFailureGoodResponse(WGCheckFailureProductsResponse response) {
+        Log.e("onSuccess", JSON.toJSONString(response));
+        if (response.code == 100) {
+            //有失效产品
+            WGShopCartFailurePopView popupView =
+                    (WGShopCartFailurePopView)getLayoutInflater()
+                    .inflate(R.layout.shopcart_failure_pop, null);
+            popupView.setFailureTips(response.data.tip);
+            popupView.setListener(new WGShopCartFailurePopView.OnItemListener() {
+                @Override
+                public void onRemove() {
+                    loadDealFailureGood(1);
+                }
+
+                @Override
+                public void onChange() {
+                    loadDealFailureGood(2);
+                }
+            });
+            JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                    JHAdaptScreenUtils.devicePixelWidth(this),
+                    JHAdaptScreenUtils.devicePixelHeight(this));
+            popupView.setPopupWindow(window);
+            window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+        }
+        else if (response.code == 101) {
+            //无失效产品
+            loadGiftGood();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadDealFailureGood(int type) {
+        WGDealFailureProductsRequest request = new WGDealFailureProductsRequest();
+        request.type = type;
+        this.postAsyn(request, WGDealFailureProductsResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessDealFailureGoodResponse((WGDealFailureProductsResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessDealFailureGoodResponse(WGDealFailureProductsResponse response) {
+        if (response.success()) {
+            loadGiftGood();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadGiftGood() {
+        WGShopCartGiftRequest request = new WGShopCartGiftRequest();
+        this.postAsyn(request, WGShopCartGiftResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessGiftGood((WGShopCartGiftResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessGiftGood(WGShopCartGiftResponse response) {
+        if (response.success() && response.data.goods != null &&
+                response.data.goods.size() > 0) {
+
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadUpdateGood(final WGShopCartGoodItem item, final int count) {
+        WGUpdateProductsRequest request = new WGUpdateProductsRequest();
+        request.count = count;
+        request.id = item.shopCartId;
+        this.postAsyn(request, WGUpdateProductsResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessUpdateGood((WGUpdateProductsResponse) result, item.id, count);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessUpdateGood(WGUpdateProductsResponse response, long goodId, int goodCount) {
+        if (response.success()) {
+            mData.shopCartPrice = response.data.shopCartPrice;
+            mData.minPriceTips = response.data.minPriceTips;
+            mData.deliverPriceDescription = response.data.deliverPriceDescription;
+            List<WGShopCartGoodItem> list = new ArrayList<>();
+            list.addAll(mData.goods);
+            for (WGShopCartGoodItem item : list) {
+                if (item.id == goodId) {
+                    item.goodCount = goodCount;
+                    break;
+                }
+            }
+            mData.goods = list;
+            int count = 0;
+            for (WGShopCartGoodItem item : list) {
+                count += item.goodCount;
+            }
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(count);
+            refreshUI();
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+}

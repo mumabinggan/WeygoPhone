@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.weygo.common.widget.JHPopView;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.base.WGResponse;
@@ -21,18 +22,13 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
  * Created by muma on 2017/8/17.
  */
 
-public class WGPostPopView extends LinearLayout {
+public class WGPostPopView extends JHPopView {
 
     EditText mCapET;
 
     TextView mCapErrorTV;
 
     Button mBtn;
-
-    PopupWindow mPopupWindow;
-    public void setPopupWindow(PopupWindow window) {
-        mPopupWindow = window;
-    }
 
     interface OnItemListener {
         void onSuccess();

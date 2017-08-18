@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x256"
+        android:layout_height="@dimen/x280"
+        android:background="@drawable/shopcart_failure_good_bg">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/x53"
+            android:layout_height="@dimen/x53"
+            android:src="@drawable/shopcart_error"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x10"/>
+
+        <TextView
+            android:id="@+id/failureTips"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x80"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="@dimen/x12"
+            android:textColor="#61000000"
+            android:gravity="center"
+            android:textSize="@dimen/ft13"
+            android:text="@string/Insert_Cap_Des"/>
+
+        <TextView
+            android:id="@+id/goodRemoveTV"
+            android:layout_width="@dimen/x136"
+            android:layout_height="@dimen/x40"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/failureTips"
+            android:layout_marginTop="@dimen/x12"
+            android:maxLines="2"
+            android:gravity="center"
+            android:textSize="@dimen/ft12"
+            android:textColor="#ffffff"
+            android:background="@drawable/shopcart_failure_good_remove_bg"
+            android:text="@string/ShopCart_DeleteFailGood"/>
+
+        <TextView
+            android:id="@+id/goodChangeTV"
+            android:layout_width="@dimen/x136"
+            android:layout_height="@dimen/x40"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/goodRemoveTV"
+            android:layout_marginTop="@dimen/x12"
+            android:textAlignment="center"
+            android:textSize="@dimen/ft12"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="#ffffff"
+            android:background="@drawable/shopcart_failure_good_remove_bg"
+            android:text="@string/ShopCart_ChangeFailGood"/>
+
+    </RelativeLayout>
+
+
+</com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView>

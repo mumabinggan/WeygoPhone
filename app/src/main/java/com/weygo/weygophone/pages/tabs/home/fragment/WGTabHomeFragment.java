@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.home.fragment;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -97,7 +99,8 @@ public class WGTabHomeFragment extends WGFragment {
 
             @Override
             public void onClickCart(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
+                startActivity(intent);
             }
 
             @Override

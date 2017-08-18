@@ -44,6 +44,7 @@
         <activity android:name=".pages.goodDetail.WGTestViewPickerActivity"></activity>
         <activity android:name=".pages.classifyDetail.WGClassifyDetailActivity"></activity>
         <activity android:name=".pages.classifyFilter.WGClassifyDetailFilterActivity"></activity>
+        <activity android:name=".pages.shopcart.WGShopCartListActivity"></activity>
 
     </application>
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/base_titlebar"
+        layout="@layout/common_navigationbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:divider="#ff000000"
+            android:dividerHeight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x92"
+            android:background="#ffffff">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/separate_color"></View>
+
+            <LinearLayout
+                android:id="@+id/cleanLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginLeft="@dimen/x12"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/x20"
+                    android:src="@drawable/shopcart_clean"/>
+
+                <View
+                    android:layout_width="@dimen/x7"
+                    android:layout_height="@dimen/x20"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x17"
+                    android:text="@string/ShopCart_Clean"
+                    android:gravity="center"
+                    android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_centerHorizontal="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/x20"
+                    android:src="@drawable/deliver_car"/>
+
+                <View
+                    android:layout_width="@dimen/x7"
+                    android:layout_height="@dimen/x20"></View>
+
+                <TextView
+                    android:id="@+id/deliverPriceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x17"
+                    android:gravity="center"
+                    android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/totalPriceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x17"
+                android:gravity="right|center_horizontal"
+                android:textColor="@color/WGAppBaseColor"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginRight="@dimen/x12"/>
+
+            <Button
+                android:id="@+id/commitOrderBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x34"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/ft12"
+                android:layout_marginTop="@dimen/x44"
+                android:layout_alignLeft="@+id/cleanLayout"
+                android:layout_alignRight="@+id/totalPriceTV"
+                android:background="@drawable/login_btn_bg"
+                android:text="@string/ShopCart_Confirm"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
