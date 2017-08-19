@@ -7,6 +7,7 @@ import com.weygo.weygophone.base.WGGuestRequest;
  */
 
 public class WGDealShopCartGiftRequest extends WGGuestRequest {
+    public int type;        //1需要 0：不需要
     public String api() {
         return "cart/cartGratiProductConfirmation?";
     }

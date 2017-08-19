@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.shopcart.model;
 
 import com.weygo.weygophone.base.WGObject;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public class WGShopCartGiftData extends WGObject {
 
     public String tip;
 
-    public List<WGShopCartGoodItem> goods;
+    public List<WGHomeFloorContentGoodItem> goods;
 }

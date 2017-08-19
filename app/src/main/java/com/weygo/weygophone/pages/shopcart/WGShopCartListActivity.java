@@ -1,12 +1,14 @@
 package com.weygo.weygophone.pages.shopcart;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -30,12 +32,15 @@ import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.shopcart.adapter.WGShopCartListAdater;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCart;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.shopcart.model.request.WGCheckFailureProductsRequest;
 import com.weygo.weygophone.pages.shopcart.model.request.WGCleanShopCartRequest;
 import com.weygo.weygophone.pages.shopcart.model.request.WGDealFailureProductsRequest;
+import com.weygo.weygophone.pages.shopcart.model.request.WGDealShopCartGiftRequest;
 import com.weygo.weygophone.pages.shopcart.model.request.WGDeleteGoodFromShopCartRequest;
 import com.weygo.weygophone.pages.shopcart.model.request.WGShopCartGiftRequest;
 import com.weygo.weygophone.pages.shopcart.model.request.WGShopCartListRequest;
@@ -43,11 +48,13 @@ import com.weygo.weygophone.pages.shopcart.model.request.WGUpdateProductsRequest
 import com.weygo.weygophone.pages.shopcart.model.response.WGCheckFailureProductsResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGCleanShopCartResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGDealFailureProductsResponse;
+import com.weygo.weygophone.pages.shopcart.model.response.WGDealShopCartGiftResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGDeleteGoodFromShopCartResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGShopCartGiftResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGShopCartListResponse;
 import com.weygo.weygophone.pages.shopcart.model.response.WGUpdateProductsResponse;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
+import com.weygo.weygophone.pages.shopcart.widget.WGShopCartGiftPopView;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartItemView;
 
 import org.w3c.dom.Text;
@@ -68,6 +75,8 @@ public class WGShopCartListActivity extends WGTitleActivity {
     LinearLayout mCleanLayout;
     TextView mDeliverPriceTV;
     TextView mTotalPriceTV;
+
+    Button mCommitOrderBtn;
 
     @Override
     public void initContentView() {
@@ -115,6 +124,13 @@ public class WGShopCartListActivity extends WGTitleActivity {
         });
         mDeliverPriceTV = (TextView) findViewById(R.id.deliverPriceTV);
         mTotalPriceTV = (TextView) findViewById(R.id.totalPriceTV);
+        mCommitOrderBtn = (Button) findViewById(R.id.commitOrderBtn);
+        mCommitOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleInCommitOrder();
+            }
+        });
     }
 
     void handleDelete(final WGShopCartGoodItem item) {
@@ -160,10 +176,11 @@ public class WGShopCartListActivity extends WGTitleActivity {
         }
         else {
             if (WGApplicationUserUtils.getInstance().isLogined()) {
-
+                loadCheckFailureGood();
             }
             else {
-
+                Intent intent = new Intent(WGShopCartListActivity.this, WGLoginActivity.class);
+                startActivity(intent);
             }
         }
     }
@@ -198,6 +215,10 @@ public class WGShopCartListActivity extends WGTitleActivity {
 
     boolean enableConfirm() {
         return JHStringUtils.isNullOrEmpty(mData.minPriceTips);
+    }
+
+    void openCommitOrder() {
+
     }
 
     void loadShopCartList() {
@@ -385,9 +406,58 @@ public class WGShopCartListActivity extends WGTitleActivity {
     }
 
     void handleSuccessGiftGood(WGShopCartGiftResponse response) {
-        if (response.success() && response.data.goods != null &&
-                response.data.goods.size() > 0) {
+        if (response.success()) {
+            if (response.data.goods != null &&
+                    response.data.goods.size() > 0) {
+                WGShopCartGiftPopView popupView = (WGShopCartGiftPopView)
+                        getLayoutInflater()
+                                .inflate(R.layout.shopcart_gift_pop, null);
+                popupView.setGoods(response.data.goods);
+                popupView.setListener(new WGShopCartGiftPopView.OnItemListener() {
+                    @Override
+                    public void onOk() {
+                        loadDealGiftGood(1);
+                    }
 
+                    @Override
+                    public void onNo() {
+                        loadDealGiftGood(0);
+                    }
+                });
+                JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                        JHAdaptScreenUtils.devicePixelWidth(this),
+                        JHAdaptScreenUtils.devicePixelHeight(this));
+                popupView.setPopupWindow(window);
+                window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+            }
+            else {
+                openCommitOrder();
+            }
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadDealGiftGood(int type) {
+        WGDealShopCartGiftRequest request = new WGDealShopCartGiftRequest();
+        request.type = type;
+        this.postAsyn(request, WGDealShopCartGiftResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessDealGiftGoodResponse((WGDealShopCartGiftResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessDealGiftGoodResponse(WGDealShopCartGiftResponse response) {
+        if (response.success()) {
+            openCommitOrder();
         }
         else {
             showWarning(response.message);

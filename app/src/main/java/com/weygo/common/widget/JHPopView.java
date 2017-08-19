@@ -14,6 +14,8 @@ import com.weygo.common.base.JHRelativeLayout;
 
 public class JHPopView extends JHRelativeLayout {
 
+    protected Context mContext;
+
     public boolean mCanClose = true;
 
     public PopupWindow mPopupWindow;
@@ -23,14 +25,17 @@ public class JHPopView extends JHRelativeLayout {
 
     public JHPopView(Context context) {
         super(context);
+        mContext = context;
     }
 
     public JHPopView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
     }
 
     public JHPopView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
     }
 
     @Override

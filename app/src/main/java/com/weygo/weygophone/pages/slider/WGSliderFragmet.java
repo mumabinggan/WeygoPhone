@@ -24,7 +24,9 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
+import com.weygo.weygophone.pages.shopcart.widget.WGShopCartGiftPopView;
 import com.weygo.weygophone.pages.slider.adapter.WGSliderAdapter;
 import com.weygo.weygophone.pages.slider.model.SliderOnItemClickListener;
 import com.weygo.weygophone.pages.slider.model.WGHomeSlider;
@@ -32,6 +34,9 @@ import com.weygo.weygophone.pages.slider.model.request.WGHomeSliderRequest;
 import com.weygo.weygophone.pages.slider.model.response.WGHomeSliderResponse;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by muma on 2017/5/7.
@@ -174,9 +179,17 @@ public class WGSliderFragmet extends WGFragment {
 //        popupView.setPopupWindow(window);
 //        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-        WGShopCartFailurePopView popupView = (WGShopCartFailurePopView) getActivity()
+        WGShopCartGoodItem item = new WGShopCartGoodItem();
+        item.name= "郑要苛要";
+        item.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
+        item.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
+        List list = new ArrayList<WGShopCartGoodItem>();
+        list.add(item);
+        list.add(item);
+        WGShopCartGiftPopView popupView = (WGShopCartGiftPopView) getActivity()
                 .getLayoutInflater()
-                .inflate(R.layout.shopcart_failure_pop, null);
+                .inflate(R.layout.shopcart_gift_pop, null);
+        popupView.setGoods(list);
         JHBasePopupWindow window = new JHBasePopupWindow(popupView,
                 JHAdaptScreenUtils.devicePixelWidth(getContext()),
                 JHAdaptScreenUtils.devicePixelHeight(getContext()));
