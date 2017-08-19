@@ -16,6 +16,8 @@ public class WGSettlementConsumePrice extends WGObject {
 
     public String integralPrice;
 
+    public String currentTotalPriceUnUnit;
+
     public String currentTotalPrice;
 
     public String reducePrice;

@@ -196,4 +196,71 @@
     <string name="ShopCart_DeliverPrice_Title">Informazioni per la consegna</string>
     <string name="ShopCart_DeliverPrice_Ok">Chiudi</string>
 
+    //生成订单
+    <string name="CommitOrder_Title">Invia ordine</string>
+    <string name="CommitOrder_Address">填写派送地址</string>
+    <string name="CommitOrder_Fax">Fattura</string>
+    <string name="CommitOrder_Deliver">Orario di consegna</string>
+    <string name="CommitOrder_Deliver_Date">Data di consegna</string>
+    <string name="CommitOrder_Deliver_Time">Ora di consegna</string>
+    <string name="CommitOrder_Pay">METODI DI PAGAMENTO</string>
+    <string name="CommitOrder_Pay_Mode">Metodi di pagamento</string>
+    <string name="CommitOrder_Pay_Online">在线支付</string>
+    <string name="CommitOrder_Pay_Offline">货到付款</string>
+    <string name="CommitOrder_No_Coupon_Title">Buono sconto</string>
+    <string name="CommitOrder_No_Coupon_SubTitle">Non scordarti del tuo coupon</string>
+    <string name="CommitOrder_Consume">IL TUO ACQUISTO</string>
+    <string name="CommitOrder_Total">Totale :</string>
+    <string name="CommitOrder_DeliverPrice">Spedizione :</string>
+    <string name="CommitOrder_CouponPrice">Coupon :</string>
+    <string name="CommitOrder_Consume_List">IL TUO CARRELLO</string>
+    <string name="CommitOrder_Remark">Commenti</string>
+    <string name="CommitOrder_Look_More">Vedi perché</string>
+    <string name="CommitOrder_Total_Pay">importo da pagare : </string>
+    <string name="CommitOrder_Confirm">Conferma</string>
+    <string name="CommitOrder_Score">Punti spesa :</string>
+    <string name="CommitOrder_Use_Score">Utilizza i punti spesa</string>
+    <string name="CommitOrder_Use_Score_YES">Si</string>
+    <string name="CommitOrder_No_Use_Score">No</string>
+    <string name="CommitOrder_OrderPrice_Tip_Title">PRODOTTI A PESO VARIABILE</string>
+    <string name="CommitOrder_OverHeight_Rise">L</string>
+    <string name="CommitOrder_OverHeight_MaxRise">LIMITE MAX</string>
+    <string name="CommitOrder_OverHeight_CurrentRise">CONTENUTO ATTUALE</string>
+    <string name="CommitOrder_OverHeight_DeleteBtnTitle">ELIMINA I PRODOTTI</string>
+    <string name="CommitOrder_OverHeight_Confirm">Conferma</string>
+
+    //地址列表
+    <string name="AddressList_FullName">Nome</string>
+    <string name="AddressList_Title">Rubrica</string>
+    <string name="AddressList_Add_Title">Nuovo indirizzo</string>
+    <string name="AddressList_HaveLift">Si</string>
+    <string name="AddressList_Italia">Italia</string>
+    <string name="AddressList_Default">Predefinito</string>
+    <string name="AddressList_unDefault">Imposta come predefinito</string>
+    <string name="AddressList_NoLift">No</string>
+
+    //地址
+    <string name="Address_Cognome">Cognome</string>
+    <string name="Address_Nome">Nome</string>
+    <string name="Address_Italia">Italia</string>
+    <string name="Address_Telefono_Cellulare">Telphone</string>
+    <string name="Address_Citta">Città</string>
+    <string name="Address_CAP">CAP</string>
+    <string name="Address_Indirizzo">Indirizzo</string>
+    <string name="Address_Numero_civico">Numero civico</string>
+    <string name="Address_Citofono">Citofono</string>
+    <string name="Address_Scala">Scala</string>
+    <string name="Address_Ascensore">Ascensore</string>
+    <string name="Address_Piano">Piano</string>
+
+    //发票
+    <string name="AddReceipt_Title">Dati fattura</string>
+    <string name="Fax_Cancel">Annulla</string>
+    <string name="Fax_Apply">Invia</string>
+    <string name="Fax_Italia">Italia</string>
+    <string name="Fax_telefonico">Recapito telefonico</string>
+    <string name="Fax_Indirizzo">Indirizzo</string>
+    <string name="Fax_civico">N. civico</string>
+    <string name="Fax_fiscale">P. IVA / Codice fiscale</string>
+
 </resources>

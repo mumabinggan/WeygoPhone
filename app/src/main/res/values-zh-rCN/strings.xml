@@ -195,4 +195,71 @@
     <string name="ShopCart_DeliverPrice_Title">运费说明</string>
     <string name="ShopCart_DeliverPrice_Ok">关闭</string>
 
+    //生成订单
+    <string name="CommitOrder_Title">提交订单</string>
+    <string name="CommitOrder_Address">填写派送地址</string>
+    <string name="CommitOrder_Fax">发票信息</string>
+    <string name="CommitOrder_Deliver">派送时间</string>
+    <string name="CommitOrder_Deliver_Date">派送日期</string>
+    <string name="CommitOrder_Deliver_Time">派送时间</string>
+    <string name="CommitOrder_Pay">付款方式</string>
+    <string name="CommitOrder_Pay_Mode">支付方式</string>
+    <string name="CommitOrder_Pay_Online">在线支付</string>
+    <string name="CommitOrder_Pay_Offline">货到付款</string>
+    <string name="CommitOrder_No_Coupon_Title">现金抵用卷</string>
+    <string name="CommitOrder_No_Coupon_SubTitle">亲爱的顾客，别忘了使用现金抵用卷哦！</string>
+    <string name="CommitOrder_Consume">消费清单</string>
+    <string name="CommitOrder_Total">总价 :</string>
+    <string name="CommitOrder_DeliverPrice">运费：</string>
+    <string name="CommitOrder_CouponPrice">优惠卷：</string>
+    <string name="CommitOrder_Consume_List">消费清单</string>
+    <string name="CommitOrder_Remark">备注留言</string>
+    <string name="CommitOrder_Look_More">查看详情</string>
+    <string name="CommitOrder_Total_Pay">最终支付金额：</string>
+    <string name="CommitOrder_Confirm">确认购买</string>
+    <string name="CommitOrder_Score">积分：</string>
+    <string name="CommitOrder_Use_Score">使用积分</string>
+    <string name="CommitOrder_Use_Score_YES">是</string>
+    <string name="CommitOrder_No_Use_Score">否</string>
+    <string name="CommitOrder_OrderPrice_Tip_Title">重量浮动的商品规则</string>
+    <string name="CommitOrder_OverHeight_Rise">L</string>
+    <string name="CommitOrder_OverHeight_MaxRise">限制最大公升数</string>
+    <string name="CommitOrder_OverHeight_CurrentRise">当前配送公升数</string>
+    <string name="CommitOrder_OverHeight_DeleteBtnTitle">删除全部</string>
+    <string name="CommitOrder_OverHeight_Confirm">确认</string>
+
+    //地址列表
+    <string name="AddressList_FullName">姓名</string>
+    <string name="AddressList_Title">派送地址</string>
+    <string name="AddressList_Add_Title">新增地址</string>
+    <string name="AddressList_HaveLift">是</string>
+    <string name="AddressList_Italia">意大利</string>
+    <string name="AddressList_Default">默认</string>
+    <string name="AddressList_unDefault">设置为默认</string>
+    <string name="AddressList_NoLift">否</string>
+
+    //地址
+    <string name="Address_Cognome">姓</string>
+    <string name="Address_Nome">名</string>
+    <string name="Address_Italia">意大利</string>
+    <string name="Address_Telefono_Cellulare">电话</string>
+    <string name="Address_Citta">城市</string>
+    <string name="Address_CAP">邮编</string>
+    <string name="Address_Indirizzo">地址</string>
+    <string name="Address_Numero_civico">街号</string>
+    <string name="Address_Citofono">门铃</string>
+    <string name="Address_Scala">楼座</string>
+    <string name="Address_Ascensore">是否有电梯</string>
+    <string name="Address_Piano">楼层</string>
+
+    //发票
+    <string name="AddReceipt_Title">新增发票</string>
+    <string name="Fax_Cancel">取消</string>
+    <string name="Fax_Apply">提交</string>
+    <string name="Fax_Italia">意大利</string>
+    <string name="Fax_telefonico">电话号码</string>
+    <string name="Fax_Indirizzo">Indirizzo</string>
+    <string name="Fax_civico">街号</string>
+    <string name="Fax_fiscale">P. IVA / Codice fiscale</string>
+
 </resources>
