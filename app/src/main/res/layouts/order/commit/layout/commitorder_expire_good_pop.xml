@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="@dimen/x256"
+        android:layout_height="@dimen/x280"
+        android:background="@drawable/shopcart_failure_good_bg">
+
+        <TextView
+            android:id="@+id/giftTitleTV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x40"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x12"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="@dimen/ft12"
+            android:text="@string/ShopCart_GiftGoodThree"/>
+        
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x136"
+            android:layout_below="@+id/giftTitleTV"
+            android:layout_marginTop="@dimen/x5">
+
+            <LinearLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/okTV"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x24"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/scrollView"
+            android:layout_marginTop="@dimen/x12"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textSize="@dimen/ft11"
+            android:textColor="#ffffff"
+            android:background="@drawable/shopcart_gift_no_bg"
+            android:text="@string/CommitOrder_Delete_Good"/>
+
+        <TextView
+            android:id="@+id/noTV"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x24"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/okTV"
+            android:layout_marginTop="@dimen/x12"
+            android:textAlignment="center"
+            android:textSize="@dimen/ft11"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:background="@drawable/shopcart_gift_no_bg"
+            android:text="@string/CommitOrder_Change_Deliver_Time"/>
+
+    </RelativeLayout>
+
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView>

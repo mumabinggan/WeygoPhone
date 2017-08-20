@@ -15,7 +15,7 @@ public class WGCommitOrderPay extends WGObject {
 
     public List<WGSettlementPayMethod> payMethods;
 
-    public String payName;
+    String payName;
     public String getPayName() {
         if (JHStringUtils.isNullOrEmpty(currentPayId)) {
             if (payMethods.size() > 0) {

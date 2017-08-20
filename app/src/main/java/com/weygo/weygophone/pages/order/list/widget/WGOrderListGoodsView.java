@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHDividerItemDecoration;
+import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by muma on 2017/5/21.
  */
 
-public class WGOrderListGoodsView extends RelativeLayout {
+public class WGOrderListGoodsView extends JHRelativeLayout {
 
     RecyclerView mRecyclerView;
     WGOrderListGoodsAdapter mAdapter;

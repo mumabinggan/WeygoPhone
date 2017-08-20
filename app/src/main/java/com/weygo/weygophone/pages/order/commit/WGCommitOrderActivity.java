@@ -1,12 +1,20 @@
 package com.weygo.weygophone.pages.order.commit;
 
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderPay;
@@ -35,11 +43,40 @@ import java.util.List;
 
 public class WGCommitOrderActivity extends WGTitleActivity {
 
+    RecyclerView mRecyclerView;
+
+    WGCommitOrderAdapter mAdapter;
+
     WGCommitOrderDetail mData;
 
+    RelativeLayout mFooterView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadSettlementResultDetail();
+    }
+
+    @Override
+    public void initContentView() {
+        setContentView(R.layout.commitorder_activity);
+    }
+
+    @Override
+    public void initSubView() {
+        super.initSubView();
+        mNavigationBar.setTitle(R.string.PersonInfo_Title);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new WGCommitOrderAdapter(this, mData);
+        mRecyclerView.setAdapter(mAdapter);
+        mFooterView = (RelativeLayout) findViewById(R.id.footerView);
+        mFooterView.setVisibility(View.INVISIBLE);
+    }
 
     void refreshUI() {
-
+        mAdapter.setData(mData);
+        mFooterView.setVisibility(View.VISIBLE);
     }
 
     void loadSettlementResultDetail() {
@@ -61,7 +98,9 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessSettlementResultDetail(WGSettlementResultResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            mData = new WGCommitOrderDetail();
+            mData.initWithSettlementResult(response.data);
+            refreshUI();
         }
         else {
             showWarning(response.message);

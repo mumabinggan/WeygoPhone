@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderMinPriceTipsView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tipsTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:textSize="@dimen/ft12"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:padding="@dimen/x13" />
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderMinPriceTipsView>

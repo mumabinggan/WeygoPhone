@@ -25,16 +25,20 @@ public class JHPopView extends JHRelativeLayout {
 
     public JHPopView(Context context) {
         super(context);
-        mContext = context;
+        initConfig(context);
     }
 
     public JHPopView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
+        initConfig(context);
     }
 
     public JHPopView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initConfig(context);
+    }
+
+    public void initConfig(Context context) {
         mContext = context;
     }
 
@@ -50,6 +54,12 @@ public class JHPopView extends JHRelativeLayout {
     }
 
     void handleClose() {
-        mPopupWindow.dismiss();;
+        if (mCanClose) {
+            dismiss();
+        }
+    }
+
+    public void dismiss() {
+        mPopupWindow.dismiss();
     }
 }

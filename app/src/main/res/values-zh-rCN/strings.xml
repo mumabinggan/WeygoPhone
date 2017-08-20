@@ -227,6 +227,8 @@
     <string name="CommitOrder_OverHeight_CurrentRise">当前配送公升数</string>
     <string name="CommitOrder_OverHeight_DeleteBtnTitle">删除全部</string>
     <string name="CommitOrder_OverHeight_Confirm">确认</string>
+    <string name="CommitOrder_Delete_Good">删除商品</string>
+    <string name="CommitOrder_Change_Deliver_Time">更改运送时间</string>
 
     //地址列表
     <string name="AddressList_FullName">姓名</string>

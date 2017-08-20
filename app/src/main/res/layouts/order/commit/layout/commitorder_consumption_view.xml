@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderConsumptionView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x94"
+    android:gravity="center">
+
+    <FrameLayout
+        android:layout_width="@dimen/x294"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/totalTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:text="@string/CommitOrder_Total"/>
+
+            <TextView
+                android:id="@+id/deliverTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:text="@string/CommitOrder_DeliverPrice"/>
+
+            <TextView
+                android:id="@+id/couponTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:text="@string/CommitOrder_CouponPrice"/>
+
+            <TextView
+                android:id="@+id/integralTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:text="@string/CommitOrder_Score"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/totalValueTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:textAlignment="textEnd"/>
+
+            <TextView
+                android:id="@+id/deliverValueTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:textAlignment="textEnd"/>
+
+            <TextView
+                android:id="@+id/couponValueTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:textAlignment="textEnd"/>
+
+            <TextView
+                android:id="@+id/integralValueTV"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x20"
+                android:maxLines="1"
+                android:textSize="@dimen/ft12"
+                android:textColor="#000000"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderConsumptionView>

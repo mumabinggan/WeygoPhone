@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderDeliverTipsView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/deliverTipsTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ft12"
+        android:textColor="#000000"
+        android:padding="@dimen/x13" />
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderDeliverTipsView>

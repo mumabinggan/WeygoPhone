@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderRemarkView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/remarkET"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:maxLines="1"
+        android:textSize="@dimen/ft12"
+        android:textColor="#000000"
+        android:hint="@string/CommitOrder_Remark"
+        android:paddingRight="@dimen/x13"
+        android:paddingLeft="@dimen/x13"/>
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderRemarkView>

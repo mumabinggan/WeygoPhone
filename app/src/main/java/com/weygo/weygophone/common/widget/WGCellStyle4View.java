@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 
 import org.w3c.dom.Text;
@@ -16,7 +17,7 @@ import org.w3c.dom.Text;
  * Created by muma on 2016/12/16.
  */
 
-public class WGCellStyle4View extends RelativeLayout {
+public class WGCellStyle4View extends JHRelativeLayout {
 
     public static final int WGCellStyleOnlyText = 1;     //Only Text
     public static final int WGCellStyleTextAndArr = 2;     //Text and arr

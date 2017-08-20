@@ -24,6 +24,10 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.order.commit.model.WGOverHeightDetail;
+import com.weygo.weygophone.pages.order.commit.model.WGOverHeightGoodItem;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartGiftPopView;
@@ -33,6 +37,7 @@ import com.weygo.weygophone.pages.slider.model.WGHomeSlider;
 import com.weygo.weygophone.pages.slider.model.request.WGHomeSliderRequest;
 import com.weygo.weygophone.pages.slider.model.response.WGHomeSliderResponse;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 import java.util.ArrayList;
@@ -179,17 +184,25 @@ public class WGSliderFragmet extends WGFragment {
 //        popupView.setPopupWindow(window);
 //        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-        WGShopCartGoodItem item = new WGShopCartGoodItem();
-        item.name= "郑要苛要";
-        item.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
-        item.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
-        List list = new ArrayList<WGShopCartGoodItem>();
-        list.add(item);
-        list.add(item);
-        WGShopCartGiftPopView popupView = (WGShopCartGiftPopView) getActivity()
+        WGOverHeightDetail item = new WGOverHeightDetail();
+        item.maxRise = "100.0";
+        WGOverHeightGoodItem good = new WGOverHeightGoodItem();
+        good.name= "郑要苛要";
+        good.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
+        good.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
+        good.goodCount = 2;
+        good.rise = 23;
+        List list = new ArrayList<WGOverHeightGoodItem>();
+        list.add(good);
+        list.add(good);
+        list.add(good);
+        item.goods = list;
+        List goods = new ArrayList<WGOverHeightDetail>();
+        goods.add(item);
+        WGCommitOrderOverWeightPopView popupView = (WGCommitOrderOverWeightPopView) getActivity()
                 .getLayoutInflater()
-                .inflate(R.layout.shopcart_gift_pop, null);
-        popupView.setGoods(list);
+                .inflate(R.layout.commitorder_overheight_pop, null);
+        popupView.setGoods(goods);
         JHBasePopupWindow window = new JHBasePopupWindow(popupView,
                 JHAdaptScreenUtils.devicePixelWidth(getContext()),
                 JHAdaptScreenUtils.devicePixelHeight(getContext()));
