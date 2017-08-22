@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.weygo.weygophone.common.widget.WGCellStyle4View
+    <include
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.weygo.weygophone.common.widget.WGCellStyle4View>
+        android:layout_height="@dimen/x41"
+        layout="@layout/common_cell_type4" />
 
 </com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderDeliverTimeView>

@@ -7,4 +7,7 @@ import com.weygo.weygophone.base.WGGuestRequest;
  */
 
 public class WGCheckFailureProductsRequest extends WGGuestRequest {
+    public String api() {
+        return "cart/checkProducts?";
+    }
 }

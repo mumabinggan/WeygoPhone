@@ -13,5 +13,5 @@ public class WGShopCartGiftData extends WGObject {
 
     public String tip;
 
-    public List<WGHomeFloorContentGoodItem> goods;
+    public List<WGShopCartGoodItem> goods;
 }

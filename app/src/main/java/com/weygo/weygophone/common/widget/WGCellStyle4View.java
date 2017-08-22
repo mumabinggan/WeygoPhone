@@ -62,7 +62,7 @@ public class WGCellStyle4View extends JHRelativeLayout {
 
     public WGCellStyle4View(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        getAtts(context, attrs, defStyleAttr);
+        //getAtts(context, attrs, defStyleAttr);
     }
 
     public void setmStyle(int style) {
@@ -91,7 +91,7 @@ public class WGCellStyle4View extends JHRelativeLayout {
         mRightImageView = (ImageView) findViewById(R.id.arrImageView);
         mtextView = (TextView) findViewById(R.id.textView);
         mDetailTextView = (TextView) findViewById(R.id.detailTextView);
-        setStyle(mStyle);
+        //setStyle(mStyle);
     }
 
     public void setStyle(int style) {

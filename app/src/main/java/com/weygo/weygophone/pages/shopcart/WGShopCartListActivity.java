@@ -33,6 +33,7 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
 import com.weygo.weygophone.pages.shopcart.adapter.WGShopCartListAdater;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCart;
@@ -218,7 +219,8 @@ public class WGShopCartListActivity extends WGTitleActivity {
     }
 
     void openCommitOrder() {
-
+        Intent intent = new Intent(WGShopCartListActivity.this, WGCommitOrderActivity.class);
+        startActivity(intent);
     }
 
     void loadShopCartList() {
@@ -407,7 +409,8 @@ public class WGShopCartListActivity extends WGTitleActivity {
 
     void handleSuccessGiftGood(WGShopCartGiftResponse response) {
         if (response.success()) {
-            if (response.data.goods != null &&
+            if (response.data != null &&
+                    response.data.goods != null &&
                     response.data.goods.size() > 0) {
                 WGShopCartGiftPopView popupView = (WGShopCartGiftPopView)
                         getLayoutInflater()

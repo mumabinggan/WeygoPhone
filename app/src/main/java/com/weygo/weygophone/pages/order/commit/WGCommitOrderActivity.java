@@ -5,20 +5,26 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderPay;
+import com.weygo.weygophone.pages.order.commit.model.WGOrderExpireGood;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightDetail;
+import com.weygo.weygophone.pages.order.commit.model.WGOverHeightGoodItem;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderDeleteExpireGoodRequest;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderRequest;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderUpdateTimeRequest;
@@ -33,6 +39,9 @@ import com.weygo.weygophone.pages.order.commit.model.response.WGOverHeightDelete
 import com.weygo.weygophone.pages.order.commit.model.response.WGOverHeightResetResponse;
 import com.weygo.weygophone.pages.order.commit.model.response.WGOverHeightResponse;
 import com.weygo.weygophone.pages.order.commit.model.response.WGSettlementResultResponse;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
 import com.weygo.weygophone.pages.receipt.model.WGReceipt;
 
 import java.util.List;
@@ -49,7 +58,11 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     WGCommitOrderDetail mData;
 
-    RelativeLayout mFooterView;
+    WGCommitOrderFooterView mFooterView;
+
+    WGCommitOrderExpirePopView mExpireView;
+
+    WGCommitOrderOverWeightPopView mOverWeightView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,23 +78,99 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     @Override
     public void initSubView() {
         super.initSubView();
-        mNavigationBar.setTitle(R.string.PersonInfo_Title);
+        mNavigationBar.setTitle(R.string.CommitOrder_Title);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGCommitOrderAdapter(this, mData);
         mRecyclerView.setAdapter(mAdapter);
-        mFooterView = (RelativeLayout) findViewById(R.id.footerView);
+        mFooterView = (WGCommitOrderFooterView) findViewById(R.id.footerView);
         mFooterView.setVisibility(View.INVISIBLE);
+        mFooterView.setListener(new WGCommitOrderFooterView.OnItemListener() {
+            @Override
+            public void onCommit() {
+                touchCommitBtn();
+            }
+        });
+    }
+
+    void touchCommitBtn() {
+        if (enableConfirm()) {
+            loadCommitOrder();;
+        }
+    }
+
+    boolean enableConfirm() {
+        if (mData != null && !JHStringUtils.isNullOrEmpty(mData.minPriceTips)) {
+            return true;
+        }
+        return false;
+    }
+
+    void showExpireGood(WGOrderExpireGood expireGood) {
+        mExpireView = (WGCommitOrderExpirePopView) getLayoutInflater()
+                .inflate(R.layout.commitorder_expire_good_pop, null);
+        mExpireView.setGoods(expireGood.goods);
+        JHBasePopupWindow window = new JHBasePopupWindow(mExpireView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        mExpireView.setPopupWindow(window);
+        mExpireView.setListener(new WGCommitOrderExpirePopView.OnItemListener() {
+            @Override
+            public void onOk() {
+                handleChangeTime();
+            }
+
+            @Override
+            public void onNo() {
+                handleDeleteExpireGood();
+            }
+        });
+        window.showAtLocation(mExpireView, Gravity.CENTER, 0, 0);
+    }
+
+    void showOverWeightGood(List<WGOverHeightDetail> overHeightDetail) {
+        mOverWeightView = (WGCommitOrderOverWeightPopView) getLayoutInflater()
+                .inflate(R.layout.commitorder_overheight_pop, null);
+        mOverWeightView.setGoods(overHeightDetail);
+        JHBasePopupWindow window = new JHBasePopupWindow(mOverWeightView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        mOverWeightView.setPopupWindow(window);
+        mOverWeightView.setListener(new WGCommitOrderOverWeightPopView.OnItemListener() {
+            @Override
+            public void onDeleteAll() {
+                loadDeleteOverHeight();
+            }
+
+            @Override
+            public void onConfirm(List<WGOverHeightDetail> overWeightList) {
+                loadOverHeightReset(overWeightList);
+            }
+        });
+        window.showAtLocation(mOverWeightView, Gravity.CENTER, 0, 0);
+    }
+
+    void handleChangeTime() {
+        mData.deliverTime.currentDateId = null;
+        mData.deliverTime.currentTimeId = null;
+        refreshUI();
+    }
+
+    void handleDeleteExpireGood() {
+        loadDeleteExpireGoodRequest();
     }
 
     void refreshUI() {
         mAdapter.setData(mData);
+        mFooterView.showWithData(mData);
         mFooterView.setVisibility(View.VISIBLE);
     }
 
     void loadSettlementResultDetail() {
         WGSettlementResultRequest request = new WGSettlementResultRequest();
-        request.addressId = mData.address.addressId;
+        if (mData != null && mData.address != null) {
+            request.addressId = mData.address.addressId;
+        }
         this.postAsyn(request, WGSettlementResultResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
@@ -101,6 +190,21 @@ public class WGCommitOrderActivity extends WGTitleActivity {
             mData = new WGCommitOrderDetail();
             mData.initWithSettlementResult(response.data);
             refreshUI();
+            WGOrderExpireGood expireGood = response.data.expireGood;
+            if (expireGood != null) {
+                expireGood.canChangeTime = false;
+                showExpireGood(expireGood);
+            }
+            else {
+                if (response != null) {
+                    if (response.data != null) {
+                        if (response.data.overHeightDetail != null &&
+                                response.data.overHeightDetail.size() > 0) {
+                            showOverWeightGood(response.data.overHeightDetail);
+                        }
+                    }
+                }
+            }
         }
         else {
             showWarning(response.message);
@@ -126,7 +230,11 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessUpdateTime(WGCommitOrderUpdateTimeResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            if (response.data != null &&
+                    response.data.expireGood != null) {
+                response.data.expireGood.canChangeTime = true;
+                showExpireGood(response.data.expireGood);
+            }
         }
         else {
             showWarning(response.message);
@@ -152,7 +260,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessDeleteExpireGood(WGCommitOrderDeleteExpireGoodResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            mExpireView.dismiss();
+            loadSettlementResultDetail();
         }
         else {
             showWarning(response.message);
@@ -200,7 +309,31 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessCommitOrder(WGCommitOrderResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            if (JHStringUtils.isNullOrEmpty(response.data.action)) {
+                if (JHStringUtils.isNullOrEmpty(response.data.orderId)) {
+                    Log.e("==commitorder==", "返回的 orderId 为空");
+//                    //[self showWarningMessage:response.message onCompletion:^(void) {
+//                                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+//                        }];
+                }
+                else {
+                    Log.e("==commitorder==", "跳转到支付成功页面");
+                    //PaySuccessViewController
+                }
+            }
+            else {
+                //PayWeb
+                Log.e("==commitorder==", "跳转到支付Web页面");
+            }
+        }
+        else if (response.overWeight()) {
+            loadOverHeightDetail();
+        }
+        else if (response.hasExpireGood()) {
+            loadUpdateTimeRequest();
+        }
+        else if (response.belowMinPrice()) {
+            showWarning(response.message);
         }
         else {
             showWarning(response.message);
@@ -226,7 +359,22 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessOverHeightDetail(WGOverHeightResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            if (response.data != null) {
+                mData.deliverTime.resetWithTimes(response.data.deliverTimes);
+                mData.minPriceTips = response.data.minPriceTips;
+                mData.consumePrice = response.data.price;
+                refreshUI();
+                WGOrderExpireGood expireGood = response.data.expireGood;
+                if (expireGood != null) {
+                    expireGood.canChangeTime = false;
+                    showExpireGood(expireGood);
+                }
+                else {
+                    if (response.data.overWeight != null && response.data.overWeight.size() > 0) {
+                        showOverWeightGood(response.data.overWeight);
+                    }
+                }
+            }
         }
         else {
             showWarning(response.message);
@@ -251,7 +399,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessDeleteOverHeight(WGOverHeightDeleteResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            loadSettlementResultDetail();
+            mOverWeightView.dismiss();
         }
         else {
             showWarning(response.message);
@@ -260,6 +409,21 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     void loadOverHeightReset(List<WGOverHeightDetail> list) {
         WGOverHeightResetRequest request = new WGOverHeightResetRequest();
+        StringBuilder idBuilder = new StringBuilder();
+        StringBuilder countBuilder = new StringBuilder();
+        WGOverHeightDetail detail = list.get(0);
+        for (WGOverHeightGoodItem item : detail.goods) {
+            idBuilder.append(item.shopCartId);
+            idBuilder.append(",");
+            countBuilder.append(item.goodCount);
+            countBuilder.append(",");
+        }
+        if (idBuilder.length() > 0) {
+            idBuilder.deleteCharAt(idBuilder.length()-1);
+            countBuilder.deleteCharAt(idBuilder.length()-1);
+        }
+        request.goodIds = idBuilder.toString();
+        request.goodCounts = countBuilder.toString();
         this.postAsyn(request, WGOverHeightResetResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
@@ -276,7 +440,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSuccessOverHeightReset(WGOverHeightResetResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-
+            loadSettlementResultDetail();
+            mOverWeightView.dismiss();
         }
         else {
             showWarning(response.message);

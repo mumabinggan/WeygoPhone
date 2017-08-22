@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.widget.JHPopView;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
@@ -82,8 +83,8 @@ public class WGShopCartGiftPopView extends JHPopView {
         });
     }
 
-    public void setGoods(List<WGHomeFloorContentGoodItem> goods) {
-        for (WGHomeFloorContentGoodItem item : goods) {
+    public void setGoods(List<WGShopCartGoodItem> goods) {
+        for (WGShopCartGoodItem item : goods) {
             WGShopCartGiftItemView view = (WGShopCartGiftItemView) LayoutInflater.from(mContext)
                     .inflate(R.layout.shopcart_gift_item, null);
             view.setGravity(Gravity.CENTER);

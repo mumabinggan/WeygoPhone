@@ -4,11 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.weygo.weygophone.common.widget.WGCellStyle4View
+    <include
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x41"
+        layout="@layout/common_cell_type4" />
 
-    </com.weygo.weygophone.common.widget.WGCellStyle4View>
+    <!--&lt;!&ndash;<com.weygo.weygophone.common.widget.WGCellStyle4View&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/view"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+
+    <!--</com.weygo.weygophone.common.widget.WGCellStyle4View>-->
 
 </com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderDeliverDateView>

@@ -77,7 +77,7 @@ public class WGCommitOrderDeliverTime extends WGObject {
     }
 
     public void resetWithTimes(List deliverTimes) {
-        deliverTimes = deliverTimes;
+        this.deliverTimes = deliverTimes;
         currentTimeId = null;
         currentDateId = null;
     }

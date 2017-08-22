@@ -9,9 +9,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="left"
-        android:layout_marginLeft="@dimen/x13"
-        android:layout_marginRight="@dimen/x13"
+        android:gravity="left|center_vertical"
+        android:paddingRight="@dimen/x13"
+        android:paddingLeft="@dimen/x13"
         android:textSize="@dimen/ft12"
         android:background="#f8fafa"
         />

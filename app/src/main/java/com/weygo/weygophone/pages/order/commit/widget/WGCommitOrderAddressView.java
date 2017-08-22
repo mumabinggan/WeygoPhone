@@ -35,7 +35,7 @@ public class WGCommitOrderAddressView extends JHRelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mNameTV = (TextView) findViewById(R.id.nameTextView);
+        mNameTV = (TextView) findViewById(R.id.nameTV);
     }
 
     @Override

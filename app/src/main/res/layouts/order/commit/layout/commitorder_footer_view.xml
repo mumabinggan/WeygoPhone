@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x13">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separate_color">
+    </View>
+
+    <TextView
+        android:id="@+id/totalPriceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x17"
+        android:gravity="right|center_horizontal"
+        android:textColor="@color/WGAppBaseColor" />
+
+    <TextView
+        android:id="@+id/reducePriceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x17"
+        android:layout_toRightOf="@+id/totalPriceTV"
+        android:layout_marginLeft="@dimen/x10"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/common_good_price_bg"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/commitOrderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/ft12"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/login_btn_bg"
+        android:text="@string/ShopCart_Confirm" />
+
+</com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView>

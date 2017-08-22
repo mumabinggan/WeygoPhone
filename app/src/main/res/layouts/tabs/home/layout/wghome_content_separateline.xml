@@ -3,6 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/x7"
-    android:background="#f8fafa">
+    android:background="@color/separate_color">
 
 </com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentSeparatelineView>

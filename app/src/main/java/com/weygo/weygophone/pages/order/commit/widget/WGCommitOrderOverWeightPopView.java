@@ -41,7 +41,7 @@ public class WGCommitOrderOverWeightPopView extends JHPopView {
 
     public interface OnItemListener {
         void onDeleteAll();
-        void onConfirm();
+        void onConfirm(List<WGOverHeightDetail> overWeightList);
     }
 
     OnItemListener mListener;
@@ -93,7 +93,7 @@ public class WGCommitOrderOverWeightPopView extends JHPopView {
             public void onClick(View v) {
                 //mPopupWindow.dismiss();
                 if (mListener != null) {
-                    mListener.onConfirm();
+                    mListener.onConfirm(mData);
                 }
             }
         });
