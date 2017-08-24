@@ -36,6 +36,8 @@ android {
                     'src/main/res/layouts/login',
                     'src/main/res/layouts/register',
                     'src/main/res/layouts/setting',
+                    'src/main/res/layouts/address/edit',
+                    'src/main/res/layouts/address/list',
                     'src/main/res/layouts/shopcart',
                     'src/main/res/layouts/findPassword',
                     'src/main/res/layouts/clientService/list',

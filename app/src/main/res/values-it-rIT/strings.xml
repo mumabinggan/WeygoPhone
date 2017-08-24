@@ -238,6 +238,10 @@
     <string name="AddressList_Default">Predefinito</string>
     <string name="AddressList_unDefault">Imposta come predefinito</string>
     <string name="AddressList_NoLift">No</string>
+    <string name="AddressList_Change">Uso</string>
+    <string name="AddressList_Use">Modifica</string>
+    <string name="Address_Clean_One_Tip">您确定要删除此地址么？</string>
+
 
     //地址
     <string name="Address_Cognome">Cognome</string>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x13">
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/ft12"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:text="@string/AddressList_FullName"/>
+
+    <TextView
+        android:id="@+id/nameValueTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_toRightOf="@+id/nameTV"
+        android:layout_marginLeft="@dimen/x50"
+        android:textSize="@dimen/ft12"
+        android:textColor="#000000"
+        android:gravity="right|center_vertical" />
+
+    <TextView
+        android:id="@+id/addressTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/ft12"
+        android:layout_below="@+id/nameValueTV"
+        android:layout_marginTop="@dimen/x10"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:text="@string/Address_Indirizzo"/>
+
+    <TextView
+        android:id="@+id/addressValueTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:layout_below="@+id/nameValueTV"
+        android:layout_alignLeft="@+id/nameValueTV"
+        android:layout_alignRight="@+id/nameValueTV"
+        android:layout_marginTop="@dimen/x10"
+        android:textSize="@dimen/ft12"
+        android:textColor="#000000"
+        android:gravity="right|center_vertical"
+        android:text="@string/Address_Indirizzo"/>
+
+    <TextView
+        android:id="@+id/phoneTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/ft12"
+        android:layout_below="@+id/addressValueTV"
+        android:layout_marginTop="@dimen/x10"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:text="@string/Address_Indirizzo"/>
+
+    <TextView
+        android:id="@+id/phoneValueTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/ft12"
+        android:layout_below="@+id/addressValueTV"
+        android:layout_alignLeft="@+id/nameValueTV"
+        android:layout_alignRight="@+id/nameValueTV"
+        android:layout_marginTop="@dimen/x10"
+        android:textColor="#000000"
+        android:gravity="center_vertical|right"
+        android:text="@string/Address_Indirizzo"/>
+
+    <View
+        android:id="@+id/lineView"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/separate_color"
+        android:layout_below="@id/phoneValueTV"
+        android:layout_marginTop="@dimen/x10"></View>
+    
+    <TextView
+        android:id="@+id/changeTV"
+        android:layout_width="@dimen/x55"
+        android:layout_height="@dimen/x21"
+        android:text="@string/AddressList_Change"
+        android:textColor="@color/WGAppBlueButtonColor"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x13"
+        android:layout_below="@+id/lineView"
+        android:layout_marginTop="@dimen/x10"
+        android:background="@drawable/address_use_bg"/>
+
+    <TextView
+        android:id="@+id/useTV"
+        android:layout_width="@dimen/x55"
+        android:layout_height="@dimen/x21"
+        android:text="@string/AddressList_Use"
+        android:textColor="@color/WGAppBlueButtonColor"
+        android:layout_toLeftOf="@+id/changeTV"
+        android:layout_marginEnd="@dimen/x10"
+        android:layout_marginRight="@dimen/x13"
+        android:layout_below="@+id/lineView"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginBottom="@dimen/x10"
+        android:background="@drawable/address_use_bg"/>
+
+    <TextView
+        android:id="@+id/defaultTV"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x21"
+        android:text="@string/AddressList_Default"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/lineView"
+        android:layout_marginTop="@dimen/x10"
+        android:background="@drawable/address_default_bg"/>
+
+    <TextView
+        android:id="@+id/unDefaultTV"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x21"
+        android:text="@string/AddressList_unDefault"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        android:layout_toRightOf="@+id/defaultTV"
+        android:layout_below="@+id/lineView"
+        android:layout_marginTop="@dimen/x10"
+        android:background="@drawable/address_undefault_bg"/>
+
+</RelativeLayout>

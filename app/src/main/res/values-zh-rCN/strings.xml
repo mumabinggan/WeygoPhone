@@ -236,9 +236,11 @@
     <string name="AddressList_Add_Title">新增地址</string>
     <string name="AddressList_HaveLift">是</string>
     <string name="AddressList_Italia">意大利</string>
-    <string name="AddressList_Default">默认</string>
-    <string name="AddressList_unDefault">设置为默认</string>
+    <string name="AddressList_Default">  默认  </string>
+    <string name="AddressList_unDefault">  设置为默认  </string>
     <string name="AddressList_NoLift">否</string>
+    <string name="AddressList_Change">修改</string>
+    <string name="AddressList_Use">使用</string>
 
     //地址
     <string name="Address_Cognome">姓</string>
@@ -253,6 +255,7 @@
     <string name="Address_Scala">楼座</string>
     <string name="Address_Ascensore">是否有电梯</string>
     <string name="Address_Piano">楼层</string>
+    <string name="Address_Clean_One_Tip">您确定要删除此地址么？</string>
 
     //发票
     <string name="AddReceipt_Title">新增发票</string>
