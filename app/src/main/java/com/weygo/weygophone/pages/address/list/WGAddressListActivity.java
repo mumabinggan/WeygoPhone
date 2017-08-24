@@ -1,11 +1,13 @@
 package com.weygo.weygophone.pages.address.list;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
@@ -15,7 +17,9 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.address.edit.WGEditAddressActivity;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.address.edit.model.WGEditAddressData;
 import com.weygo.weygophone.pages.address.list.adapter.WGAddressListAdapter;
 import com.weygo.weygophone.pages.address.list.model.request.WGAddAddressRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGAddressListRequest;
@@ -24,6 +28,7 @@ import com.weygo.weygophone.pages.address.list.model.request.WGSetDefaultAddress
 import com.weygo.weygophone.pages.address.list.model.response.WGAddressListResponse;
 import com.weygo.weygophone.pages.address.list.model.response.WGDeleteAddressResponse;
 import com.weygo.weygophone.pages.address.list.model.response.WGSetDefaultAddressResponse;
+import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
 import com.weygo.weygophone.pages.classifyDetail.adapter.WGClassifyDetailContentAdapter;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyFilterCondition;
 import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
@@ -40,22 +45,46 @@ public class WGAddressListActivity extends WGTitleActivity {
 
     RecyclerView mRecyclerView;
     WGAddressListAdapter mAdapter;
-
     List<WGAddress> mData;
+
+    ImageView mAddIV;
 
     long mAddressId;
 
-    public interface OnItemLinsener {
-        void onUse(WGAddress address);
-    }
-    OnItemLinsener mListener;
-    public void setListener(OnItemLinsener listener) {
-        mListener = listener;
-    }
+    WGAddress mChangeAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAddressListRequest();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                mChangeAddress = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
+            }
+        }
+    }
+
+    @Override
+    public void handleReturn() {
+        handleChangeAddress();
+        super.handleReturn();
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleChangeAddress();
+        super.onBackPressed();
     }
 
     @Override
@@ -107,10 +136,18 @@ public class WGAddressListActivity extends WGTitleActivity {
     }
 
     void handleUse(WGAddress address) {
-        if (mListener != null) {
-            mListener.onUse(address);
-        }
+        handleChange(address);
         finish();
+    }
+
+    void handleChangeAddress() {
+        Intent intent = getIntent();
+        Bundle bundle = new Bundle();
+        if (mChangeAddress != null) {
+            bundle.putSerializable(WGConstants.WGIntentDataKey, mChangeAddress);
+            intent.putExtras(bundle);
+            setResult(RESULT_OK, intent);
+        }
     }
 
     void handleSetDefault(WGAddress address) {
@@ -118,7 +155,30 @@ public class WGAddressListActivity extends WGTitleActivity {
     }
 
     void handleChange(WGAddress address) {
+        Intent intent = new Intent(this, WGEditAddressActivity.class);
+        Bundle bundle = new Bundle();
+        WGEditAddressData item = new WGEditAddressData();
+        boolean needRefresh = false;
+        if (address == null) {
+            needRefresh = false;
+        }
+        else {
+            if (address.addressId == mAddressId) {
+                needRefresh = true;
+            }
+            else {
+                needRefresh = false;
+            }
+        }
+        item.needRefresh = needRefresh;
+        item.addressId = mAddressId;
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
+    void handleAddAddress() {
+        handleChange(null);
     }
 
     void handleDelete(final WGAddress address) {

@@ -21,12 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
-        
-        <ImageView
-            android:id="@+id/addIV"
-            android:layout_width="@dimen/x60"
-            android:layout_height="@dimen/x60"
-            android:background="#00ff00"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/addIV"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/x13"
+                android:layout_marginBottom="@dimen/x23"
+                android:src="@drawable/address_add" />
+
+        </RelativeLayout>
 
     </FrameLayout>
 

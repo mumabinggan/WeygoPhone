@@ -45,6 +45,7 @@
         <activity android:name=".pages.classifyDetail.WGClassifyDetailActivity"></activity>
         <activity android:name=".pages.classifyFilter.WGClassifyDetailFilterActivity"></activity>
         <activity android:name=".pages.shopcart.WGShopCartListActivity"></activity>
+        <activity android:name=".pages.address.edit.WGEditAddressActivity"></activity>
 
     </application>
 

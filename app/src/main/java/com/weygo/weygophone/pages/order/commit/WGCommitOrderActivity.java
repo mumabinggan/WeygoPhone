@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.order.commit;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,9 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
 import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
@@ -68,6 +72,19 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadSettlementResultDetail();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                WGAddress address = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                mData.address = address;
+                mAdapter.setData(mData);
+            }
+        }
     }
 
     @Override
@@ -164,6 +181,16 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         mAdapter.setData(mData);
         mFooterView.showWithData(mData);
         mFooterView.setVisibility(View.VISIBLE);
+    }
+
+    void handleAddress() {
+        Intent intent = new Intent(WGCommitOrderActivity.this, WGAddressListActivity.class);
+        if (mData != null && mData.address != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(WGConstants.WGIntentDataKey, mData.address.addressId);
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
     }
 
     void loadSettlementResultDetail() {

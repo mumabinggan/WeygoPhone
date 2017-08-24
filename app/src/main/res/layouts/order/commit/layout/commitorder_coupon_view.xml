@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x68"
         android:layout_gravity="center"
+        android:src="@drawable/commitOrder_coupon_bg"
         android:layout_marginTop="@dimen/x7"/>
 
     <TextView
