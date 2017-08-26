@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
-    public String app = "com_weygo_weygo";
+    public String app = "com.weygo.test";
 
     public String os = "iOS";
 
@@ -25,7 +25,7 @@ public class WGRequest extends JHRequest {
     //m.delong6688.develop.weygo.com
     //m.weygo.com
     public String host() {
-        return "m.weygo.com";
+        return "m.preview.weygo.com";
     }
 
     // eg. app/ default ""
@@ -41,7 +41,7 @@ public class WGRequest extends JHRequest {
     }
 
     public String scheme() {
-        return "https";
+        return "http";
     }
 
 //    public String apiSuffix() {

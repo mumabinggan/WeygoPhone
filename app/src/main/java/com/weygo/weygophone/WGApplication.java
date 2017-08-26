@@ -14,6 +14,7 @@ import com.weygo.common.tools.JHDeviceUtils;
 import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
@@ -51,6 +52,9 @@ public class WGApplication extends Application {
 
         //initUtils
         initRequireUtils();
+
+        String text = "中国";
+        Log.e("---java--", JHStringUtils.md5(text));
     }
 
     public static Context getContext() {

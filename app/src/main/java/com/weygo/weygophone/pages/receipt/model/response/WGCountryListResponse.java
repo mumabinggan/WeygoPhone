@@ -1,7 +1,7 @@
-package com.weygo.weygophone.pages.address.list.model.response;
+package com.weygo.weygophone.pages.receipt.model.response;
 
 import com.weygo.weygophone.base.WGResponse;
-import com.weygo.weygophone.pages.address.list.model.WGReceiptCountryListItem;
+import com.weygo.weygophone.pages.receipt.model.WGReceiptCountryListItem;
 
 import java.util.List;
 

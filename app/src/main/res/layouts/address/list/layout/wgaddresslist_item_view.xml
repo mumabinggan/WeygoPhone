@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.weygo.weygophone.pages.address.list.widget.WGAddressListItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/x13">
@@ -95,6 +95,7 @@
         android:layout_marginRight="@dimen/x13"
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
+        android:gravity="center"
         android:background="@drawable/address_use_bg"/>
 
     <TextView
@@ -108,14 +109,13 @@
         android:layout_marginRight="@dimen/x13"
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
-        android:layout_marginBottom="@dimen/x10"
+        android:gravity="center"
         android:background="@drawable/address_use_bg"/>
 
     <TextView
         android:id="@+id/defaultTV"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/x21"
-        android:text="@string/AddressList_Default"
         android:textColor="#ffffff"
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
@@ -125,11 +125,11 @@
         android:id="@+id/unDefaultTV"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/x21"
-        android:text="@string/AddressList_unDefault"
         android:textColor="@color/WGAppBaseTitleAAAColor"
         android:layout_toRightOf="@+id/defaultTV"
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
+        android:gravity="center"
         android:background="@drawable/address_undefault_bg"/>
 
-</RelativeLayout>
+</com.weygo.weygophone.pages.address.list.widget.WGAddressListItemView>

@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.address.list.model.request;
+package com.weygo.weygophone.pages.receipt.model.request;
 
 import com.weygo.weygophone.base.WGGuestRequest;
 

@@ -1,4 +1,4 @@
-package com.weygo.weygophone.pages.address.list.model;
+package com.weygo.weygophone.pages.receipt.model;
 
 import com.weygo.weygophone.base.WGObject;
 

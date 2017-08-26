@@ -9,12 +9,14 @@ import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGCellStyle4View;
+import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.edit.model.WGEditAddressData;
 import com.weygo.weygophone.pages.address.list.model.WGAddressCityListItem;
@@ -28,7 +30,10 @@ import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderDelete
 import com.weygo.weygophone.pages.order.commit.model.response.WGCommitOrderDeleteExpireGoodResponse;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * Created by muma on 2017/8/22.
@@ -104,7 +109,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
     @Override
     public void initSubView() {
         super.initSubView();
-        mNavigationBar.setTitle(R.string.CommitOrder_Title);
+        mNavigationBar.setTitle(R.string.AddressList_Add_Title);
         mFirstNameET = (EditText) findViewById(R.id.firstET);
         mLastNameET = (EditText) findViewById(R.id.lastET);
         mPhoneET = (EditText) findViewById(R.id.phoneET);
@@ -115,7 +120,21 @@ public class WGEditAddressActivity extends WGTitleActivity {
         mScalaET = (EditText) findViewById(R.id.scalaET);
         mPianoET = (EditText) findViewById(R.id.floorET);
         mCityView = (WGCellStyle4View) findViewById(R.id.cityView);
+        mCityView.setTitle(R.string.Address_Citta);
+        mCityView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCity();
+            }
+        });
         mAscensoreView = (WGCellStyle4View) findViewById(R.id.ascensoreView);
+        mAscensoreView.setTitle(R.string.Address_Ascensore);
+        mAscensoreView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleAscensore();
+            }
+        });
         mSaveBtn = (Button) findViewById(R.id.saveBtn);
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,11 +159,55 @@ public class WGEditAddressActivity extends WGTitleActivity {
             mCitofonoET.setText(mAddress.citofono);
             mScalaET.setText(mAddress.scala);
             mPianoET.setText(mAddress.piano);
-            mCityView.setTitle(R.string.Address_Citta);
             mCityView.setDetailTitle(mAddress.city);
-            mAscensoreView.setTitle(R.string.Address_Ascensore);
             mAscensoreView.setDetailTitle(mAddress.currentAscensore());
         }
+    }
+
+    void handleCity() {
+        List<String> list = new ArrayList();
+        for (WGAddressCityListItem item : mCityList) {
+            list.add(item.name);
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectedCity(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectedCity(int index, String title) {
+        WGAddressCityListItem item = mCityList.get(index);
+        mAddress.cityId = item.value;
+        mAddress.city = item.name;
+        mCityView.setDetailTitle(mAddress.city);
+    }
+
+    void handleAscensore() {
+        List<String> list = new ArrayList();
+        for (Integer item : mAddress.ascensores) {
+            list.add(JHResourceUtils.getInstance().getString(item));
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectedAscensore(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectedAscensore(int index, String title) {
+        mAddress.ascensore = index;
+        mAscensoreView.setDetailTitle(mAddress.currentAscensore());
     }
 
     void loadAddressDetailRequest() {
@@ -176,6 +239,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
 
     void loadCityListRequest() {
         WGAddressCityListRequest request = new WGAddressCityListRequest();
+        request.showsLoadingView = false;
         this.postAsyn(request, WGAddressCityResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {

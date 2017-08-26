@@ -35,6 +35,8 @@ android {
                     'src/main/res/layouts/classifyDetailFilter',
                     'src/main/res/layouts/login',
                     'src/main/res/layouts/register',
+                    'src/main/res/layouts/receipt',
+                    'src/main/res/layouts/coupon',
                     'src/main/res/layouts/setting',
                     'src/main/res/layouts/address/edit',
                     'src/main/res/layouts/address/list',

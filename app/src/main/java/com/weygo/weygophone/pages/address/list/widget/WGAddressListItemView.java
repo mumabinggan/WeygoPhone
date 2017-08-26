@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHRelativeLayout;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView;
@@ -34,9 +35,10 @@ public class WGAddressListItemView extends JHRelativeLayout {
     WGAddress mData;
 
     public interface OnItemListener {
-        void onSetDefault();
-        void onUse();
-        void onChange();
+        void onDelete(WGAddress data);
+        void onSetDefault(WGAddress data);
+        void onUse(WGAddress data);
+        void onChange(WGAddress data);
     }
 
     OnItemListener mListener;
@@ -63,7 +65,9 @@ public class WGAddressListItemView extends JHRelativeLayout {
         mAddressTV = (TextView) findViewById(R.id.addressValueTV);
         mPhoneTV = (TextView) findViewById(R.id.phoneValueTV);
         mDefaultTV = (TextView) findViewById(R.id.defaultTV);
+        mDefaultTV.setText("  " + JHResourceUtils.getInstance().getString(R.string.AddressList_Default) + "  ");
         mUnDefaultTV = (TextView) findViewById(R.id.unDefaultTV);
+        mUnDefaultTV.setText("  " + JHResourceUtils.getInstance().getString(R.string.AddressList_unDefault) + "  ");
         mUnDefaultTV.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,23 +88,36 @@ public class WGAddressListItemView extends JHRelativeLayout {
                 handleChange();
             }
         });
+        this.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                handleDelete();
+                return false;
+            }
+        });
+    }
+
+    void handleDelete() {
+        if (mListener != null) {
+            mListener.onDelete(mData);
+        }
     }
 
     void handleSetDefault() {
         if (mListener != null) {
-            mListener.onSetDefault();
+            mListener.onSetDefault(mData);
         }
     }
 
     void handleUse() {
         if (mListener != null) {
-            mListener.onUse();
+            mListener.onUse(mData);
         }
     }
 
     void handleChange() {
         if (mListener != null) {
-            mListener.onChange();
+            mListener.onChange(mData);
         }
     }
 

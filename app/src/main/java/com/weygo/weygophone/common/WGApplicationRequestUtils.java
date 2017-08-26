@@ -32,6 +32,7 @@ import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 
 import org.parceler.apache.commons.collections.map.HashedMap;
 
+import java.net.URLEncoder;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -83,7 +84,7 @@ public class WGApplicationRequestUtils {
         StringBuffer buffer = new StringBuffer(this.signPrefix());
         buffer.append("___store");
         Log.e("___store", "___store");
-        String storeValue = "mobileitaly";
+        String storeValue = "mobilecn";
         //String storeValue = "mobilecn";
         //String storeValue = getResources().getString(R.string.request_StoreValue);
         Log.e("storeValue", storeValue);
@@ -91,14 +92,14 @@ public class WGApplicationRequestUtils {
 
         //map.putAll(versionMap());
 
-        Map<String, Object> sortMap = new TreeMap<String, Object>(
-                new Comparator<String>() {
-                    public int compare(String obj1, String obj2) {
-                        // 降序排序
-                        return obj1.compareTo(obj2);
-                    }
-                });
-        sortMap.putAll(map);
+//        Map<String, Object> sortMap = new TreeMap<String, Object>(
+//                new Comparator<String>() {
+//                    public int compare(String obj1, String obj2) {
+//                        // 降序排序
+//                        return obj1.compareTo(obj2);
+//                    }
+//                });
+        TreeMap<String, Object> sortMap = new TreeMap<>(map);
         for (Map.Entry<String, Object> m :sortMap.entrySet())  {
             buffer.append(m.getKey());
             if (m.getValue() instanceof Number) {

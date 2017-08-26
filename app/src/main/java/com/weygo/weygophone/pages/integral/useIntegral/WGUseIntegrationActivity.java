@@ -122,7 +122,7 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable(WGConstants.WGIntentDataKey, data);
             intent.putExtras(bundle);
-            setResult(RESULT_OK, intent);
+            setResult(WGConstants.WGCommitOrderIntegralReturn, intent);
             finish();
         }
         else {

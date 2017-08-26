@@ -12,10 +12,17 @@ import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseViewHolder;
 import com.weygo.weygophone.common.widget.WGCellStyle6View;
+import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
+import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderPay;
 import com.weygo.weygophone.pages.order.commit.model.WGSettlementTips;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderLookMoreTipsView;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightItemView;
+import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
+import com.weygo.weygophone.pages.receipt.model.WGReceipt;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
 import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsColumnView;
 
@@ -31,6 +38,22 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
     public WGCommitOrderAdapter(Context context, WGCommitOrderDetail data) {
         this.mData = data;
         this.mContext = context;
+    }
+
+    public interface OnItemListener extends OnBaseItemClickListener {
+        void onAddress(WGAddress address);
+        void onReceipt(WGReceipt receipt);
+        void onDeliverDate(WGCommitOrderDeliverTime data);
+        void onDeliverTime(WGCommitOrderDeliverTime data);
+        void onPayMethod(WGCommitOrderPay data);
+        void onIntegral(WGCommitOrderDetail data);
+        void onCoupon(WGCoupon data);
+        void onGoodItem(WGOrderGoodItem item);
+        void onLookMore(WGCommitOrderDetail data);
+    }
+
+    public void setListener(OnItemListener listener) {
+        mOnItemClickListener = listener;
     }
 
     public enum Item_Type {
@@ -229,6 +252,12 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handleTouchAddress(mData.address);
+                }
+            });
         }
         else if (viewType == Item_Type.ITEM_TYPE_ReceiptTitle.ordinal()) {
             resourceId = R.layout.common_cell_type6;
@@ -246,7 +275,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchReceipt(null);
                 }
             });
         }
@@ -258,7 +287,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchReceipt(mData.receipt);
                 }
             });
         }
@@ -278,7 +307,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchDeliverDate(mData.deliverTime);
                 }
             });
         }
@@ -290,7 +319,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchDeliverDate(mData.deliverTime);
                 }
             });
         }
@@ -310,7 +339,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchIntegral(mData);
                 }
             });
         }
@@ -322,7 +351,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchPayMethod(mData.payMothod);
                 }
             });
         }
@@ -334,7 +363,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //handleClickView(view);
+                    handleTouchCoupon(mData.coupon);
                 }
             });
         }
@@ -387,7 +416,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             tempView.setListener(new WGCommitOrderLookMoreTipsView.OnItemListener() {
                 @Override
                 public void onMore(WGSettlementTips tips) {
-
+                    handleTouchLookMore(mData);
                 }
             });
             view = tempView;
@@ -430,5 +459,53 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             return data.mType.ordinal();
         }
         return WGHomeFragmentAdapter.Item_Type.ITEM_TYPE_None.ordinal();
+    }
+
+    void handleTouchAddress(WGAddress data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onAddress(data);
+        }
+    }
+
+    void handleTouchReceipt(WGReceipt data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onReceipt(data);
+        }
+    }
+
+    void handleTouchDeliverDate(WGCommitOrderDeliverTime data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onDeliverDate(data);
+        }
+    }
+
+    void handleTouchDeliverTime(WGCommitOrderDeliverTime data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onDeliverTime(data);
+        }
+    }
+
+    void handleTouchPayMethod(WGCommitOrderPay data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onPayMethod(data);
+        }
+    }
+
+    void handleTouchIntegral(WGCommitOrderDetail data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onIntegral(data);
+        }
+    }
+
+    void handleTouchCoupon(WGCoupon data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onCoupon(data);
+        }
+    }
+
+    void handleTouchLookMore(WGCommitOrderDetail data) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onLookMore(data);
+        }
     }
 }

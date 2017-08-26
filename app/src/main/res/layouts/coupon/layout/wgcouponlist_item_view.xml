@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.coupon.widget.WGCouponListItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x107"
+    android:layout_margin="@dimen/x7">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x107" />
+
+    <TextView
+        android:id="@+id/priceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x13"
+        android:layout_marginLeft="@dimen/x75"
+        android:layout_marginRight="@dimen/x14"
+        android:textColor="@color/WGAppBaseColor"
+        android:textSize="@dimen/ft13"/>
+
+    <TextView
+        android:id="@+id/countTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_alignBottom="@+id/priceTV"
+        android:textColor="@color/WGAppBaseColor"
+        android:textSize="@dimen/ft13"/>
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_toRightOf="@+id/priceTV"
+        android:layout_toLeftOf="@+id/countTV"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_alignBottom="@+id/priceTV"
+        android:textSize="@dimen/ft13"/>
+
+    <TextView
+        android:id="@+id/desTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        android:layout_alignLeft="@+id/priceTV"
+        android:layout_below="@+id/priceTV"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_alignParentRight="true"
+        android:maxLines="2"
+        android:layout_marginRight="@dimen/x10"
+        android:textSize="@dimen/ft12"/>
+
+    <TextView
+        android:id="@+id/timeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/x13"
+        android:layout_alignRight="@+id/countTV"
+        android:gravity="right|center"
+        android:textSize="@dimen/ft12"/>
+
+</com.weygo.weygophone.pages.coupon.widget.WGCouponListItemView>

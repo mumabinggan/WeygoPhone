@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -86,23 +87,18 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
         String jsonString = JSON.toJSONString(originRequest);
         Map<String, String> paramsMap = JSON.parseObject(
                 jsonString,new TypeReference<Map<String, String>>(){} );
-//        for (Map.Entry<String, Object> m :paramsMap.entrySet()) {
-//            paramsString.append("&");
-//            paramsString.append(m.getKey());
-//            paramsString.append(m.getValue() + "");
-//        }
-        //StringBuilder tempParams = new StringBuilder();
         int pos = 0;
         for (String key : paramsMap.keySet()) {
             if (pos > 0) {
                 paramsString.append("&");
             }
-            //String string = (String) paramsMap.get(key);
-            try {
-                paramsString.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            paramsString.append(String.format("%s=%s", key, paramsMap.get(key)));
+//            try {
+//                //paramsString.append(String.format("%s=%s", key, paramsMap.get(key)));
+//                //paramsString.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
             pos++;
         }
         Log.e("---paramsString----", paramsString.toString());

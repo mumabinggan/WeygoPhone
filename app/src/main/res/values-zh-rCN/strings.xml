@@ -266,5 +266,12 @@
     <string name="Fax_Indirizzo">Indirizzo</string>
     <string name="Fax_civico">街号</string>
     <string name="Fax_fiscale">P. IVA / Codice fiscale</string>
+    
+    //优惠卷
+    <string name="CouponList_Input_Holder">输入优惠卷编码</string>
+    <string name="CouponList_Title">我的优惠卷</string>
+    <string name="CouponList_Selected_Title">选择优惠卷</string>
+    <string name="CouponList_Active">激活</string>
+    <string name="CouponList_UnActive">取消</string>
 
 </resources>

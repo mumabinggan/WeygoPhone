@@ -41,6 +41,7 @@ public class WGConstants {
 
     //Intent Data key
     public static final String WGIntentDataKey = "WGIntentDataKey";
+    public static final String WGIntentDataKey1 = "WGIntentDataKey1";
 
     //跳转类型
     public static final int WGAppJumpTypeNone = 0;
@@ -68,4 +69,10 @@ public class WGConstants {
     public static final int WGClassifySortTypeBranch = 1;
     public static final int WGClassifySortTypePriceDown = 2;
     public static final int WGClassifySortTypePriceUp = 3;
+
+    //Intent Result
+    public static final int WGCommitOrderReceiptReturn = 10;
+    public static final int WGCommitOrderAddressReturn = 11;
+    public static final int WGCommitOrderCouponReturn = 12;
+    public static final int WGCommitOrderIntegralReturn = 13;
 }

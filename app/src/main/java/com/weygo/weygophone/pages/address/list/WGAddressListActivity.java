@@ -21,18 +21,12 @@ import com.weygo.weygophone.pages.address.edit.WGEditAddressActivity;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.edit.model.WGEditAddressData;
 import com.weygo.weygophone.pages.address.list.adapter.WGAddressListAdapter;
-import com.weygo.weygophone.pages.address.list.model.request.WGAddAddressRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGAddressListRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGDeleteAddressRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGSetDefaultAddressRequest;
 import com.weygo.weygophone.pages.address.list.model.response.WGAddressListResponse;
 import com.weygo.weygophone.pages.address.list.model.response.WGDeleteAddressResponse;
 import com.weygo.weygophone.pages.address.list.model.response.WGSetDefaultAddressResponse;
-import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
-import com.weygo.weygophone.pages.classifyDetail.adapter.WGClassifyDetailContentAdapter;
-import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyFilterCondition;
-import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
-import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -77,13 +71,13 @@ public class WGAddressListActivity extends WGTitleActivity {
 
     @Override
     public void handleReturn() {
-        handleChangeAddress();
+        handleChangeAddress(mChangeAddress);
         super.handleReturn();
     }
 
     @Override
     public void onBackPressed() {
-        handleChangeAddress();
+        handleChangeAddress(mChangeAddress);
         super.onBackPressed();
     }
 
@@ -114,6 +108,11 @@ public class WGAddressListActivity extends WGTitleActivity {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setListener(new WGAddressListAdapter.OnItemLinsener() {
             @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
             public void onDelete(WGAddress address) {
                 handleDelete(address);
             }
@@ -133,20 +132,32 @@ public class WGAddressListActivity extends WGTitleActivity {
                 handleSetDefault(address);
             }
         });
+        mAddIV = (ImageView) findViewById(R.id.addIV);
+        mAddIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleAdd();
+            }
+        });
+    }
+
+    void handleAdd() {
+        Intent intent = new Intent(this, WGEditAddressActivity.class);
+        startActivity(intent);
     }
 
     void handleUse(WGAddress address) {
-        handleChange(address);
+        handleChangeAddress(address);
         finish();
     }
 
-    void handleChangeAddress() {
+    void handleChangeAddress(WGAddress address) {
         Intent intent = getIntent();
         Bundle bundle = new Bundle();
-        if (mChangeAddress != null) {
-            bundle.putSerializable(WGConstants.WGIntentDataKey, mChangeAddress);
+        if (address != null) {
+            bundle.putSerializable(WGConstants.WGIntentDataKey, address);
             intent.putExtras(bundle);
-            setResult(RESULT_OK, intent);
+            setResult(WGConstants.WGCommitOrderAddressReturn, intent);
         }
     }
 
@@ -171,7 +182,7 @@ public class WGAddressListActivity extends WGTitleActivity {
             }
         }
         item.needRefresh = needRefresh;
-        item.addressId = mAddressId;
+        item.addressId = address.addressId;
         bundle.putSerializable(WGConstants.WGIntentDataKey, item);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -221,6 +232,7 @@ public class WGAddressListActivity extends WGTitleActivity {
     void handleSuccessAddressList(WGAddressListResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
+            mData = response.data;
             mAdapter.setData(response.data);
         }
         else {

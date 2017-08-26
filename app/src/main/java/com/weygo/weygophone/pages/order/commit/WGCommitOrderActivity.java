@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -20,8 +22,14 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
+import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
+import com.weygo.weygophone.pages.coupon.model.WGActiveCouponData;
+import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.integral.useIntegral.WGUseIntegrationActivity;
+import com.weygo.weygophone.pages.integral.useIntegral.model.response.WGUseIntegrationData;
 import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
@@ -29,6 +37,9 @@ import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderPay;
 import com.weygo.weygophone.pages.order.commit.model.WGOrderExpireGood;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightDetail;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightGoodItem;
+import com.weygo.weygophone.pages.order.commit.model.WGSettlementDate;
+import com.weygo.weygophone.pages.order.commit.model.WGSettlementPayMethod;
+import com.weygo.weygophone.pages.order.commit.model.WGSettlementTime;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderDeleteExpireGoodRequest;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderRequest;
 import com.weygo.weygophone.pages.order.commit.model.request.WGCommitOrderUpdateTimeRequest;
@@ -46,9 +57,14 @@ import com.weygo.weygophone.pages.order.commit.model.response.WGSettlementResult
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
+import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.receipt.WGReceiptActivity;
 import com.weygo.weygophone.pages.receipt.model.WGReceipt;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * Created by muma on 2017/5/22.
@@ -77,12 +93,31 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            Bundle bundle = data.getExtras();
+        Bundle bundle = data.getExtras();
+        if (requestCode == 0) {
             if (bundle != null) {
-                WGAddress address = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
-                mData.address = address;
-                mAdapter.setData(mData);
+                if (resultCode == WGConstants.WGCommitOrderReceiptReturn) {
+                    WGReceipt receipt = (WGReceipt) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                    mData.receipt = receipt;
+                    mAdapter.setData(mData);
+                }
+                else if (resultCode == WGConstants.WGCommitOrderCouponReturn) {
+                    WGActiveCouponData couponData = (WGActiveCouponData) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                    mData.coupon = couponData.coupon;
+                    mData.consumePrice = couponData.price;
+                    mAdapter.setData(mData);
+                }
+                else if (resultCode == WGConstants.WGCommitOrderAddressReturn) {
+                    WGAddress address = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                    mData.address = address;
+                    mAdapter.setData(mData);
+                }
+                else if (resultCode == WGConstants.WGCommitOrderIntegralReturn) {
+                    WGUseIntegrationData integral = (WGUseIntegrationData) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                    mData.useIntegration = integral.use;
+                    mData.consumePrice = integral.price;
+                    mAdapter.setData(mData);
+                }
             }
         }
     }
@@ -99,6 +134,57 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGCommitOrderAdapter(this, mData);
+        mAdapter.setListener(new WGCommitOrderAdapter.OnItemListener() {
+            @Override
+            public void onAddress(WGAddress address) {
+                handleAddress();
+            }
+
+            @Override
+            public void onReceipt(WGReceipt receipt) {
+                handleReceipt();
+            }
+
+            @Override
+            public void onDeliverDate(WGCommitOrderDeliverTime data) {
+                handleDeliverDate();
+            }
+
+            @Override
+            public void onDeliverTime(WGCommitOrderDeliverTime data) {
+                handleDeliverTime();
+            }
+
+            @Override
+            public void onPayMethod(WGCommitOrderPay data) {
+                handlePayMethod();
+            }
+
+            @Override
+            public void onIntegral(WGCommitOrderDetail data) {
+                handleIntegral();
+            }
+
+            @Override
+            public void onCoupon(WGCoupon data) {
+                handleCoupon();
+            }
+
+            @Override
+            public void onGoodItem(WGOrderGoodItem item) {
+
+            }
+
+            @Override
+            public void onLookMore(WGCommitOrderDetail data) {
+                handleLookMore();
+            }
+
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         mFooterView = (WGCommitOrderFooterView) findViewById(R.id.footerView);
         mFooterView.setVisibility(View.INVISIBLE);
@@ -188,6 +274,107 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         if (mData != null && mData.address != null) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(WGConstants.WGIntentDataKey, mData.address.addressId);
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, 0);
+    }
+
+    void handleDeliverDate() {
+        List<String> list = new ArrayList();
+        for (WGSettlementDate item : mData.deliverTime.deliverTimes) {
+            list.add(item.week + "  " + item.date);
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectDeliverDate(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectDeliverDate(int index, String title) {
+        WGSettlementDate item = mData.deliverTime.deliverTimes.get(index);
+        mData.deliverTime.currentDateId = item.id;
+        mData.deliverTime.currentTimeId = mData.deliverTime.defaultTimeId;
+        loadUpdateTimeRequest();
+        refreshUI();
+    }
+
+    void handleDeliverTime() {
+        List<String> list = new ArrayList();
+        for (WGSettlementTime item : mData.deliverTime.currentTimes) {
+            list.add(item.time);
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectDeliverTime(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectDeliverTime(int index, String title) {
+        WGSettlementTime item = mData.deliverTime.currentTimes.get(index);
+        mData.deliverTime.currentTimeId = item.id;
+        loadUpdateTimeRequest();
+        refreshUI();
+    }
+
+    void handlePayMethod() {
+        List<String> list = new ArrayList();
+        for (WGSettlementPayMethod item : mData.payMothod.payMethods) {
+            list.add(item.name);
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectPayMethod(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectPayMethod(int index, String title) {
+        WGSettlementPayMethod item = mData.payMothod.payMethods.get(index);
+        mData.payMothod.currentPayId = item.id;
+        refreshUI();
+    }
+
+    void handleIntegral() {
+        Intent intent = new Intent(WGCommitOrderActivity.this, WGUseIntegrationActivity.class);
+        startActivity(intent);
+    }
+
+    void handleLookMore() {
+
+    }
+
+    void handleCoupon() {
+        Intent intent = new Intent(WGCommitOrderActivity.this, WGCouponListActivity.class);
+        if (mData != null && mData.coupon != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(WGConstants.WGIntentDataKey, mData.coupon);
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, 0);
+    }
+
+    void handleReceipt() {
+        Intent intent = new Intent(WGCommitOrderActivity.this, WGReceiptActivity.class);
+        if (mData != null && mData.receipt != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(WGConstants.WGIntentDataKey, mData.receipt);
             intent.putExtras(bundle);
         }
         startActivity(intent);

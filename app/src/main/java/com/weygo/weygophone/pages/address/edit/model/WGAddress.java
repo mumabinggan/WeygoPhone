@@ -24,7 +24,7 @@ public class WGAddress extends WGObject {
     public String lastName;
 
     public String country = JHResourceUtils.getInstance().getString(R.string.Address_Italia);
-    public String countryId;
+    public String countryId = "IT";
 
     public String phone;
 

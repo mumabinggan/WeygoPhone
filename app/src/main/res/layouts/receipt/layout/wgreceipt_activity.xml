@@ -12,13 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:background="#ffffff">
+        android:layout_weight="1">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/x13"
+            android:paddingRight="@dimen/x13">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -36,48 +37,24 @@
                         android:background="@color/separate_color"></View>
 
                     <EditText
-                        android:id="@+id/firstET"
+                        android:id="@+id/companyET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Cognome"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"/>
+                        android:background="@null"/>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/separate_color"></View>
 
-                    <EditText
-                        android:id="@+id/lastET"
+                    <include
+                        android:id="@+id/countryView"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
-                        android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Nome"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/separate_color"></View>
-
-                    <EditText
-                        android:id="@+id/countryET"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
-                        android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Italia"
-                        android:enabled="false"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"/>
+                        layout="@layout/common_cell_type4" />
 
                     <View
                         android:layout_width="match_parent"
@@ -88,41 +65,11 @@
                         android:id="@+id/phoneET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Telefono_Cellulare"
                         android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
                         />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/separate_color"></View>
-
-                    <EditText
-                        android:id="@+id/capET"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x41"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
-                        android:background="@null"
-                        android:hint="@string/Address_CAP"
-                        android:textColor="#000000"
-                        android:textSize="@dimen/ft12" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/separate_color"></View>
-
-                    <include
-                        android:id="@+id/cityView"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x41"
-                        layout="@layout/common_cell_type4"
-                        android:background="@null"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -133,12 +80,10 @@
                         android:id="@+id/addressET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Indirizzo"
                         android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
                         />
 
                     <View
@@ -150,12 +95,10 @@
                         android:id="@+id/streetET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Numero_civico"
                         android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
                         />
 
                     <View
@@ -164,15 +107,13 @@
                         android:background="@color/separate_color"></View>
 
                     <EditText
-                        android:id="@+id/citofonoET"
+                        android:id="@+id/cityET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Citofono"
+                        android:hint="@string/Address_Numero_civico"
                         android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
                         />
 
                     <View
@@ -181,27 +122,12 @@
                         android:background="@color/separate_color"></View>
 
                     <EditText
-                        android:id="@+id/scalaET"
+                        android:id="@+id/capET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Scala"
-                        android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
-                        />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/separate_color"></View>
-
-                    <include
-                        android:id="@+id/ascensoreView"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x41"
-                        layout="@layout/common_cell_type4"
+                        android:hint="@string/Address_CAP"
                         android:background="@null"/>
 
                     <View
@@ -210,19 +136,21 @@
                         android:background="@color/separate_color"></View>
 
                     <EditText
-                        android:id="@+id/floorET"
+                        android:id="@+id/codiceET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="#000000"
+                        android:textColor="@color/WGAppBaseTitleAAAAColor"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Piano"
+                        android:hint="@string/Address_Citofono"
                         android:background="@null"
-                        android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"
                         />
 
-                </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/separate_color"></View>
 
+                </LinearLayout>
 
 
             </ScrollView>
@@ -238,26 +166,44 @@
                     android:layout_height="1dip"
                     android:background="@color/separate_color"></View>
 
-                <Button
-                    android:id="@+id/saveBtn"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x34"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/ft12"
-                    android:background="@drawable/register_btn_bg"
-                    android:text="@string/PersonInfo_Save"
-                    android:paddingLeft="@dimen/x13"
-                    android:paddingRight="@dimen/x13"/>
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/commitBtn"
+                        android:layout_width="@dimen/x130"
+                        android:layout_height="@dimen/x34"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/ft12"
+                        android:layout_marginLeft="@dimen/x13"
+                        android:background="@drawable/register_btn_bg"
+                        android:text="@string/Fax_Apply"/>
+
+                    <Button
+                        android:id="@+id/cancelBtn"
+                        android:layout_width="@dimen/x130"
+                        android:layout_height="@dimen/x34"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/ft12"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x13"
+                        android:background="@drawable/login_btn_bg"
+                        android:text="@string/Fax_Cancel"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
         </LinearLayout>
         
-        <!--<ImageView-->
-            <!--android:id="@+id/addIV"-->
-            <!--android:layout_width="@dimen/x60"-->
-            <!--android:layout_height="@dimen/x60"-->
-            <!--android:background="#00ff00"/>-->
+        <ImageView
+            android:id="@+id/addIV"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:background="#00ff00"/>
 
     </FrameLayout>
 

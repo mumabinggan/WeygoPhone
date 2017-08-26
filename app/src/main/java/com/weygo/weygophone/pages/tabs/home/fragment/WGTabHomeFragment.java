@@ -24,6 +24,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;

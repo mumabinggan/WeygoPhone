@@ -10,6 +10,7 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseViewHolder;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.address.list.widget.WGAddressListItemView;
 import com.weygo.weygophone.pages.shopcart.adapter.WGShopCartListAdater;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCart;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
@@ -29,7 +30,7 @@ public class WGAddressListAdapter extends JHRecyclerViewAdapter {
         ITEM_TYPE_SeparateLine,
     }
 
-    public interface OnItemLinsener {
+    public interface OnItemLinsener extends OnBaseItemClickListener {
         void onDelete(WGAddress address);
         void onUse(WGAddress address);
         void onChange(WGAddress address);
@@ -57,9 +58,31 @@ public class WGAddressListAdapter extends JHRecyclerViewAdapter {
         View view = null;
         if (viewType == Item_Type.ITEM_TYPE_AddressListItem.ordinal()) {
             int resourceId = R.layout.wgaddresslist_item_view;
-            view = LayoutInflater.from(
+            WGAddressListItemView tempView = (WGAddressListItemView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            tempView.setListener(new WGAddressListItemView.OnItemListener() {
+                @Override
+                public void onDelete(WGAddress data) {
+                    mListener.onDelete(data);
+                }
+
+                @Override
+                public void onSetDefault(WGAddress data) {
+                    mListener.onSetDefault(data);
+                }
+
+                @Override
+                public void onUse(WGAddress data) {
+                    mListener.onUse(data);
+                }
+
+                @Override
+                public void onChange(WGAddress data) {
+                    mListener.onChange(data);
+                }
+            });
+            view = tempView;
         }
         else if (viewType == Item_Type.ITEM_TYPE_SeparateLine.ordinal()) {
             int resourceId = R.layout.wghome_content_separateline;
@@ -74,8 +97,8 @@ public class WGAddressListAdapter extends JHRecyclerViewAdapter {
     @Override
     public void onBindViewHolder(JHBaseViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        if (mData.size() > position) {
-            WGAddress item = mData.get(position);
+        if (position % 2 == 0) {
+            WGAddress item = mData.get(position/2);
             holder.showWithData(item);
         }
     }
@@ -93,10 +116,10 @@ public class WGAddressListAdapter extends JHRecyclerViewAdapter {
     public int getItemViewType(int position) {
         if (mData != null) {
             if (position % 2 == 0) {
-                Item_Type.ITEM_TYPE_AddressListItem.ordinal();
+                return Item_Type.ITEM_TYPE_AddressListItem.ordinal();
             }
             else {
-                Item_Type.ITEM_TYPE_SeparateLine.ordinal();
+                return Item_Type.ITEM_TYPE_SeparateLine.ordinal();
             }
         }
         return WGHomeFragmentAdapter.Item_Type.ITEM_TYPE_None.ordinal();

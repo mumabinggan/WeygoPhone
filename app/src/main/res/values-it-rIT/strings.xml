@@ -267,4 +267,11 @@
     <string name="Fax_civico">N. civico</string>
     <string name="Fax_fiscale">P. IVA / Codice fiscale</string>
 
+    //优惠卷
+    <string name="CouponList_Input_Holder">Input Placeholder</string>
+    <string name="CouponList_Title">Coupon spesa</string>
+    <string name="CouponList_Selected_Title">Coupon spesa</string>
+    <string name="CouponList_Active">Activate</string>
+    <string name="CouponList_UnActive">Inactivate</string>
+
 </resources>
