@@ -60,4 +60,6 @@ public class WGAddress extends WGObject {
             return ascensores.get(1);
         }
     }
+
+    public boolean showUse;
 }

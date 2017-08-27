@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHLinearLayout;
+import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.widget.WGCellStyle4View;
 import com.weygo.weygophone.pages.receipt.model.WGReceipt;
@@ -14,7 +15,7 @@ import com.weygo.weygophone.pages.receipt.model.WGReceipt;
  * Created by muma on 2017/8/20.
  */
 
-public class WGCommitOrderReceiptView extends JHLinearLayout {
+public class WGCommitOrderReceiptView extends JHRelativeLayout {
 
     TextView mTaxTV;
 

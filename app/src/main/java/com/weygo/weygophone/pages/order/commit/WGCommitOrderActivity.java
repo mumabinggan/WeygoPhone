@@ -25,6 +25,7 @@ import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
+import com.weygo.weygophone.pages.address.list.model.WGAddressListData;
 import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
 import com.weygo.weygophone.pages.coupon.model.WGActiveCouponData;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
@@ -93,8 +94,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle = data.getExtras();
-        if (requestCode == 0) {
+        if (requestCode == 0 && data != null) {
+            Bundle bundle = data.getExtras();
             if (bundle != null) {
                 if (resultCode == WGConstants.WGCommitOrderReceiptReturn) {
                     WGReceipt receipt = (WGReceipt) bundle.getSerializable(WGConstants.WGIntentDataKey);
@@ -273,7 +274,10 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         Intent intent = new Intent(WGCommitOrderActivity.this, WGAddressListActivity.class);
         if (mData != null && mData.address != null) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(WGConstants.WGIntentDataKey, mData.address.addressId);
+            WGAddressListData item = new WGAddressListData();
+            item.addressId = mData.address.addressId;
+            item.canUse = true;
+            bundle.putSerializable(WGConstants.WGIntentDataKey, item);
             intent.putExtras(bundle);
         }
         startActivityForResult(intent, 0);
@@ -299,14 +303,14 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     void handleSelectDeliverDate(int index, String title) {
         WGSettlementDate item = mData.deliverTime.deliverTimes.get(index);
         mData.deliverTime.currentDateId = item.id;
-        mData.deliverTime.currentTimeId = mData.deliverTime.defaultTimeId;
+        mData.deliverTime.currentTimeId = mData.deliverTime.getDefaultTimeId();
         loadUpdateTimeRequest();
         refreshUI();
     }
 
     void handleDeliverTime() {
         List<String> list = new ArrayList();
-        for (WGSettlementTime item : mData.deliverTime.currentTimes) {
+        for (WGSettlementTime item : mData.deliverTime.getCurrentTimes()) {
             list.add(item.time);
         }
         if (list.size() > 0) {
@@ -322,7 +326,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     }
 
     void handleSelectDeliverTime(int index, String title) {
-        WGSettlementTime item = mData.deliverTime.currentTimes.get(index);
+        WGSettlementTime item = mData.deliverTime.getCurrentTimes().get(index);
         mData.deliverTime.currentTimeId = item.id;
         loadUpdateTimeRequest();
         refreshUI();
@@ -353,7 +357,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     void handleIntegral() {
         Intent intent = new Intent(WGCommitOrderActivity.this, WGUseIntegrationActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
     void handleLookMore() {
@@ -377,7 +381,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
             bundle.putSerializable(WGConstants.WGIntentDataKey, mData.receipt);
             intent.putExtras(bundle);
         }
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
     void loadSettlementResultDetail() {

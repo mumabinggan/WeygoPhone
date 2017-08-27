@@ -39,7 +39,8 @@ public class WGCommitOrderDeliverTime extends WGObject {
         }
         for (WGSettlementDate item : deliverTimes) {
             if (item.id.equals(currentDateId)) {
-                currentDate = item.date;
+                currentDate = item.week + "  " + item.date;
+                //currentDate = item.date;
                 break;
             }
         }
@@ -71,7 +72,9 @@ public class WGCommitOrderDeliverTime extends WGObject {
     public List<WGSettlementTime> currentTimes;
     public List<WGSettlementTime> getCurrentTimes() {
         for (WGSettlementDate date : deliverTimes) {
-            return date.times;
+            if (date.id == currentDateId) {
+                return date.times;
+            }
         }
         return null;
     }

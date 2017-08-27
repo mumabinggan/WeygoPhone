@@ -15,13 +15,18 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGCellStyle4View;
+import com.weygo.weygophone.common.widget.WGOptionPickerView;
+import com.weygo.weygophone.pages.address.list.model.WGAddressCityListItem;
 import com.weygo.weygophone.pages.receipt.model.WGReceipt;
 import com.weygo.weygophone.pages.receipt.model.WGReceiptCountryListItem;
 import com.weygo.weygophone.pages.receipt.model.request.WGCountryListRequest;
 import com.weygo.weygophone.pages.receipt.model.response.WGCountryListResponse;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * Created by muma on 2017/8/25.
@@ -73,7 +78,6 @@ public class WGReceiptActivity extends WGTitleActivity {
             Serializable temp = bundle.getSerializable(WGConstants.WGIntentDataKey);
             if (temp != null && temp instanceof WGReceipt) {
                 mData = (WGReceipt) temp;
-                refreshUI();
             }
         }
     }
@@ -89,6 +93,12 @@ public class WGReceiptActivity extends WGTitleActivity {
         mStreetET = (EditText) findViewById(R.id.streetET);
         mCityET = (EditText) findViewById(R.id.cityET);
         mCountryView = (WGCellStyle4View) findViewById(R.id.countryView);
+        mCountryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCountry();
+            }
+        });
         mCodiceET = (EditText) findViewById(R.id.codiceET);
         mCommitBtn = (Button) findViewById(R.id.commitBtn);
         mCommitBtn.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +114,7 @@ public class WGReceiptActivity extends WGTitleActivity {
                 handleCancel();
             }
         });
+        refreshUI();
     }
 
     void handleCancel() {
@@ -134,10 +145,34 @@ public class WGReceiptActivity extends WGTitleActivity {
             mCapET.setText(mData.cap);
             mAddressET.setText(mData.address);
             mStreetET.setText(mData.civico);
-            mCountryView.setTitle(mData.country);
             mCityET.setText(mData.city);
             mCodiceET.setText(mData.taxCode);
+            mCountryView.setTitle(mData.country);
         }
+    }
+
+    void handleCountry() {
+        List<String> list = new ArrayList();
+        for (WGReceiptCountryListItem item : mCountryList) {
+            list.add(item.label);
+        }
+        if (list.size() > 0) {
+            WGOptionPickerView picker = new WGOptionPickerView(this, list);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    handleSelectedCountry(index, item);
+                }
+            });
+            picker.show();
+        }
+    }
+
+    void handleSelectedCountry(int index, String title) {
+        WGReceiptCountryListItem item = mCountryList.get(index);
+        mData.country = item.label;
+        mData.countryId = item.value;
+        mCountryView.setTitle(mData.country);
     }
 
     void loadCountryListRequest() {

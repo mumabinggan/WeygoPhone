@@ -41,8 +41,7 @@ public class WGCommitOrderDeliverTimeView extends JHLinearLayout {
         if (object instanceof WGCommitOrderDeliverTime) {
             WGCommitOrderDeliverTime item = (WGCommitOrderDeliverTime) object;
             mView.setTitle(R.string.CommitOrder_Deliver_Time);
-            mView.setDetailTitle(item.currentTime);
+            mView.setDetailTitle(item.getCurrentTime());
         }
     }
-
 }

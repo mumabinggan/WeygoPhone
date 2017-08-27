@@ -14,6 +14,7 @@
         android:textColor="#000000"
         android:hint="@string/CommitOrder_Remark"
         android:paddingRight="@dimen/x13"
-        android:paddingLeft="@dimen/x13"/>
+        android:paddingLeft="@dimen/x13"
+        android:background="@null"/>
 
 </com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderRemarkView>

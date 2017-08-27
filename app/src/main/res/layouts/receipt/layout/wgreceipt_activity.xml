@@ -17,14 +17,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/x13"
-            android:paddingRight="@dimen/x13">
+            android:layout_height="match_parent">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="#ffffff">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -40,10 +39,12 @@
                         android:id="@+id/companyET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Cognome"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -65,11 +66,12 @@
                         android:id="@+id/phoneET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Telefono_Cellulare"
                         android:background="@null"
-                        />
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13" />
 
                     <View
                         android:layout_width="match_parent"
@@ -80,11 +82,12 @@
                         android:id="@+id/addressET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Indirizzo"
                         android:background="@null"
-                        />
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -95,11 +98,12 @@
                         android:id="@+id/streetET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Numero_civico"
                         android:background="@null"
-                        />
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -110,11 +114,12 @@
                         android:id="@+id/cityET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Numero_civico"
+                        android:hint="@string/Address_Citta"
                         android:background="@null"
-                        />
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -125,10 +130,12 @@
                         android:id="@+id/capET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_CAP"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -139,11 +146,12 @@
                         android:id="@+id/codiceET"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
-                        android:textColor="@color/WGAppBaseTitleAAAAColor"
+                        android:textColor="#000000"
                         android:textSize="@dimen/ft12"
                         android:hint="@string/Address_Citofono"
                         android:background="@null"
-                        />
+                        android:paddingLeft="@dimen/x13"
+                        android:paddingRight="@dimen/x13"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -159,7 +167,10 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x48"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="#ffffff"
+                android:paddingLeft="@dimen/x13"
+                android:paddingRight="@dimen/x13">
 
                 <View
                     android:layout_width="match_parent"
@@ -199,11 +210,11 @@
 
         </LinearLayout>
         
-        <ImageView
-            android:id="@+id/addIV"
-            android:layout_width="@dimen/x60"
-            android:layout_height="@dimen/x60"
-            android:background="#00ff00"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/addIV"-->
+            <!--android:layout_width="@dimen/x60"-->
+            <!--android:layout_height="@dimen/x60"-->
+            <!--android:background="#00ff00"/>-->
 
     </FrameLayout>
 

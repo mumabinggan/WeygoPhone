@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderReceiptView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x85">
+    android:layout_height="@dimen/x85"
+    android:background="#ffffff">
 
     <ImageView
         android:id="@+id/arrImageView"
@@ -22,8 +23,7 @@
         android:layout_marginRight="@dimen/x5"
         android:textSize="@dimen/ft12"
         android:maxLines="1"
-        android:textColor="@color/WGAppBaseTitleAAAColor"
-        />
+        android:textColor="@color/WGAppBaseTitleAAAColor" />
 
     <TextView
         android:id="@+id/taxTV"

@@ -223,19 +223,17 @@
 
                 </LinearLayout>
 
-
-
             </ScrollView>
             
-            <LinearLayout
-                android:orientation="vertical"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x48"
-                android:gravity="center">
+                android:layout_height="@dimen/x48">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
                     android:background="@color/separate_color"></View>
 
                 <Button
@@ -244,12 +242,15 @@
                     android:layout_height="@dimen/x34"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/ft12"
+                    android:layout_marginLeft="@dimen/x13"
+                    android:layout_marginRight="@dimen/x13"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/register_btn_bg"
                     android:text="@string/PersonInfo_Save"
                     android:paddingLeft="@dimen/x13"
                     android:paddingRight="@dimen/x13"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
         

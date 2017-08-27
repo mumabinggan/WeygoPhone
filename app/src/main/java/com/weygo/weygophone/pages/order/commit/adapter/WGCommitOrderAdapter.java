@@ -155,10 +155,12 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
         mPostionValueMap.put(key, value);
         key += 1;
 
-        value = new CellData(Item_Type.ITEM_TYPE_Integral,
-                mData);
-        mPostionValueMap.put(key, value);
-        key += 1;
+        if (mData != null && mData.integration > 0) {
+            value = new CellData(Item_Type.ITEM_TYPE_Integral,
+                    mData);
+            mPostionValueMap.put(key, value);
+            key += 1;
+        }
 
         value = new CellData(Item_Type.ITEM_TYPE_PayMethod,
                 mData.payMothod);
@@ -319,7 +321,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleTouchDeliverDate(mData.deliverTime);
+                    handleTouchDeliverTime(mData.deliverTime);
                 }
             });
         }
@@ -422,7 +424,7 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             view = tempView;
         }
         else if (viewType == Item_Type.ITEM_TYPE_MinPriceTips.ordinal()) {
-            resourceId = R.layout.commitorder_delivertips_view;
+            resourceId = R.layout.commitorder_minpricetips_view;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);

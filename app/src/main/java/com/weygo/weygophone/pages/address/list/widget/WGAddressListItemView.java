@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.address.list.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.EventLog;
 import android.view.View;
 import android.widget.TextView;
 
@@ -135,6 +136,12 @@ public class WGAddressListItemView extends JHRelativeLayout {
         else {
             mUnDefaultTV.setVisibility(VISIBLE);
             mDefaultTV.setVisibility(GONE);
+        }
+        if (mData.showUse) {
+            mUseTV.setVisibility(VISIBLE);
+        }
+        else {
+            mUseTV.setVisibility(INVISIBLE);
         }
     }
 }

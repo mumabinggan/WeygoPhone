@@ -21,6 +21,7 @@ import com.weygo.weygophone.pages.address.edit.WGEditAddressActivity;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.edit.model.WGEditAddressData;
 import com.weygo.weygophone.pages.address.list.adapter.WGAddressListAdapter;
+import com.weygo.weygophone.pages.address.list.model.WGAddressListData;
 import com.weygo.weygophone.pages.address.list.model.request.WGAddressListRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGDeleteAddressRequest;
 import com.weygo.weygophone.pages.address.list.model.request.WGSetDefaultAddressRequest;
@@ -44,6 +45,7 @@ public class WGAddressListActivity extends WGTitleActivity {
     ImageView mAddIV;
 
     long mAddressId;
+    boolean mCanUse;
 
     WGAddress mChangeAddress;
 
@@ -71,14 +73,14 @@ public class WGAddressListActivity extends WGTitleActivity {
 
     @Override
     public void handleReturn() {
-        handleChangeAddress(mChangeAddress);
         super.handleReturn();
+        handleChangeAddress(mChangeAddress);
     }
 
     @Override
     public void onBackPressed() {
-        handleChangeAddress(mChangeAddress);
         super.onBackPressed();
+        handleChangeAddress(mChangeAddress);
     }
 
     @Override
@@ -92,8 +94,10 @@ public class WGAddressListActivity extends WGTitleActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Serializable temp = bundle.getSerializable(WGConstants.WGIntentDataKey);
-            if (temp != null && temp instanceof Long) {
-                mAddressId = (Long)temp;
+            if (temp != null && temp instanceof WGAddressListData) {
+                WGAddressListData item = (WGAddressListData) temp;
+                mAddressId = item.addressId;
+                mCanUse = item.canUse;
             }
         }
     }
@@ -143,7 +147,7 @@ public class WGAddressListActivity extends WGTitleActivity {
 
     void handleAdd() {
         Intent intent = new Intent(this, WGEditAddressActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
     void handleUse(WGAddress address) {
@@ -152,6 +156,9 @@ public class WGAddressListActivity extends WGTitleActivity {
     }
 
     void handleChangeAddress(WGAddress address) {
+        if (address == null) {
+            return;
+        }
         Intent intent = getIntent();
         Bundle bundle = new Bundle();
         if (address != null) {
@@ -233,6 +240,9 @@ public class WGAddressListActivity extends WGTitleActivity {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
             mData = response.data;
+            for (WGAddress item : mData) {
+                item.showUse = mCanUse;
+            }
             mAdapter.setData(response.data);
         }
         else {

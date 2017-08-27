@@ -63,17 +63,17 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
                 number2 + mIntegration.currentCanUseCount + number3 + mIntegration.money + number4);
         if (mIntegration.hasUsed()) {
             mUseBtn.setText(R.string.UseIntegral_Cancel);
-            mUseBtn.setBackgroundResource(R.color.WGAppBaseColor);
+            mUseBtn.setBackgroundResource(R.drawable.login_btn_bg);
         }
         else {
             mUseBtn.setText(R.string.UseIntegral_OK);
-            mUseBtn.setBackgroundResource(R.color.WGAppBlueButtonColor);
+            mUseBtn.setBackgroundResource(R.drawable.register_btn_bg);
         }
     }
 
     void loadIntegration() {
         final WGIntegrationRequest request = new WGIntegrationRequest();
-        this.postAsyn(request, WGUseIntegrationResponse.class, new JHResponseCallBack() {
+        this.postAsyn(request, WGIntegrationResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {
                 handleIntegrationResponse((WGIntegrationResponse) response);
