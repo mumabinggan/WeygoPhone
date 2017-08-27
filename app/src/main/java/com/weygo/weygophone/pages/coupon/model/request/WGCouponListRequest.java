@@ -7,4 +7,7 @@ import com.weygo.weygophone.base.WGGuestRequest;
  */
 
 public class WGCouponListRequest extends WGGuestRequest {
+    public String api() {
+        return "customer/getCoupons?";
+    }
 }

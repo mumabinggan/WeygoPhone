@@ -1,20 +1,16 @@
 package com.weygo.weygophone.pages.order.commit;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
-import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -491,16 +487,19 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         request.addressId = mData.address.addressId;
 
         WGReceipt receipt = mData.receipt;
-        request.useBilling = (receipt == null) ? 0 : 1;
-        request.billingCompanyName = receipt.companyName;
-        request.billingCountry = receipt.countryId;
-        request.billingPhone = receipt.phone;
-        request.billingAddress = receipt.address;
-        request.billingCivico = receipt.civico;
-        request.billingCity = receipt.city;
-        request.billingCap = receipt.cap;
-        request.billingProvince = receipt.province;
-        request.billingTaxCode = receipt.taxCode;
+        if (receipt != null) {
+            request.useBilling = 1;
+            request.billingCompanyName = receipt.companyName;
+            request.billingCountry = receipt.countryId;
+            request.billingPhone = receipt.phone;
+            request.billingAddress = receipt.address;
+            request.billingCivico = receipt.civico;
+            request.billingCity = receipt.city;
+            request.billingCap = receipt.cap;
+            request.billingProvince = receipt.province;
+            request.billingTaxCode = receipt.taxCode;
+        }
+        request.useBilling = 0;
 
         WGCommitOrderDeliverTime time = mData.deliverTime;
         request.deliverDate = time.currentDateId;

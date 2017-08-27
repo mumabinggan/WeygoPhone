@@ -3,7 +3,8 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="@dimen/x94"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#ffffff">
 
     <FrameLayout
         android:layout_width="@dimen/x294"
