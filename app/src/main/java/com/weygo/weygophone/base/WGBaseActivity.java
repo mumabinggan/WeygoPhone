@@ -79,7 +79,7 @@ public class WGBaseActivity extends JHActivity {
 
     @Override
     public boolean useActivityCollector() {
-        return false;
+        return true;
     }
 
     //子类重写

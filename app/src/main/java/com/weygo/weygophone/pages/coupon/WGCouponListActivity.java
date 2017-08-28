@@ -65,7 +65,7 @@ public class WGCouponListActivity extends WGTitleActivity {
             if (temp != null && temp instanceof WGCoupon) {
                 mCoupon = (WGCoupon)temp;
             }
-            Serializable temp1 = bundle.getSerializable(WGConstants.WGIntentDataKey);
+            Serializable temp1 = bundle.getSerializable(WGConstants.WGIntentDataKey1);
             if (temp1 != null && temp1 instanceof Boolean) {
                 mIsSelected = (boolean)temp1;
             }

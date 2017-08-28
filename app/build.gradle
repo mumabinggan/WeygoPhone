@@ -37,6 +37,8 @@ android {
                     'src/main/res/layouts/register',
                     'src/main/res/layouts/receipt',
                     'src/main/res/layouts/coupon',
+                    'src/main/res/layouts/pay/paySuccess',
+                    'src/main/res/layouts/pay/payWeb',
                     'src/main/res/layouts/setting',
                     'src/main/res/layouts/address/edit',
                     'src/main/res/layouts/address/list',
@@ -102,4 +104,5 @@ dependencies {
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
 
     compile 'com.zhy:flowlayout-lib:1.0.3'
+
 }

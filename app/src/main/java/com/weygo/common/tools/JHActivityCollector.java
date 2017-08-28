@@ -43,4 +43,8 @@ public class JHActivityCollector extends JHObject {
     public static JHActivity lastActivity() {
         return (JHActivity)activityList.getLast();
     }
+
+    public static JHActivity getActivity(int index) {
+        return (JHActivity)activityList.get(index);
+    }
 }

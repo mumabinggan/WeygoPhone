@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
@@ -55,6 +56,9 @@ import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderFooterView;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
+import com.weygo.weygophone.pages.pay.paySuccess.model.WGPaySuccessData;
+import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
 import com.weygo.weygophone.pages.receipt.WGReceiptActivity;
 import com.weygo.weygophone.pages.receipt.model.WGReceipt;
 
@@ -365,6 +369,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         if (mData != null && mData.coupon != null) {
             Bundle bundle = new Bundle();
             bundle.putSerializable(WGConstants.WGIntentDataKey, mData.coupon);
+            bundle.putSerializable(WGConstants.WGIntentDataKey1, true);
             intent.putExtras(bundle);
         }
         startActivityForResult(intent, 0);
@@ -529,18 +534,34 @@ public class WGCommitOrderActivity extends WGTitleActivity {
             if (JHStringUtils.isNullOrEmpty(response.data.action)) {
                 if (JHStringUtils.isNullOrEmpty(response.data.orderId)) {
                     Log.e("==commitorder==", "返回的 orderId 为空");
-//                    //[self showWarningMessage:response.message onCompletion:^(void) {
-//                                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-//                        }];
+                    Toast.makeText(getBaseContext(), response.message, Toast.LENGTH_LONG);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finish();
                 }
                 else {
                     Log.e("==commitorder==", "跳转到支付成功页面");
-                    //PaySuccessViewController
+                    Intent intent = new Intent(WGCommitOrderActivity.this, WGPaySuccessActivity.class);
+                    if (response != null && response.data != null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(WGConstants.WGIntentDataKey, response.data.orderId);
+                        intent.putExtras(bundle);
+                    }
+                    startActivity(intent);
                 }
             }
             else {
                 //PayWeb
-                Log.e("==commitorder==", "跳转到支付Web页面");
+                Intent intent = new Intent(WGCommitOrderActivity.this, WGPayWebActivity.class);
+                if (response != null && response.data != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(WGConstants.WGIntentDataKey, response.data);
+                    intent.putExtras(bundle);
+                }
+                startActivity(intent);
             }
         }
         else if (response.overWeight()) {

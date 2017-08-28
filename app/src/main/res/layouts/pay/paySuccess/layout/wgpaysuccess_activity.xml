@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/base_titlebar"
+        layout="@layout/common_navigationbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/x96"
+            android:layout_height="@dimen/x96"
+            android:scaleType="centerCrop"
+            android:src="@drawable/paysuccess_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x51"></ImageView>
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="@dimen/x14"
+            android:gravity="center"
+            android:text="@string/PaySuccess_SubTitle"
+            android:textColor="@color/WGAppBaseTitleAColor"
+            android:textSize="@dimen/ft14"/>
+
+        <TextView
+            android:id="@+id/title1TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTV"
+            android:layout_marginTop="@dimen/x9"
+            android:gravity="center"
+            android:text="@string/PaySuccess_SubTitle1"
+            android:textColor="@color/WGAppBaseTitleAAColor"
+            android:textSize="@dimen/ft10"/>
+        
+        <RelativeLayout
+            android:id="@+id/orderView"
+            android:layout_width="@dimen/x294"
+            android:layout_height="@dimen/x85"
+            android:layout_below="@+id/title1TV"
+            android:layout_marginTop="@dimen/x21"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/paysuccess_order_bg">
+
+            <TextView
+                android:id="@+id/orderTitle1TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x14"
+                android:gravity="center"
+                android:text="@string/PaySuccess_SubTitle2"
+                android:textColor="@color/WGAppBaseTitleAColor"
+                android:textSize="@dimen/ft12"/>
+
+            <TextView
+                android:id="@+id/titleLabel3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/orderTitle1TV"
+                android:layout_marginTop="@dimen/x7"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@string/PaySuccess_SubTitle3"
+                android:textColor="@color/WGAppBaseTitleAAColor"
+                android:textSize="@dimen/ft12"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/continueBtn"
+            android:layout_width="@dimen/x135"
+            android:layout_height="@dimen/x34"
+            android:layout_below="@+id/orderView"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ft12"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/register_btn_bg"
+            android:layout_marginTop="@dimen/x15"
+            android:text="@string/PaySuccess_Button" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

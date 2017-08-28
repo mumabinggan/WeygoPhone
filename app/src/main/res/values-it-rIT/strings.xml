@@ -274,4 +274,12 @@
     <string name="CouponList_Active">Activate</string>
     <string name="CouponList_UnActive">Inactivate</string>
 
+    //支付成功
+    <string name="PaySuccess_Title">Pagamento effettuato con successo</string>
+    <string name="PaySuccess_SubTitle">TI RINGRAZIAMO PER IL \n TUO ACQUISTO!</string>
+    <string name="PaySuccess_SubTitle1">IL TUO ORDINE È STATO RICEVUTO.</string>
+    <string name="PaySuccess_SubTitle2">IL TUO ORDINE :</string>
+    <string name="PaySuccess_SubTitle3">Riceverai una conferma dell’ordine via email con \n i dettagli e il link per seguirne i progressi.</string>
+    <string name="PaySuccess_Button">Continua l\'acquisto</string>
+
 </resources>

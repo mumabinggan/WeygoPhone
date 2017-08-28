@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.tabs.mine.fragment;
 
 import android.content.Intent;
+import android.media.MediaDrmException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,15 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
 import com.weygo.weygophone.pages.address.list.model.WGAddressListData;
+import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
+import com.weygo.weygophone.pages.collection.WGCollectionActivity;
+import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
+import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
 import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
+import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
+import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
+import com.weygo.weygophone.pages.setting.WGSettingActivity;
 
 import org.w3c.dom.Text;
 
@@ -93,22 +102,58 @@ public class WGTabMineFragment extends WGFragment {
         //All Order
         mOrderTextView = (TextView) view.findViewById(R.id.allOrderCountTextView);
         mOrderTextView.setText(WGApplicationUserUtils.getInstance().orderCount() + "");
+        mOrderTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleOrder(false);
+            }
+        });
 
         //Deliver Order
         mDeliverTextView = (TextView) view.findViewById(R.id.deliverOrderCountTextView);
         mDeliverTextView.setText(WGApplicationUserUtils.getInstance().deliverOrderCount() + "");
+        mDeliverTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleOrder(true);
+            }
+        });
 
         //mIntegralView
         mIntegralView = (ViewGroup) view.findViewById(R.id.scoreLayout);
+        mIntegralView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleIntegral();;
+            }
+        });
 
         //mCouponView
         mCouponView = (ViewGroup) view.findViewById(R.id.couponLayout);
+        mCouponView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCoupon();
+            }
+        });
 
         //mFootPrintView
         mFootPrintView = (ViewGroup) view.findViewById(R.id.footprintLayout);
+        mFootPrintView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleFooterPrint();
+            }
+        });
 
         //mFavoriteView
         mFavoriteView = (ViewGroup) view.findViewById(R.id.couponLayout);
+        mFavoriteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleCoupon();
+            }
+        });
 
         //mAddressView
         mAddressView = (ViewGroup) view.findViewById(R.id.addressLayout);
@@ -121,15 +166,39 @@ public class WGTabMineFragment extends WGFragment {
 
         //mServiceView
         mServiceView = (ViewGroup) view.findViewById(R.id.serviceLayout);
+        mServiceView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleService();;
+            }
+        });
 
         //mServiceView
         mPersonView = (ViewGroup) view.findViewById(R.id.userInfoLayout);
+        mPersonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handlePerson();
+            }
+        });
 
         //mServiceView
         mSettingView = (ViewGroup) view.findViewById(R.id.setLayout);
+        mSettingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleSetting();
+            }
+        });
 
         //mServiceView
         mExitView = (ViewGroup) view.findViewById(R.id.loginLayout);
+        mExitView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleExit();
+            }
+        });
     }
 
     void handleAddress() {
@@ -140,5 +209,54 @@ public class WGTabMineFragment extends WGFragment {
         bundle.putSerializable(WGConstants.WGIntentDataKey, item);
         intent.putExtras(bundle);
         startActivityForResult(intent, 0);
+    }
+
+    void handleSetting() {
+        Intent intent = new Intent(getActivity(), WGSettingActivity.class);
+        startActivity(intent);
+    }
+
+    void handleFooterPrint() {
+        Intent intent = new Intent(getActivity(), WGFootprintActivity.class);
+        startActivity(intent);
+    }
+
+    void handleCoupon() {
+        Intent intent = new Intent(getActivity(), WGCouponListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey1, false);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    void handleFavorite() {
+        Intent intent = new Intent(getActivity(), WGCollectionActivity.class);
+        startActivity(intent);
+    }
+
+    void handleService() {
+        Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
+        startActivity(intent);
+    }
+
+    void handlePerson() {
+        Intent intent = new Intent(getActivity(), WGPersonInfoActivity.class);
+        startActivity(intent);
+    }
+
+    void handleIntegral() {
+
+    }
+
+    void handleExit() {
+
+    }
+
+    void handleOrder(boolean deliver) {
+        Intent intent = new Intent(getActivity(), WGOrderListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, deliver);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -23,6 +23,7 @@ import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGMainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +139,18 @@ public class JHActivity extends FragmentActivity {
         //remove activity to Collector
         if (useActivityCollector()) {
             JHActivityCollector.removeActivity(this);
+        }
+    }
+
+    public void gotoHome() {
+        Integer count = JHActivityCollector.getActivityList().size();
+        for (int num = count - 1; num > 0; --num) {
+            JHActivity activity = JHActivityCollector.getActivity(num);
+            if (activity instanceof WGMainActivity) {
+                return;
+            }
+            JHActivityCollector.removeActivity(activity);
+            activity.finish();
         }
     }
 
