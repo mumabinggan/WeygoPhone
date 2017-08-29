@@ -192,7 +192,7 @@ public class WGTabMineFragment extends WGFragment {
         });
 
         //mServiceView
-        mExitView = (ViewGroup) view.findViewById(R.id.loginLayout);
+        mExitView = (ViewGroup) view.findViewById(R.id.logoutLayout);
         mExitView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,6 +16,7 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
 
@@ -37,6 +38,12 @@ public class WGBaseServiceActivity extends WGBaseActivity {
         if (!isFirst) {
             JHLocalSettingUtils.setBooleanLocalSetting(this, WGConstants.WGLocalSettingWelcome, true);
             mLayout = (WelcomeCoordinatorLayout) findViewById(R.id.coordinator);
+            if (WGChangeAppLanguageLogic.isItalin()) {
+                mLayout.addPage(R.layout.welcome_00, R.layout.welcome_01, R.layout.welcome_02);
+            }
+            else {
+                mLayout.addPage(R.layout.welcome_10, R.layout.welcome_11, R.layout.welcome_12);
+            }
             mLayout.addPage(R.layout.welcome_00, R.layout.welcome_01, R.layout.welcome_02);
             mLayout.setOnPageScrollListener(new WelcomeCoordinatorLayout.OnPageScrollListener() {
                 @Override

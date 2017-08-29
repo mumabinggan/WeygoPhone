@@ -26,6 +26,13 @@ public class WGChangeAppLanguageLogic {
 
     static Locale mCurrentAppLocale;
 
+    public static boolean isItalin() {
+        return mCurrentAppLocale.toString().contains("it");
+    }
+    public static boolean isChiness() {
+        return mCurrentAppLocale.toString().contains("zh");
+    }
+
     static List mSupportLanguageList = Arrays.asList(WGAppLanguageItalin, WGAppLanguageChiness);
 
     public static void resetAppLanguage(Context context, WGChangeLanguageCallBack callBack) {
@@ -51,9 +58,10 @@ public class WGChangeAppLanguageLogic {
         if (mCurrentAppLocale == null) {
             Locale locale = context.getResources().getConfiguration().locale;
             String language = locale.getLanguage();
-            if (!language.endsWith("zh") && !language.endsWith("it")) {
+            if (!language.contains("zh") && !language.contains("it")) {
                 mCurrentAppLocale = Locale.ITALIAN;
                 JHLanguageUtils.setAppLanguage(context, mCurrentAppLocale);
+                JHLocalSettingUtils.setLocalSetting(context, kUserSetLanguageKey, locale);
             }
         }
         else {
@@ -78,11 +86,12 @@ public class WGChangeAppLanguageLogic {
         if (!canChangeLanguage) {
             return;
         }
-        if (locale.equals(mCurrentAppLocale)) {
+        if (locale.toString().contains(mCurrentAppLocale.toString())) {
             return;
         }
         JHLocalSettingUtils.setLocalSetting(context, kUserSetLanguageKey, locale);
         mCurrentAppLocale = locale;
+        JHLanguageUtils.setAppLanguage(context, mCurrentAppLocale);
         if (callBack != null) {
             callBack.onCompletion(mCurrentAppLocale, true);
         }
@@ -90,6 +99,6 @@ public class WGChangeAppLanguageLogic {
 
     public static boolean hasChangeAppLocale(Context context) {
         Locale currentLocale = context.getResources().getConfiguration().locale;
-        return !(currentLocale.equals(mCurrentAppLocale));
+        return !currentLocale.toString().contains(mCurrentAppLocale.toString());
     }
 }
