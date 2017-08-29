@@ -18,6 +18,8 @@ allprojects {
     }
 }
 
+ext.support_version = "26.0.0-alpha1"  //看这行，这行。
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

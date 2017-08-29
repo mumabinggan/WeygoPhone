@@ -40,6 +40,17 @@ public class JHLocalSettingUtils {
         return JSON.parseObject(value, clazz);
     }
 
+    public static void setBooleanLocalSetting(Context context, String key, boolean value) {
+        SharedPreferences.Editor editor = getSharePreferences(context).edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static boolean getBooleanLocalSetting(Context context, String key) {
+        SharedPreferences sharedPreferences = getSharePreferences(context);
+        return sharedPreferences.getBoolean(key, false);
+    }
+
     public static void setStringLocalSetting(Context context, String key, String value) {
         SharedPreferences.Editor editor = getSharePreferences(context).edit();
         editor.putString(key, value);

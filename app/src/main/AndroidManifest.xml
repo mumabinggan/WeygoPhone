@@ -49,7 +49,7 @@
         <activity android:name=".pages.address.list.WGAddressListActivity"></activity>
         <activity android:name=".pages.coupon.WGCouponListActivity"></activity>
         <activity android:name=".pages.receipt.WGReceiptActivity"></activity>
-        <activity android:name=".pages.pay.payWeb.model.WGPayWebActivity"></activity>
+        <activity android:name=".pages.pay.payWeb.WGPayWebActivity"></activity>
         <activity android:name=".pages.pay.paySuccess.WGPaySuccessActivity"></activity>
     </application>
 

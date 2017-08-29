@@ -25,6 +25,8 @@ public class WGConstants {
     public static final String WGLocalSettingClassifyCache = "WGLocalSettingClassifyCache";
     public static final String WGLocalSettingAsiaCache = "WGLocalSettingAsiaCache";
     public static final String WGLocalSettingBenefitCache = "WGLocalSettingBenefitCache";
+    public static final String WGLocalSettingWelcome = "WGLocalSettingWelcome";
+    public static final String WGLocalSettingLanguage = "WGLocalSettingLanguage";
 
     //RefreshNotification
     public static final int WGRefreshNotificationTypeLogin = 1;
@@ -75,4 +77,8 @@ public class WGConstants {
     public static final int WGCommitOrderAddressReturn = 11;
     public static final int WGCommitOrderCouponReturn = 12;
     public static final int WGCommitOrderIntegralReturn = 13;
+
+    public static final int WGLanguageIT = 1;
+    public static final int WGLanguageCN = 2;
 }
+
