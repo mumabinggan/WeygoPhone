@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHRecyclerViewAdapter;
@@ -18,6 +19,7 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
 import com.weygo.weygophone.pages.classifyFilter.WGClassifyDetailFilterActivity;
@@ -36,6 +38,8 @@ import java.util.List;
  */
 
 public class WGTabClassifyFragment extends WGFragment {
+
+    LinearLayout mLayout;
 
     //navigationbar
     WGTabNavigationBar mNavigationBar;
@@ -70,6 +74,7 @@ public class WGTabClassifyFragment extends WGFragment {
     public void initSubView(View view) {
 
         final WGMainActivity activity = (WGMainActivity) getActivity();
+        mLayout = (LinearLayout) view.findViewById(R.id.layout);
         mNavigationBar = (WGTabNavigationBar) view.findViewById(R.id.classify_navigationBar);
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
@@ -146,12 +151,15 @@ public class WGTabClassifyFragment extends WGFragment {
     }
 
     void handleSubClassifyItemClick(View view, WGClassifyItem item) {
-        Log.e("handle", "handleSubClassifyItemClick" + item.name);
-        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        int[] distance = {0,0};
+        WGApplicationAnimationUtils.add(getContext(), mLayout, view, null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+        return;
+//        Log.e("handle", "handleSubClassifyItemClick" + item.name);
+//        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
     }
 
     void handleSubClassifyHotGoodItem(View view, WGClassifyHotGoodItem item) {

@@ -75,4 +75,13 @@
 
     </RelativeLayout>
 
+    <include
+        android:id="@+id/addView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/priceView"
+        android:layout_below="@+id/addView"
+        android:layout_marginTop="@dimen/x5"
+        layout="@layout/common_addgood" />
+
 </com.weygo.weygophone.pages.shopcart.widget.WGShopCartItemView>

@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.tabs.home.widget;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -65,6 +66,10 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
             View item = findViewById(id);
             item.setOnClickListener(this);
         }
+    }
+
+    public View getShopCartView() {
+        return findViewById(R.id.navigationBar_cart);
     }
 
     @Override

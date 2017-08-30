@@ -28,6 +28,7 @@ import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
 import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -115,7 +116,7 @@ public class WGTabHomeFragment extends WGFragment {
 //                        .go("http://www.baidu.com");
 //                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
 //                startActivity(intent);
-                Intent intent = new Intent(getActivity(), WGPaySuccessActivity.class);
+                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
                 startActivity(intent);
             }
 

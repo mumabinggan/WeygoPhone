@@ -78,7 +78,7 @@ public class WGConstants {
     public static final int WGCommitOrderCouponReturn = 12;
     public static final int WGCommitOrderIntegralReturn = 13;
 
-    public static final int WGLanguageIT = 1;
-    public static final int WGLanguageCN = 2;
+    public static final int WGGoodAddViewFromGoodDetail = 1;
+    public static final int WGGoodAddViewFromCart = 2;
 }
 

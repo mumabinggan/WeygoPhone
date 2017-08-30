@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.common.widget.WGAddGoodView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="@dimen/x68"
+    android:layout_height="@dimen/x21">
+
+    <ImageView
+        android:id="@+id/subBtn"
+        android:layout_width="@dimen/x21"
+        android:layout_height="match_parent"
+        android:src="@drawable/sub_good"/>
+
+    <TextView
+        android:id="@+id/countLabel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseColor"
+        android:gravity="center"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/addBtn"
+        android:layout_width="@dimen/x21"
+        android:layout_height="match_parent"
+        android:src="@drawable/add_good" />
+
+</com.weygo.weygophone.common.widget.WGAddGoodView>
