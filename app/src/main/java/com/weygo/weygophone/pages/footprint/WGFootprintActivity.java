@@ -55,8 +55,11 @@ public class WGFootprintActivity extends WGGoodListActivity {
             if (mList == null) {
                 mList = new ArrayList();
             }
-            mList.addAll(response.data);
-            mAdapter.setData(mList);
+            if (response.data != null) {
+                mList.addAll(response.data);
+                mAdapter.setData(mList);
+            }
+
         }
         else {
             showWarning(response.message);

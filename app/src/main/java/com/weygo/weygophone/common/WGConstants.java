@@ -27,6 +27,7 @@ public class WGConstants {
     public static final String WGLocalSettingBenefitCache = "WGLocalSettingBenefitCache";
     public static final String WGLocalSettingWelcome = "WGLocalSettingWelcome";
     public static final String WGLocalSettingLanguage = "WGLocalSettingLanguage";
+    public static final String WGLocalSettingSearchHistory = "WGLocalSettingSearchHistory";
 
     //RefreshNotification
     public static final int WGRefreshNotificationTypeLogin = 1;
@@ -40,6 +41,9 @@ public class WGConstants {
     //Notification
     public static final int WGNotificationTypeLogin = 1;
     public static final int WGNotificationTypeLogout = 2;
+
+    //Special Notification
+    public static final String WGSpecialNotificationTypeShopCartCountAction = "WGSpecialNotificationTypeShopCartCountAction";
 
     //Intent Data key
     public static final String WGIntentDataKey = "WGIntentDataKey";

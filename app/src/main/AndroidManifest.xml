@@ -51,6 +51,7 @@
         <activity android:name=".pages.receipt.WGReceiptActivity"></activity>
         <activity android:name=".pages.pay.payWeb.WGPayWebActivity"></activity>
         <activity android:name=".pages.pay.paySuccess.WGPaySuccessActivity"></activity>
+        <activity android:name=".pages.search.WGSearchActivity"></activity>
     </application>
 
     <!-- Include following permission if you load images from Internet -->

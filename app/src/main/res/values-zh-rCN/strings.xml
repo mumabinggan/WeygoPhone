@@ -282,4 +282,9 @@
     <string name="PaySuccess_SubTitle3">您将收到封我们的电子邮件来确认订单与详细信息\n并使用链接来咔嚓进度。</string>
     <string name="PaySuccess_Button">继续购物</string>
 
+    //搜索
+    <string name="Search_Hot_Title">热搜榜</string>
+    <string name="Search_History_Title">搜索历史记录</string>
+    <string name="Search_Keyword">\"%s\的搜索结果</string>
+
 </resources>

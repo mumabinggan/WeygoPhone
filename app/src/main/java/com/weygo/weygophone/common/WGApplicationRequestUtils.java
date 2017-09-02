@@ -27,6 +27,8 @@ import com.weygo.weygophone.pages.common.model.request.WGSetPostCodeRequest;
 import com.weygo.weygophone.pages.common.model.response.WGSetPostCodeResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
+import com.weygo.weygophone.pages.tabs.home.model.request.WGLogoutRequest;
+import com.weygo.weygophone.pages.tabs.home.model.response.WGLogoutResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 
@@ -251,6 +253,32 @@ public class WGApplicationRequestUtils {
     void handleSetPostCodeResponse(WGSetPostCodeResponse response, String cap) {
         if (response.success()) {
             WGApplicationUserUtils.getInstance().setCurrentPostCode(cap);
+        }
+    }
+
+    public void loadLogoutRequest(final WGOnCompletionInteface inteface) {
+        WGLogoutRequest request = new WGLogoutRequest();
+        JHNetworkUtils.getInstance().postAsyn(request, WGLogoutResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                Log.e("onSuccess", JSON.toJSONString(result));
+                WGLogoutResponse response = (WGLogoutResponse) result;
+                handleLogoutResponse(response);
+                if (inteface != null) {
+                    inteface.onSuccessCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleLogoutResponse(WGLogoutResponse response) {
+        if (response.success()) {
+            WGApplicationUserUtils.getInstance().reset();
         }
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.search.widget.WGSearchNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:background="@color/WGAppBaseColor"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:id="@+id/titlebar_left"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginLeft="@dimen/x14"
+        android:src="@drawable/common_return"
+        />
+
+    <RelativeLayout
+        android:layout_width="@dimen/x200"
+        android:layout_height="30dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/search_navigationbar_titleview_bg">
+
+        <ImageView
+            android:id="@+id/searchIV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight = "1"
+            android:src="@drawable/search_place"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:id="@+id/inputET"
+            android:layout_width="@dimen/x200"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:focusable="false"
+            android:layout_weight = "1"
+            android:layout_marginLeft="50dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/vistaIV"
+        android:layout_width="@dimen/x18"
+        android:layout_height="@dimen/x18"
+        android:layout_marginLeft="@dimen/x263"
+        android:layout_centerVertical="true"
+        android:src="@drawable/search_vista_normal"/>
+
+    <include
+        android:id="@+id/shopCartView"
+        layout="@layout/common_shopcart_withcount"
+        android:layout_width="@dimen/x26"
+        android:layout_height="@dimen/x24"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginRight="@dimen/x3"/>
+
+</com.weygo.weygophone.pages.search.widget.WGSearchNavigationView>

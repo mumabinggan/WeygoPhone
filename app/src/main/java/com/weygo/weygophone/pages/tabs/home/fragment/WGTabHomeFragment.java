@@ -28,6 +28,7 @@ import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
 import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
+import com.weygo.weygophone.pages.search.WGSearchActivity;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
@@ -97,25 +98,12 @@ public class WGTabHomeFragment extends WGFragment {
 
             @Override
             public void onClickSearch(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGSearchActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onClickCart(View var1) {
-//                AgentWeb.with(this)//
-//                        .setAgentWebParent(mLinearLayout,new LinearLayout.LayoutParams(-1,-1) )//
-//                        .useDefaultIndicator()//
-//                        .defaultProgressBarColor()
-////                        .setReceivedTitleCallback(mCallback)
-////                        .setWebChromeClient(mWebChromeClient)
-////                        .setWebViewClient(mWebViewClient)
-//                        .setSecutityType(AgentWeb.SecurityType.strict)
-////                        .setWebLayout(new WebLayout(this))
-//                        .createAgentWeb()//
-//                        .ready()
-//                        .go("http://www.baidu.com");
-//                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
-//                startActivity(intent);
                 Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
                 startActivity(intent);
             }

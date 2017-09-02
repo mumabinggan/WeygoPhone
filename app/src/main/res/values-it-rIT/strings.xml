@@ -282,4 +282,9 @@
     <string name="PaySuccess_SubTitle3">Riceverai una conferma dell’ordine via email con \n i dettagli e il link per seguirne i progressi.</string>
     <string name="PaySuccess_Button">Continua l\'acquisto</string>
 
+    //搜索
+    <string name="Search_Hot_Title">I più cercati</string>
+    <string name="Search_History_Title">Cronologia di ricerca</string>
+    <string name="Search_Keyword">Risultati per \"%s\"</string>
+
 </resources>

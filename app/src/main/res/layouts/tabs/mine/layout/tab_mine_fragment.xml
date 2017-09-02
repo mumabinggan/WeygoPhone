@@ -277,7 +277,7 @@
                         android:textColor="@color/WGAppBaseTitleAColor"
                         android:textSize="@dimen/ft10"
                         android:gravity="center"
-                        android:text="@string/Mine_Footprint"/>
+                        android:text="@string/Mine_Service"/>
 
                 </RelativeLayout>
 

@@ -39,44 +39,44 @@ public class WGGoodListActivity extends WGTitleActivity {
         loadGoodList(true, false);
     }
 
-    @Override
-    public void initData() {
-        super.initData();
-        mList = new ArrayList();
-        WGHomeFloorContentGoodItem item = new WGHomeFloorContentGoodItem();
-        item.pictureURL = "";
-        item.name = "郑少要";
-        item.chineseName = "sss";
-        item.briefDescription = "asdfasdfasdfas";
-        item.price = "12d";
-        item.currentPrice = "fss";
-        item.reducePrice = "fs2323";
-        mList.add(item);
-
-        WGHomeFloorContentGoodItem item2 = new WGHomeFloorContentGoodItem();
-        item2.pictureURL = "";
-        item2.name = "郑少要";
-        item2.chineseName = "sss";
-        item2.briefDescription = "asdfasdfasdfas";
-        item2.price = "12d";
-        item2.currentPrice = "fss";
-        item2.reducePrice = "fs2323";
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);mList.add(item);mList.add(item);mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);
-        mList.add(item);mList.add(item);mList.add(item);
-        mList.add(item);
-        mList.add(item);mList.add(item);
-    }
+//    @Override
+//    public void initData() {
+//        super.initData();
+//        mList = new ArrayList();
+//        WGHomeFloorContentGoodItem item = new WGHomeFloorContentGoodItem();
+//        item.pictureURL = "";
+//        item.name = "郑少要";
+//        item.chineseName = "sss";
+//        item.briefDescription = "asdfasdfasdfas";
+//        item.price = "12d";
+//        item.currentPrice = "fss";
+//        item.reducePrice = "fs2323";
+//        mList.add(item);
+//
+//        WGHomeFloorContentGoodItem item2 = new WGHomeFloorContentGoodItem();
+//        item2.pictureURL = "";
+//        item2.name = "郑少要";
+//        item2.chineseName = "sss";
+//        item2.briefDescription = "asdfasdfasdfas";
+//        item2.price = "12d";
+//        item2.currentPrice = "fss";
+//        item2.reducePrice = "fs2323";
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);mList.add(item);mList.add(item);mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);
+//        mList.add(item);mList.add(item);mList.add(item);
+//        mList.add(item);
+//        mList.add(item);mList.add(item);
+//    }
 
     @Override
     public void initSubView() {

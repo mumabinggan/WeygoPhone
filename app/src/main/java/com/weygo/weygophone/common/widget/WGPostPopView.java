@@ -30,7 +30,7 @@ public class WGPostPopView extends JHPopView {
 
     Button mBtn;
 
-    interface OnItemListener {
+    public interface OnItemListener {
         void onSuccess();
     }
 

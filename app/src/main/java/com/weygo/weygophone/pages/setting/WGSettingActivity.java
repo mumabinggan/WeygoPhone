@@ -7,14 +7,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHRecyclerViewAdapter;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHDeviceUtils;
+import com.weygo.common.tools.JHLanguageUtils;
 import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGCellStyle4View;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
+import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.logic.WGChangeLanguageCallBack;
 import com.weygo.weygophone.pages.order.commit.model.WGSettlementPayMethod;
@@ -68,6 +73,7 @@ public class WGSettingActivity extends WGTitleActivity {
         mLanguageView = (WGCellStyle4View) findViewById(R.id.languageView);
         mLanguageView.setTitle(R.string.Setting_SetLanguage);
         mLanguageView.setStyle(WGCellStyle4View.WGCellStyleTextAndDetailAndArr);
+        handleSelectedLanguage();
         mLanguageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,13 +106,35 @@ public class WGSettingActivity extends WGTitleActivity {
     }
 
     void handlePostCap() {
+        WGPostPopView popupView = (WGPostPopView) getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+//        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+//                JHAdaptScreenUtils.deviceDpWidth(getContext()),
+//                JHAdaptScreenUtils.deviceDpHeight(getContext()));
+        popupView.setListener(new WGPostPopView.OnItemListener() {
+            @Override
+            public void onSuccess() {
+                mPostCapView.setDetailTitle(WGApplicationUserUtils.getInstance().currentPostCode());
+            }
+        });
+        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        popupView.setPopupWindow(window);
+    }
 
+    void handleSelectedLanguage() {
+        if (WGChangeAppLanguageLogic.isItalin()) {
+            mLanguageView.setDetailTitle(R.string.Setting_Italiano);
+        }
+        else {
+            mLanguageView.setDetailTitle(R.string.Setting_China);
+        }
     }
 
     void handleLanguage() {
         List<String> list = new ArrayList();
-        list.add(JHResourceUtils.getInstance().getString(R.string.Setting_Italiano));
         list.add(JHResourceUtils.getInstance().getString(R.string.Setting_China));
+        list.add(JHResourceUtils.getInstance().getString(R.string.Setting_Italiano));
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
             picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
@@ -137,6 +165,7 @@ public class WGSettingActivity extends WGTitleActivity {
     }
 
     private void restartApplication() {
+        handleSelectedLanguage();
         final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -149,6 +178,8 @@ public class WGSettingActivity extends WGTitleActivity {
     }
 
     void handleLogout() {
-
+        sendNotification(WGConstants.WGNotificationTypeLogout);
+        sendRefreshNotification(WGConstants.WGRefreshNotificationTypeLogout);
+        finish();
     }
 }

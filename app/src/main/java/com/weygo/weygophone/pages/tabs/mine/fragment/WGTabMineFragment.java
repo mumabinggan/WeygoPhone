@@ -14,6 +14,8 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.base.WGResponse;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
@@ -108,6 +110,9 @@ public class WGTabMineFragment extends WGFragment {
                 handleOrder(false);
             }
         });
+//        int unicodeJoy = 0x1F602;
+//        String emojiString = new String(Character.toChars(unicodeJoy));
+//        mOrderTextView.setText(emojiString);
 
         //Deliver Order
         mDeliverTextView = (TextView) view.findViewById(R.id.deliverOrderCountTextView);
@@ -147,11 +152,11 @@ public class WGTabMineFragment extends WGFragment {
         });
 
         //mFavoriteView
-        mFavoriteView = (ViewGroup) view.findViewById(R.id.couponLayout);
+        mFavoriteView = (ViewGroup) view.findViewById(R.id.collectionLayout);
         mFavoriteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleCoupon();
+                handleFavorite();
             }
         });
 
@@ -249,6 +254,20 @@ public class WGTabMineFragment extends WGFragment {
     }
 
     void handleExit() {
+//        WGApplicationRequestUtils.getInstance().loadLogoutRequest(new WGApplicationRequestUtils.WGOnCompletionInteface() {
+//            @Override
+//            public void onSuccessCompletion(WGResponse response) {
+//                handleLogoutCompletion();
+//            }
+//
+//            @Override
+//            public void onFailCompletion(WGResponse response) {
+//
+//            }
+//        });
+    }
+
+    void handleLogoutCompletion() {
 
     }
 

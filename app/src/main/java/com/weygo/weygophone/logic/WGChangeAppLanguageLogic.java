@@ -33,7 +33,7 @@ public class WGChangeAppLanguageLogic {
         return mCurrentAppLocale.toString().contains("zh");
     }
 
-    static List mSupportLanguageList = Arrays.asList(WGAppLanguageItalin, WGAppLanguageChiness);
+    public static List mSupportLanguageList = Arrays.asList(WGAppLanguageItalin, WGAppLanguageChiness);
 
     public static void resetAppLanguage(Context context, WGChangeLanguageCallBack callBack) {
         if (!canChangeLanguage) {

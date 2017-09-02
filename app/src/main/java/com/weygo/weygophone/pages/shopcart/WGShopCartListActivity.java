@@ -196,6 +196,15 @@ public class WGShopCartListActivity extends WGTitleActivity {
     }
 
     @Override
+    public void didReceivedNotification(int notification) {
+        super.didReceivedNotification(notification);
+//        Log.e("====", "======================================");
+//        if (notification == WGConstants.WGNotificationTypeShopCartCount) {
+//
+//        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         loadShopCartList();
@@ -240,6 +249,7 @@ public class WGShopCartListActivity extends WGTitleActivity {
 
     void handleSuccessShopCartResponse(WGShopCartListResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
+        WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(1);
         if (response.success()) {
             mData = response.data;
             mAdapter.setData(mData);

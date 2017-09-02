@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/hotTitleView"
+            layout="@layout/common_cell_type7" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/hotFlowLayout"
+            zhy:max_select="-1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:padding="20dp">
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+        <include
+            android:id="@+id/historyTitleView"
+            layout="@layout/common_cell_type7" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/historyFlowLayout"
+            zhy:max_select="-1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:padding="20dp">
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+    </LinearLayout>
+
+</ScrollView>

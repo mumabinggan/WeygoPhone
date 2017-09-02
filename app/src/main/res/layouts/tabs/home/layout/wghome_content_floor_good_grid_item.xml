@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x27"
+        android:layout_height="@dimen/x30"
         android:layout_below="@+id/imageView"
         android:layout_marginTop="@dimen/x10"
         android:layout_marginLeft="@dimen/x7"
@@ -62,7 +62,7 @@
     <TextView
         android:id="@+id/purchaseTV"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x18"
+        android:layout_height="@dimen/x20"
         android:gravity="center"
         android:layout_below="@+id/specificationTV"
         android:textColor="#ffffff"
@@ -75,7 +75,7 @@
     <TextView
         android:id="@+id/unPurchaseTV"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x18"
+        android:layout_height="@dimen/x20"
         android:gravity="center"
         android:layout_below="@+id/specificationTV"
         android:textColor="#ffffff"

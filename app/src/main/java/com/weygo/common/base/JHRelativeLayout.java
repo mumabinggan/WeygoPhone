@@ -12,6 +12,7 @@ import java.util.List;
  */
 
 public class JHRelativeLayout extends RelativeLayout {
+
     public JHRelativeLayout(Context context) {
         super(context);
     }
