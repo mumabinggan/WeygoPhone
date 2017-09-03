@@ -34,7 +34,7 @@ import java.util.List;
 
 public class JHActivity extends FragmentActivity {
 
-    Dialog mShowDialog;
+    protected Dialog mShowDialog;
 
     public final String mRefreshAction = "com.muma.broadcast";
     final String JHRefreshNotificationKey = "refreshNotificationKey";

@@ -18,10 +18,13 @@ public class WGOrderDetailRebuyView extends RelativeLayout {
 
     Button mMoreBtn;
 
-    public OnRebuyListener mOnRebuyListener;
+    OnRebuyListener mOnRebuyListener;
+    public void setListener(OnRebuyListener listener) {
+        mOnRebuyListener = listener;
+    }
 
     public interface OnRebuyListener extends JHInterface {
-        void onTouchRebuy();
+        void onTouchRebuy(View view);
     }
 
     public WGOrderDetailRebuyView(Context context) {
@@ -44,7 +47,7 @@ public class WGOrderDetailRebuyView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (mOnRebuyListener!= null) {
-                    mOnRebuyListener.onTouchRebuy();
+                    mOnRebuyListener.onTouchRebuy(mMoreBtn);
                 }
             }
         });

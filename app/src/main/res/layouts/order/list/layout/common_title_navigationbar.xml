@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:background="@color/WGAppBaseColor"
+    android:fitsSystemWindows="true" >
+
+    <ImageView
+        android:id="@+id/titlebar_left"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="@dimen/x9"
+        android:layout_marginLeft="@dimen/x14"
+        android:src="@drawable/common_return"
+        />
+
+    <TextView
+        android:id="@+id/titlebar_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/navigationBar_title"/>
+
+    <include
+        android:id="@+id/shopCartView"
+        layout="@layout/common_shopcart_withcount"
+        android:layout_width="@dimen/x26"
+        android:layout_height="@dimen/x24"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginRight="@dimen/x3"/>
+
+</com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView>

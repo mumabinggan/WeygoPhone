@@ -97,4 +97,14 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
     public void setTitle(int resId) {
         mTitleLabel.setText(resId);
     }
+
+    public void setSearchHidden(boolean hidden) {
+        View view = findViewById(R.id.navigationBar_search);
+        if (hidden) {
+            view.setVisibility(INVISIBLE);
+        }
+        else {
+            view.setVisibility(VISIBLE);
+        }
+    }
 }

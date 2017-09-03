@@ -25,6 +25,8 @@ import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoo
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
 import com.weygo.weygophone.pages.common.model.request.WGSetPostCodeRequest;
 import com.weygo.weygophone.pages.common.model.response.WGSetPostCodeResponse;
+import com.weygo.weygophone.pages.order.detail.model.request.WGRebuyRequest;
+import com.weygo.weygophone.pages.order.detail.model.response.WGRebuyResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGLogoutRequest;
@@ -280,5 +282,24 @@ public class WGApplicationRequestUtils {
         if (response.success()) {
             WGApplicationUserUtils.getInstance().reset();
         }
+    }
+
+    public void loadRebuyOrderRequest(long orderId, final WGOnCompletionInteface inteface) {
+        WGRebuyRequest request = new WGRebuyRequest();
+        request.orderId = orderId;
+        JHNetworkUtils.getInstance().postAsyn(request, WGRebuyResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                WGRebuyResponse response = (WGRebuyResponse) result;
+                if (inteface != null) {
+                    inteface.onSuccessCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
     }
 }

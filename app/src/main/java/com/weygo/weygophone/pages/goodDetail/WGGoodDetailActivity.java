@@ -58,7 +58,7 @@ public class WGGoodDetailActivity extends WGTitleActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            mGoodId = (int)bundle.getSerializable(WGConstants.WGIntentDataKey);
+            mGoodId = (long)bundle.getSerializable(WGConstants.WGIntentDataKey);
         }
 
         mData = new WGGoodDetail();

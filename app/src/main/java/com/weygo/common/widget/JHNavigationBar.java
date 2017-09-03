@@ -88,6 +88,10 @@ public class JHNavigationBar extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public View getShopCartView() {
+        return findViewById(R.id.navigationBar_cart);
+    }
+
     public void setLeftBtnVisible(int visible) {
         mLeftImageView.setVisibility(visible);
     }

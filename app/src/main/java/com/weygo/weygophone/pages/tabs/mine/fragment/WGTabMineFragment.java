@@ -274,7 +274,14 @@ public class WGTabMineFragment extends WGFragment {
     void handleOrder(boolean deliver) {
         Intent intent = new Intent(getActivity(), WGOrderListActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(WGConstants.WGIntentDataKey, deliver);
+        int type = 1;
+        if (deliver) {
+            type = WGConstants.WGOrderListTypeDelivering;
+        }
+        else {
+            type = WGConstants.WGOrderListTypeAll;
+        }
+        bundle.putSerializable(WGConstants.WGIntentDataKey, type);
         intent.putExtras(bundle);
         startActivity(intent);
     }

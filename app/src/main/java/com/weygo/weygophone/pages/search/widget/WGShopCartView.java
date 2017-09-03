@@ -59,6 +59,7 @@ public class WGShopCartView extends JHRelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mCountTV = (TextView) findViewById(R.id.countTV);
+        showShopCartCountStatus();
         initShopcartReceiver();
     }
 
@@ -86,5 +87,16 @@ public class WGShopCartView extends JHRelativeLayout {
 
     void handelShopCart() {
         mCountTV.setText(WGApplicationGlobalUtils.getInstance().mShopCartGoodCount + "");
+        showShopCartCountStatus();
+    }
+
+    void showShopCartCountStatus() {
+        long count = WGApplicationGlobalUtils.getInstance().mShopCartGoodCount;
+        if (count == 0) {
+            mCountTV.setVisibility(INVISIBLE);
+        }
+        else {
+            mCountTV.setVisibility(VISIBLE);
+        }
     }
 }

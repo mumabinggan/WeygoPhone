@@ -64,17 +64,23 @@ public class WGOrderDetailDeliverStatusView extends RelativeLayout {
         if (orderDetail != null) {
             WGOrderListItem item = new WGOrderListItem();
             item.sn = orderDetail.sn;
-            item.status = orderDetail.status.curstatus();
+            if (orderDetail.status != null) {
+                item.status = orderDetail.status.curstatus();
+            }
             mOrderNumberTV.showWithData(item);
 
-            List<WGOrderStatusItem> statusArray = orderDetail.status.status;
-            if (statusArray.size() > 2) {
-                mConfirmTimeTV.setText(statusArray.get(0).time);
-                mConfirmDesTV.setText(statusArray.get(0).statusText);
-                mDeliverTimeTV.setText(statusArray.get(1).time);
-                mDeliverDesTV.setText(statusArray.get(1).statusText);
-                mCompletionTimeTV.setText(statusArray.get(2).time);
-                mCompletionDesTV.setText(statusArray.get(2).statusText);
+            if (orderDetail.status != null) {
+                List<WGOrderStatusItem> statusArray = orderDetail.status.status;
+                if (statusArray != null) {
+                    if (statusArray.size() > 2) {
+                        mConfirmTimeTV.setText(statusArray.get(0).time);
+                        mConfirmDesTV.setText(statusArray.get(0).statusText);
+                        mDeliverTimeTV.setText(statusArray.get(1).time);
+                        mDeliverDesTV.setText(statusArray.get(1).statusText);
+                        mCompletionTimeTV.setText(statusArray.get(2).time);
+                        mCompletionDesTV.setText(statusArray.get(2).statusText);
+                    }
+                }
             }
         }
     }

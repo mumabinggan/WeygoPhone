@@ -13,6 +13,7 @@ import com.weygo.weygophone.pages.order.list.model.WGOrderListItem;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderItemPriceView;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemViewHolder;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
+import com.weygo.weygophone.pages.order.list.widget.WGOrderListRebuyView;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderNumberView;
 
 import java.util.List;
@@ -23,6 +24,15 @@ import java.util.List;
 
 public class WGOrderListAdapter extends JHRecyclerViewAdapter {
 
+    public interface OnItemListener extends OnBaseItemClickListener {
+        void onOrderDetail(WGOrderListItem item);
+        void onGoodItem(WGOrderGoodItem item);
+        void onRebuy(View view, WGOrderListItem item);
+    }
+
+    public void setListener(OnItemListener listener) {
+        mOnItemClickListener = listener;
+    }
     List mArray;
 
     public WGOrderListAdapter(Context context, List<WGOrderListItem> data) {
@@ -49,12 +59,12 @@ public class WGOrderListAdapter extends JHRecyclerViewAdapter {
                 mContext).inflate(resourceId, parent,
                 false);
         WGOrderListItemViewHolder holder = new WGOrderListItemViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleTouchGoodItem(view);
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                handleTouchGoodItem(view);
+//            }
+//        });
         return holder;
     }
 
@@ -78,22 +88,55 @@ public class WGOrderListAdapter extends JHRecyclerViewAdapter {
         WGOrderNumberView numberView;
         WGOrderListGoodsView goodsView;
         WGOrderItemPriceView priceView;
+        WGOrderListRebuyView rebuyView;
+
+        WGOrderListItem mData;
 
         public WGOrderListItemViewHolder(View view) {
             super(view);
             numberView = (WGOrderNumberView) view.findViewById(R.id.orderNumberView);
             goodsView = (WGOrderListGoodsView) view.findViewById(R.id.orderGoodsView);
+            goodsView.setListener(new WGOrderListGoodsView.OnItemListener() {
+                @Override
+                public void onGoodItem(WGOrderGoodItem item) {
+                    if (mOnItemClickListener != null) {
+                        OnItemListener temp = (OnItemListener) mOnItemClickListener;
+                        temp.onGoodItem(item);
+                    }
+                }
+            });
             priceView = (WGOrderItemPriceView) view.findViewById(R.id.orderPriceView);
+            priceView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnItemClickListener != null) {
+                        OnItemListener temp = (OnItemListener) mOnItemClickListener;
+                        temp.onOrderDetail(mData);
+                    }
+                }
+            });
+            rebuyView = (WGOrderListRebuyView) view.findViewById(R.id.orderRebuy);
+            rebuyView.setListener(new WGOrderListRebuyView.OnItemListener() {
+                @Override
+                public void onRebuy(View view, WGOrderListItem item) {
+                    if (mOnItemClickListener != null) {
+                        OnItemListener temp = (OnItemListener) mOnItemClickListener;
+                        temp.onRebuy(rebuyView, mData);
+                    }
+                }
+            });
         }
 
         @Override
         public void showWithData(Object object) {
             super.showWithData(object);
+            mData = (WGOrderListItem) object;
             if (object instanceof WGOrderListItem) {
                 WGOrderListItem item = (WGOrderListItem) object;
                 numberView.showWithData(item);
                 goodsView.showWithArray(item.goods);
                 priceView.showWithData(item);
+                rebuyView.showWithData(item);
             }
         }
     }

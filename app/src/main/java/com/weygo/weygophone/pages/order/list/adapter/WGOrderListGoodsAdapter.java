@@ -10,6 +10,8 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.order.list.model.WGOrderListItem;
+import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemView;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemViewHolder;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
@@ -25,6 +27,14 @@ public class WGOrderListGoodsAdapter extends JHRecyclerViewAdapter {
 
     List mArray;
 
+    public interface OnItemListener extends OnBaseItemClickListener {
+        void onGoodItem(WGOrderGoodItem item);
+    }
+    public void setListener(OnItemListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+
     public WGOrderListGoodsAdapter(Context context, List<WGOrderGoodItem> data) {
         this.mArray = data;
         this.mContext = context;
@@ -35,32 +45,22 @@ public class WGOrderListGoodsAdapter extends JHRecyclerViewAdapter {
         notifyDataSetChanged();
     }
 
-    void handleTouchGoodItem(View view) {
-        if (mOnItemClickListener != null) {
-            WGOrderGoodItem item = (WGOrderGoodItem) mArray.get((int) view.getTag());
-            mOnItemClickListener.onItemClick(view, (int)view.getTag());
-        }
-    }
-
     @Override
     public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int resourceId = R.layout.wgorderlist_good_item;
-        final View view = LayoutInflater.from(
+        final WGOrderListGoodItemView view = (WGOrderListGoodItemView)LayoutInflater.from(
                 mContext).inflate(resourceId, parent,
                 false);
-        WGOrderListGoodItemViewHolder holder = new WGOrderListGoodItemViewHolder(view);
-//        ((WGGoodListView)view).setInnerTouchListener(new WGGoodListView.GoodListItemOnListener() {
-//            @Override
-//            public void onTouchShopCart() {
-//                handleTouchShopCartItem(view);
-//            }
-//        });
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                handleTouchGoodItem(view);
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    OnItemListener temp = (OnItemListener) mOnItemClickListener;
+                    temp.onGoodItem((WGOrderGoodItem)mArray.get((int)v.getTag()));
+                }
             }
         });
+        WGOrderListGoodItemViewHolder holder = new WGOrderListGoodItemViewHolder(view);
         return holder;
     }
 

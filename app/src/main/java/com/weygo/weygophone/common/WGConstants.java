@@ -84,5 +84,9 @@ public class WGConstants {
 
     public static final int WGGoodAddViewFromGoodDetail = 1;
     public static final int WGGoodAddViewFromCart = 2;
+
+
+    public static final int WGOrderListTypeAll = 1;
+    public static final int WGOrderListTypeDelivering = 2;
 }
 

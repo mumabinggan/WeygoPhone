@@ -22,6 +22,7 @@
         android:textSize="@dimen/ft9"
         android:textColor="#ffffffff"
         android:gravity="center"
+        android:visibility="invisible"
         android:background="@drawable/common_shopcartcount_textview_corner" />
 
 </com.weygo.weygophone.pages.search.widget.WGShopCartView>

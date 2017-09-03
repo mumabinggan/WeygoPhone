@@ -47,7 +47,7 @@ public class WGApplicationGlobalUtils extends Object {
         return false;
     }
 
-    public void handleShopCartGoodCount(int count) {
+    public void handleShopCartGoodCount(long count) {
         mShopCartGoodCount = count;
         //通知
         Intent intent = new Intent(WGConstants.WGSpecialNotificationTypeShopCartCountAction);

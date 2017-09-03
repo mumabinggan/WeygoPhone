@@ -152,7 +152,8 @@ public class WGTabClassifyFragment extends WGFragment {
 
     void handleSubClassifyItemClick(View view, WGClassifyItem item) {
         int[] distance = {0,0};
-        WGApplicationAnimationUtils.add(getContext(), mLayout, view, null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+        WGApplicationAnimationUtils.add(getContext(), mLayout, view,
+                null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
         return;
 //        Log.e("handle", "handleSubClassifyItemClick" + item.name);
 //        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);

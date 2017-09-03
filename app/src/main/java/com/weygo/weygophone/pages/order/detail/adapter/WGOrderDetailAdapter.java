@@ -23,6 +23,8 @@ import com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodsMoreView
 import com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailPayView;
 import com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailUserInfoView;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.order.list.model.WGOrderListItem;
+import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
@@ -37,7 +39,7 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
 
     Context mContext;
 
-    WGOrderDetail mOrderDetai;
+    WGOrderDetail mOrderDetail;
 
     boolean mShowMoreGoods;
 
@@ -53,13 +55,13 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
     }
 
     public WGOrderDetailAdapter(Context context, WGOrderDetail data) {
-        mOrderDetai = data;
+        mOrderDetail = data;
         this.mContext = context;
         mShowMoreGoods = false;
     }
 
     public void setData(WGOrderDetail data) {
-        mOrderDetai = data;
+        mOrderDetail = data;
         notifyDataSetChanged();
     }
 
@@ -79,7 +81,7 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
                     mContext).inflate(resId, parent,
                     false);
             holder = new WGOrderDetailViewHolder(view);
-            holder.showWithData(mOrderDetai);
+            holder.showWithData(mOrderDetail);
         }
         else if (viewType == Item_Type.ITEM_TYPE_OrderDeliver.ordinal()) {
             resId = R.layout.wgorderdetail_order_userinfo;
@@ -87,7 +89,7 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
                     mContext).inflate(resId, parent,
                     false);
             holder = new WGOrderDetailViewHolder(view);
-            holder.showWithData(mOrderDetai.deliver);
+            holder.showWithData(mOrderDetail.deliver);
         }
         else if (viewType == Item_Type.ITEM_TYPE_OrderGoodsTitle.ordinal()) {
             resId = R.layout.wgorderdetail_order_goodtitle;
@@ -123,7 +125,7 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
                     mContext).inflate(resId, parent,
                     false);
             holder = new WGOrderDetailViewHolder(view);
-            holder.showWithData(mOrderDetai.fax);
+            holder.showWithData(mOrderDetail.fax);
         }
         else if (viewType == Item_Type.ITEM_TYPE_OrderPay.ordinal()) {
             resId = R.layout.wgorderdetail_order_pay;
@@ -131,7 +133,7 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
                     mContext).inflate(resId, parent,
                     false);
             holder = new WGOrderDetailViewHolder(view);
-            holder.showWithData(mOrderDetai.pay);
+            holder.showWithData(mOrderDetail.pay);
         }
 //        else if (viewType == Item_Type.ITEM_TYPE_OrderRebuy.ordinal()) {
 //            resId = R.layout.wgorderdetail_order_rebuy;
@@ -148,9 +150,9 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
         super.onBindViewHolder(holder, position);
         Item_Type type = getItemViewTypeWithPositon(position);
         if (type == Item_Type.ITEM_TYPE_OrderGoods) {
-            if (mOrderDetai != null && mOrderDetai.goods != null) {
+            if (mOrderDetail != null && mOrderDetail.goods != null) {
                 int index = position - 3;
-                WGOrderGoodItem item = mOrderDetai.goods.get(index);
+                WGOrderGoodItem item = mOrderDetail.goods.get(index);
                 holder.showWithData(item);
                 WGOrderDetailGoodItemView itemView = (WGOrderDetailGoodItemView) holder.itemView;
                 if (mShowMoreGoods) {
@@ -169,10 +171,14 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
 
     @Override
     public int getItemCount() {
-        if (mOrderDetai == null) {
+        if (mOrderDetail == null) {
             return 0;
         }
-        return 6 + ((mOrderDetai.goods != null) ? mOrderDetai.goods.size() : 0);
+        int count = 6;
+        if (mOrderDetail.goods != null) {
+            count += mOrderDetail.goods.size();
+        }
+        return count;
     }
 
     @Override
@@ -182,6 +188,10 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
 
     Item_Type getItemViewTypeWithPositon(int position) {
         Item_Type type = Item_Type.ITEM_TYPE_None;
+        int goodCount = 0;
+        if (mOrderDetail != null && mOrderDetail.goods != null) {
+            goodCount = mOrderDetail.goods.size();
+        }
         if (position == 0) {
             type = Item_Type.ITEM_TYPE_OrderStatus;
         }
@@ -191,16 +201,16 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
         else if (position == 2) {
             type = Item_Type.ITEM_TYPE_OrderGoodsTitle;
         }
-        else if (position <= 2 + mOrderDetai.goods.size() && position > 2) {
+        else if (position <= 2 + goodCount && position > 2) {
             type = Item_Type.ITEM_TYPE_OrderGoods;
         }
-        else if (position == 3 + mOrderDetai.goods.size()) {
+        else if (position == 3 + goodCount) {
             type = Item_Type.ITEM_TYPE_OrderGoodsMore;
         }
-        else if (position == 4 + mOrderDetai.goods.size()) {
+        else if (position == 4 + goodCount) {
             type = Item_Type.ITEM_TYPE_OrderFax;
         }
-        else if (position == 5 + mOrderDetai.goods.size()) {
+        else if (position == 5 + goodCount) {
             type = Item_Type.ITEM_TYPE_OrderPay;
         }
 //        else if (position == 6 + mOrderDetai.goods.size()) {
@@ -222,7 +232,6 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
 
         @Override
         public void showWithData(Object object) {
-            Log.e("errorrrddddd", object.toString());
             super.showWithData(object);
             if (itemView instanceof WGOrderDetailDeliverStatusView) {
                 ((WGOrderDetailDeliverStatusView)itemView).showWithData((WGOrderDetail) object);

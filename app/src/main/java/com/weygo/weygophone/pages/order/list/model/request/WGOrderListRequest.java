@@ -9,6 +9,8 @@ import com.weygo.weygophone.base.WGGuestRequest;
 
 public class WGOrderListRequest extends WGGuestPageRequest {
 
+    public int type;
+
     public String api() {
         return "orders/index?";
     }

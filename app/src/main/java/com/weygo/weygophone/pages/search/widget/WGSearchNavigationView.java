@@ -126,6 +126,10 @@ public class WGSearchNavigationView extends JHRelativeLayout {
         super.showWithData(object);
     }
 
+    public View getShopCartView() {
+        return mShopCartView;
+    }
+
     public void setInputText(String title) {
         mInputET.setText(title);
     }

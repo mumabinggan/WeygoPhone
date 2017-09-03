@@ -1,18 +1,30 @@
 package com.weygo.weygophone.pages.order.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHPaddingDecoration;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHDialogUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
@@ -20,12 +32,20 @@ import com.weygo.weygophone.pages.order.detail.model.WGOrderFax;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderPay;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderStatus;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderStatusItem;
+import com.weygo.weygophone.pages.order.detail.model.request.WGOrderDetailRequest;
+import com.weygo.weygophone.pages.order.detail.model.response.WGOrderDetailResponse;
+import com.weygo.weygophone.pages.order.detail.model.response.WGRebuyResponse;
+import com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailRebuyView;
+import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.order.list.adapter.WGOrderListAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.order.list.model.WGOrderListItem;
 import com.weygo.weygophone.pages.order.list.model.request.WGOrderListRequest;
 import com.weygo.weygophone.pages.order.list.model.response.WGOrderListResponse;
+import com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,17 +54,24 @@ import java.util.List;
  * Created by muma on 2017/5/22.
  */
 
-public class WGOrderDetailActivity extends WGTitleActivity {
+public class WGOrderDetailActivity extends WGBaseActivity {
+
+    LinearLayout mLayout;
+
+    WGShopCartNavigationView mNavigationBar;
 
     RecyclerView mRecyclerView;
     WGOrderDetailAdapter mAdapter;
-
     WGOrderDetail mData;
+
+    WGOrderDetailRebuyView mRebuyView;
+
+    long mOrderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadOrderList(true, false);
+        loadOrderDetail();
     }
 
     @Override
@@ -55,100 +82,104 @@ public class WGOrderDetailActivity extends WGTitleActivity {
     @Override
     public void initData() {
         super.initData();
-        mData = new WGOrderDetail();
-        mData.sn = "adfasdfasd";
-        WGOrderStatus status = new WGOrderStatus();
-
-        WGOrderStatusItem item = new WGOrderStatusItem();
-        item.time = "1900 23-23 23-23";
-        item.statusText = "sdfadfasfdasadsasfd";
-        item.totalStatusText = "WTSFSFAFS";
-
-        status.status = Arrays.asList(item, item, item);
-        status.currentStatus = 0;
-
-        mData.status = status;
-
-        WGOrderDeliver deliver = new WGOrderDeliver();
-        deliver.userName = "磁艺术硕士";
-        deliver.userAddress = "sfasdfasdf";
-        deliver.phone = "fsdfasdfasfasf";
-        deliver.deliverTime = "2323232332";
-
-        mData.deliver = deliver;
-
-        mData.pay = Arrays.asList("在艺术硕士 艺术硕士", "fasdfasdfas", "WEFADSFASDFASD");
-
-        WGOrderFax fax = new WGOrderFax();
-        fax.companyName = "23232324234";
-        fax.taxCode = "3233sfa";
-        fax.cap = "23asdfasd";
-
-        mData.fax = fax;
-
-        List list = new ArrayList();
-        WGOrderGoodItem goodItem = new WGOrderGoodItem();
-        goodItem.name = "郑枯塔顶地";
-        goodItem.goodCount = 12;
-        goodItem.price = "2332.sf";
-        goodItem.currentPrice = "23233";
-        goodItem.pictureURL = "https://www.weygo.com/media/catalog/product/1/2/120073.jpg";
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        mData.goods = list;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Serializable temp = bundle.getSerializable(WGConstants.WGIntentDataKey);
+            if (temp instanceof Long) {
+                mOrderId = (long)temp;
+            }
+        }
     }
 
     @Override
     public void initSubView() {
         super.initSubView();
+        mLayout = (LinearLayout) findViewById(R.id.layout);
+        mNavigationBar = (WGShopCartNavigationView) findViewById(R.id.titlebar);
         mNavigationBar.setTitle(R.string.OrderDetail_Title);
+        mNavigationBar.setListener(new WGShopCartNavigationView.OnItemListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+
+            @Override
+            public void onRight() {
+                Intent intent = new Intent(WGOrderDetailActivity.this, WGShopCartListActivity.class);
+                startActivity(intent);
+            }
+        });
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGOrderDetailAdapter(this, mData);
         mRecyclerView.setAdapter(mAdapter);
-        //float dividerHeight = JHResourceUtils.getInstance().getDimension(R.dimen.x8);
-        //mRecyclerView.addItemDecoration(new JHPaddingDecoration(this, (int)dividerHeight));
+        mRebuyView = (WGOrderDetailRebuyView) findViewById(R.id.rebuyView);
+        mRebuyView.setListener(new WGOrderDetailRebuyView.OnRebuyListener() {
+            @Override
+            public void onTouchRebuy(View view) {
+                loadRebuyOrder(view, mData);
+            }
+        });
     }
 
-    @Override
-    public void handleRightBarItem() {
-        super.handleRightBarItem();
+    void loadOrderDetail() {
+        final WGOrderDetailRequest request = new WGOrderDetailRequest();
+        request.id = mOrderId;
+        this.postAsyn(request, WGOrderDetailResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleOrderDetailResponse((WGOrderDetailResponse)response);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                handleOrderDetailResponse(null);
+            }
+        });
     }
-//
-//    void loadOrderDetail() {
-//        final WGOrderListRequest request = new WGOrderListRequest();
-//        this.postAsyn(request, WGOrderListResponse.class, new JHResponseCallBack() {
-//            @Override
-//            public void onSuccess(JHResponse response) {
-//                handleOrderListResponse((WGOrderListResponse)response, refresh, pulling);
-//            }
-//
-//            @Override
-//            public void onFailure(JHRequestError error) {
-//                handleOrderListResponse(null, refresh, pulling);
-//            }
-//        });
-//    }
-//
-//    void handleOrderListResponse(WGOrderListResponse response, boolean refresh, boolean pulling) {
-//        mRefreshLayout.finishRefreshing();
-//        if (response == null) {
-//            showWarning(R.string.Request_Fail_Tip);
-//            return;
-//        }
-//        if (response.success()) {
-//            if (mArray == null) {
-//                mArray = new ArrayList();
-//            }
-//            mArray.addAll(response.data);
-//            mAdapter.setData(mArray);
-//        }
-//        else {
-//            showWarning(response.message);
-//        }
-//    }
+
+    void handleOrderDetailResponse(WGOrderDetailResponse response) {
+        if (response == null) {
+            showWarning(R.string.Request_Fail_Tip);
+            return;
+        }
+        if (response.success()) {
+            Log.e("onSuccess", JSON.toJSONString(response));
+            mData = response.data;
+            mAdapter.setData(mData);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadRebuyOrder(final View view, WGOrderDetail item) {
+        mShowDialog = JHDialogUtils.showLoadingDialog(this);
+        WGApplicationRequestUtils.getInstance().loadRebuyOrderRequest(item.id, new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+                handleRebuySuccess(view, (WGRebuyResponse)response);
+            }
+
+            @Override
+            public void onFailCompletion(WGResponse response) {
+                JHDialogUtils.hideLoadingDialog(mShowDialog);
+            }
+        });
+    }
+
+    void handleRebuySuccess(View view, WGRebuyResponse response) {
+        JHDialogUtils.hideLoadingDialog(mShowDialog);
+        if (response.success() || response.outStock()) {
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        }
+        if (!response.success()) {
+            showWarning(response.message);
+        }
+        //动画
+        int[] distance = {0,0};
+        WGApplicationAnimationUtils.add(this, mLayout, view,
+                null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+
+    }
 }
