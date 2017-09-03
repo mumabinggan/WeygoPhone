@@ -11,7 +11,27 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00ff00">
+        android:layout_weight="1">
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:background="#ffffff"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/chatBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x34"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/ft12"
+            android:layout_marginLeft="@dimen/x13"
+            android:layout_marginRight="@dimen/x13"
+            android:background="@drawable/register_btn_bg"
+            android:text="@string/Live_Chat"/>
+
+    </LinearLayout>
 
 </LinearLayout>

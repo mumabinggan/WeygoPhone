@@ -39,6 +39,7 @@ import com.weygo.weygophone.pages.slider.model.response.WGHomeSliderResponse;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,8 @@ public class WGSliderFragmet extends WGFragment {
 
             @Override
             public void onMessageCenterClick(View view) {
-
+                Log.e("========", "00000");
+                startActivity(new Intent(getActivity(), ZopimChatActivity.class));
             }
 
             @Override

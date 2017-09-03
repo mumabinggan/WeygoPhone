@@ -25,6 +25,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
 import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
@@ -36,6 +37,7 @@ import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTabContentResponse;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTitlesResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGTabNavigationBar;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,7 +95,10 @@ public class WGTabHomeFragment extends WGFragment {
                 Intent intent = new Intent(getActivity(), WGSliderActivity.class);
                 startActivity(intent);
                 */
-                activity.openSlider();
+                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
+                startActivity(intent);
+                //startActivity(new Intent(getActivity(), ZopimChatActivity.class));
+                //activity.openSlider();
             }
 
             @Override

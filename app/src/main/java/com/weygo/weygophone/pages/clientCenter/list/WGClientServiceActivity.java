@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHResponse;
@@ -18,6 +19,8 @@ import com.weygo.weygophone.pages.clientCenter.list.adapter.WGClientServiceAdapt
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
 import com.weygo.weygophone.pages.clientCenter.list.model.request.WGClientServiceRequest;
 import com.weygo.weygophone.pages.clientCenter.list.model.response.WGClientServiceResponse;
+import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.List;
 
@@ -28,10 +31,10 @@ import java.util.List;
 public class WGClientServiceActivity extends WGTitleActivity {
 
     List mArray;
-
     RecyclerView mRecyclerView;
-
     WGClientServiceAdapter mAdapter;
+
+    Button mChatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,17 @@ public class WGClientServiceActivity extends WGTitleActivity {
                 handleItemClick(view, position);
             }
         });
+        mChatBtn = (Button) findViewById(R.id.chatBtn);
+        mChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleChat();
+            }
+        });
+    }
+
+    void handleChat() {
+        startActivity(new Intent(WGClientServiceActivity.this, ZopimChatActivity.class));
     }
 
     void handleItemClick(View view, int position) {
@@ -92,7 +106,6 @@ public class WGClientServiceActivity extends WGTitleActivity {
         if (response.success()) {
             mArray = response.data;
             mAdapter.setData(mArray);
-            mAdapter.notifyDataSetChanged();
         }
         else {
             showWarning(response.message);

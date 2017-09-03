@@ -26,5 +26,8 @@ public class WGCommonCellStyle2ViewHolder extends JHBaseViewHolder {
             WGClassifyItem item = (WGClassifyItem) object;
             textView.setText(item.name);
         }
+        else if (object instanceof String) {
+            textView.setText((String)object);
+        }
     }
 }

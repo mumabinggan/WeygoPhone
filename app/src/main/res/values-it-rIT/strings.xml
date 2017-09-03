@@ -73,6 +73,7 @@
 
     //客服中心
     <string name="ClientService_Title">Servizio clienti</string>
+    <string name="Live_Chat">Live Chat</string>
 
     //找回密码
     <string name="FindPW_Title">Password dimenticata</string>
