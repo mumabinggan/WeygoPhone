@@ -1,26 +1,46 @@
 package com.weygo.weygophone.pages.goodDetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
 import com.weygo.weygophone.pages.goodDetail.adapter.WGGoodDetailAdapter;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
 import com.weygo.weygophone.pages.goodDetail.model.request.WGCollectGoodRequest;
+import com.weygo.weygophone.pages.goodDetail.model.request.WGGoodDetailRecommendRequest;
 import com.weygo.weygophone.pages.goodDetail.model.request.WGGoodDetailRequest;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGCollectGoodResponse;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailRecommendResponse;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailResponse;
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailOperateView;
+import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +49,12 @@ import java.util.List;
  * Created by muma on 2017/5/30.
  */
 
-public class WGGoodDetailActivity extends WGTitleActivity {
+public class WGGoodDetailActivity extends WGBaseActivity {
 
     long mGoodId;
+
+    LinearLayout mLayout;
+    WGShopCartNavigationView mNavigationBar;
 
     RecyclerView mRecyclerView;
 
@@ -41,10 +64,13 @@ public class WGGoodDetailActivity extends WGTitleActivity {
 
     WGGoodDetailOperateView mOperateView;
 
+    WGGoodDetailRecommendResponse mRecommendResponse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadGoodDetail();
+        loadGoodDetail();
+        loadRecommendGoods();
     }
 
     @Override
@@ -55,71 +81,48 @@ public class WGGoodDetailActivity extends WGTitleActivity {
     @Override
     public void initData() {
         super.initData();
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mGoodId = (long)bundle.getSerializable(WGConstants.WGIntentDataKey);
         }
-
-        mData = new WGGoodDetail();
-        WGCarouselFigureItem carouseItem = new WGCarouselFigureItem();
-        carouseItem.pictureURL = "https://www.weygo.com/media/catalog/product/1/2/120073.jpg";
-        List carouseList = new ArrayList();
-        carouseList.add(carouseItem);
-        mData.carouselFigures = carouseList;
-
-        mData.name = "郑淡和";
-        mData.currentPrice = "2323.23";
-        mData.price = "23";
-        mData.specification = "我们的名字";
-        mData.expiredTime = "1922.121";
-
-        WGGoodDetail.WGGoodDetailDesItem desItem = new WGGoodDetail.WGGoodDetailDesItem();
-        desItem.name = "改名";
-        desItem.value = "郑洒";
-        WGGoodDetail.WGGoodDetailDesItem desItem1 = new WGGoodDetail.WGGoodDetailDesItem();
-        desItem1.name = "改ss名";
-        desItem1.value = "郑ss洒";
-        List desList = new ArrayList();
-        desList.add(desItem);
-        desList.add(desItem1);
-        desList.add(desItem);
-        mData.productDes = desList;
-        mData.deliveryInfo = "Weygo.com è il tuo supermercato online con consegna a domicilio. \n" +
-                "Con la tua APP sempre a portata di mano potrai fare la spesa in ogni momento! \n" +
-                "Sul tram, nella pausa pranzo, mentre aspetti in coda. \n" +
-                "Mai più tempo perso, ma solo comodità e vantaggi. \n" +
-                "Weygo.com consegna a Milano tutti i giorni, domenica e festivi inclusi, dalle 8 alle 22. \n" +
-                "Puoi ricevere la tua spesa a partire da 2 ore dopo l";
-        mData.purchaseTip = "间交流通道,iOS,Android,Web客户端均可接入ios 推送,保持TCP长连接,支持海量并发,同时提供Rest API和后台管理系统,简单的SDK集成接入,让APP跨应用畅聊";
-        mData.productInfo = "间交流通道,iOS,Android,Web客户端均可接入ios";
-
-
-
-        List list = new ArrayList();
-        WGOrderGoodItem goodItem = new WGOrderGoodItem();
-        goodItem.name = "郑枯塔顶地";
-        goodItem.goodCount = 12;
-        goodItem.price = "2332.sf";
-        goodItem.currentPrice = "23233";
-        goodItem.pictureURL = "https://www.weygo.com/media/catalog/product/1/2/120073.jpg";
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        list.add(goodItem);
-        mData.recommendProduce = list;
-
     }
 
     @Override
     public void initSubView() {
         super.initSubView();
+        mLayout = (LinearLayout) findViewById(R.id.mLayout);
+        mNavigationBar = (WGShopCartNavigationView) findViewById(R.id.titlebar);
         mNavigationBar.setTitle(R.string.OrderDetail_Title);
+        mNavigationBar.setListener(new WGShopCartNavigationView.OnItemListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+
+            @Override
+            public void onRight() {
+                Intent intent = new Intent(WGGoodDetailActivity.this, WGShopCartListActivity.class);
+                startActivity(intent);
+            }
+        });
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGGoodDetailAdapter(this, mData);
+        mAdapter.setListener(new WGGoodDetailAdapter.GoodDetailItemClickListener() {
+            @Override
+            public void onGoodItemClick(View view, WGHomeFloorContentGoodItem item) {
+                Intent intent = new Intent(WGGoodDetailActivity.this, WGGoodDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
         mOperateView = (WGGoodDetailOperateView) findViewById(R.id.operateView);
@@ -127,18 +130,61 @@ public class WGGoodDetailActivity extends WGTitleActivity {
             @Override
             public void onAddShopCart() {
                 //加购物车
+                handleAddToShopCart();
             }
 
             @Override
             public void onCollection() {
                 //加收藏
+                if (mData != null) {
+                    loadCollectGood((mData.hasFavorited == 0) ? true : false);
+                }
             }
         });
     }
 
-    @Override
-    public void handleRightBarItem() {
-        super.handleRightBarItem();
+    void handleAddToShopCart() {
+        if (JHStringUtils.isNullOrEmpty(WGApplicationUserUtils.getInstance().currentPostCode())) {
+            WGPostPopView popupView = (WGPostPopView) getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+            popupView.setListener(new WGPostPopView.OnItemListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+            });
+            JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                    JHAdaptScreenUtils.devicePixelWidth(this),
+                    JHAdaptScreenUtils.devicePixelHeight(this));
+            popupView.setPopupWindow(window);
+            return;
+        }
+        WGApplicationRequestUtils.getInstance().loadAddGoodToCart(mGoodId, mOperateView.getGoodCount(), new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+                handleShopCartCount((WGAddGoodToCartResponse) response);
+            }
+
+            @Override
+            public void onFailCompletion(WGResponse response) {
+
+            }
+        });
+        if (mData != null && mData.carouselFigures != null && mData.carouselFigures.size() > 0) {
+            WGCarouselFigureItem item = mData.carouselFigures.get(0);
+            //动画
+            int[] distance = {0,0};
+            WGApplicationAnimationUtils.add(this, mLayout, mOperateView,
+                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+        }
+    }
+
+    void handleShopCartCount(WGAddGoodToCartResponse response) {
+        if (response.success()) {
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        }
+        else {
+            showWarning(response.message);
+        }
     }
 
     void loadGoodDetail() {
@@ -160,7 +206,11 @@ public class WGGoodDetailActivity extends WGTitleActivity {
     void handleGoodDetailSuccessResponse(WGGoodDetailResponse response) {
         if (response.success()) {
             mData = response.data;
+            if (mRecommendResponse != null) {
+                mData.recommendProduce = mRecommendResponse.data;
+            }
             mAdapter.setData(mData);
+            mOperateView.showWithData(mData);
         }
         else {
             showWarning(response.message);
@@ -203,6 +253,7 @@ public class WGGoodDetailActivity extends WGTitleActivity {
 
     void handleCollectGoodSuccessResponse(WGCollectGoodResponse response) {
         if (response.success()) {
+            mData.hasFavorited = response.data.favoriteId;
             mData.favoritedId = response.data.favoriteId;
             mOperateView.showWithData(mData);
         }
@@ -214,7 +265,40 @@ public class WGGoodDetailActivity extends WGTitleActivity {
     void handleCancelCollectGoodSuccessResponse(WGCancelCollectionGoodResponse response) {
         if (response.success()) {
             mData.favoritedId = 0;
+            mData.hasFavorited = 0;
             mOperateView.showWithData(mData);
+        }
+        else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadRecommendGoods() {
+        WGGoodDetailRecommendRequest request = new WGGoodDetailRecommendRequest();
+        request.goodId = mGoodId;
+        request.showsLoadingView = false;
+        this.postAsyn(request, WGGoodDetailRecommendResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse response) {
+                handleGoodDetailRecommendSuccessResponse((WGGoodDetailRecommendResponse )response);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleGoodDetailRecommendSuccessResponse(WGGoodDetailRecommendResponse response) {
+        if (response.success()) {
+            if (mData != null) {
+                mData.recommendProduce = response.data;
+                mAdapter.setData(mData);
+            }
+            else {
+                mRecommendResponse = response;
+            }
         }
         else {
             showWarning(response.message);

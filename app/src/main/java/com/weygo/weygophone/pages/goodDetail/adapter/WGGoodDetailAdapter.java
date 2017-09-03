@@ -15,6 +15,7 @@ import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailCommodityDescrip
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailConfigView;
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailDescriptionView;
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailImagesView;
+import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
@@ -42,6 +43,10 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
     public static interface GoodDetailItemClickListener extends OnBaseItemClickListener {
 
         void onGoodItemClick(View view, WGHomeFloorContentGoodItem item);
+    }
+
+    public void setListener(GoodDetailItemClickListener listener) {
+        mOnItemClickListener = listener;
     }
 
     public WGGoodDetailAdapter(Context context, WGGoodDetail data) {
@@ -100,6 +105,15 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
             WGOrderListGoodsView commonView = (WGOrderListGoodsView)LayoutInflater.from(
                     mContext).inflate(R.layout.wgorderlist_goods, parent,
                     false);
+            commonView.setListener(new WGOrderListGoodsView.OnItemListener() {
+                @Override
+                public void onGoodItem(WGHomeFloorContentGoodItem item) {
+                    if (mOnItemClickListener != null) {
+                        GoodDetailItemClickListener temp = (GoodDetailItemClickListener)mOnItemClickListener;
+                        temp.onGoodItemClick(null, item);
+                    }
+                }
+            });
             view = commonView;
         }
         GoodDetailItemViewHolder holder = new GoodDetailItemViewHolder(view);
@@ -114,6 +128,9 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
 
     @Override
     public int getItemCount() {
+        if (mGoodDetail == null) {
+            return 0;
+        }
         return 5;
     }
 
@@ -154,6 +171,9 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
         @Override
         public void showWithData(Object object) {
             super.showWithData(object);
+            if (object == null) {
+                return;
+            }
             WGGoodDetail item = (WGGoodDetail)object;
             int tag = (int) mView.getTag();
             if (tag == 0) {
@@ -175,6 +195,9 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
                 if (hasProductDes()) {
                     WGGoodDetailCommodityDescriptionView view = (WGGoodDetailCommodityDescriptionView) mView;
                     view.showWithData(item);
+                }
+                else {
+
                 }
             }
             else if (tag == 4) {

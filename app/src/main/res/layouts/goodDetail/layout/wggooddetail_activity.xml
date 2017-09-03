@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/base_titlebar"
-        layout="@layout/common_navigationbar" />
+        android:id="@+id/titlebar"
+        layout="@layout/common_title_navigationbar" />
 
     <RelativeLayout
         android:id="@+id/layout"

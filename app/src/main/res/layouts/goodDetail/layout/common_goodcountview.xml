@@ -17,7 +17,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textAlignment="center"
-        android:text="999"
         android:textSize="@dimen/ft12"
         android:textColor="@color/WGAppBaseColor"/>
 

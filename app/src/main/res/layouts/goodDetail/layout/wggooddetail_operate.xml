@@ -31,7 +31,7 @@
         android:layout_height="@dimen/x25"
         android:layout_marginTop="@dimen/x7"
         android:textSize="@dimen/ft12"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:layout_toRightOf="@+id/goodCountLayout"
         android:layout_marginRight="@dimen/x15"
         android:layout_toLeftOf="@+id/collectionIV"

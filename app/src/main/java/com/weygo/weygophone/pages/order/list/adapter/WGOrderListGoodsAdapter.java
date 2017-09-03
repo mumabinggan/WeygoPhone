@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.base.WGObject;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.order.list.model.WGOrderListItem;
@@ -16,6 +17,7 @@ import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemViewHolde
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by muma on 2017/5/21.
@@ -28,7 +30,7 @@ public class WGOrderListGoodsAdapter extends JHRecyclerViewAdapter {
     List mArray;
 
     public interface OnItemListener extends OnBaseItemClickListener {
-        void onGoodItem(WGOrderGoodItem item);
+        void onGoodItem(WGHomeFloorContentGoodItem item);
     }
     public void setListener(OnItemListener listener) {
         mOnItemClickListener = listener;
@@ -56,7 +58,7 @@ public class WGOrderListGoodsAdapter extends JHRecyclerViewAdapter {
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
                     OnItemListener temp = (OnItemListener) mOnItemClickListener;
-                    temp.onGoodItem((WGOrderGoodItem)mArray.get((int)v.getTag()));
+                    temp.onGoodItem((WGHomeFloorContentGoodItem)mArray.get((int)v.getTag()));
                 }
             }
         });
@@ -67,8 +69,15 @@ public class WGOrderListGoodsAdapter extends JHRecyclerViewAdapter {
     @Override
     public void onBindViewHolder(JHBaseViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        WGOrderGoodItem item = (WGOrderGoodItem) mArray.get(position);
-        holder.showWithData(item);
+        Object object = mArray.get(position);
+        if (object instanceof WGOrderGoodItem) {
+            WGOrderGoodItem item = (WGOrderGoodItem) mArray.get(position);
+            holder.showWithData(item);
+        }
+        else if (object instanceof WGHomeFloorContentGoodItem) {
+            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) mArray.get(position);
+            holder.showWithData(item);
+        }
     }
 
     @Override

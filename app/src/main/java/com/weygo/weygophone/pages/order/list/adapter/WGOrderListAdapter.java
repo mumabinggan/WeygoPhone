@@ -15,6 +15,7 @@ import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemViewHolde
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderListRebuyView;
 import com.weygo.weygophone.pages.order.list.widget.WGOrderNumberView;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -98,10 +99,10 @@ public class WGOrderListAdapter extends JHRecyclerViewAdapter {
             goodsView = (WGOrderListGoodsView) view.findViewById(R.id.orderGoodsView);
             goodsView.setListener(new WGOrderListGoodsView.OnItemListener() {
                 @Override
-                public void onGoodItem(WGOrderGoodItem item) {
+                public void onGoodItem(WGHomeFloorContentGoodItem item) {
                     if (mOnItemClickListener != null) {
                         OnItemListener temp = (OnItemListener) mOnItemClickListener;
-                        temp.onGoodItem(item);
+                        temp.onGoodItem((WGOrderGoodItem) item);
                     }
                 }
             });

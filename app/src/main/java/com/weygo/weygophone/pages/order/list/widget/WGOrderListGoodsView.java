@@ -19,6 +19,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
 import com.weygo.weygophone.pages.order.list.adapter.WGOrderListGoodsAdapter;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class WGOrderListGoodsView extends JHRelativeLayout {
     List mArray;
 
     public interface OnItemListener {
-        void onGoodItem(WGOrderGoodItem item);
+        void onGoodItem(WGHomeFloorContentGoodItem item);
     }
 
     OnItemListener mListener;
@@ -65,7 +66,7 @@ public class WGOrderListGoodsView extends JHRelativeLayout {
         mAdapter = new WGOrderListGoodsAdapter(getContext(), mArray);
         mAdapter.setListener(new WGOrderListGoodsAdapter.OnItemListener() {
             @Override
-            public void onGoodItem(WGOrderGoodItem item) {
+            public void onGoodItem(WGHomeFloorContentGoodItem item) {
                 if (mListener != null) {
                     mListener.onGoodItem(item);
                 }
@@ -80,10 +81,15 @@ public class WGOrderListGoodsView extends JHRelativeLayout {
     }
 
     public void showWithArray(List array) {
-        if (array.equals(mArray)) {
-            return;
+        if (array == null) {
+            mArray = array;
         }
-        mArray = array;
+        else {
+            if (array.equals(mArray)) {
+                return;
+            }
+            mArray = array;
+        }
         mAdapter.setData(mArray);
     }
 }

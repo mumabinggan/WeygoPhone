@@ -25,6 +25,8 @@ import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoo
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
 import com.weygo.weygophone.pages.common.model.request.WGSetPostCodeRequest;
 import com.weygo.weygophone.pages.common.model.response.WGSetPostCodeResponse;
+import com.weygo.weygophone.pages.goodDetail.model.request.WGAddGoodToCartRequest;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
 import com.weygo.weygophone.pages.order.detail.model.request.WGRebuyRequest;
 import com.weygo.weygophone.pages.order.detail.model.response.WGRebuyResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
@@ -291,6 +293,26 @@ public class WGApplicationRequestUtils {
             @Override
             public void onSuccess(JHResponse result) {
                 WGRebuyResponse response = (WGRebuyResponse) result;
+                if (inteface != null) {
+                    inteface.onSuccessCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    public void loadAddGoodToCart(long goodId, long count, final WGOnCompletionInteface inteface) {
+        WGAddGoodToCartRequest request = new WGAddGoodToCartRequest();
+        request.goodId = goodId;
+        request.count = count;
+        JHNetworkUtils.getInstance().postAsyn(request, WGAddGoodToCartResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                WGAddGoodToCartResponse response = (WGAddGoodToCartResponse) result;
                 if (inteface != null) {
                     inteface.onSuccessCompletion(response);
                 }

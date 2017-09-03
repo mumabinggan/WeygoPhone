@@ -90,6 +90,10 @@ public class WGGoodCountView extends LinearLayout {
         mCountView.setText(mCount + "");
     }
 
+    public long getCount() {
+        return mCount;
+    }
+
     public void setListener(OnGoodCountChangeListener listener) {
         mListener = listener;
     }

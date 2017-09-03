@@ -65,7 +65,15 @@ public class WGGoodDetailOperateView extends RelativeLayout {
     }
 
     public void showWithData(WGGoodDetail goodDetail) {
-
+        if (goodDetail != null)   {
+            if (goodDetail.hasFavorited > 0) {
+                mCollectionIV.setImageResource(R.drawable.gooddetail_collection_selected);
+            }
+            else {
+                mCollectionIV.setImageResource(R.drawable.gooddetail_collection_normal);
+            }
+            mCountView.setCount(1);
+        }
     }
 
     void handleAddShopCartBtn() {
@@ -82,5 +90,9 @@ public class WGGoodDetailOperateView extends RelativeLayout {
 
     public void setListener(OnGoodOperateListener listener) {
         mListener = listener;
+    }
+
+    public long getGoodCount() {
+        return mCountView.getCount();
     }
 }

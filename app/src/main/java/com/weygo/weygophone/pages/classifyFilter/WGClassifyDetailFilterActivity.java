@@ -43,7 +43,9 @@ public class WGClassifyDetailFilterActivity extends WGTitleActivity {
         refresh();
     }
 
+    TextView mBrandTV;
     TagFlowLayout mBrandFlowLayout;
+    TextView mKeywordTV;
     TagFlowLayout mKeywordFlowLayout;
 
     @Override
@@ -73,6 +75,7 @@ public class WGClassifyDetailFilterActivity extends WGTitleActivity {
         super.initSubView();
         mNavigationBar.setTitle(R.string.ClassifyDetail_Filter);
         mNavigationBar.setRightBarItem(R.drawable.classifydetail_filter_confirm);
+        mBrandTV = (TextView) findViewById(R.id.brandTV);
         mBrandFlowLayout = (TagFlowLayout) findViewById(R.id.brandFlowLayout);
         mBrandFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
@@ -86,6 +89,7 @@ public class WGClassifyDetailFilterActivity extends WGTitleActivity {
                 return true;
             }
         });
+        mKeywordTV = (TextView) findViewById(R.id.keywordTV);
         mKeywordFlowLayout = (TagFlowLayout) findViewById(R.id.keywordFlowLayout);
         mKeywordFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
@@ -105,6 +109,27 @@ public class WGClassifyDetailFilterActivity extends WGTitleActivity {
     }
 
     void refresh() {
+        if (mData == null) {
+            return;
+        }
+        if (mData.brands != null) {
+            if (mData.brands.size() > 0) {
+                mBrandTV.setVisibility(View.VISIBLE);
+                mBrandFlowLayout.setVisibility(View.VISIBLE);
+            }
+            else {
+                mBrandTV.setVisibility(View.GONE);
+                mBrandFlowLayout.setVisibility(View.GONE);
+            }
+            if (mData.classifys.size() > 0) {
+                mKeywordTV.setVisibility(View.VISIBLE);
+                mKeywordFlowLayout.setVisibility(View.VISIBLE);
+            }
+            else {
+                mKeywordTV.setVisibility(View.GONE);
+                mKeywordFlowLayout.setVisibility(View.GONE);
+            }
+        }
         List<String> brandList = new ArrayList<>();
         Set<Integer> selectBrandSet = new HashSet<>();
         List<String> keywordList = new ArrayList<>();

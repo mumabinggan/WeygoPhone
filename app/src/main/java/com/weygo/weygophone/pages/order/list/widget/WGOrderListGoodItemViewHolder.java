@@ -27,5 +27,9 @@ public class WGOrderListGoodItemViewHolder extends JHBaseViewHolder {
             WGOrderGoodItem item = (WGOrderGoodItem) object;
             mItemView.showWithData(item);
         }
+        else if (object instanceof WGHomeFloorContentGoodItem) {
+            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) object;
+            mItemView.showWithData(item);
+        }
     }
 }

@@ -23,6 +23,7 @@ import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
 import com.weygo.weygophone.pages.classifyFilter.WGClassifyDetailFilterActivity;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyHotGoodItem;
@@ -151,20 +152,19 @@ public class WGTabClassifyFragment extends WGFragment {
     }
 
     void handleSubClassifyItemClick(View view, WGClassifyItem item) {
-        int[] distance = {0,0};
-        WGApplicationAnimationUtils.add(getContext(), mLayout, view,
-                null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
-        return;
-//        Log.e("handle", "handleSubClassifyItemClick" + item.name);
-//        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void handleSubClassifyHotGoodItem(View view, WGClassifyHotGoodItem item) {
-        Log.e("handle", "handleSubClassifyItemClick" + item.name);
+        Intent intent = new Intent(getActivity(), WGGoodDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void loadClassify() {

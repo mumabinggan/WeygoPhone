@@ -147,6 +147,7 @@ public class WGGoodDetailDescriptionView extends JHLinearLayout {
             else {
                 textView.setText(mGoodDetail.deliveryInfo);
             }
+            textView.setBackgroundColor(Color.parseColor("#ffffff"));
         }
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
