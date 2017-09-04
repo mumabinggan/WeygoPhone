@@ -59,6 +59,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
 
     public interface RefreshListener {
         void onRefresh();
+        void onRequestCompletion(WGClassifyDetail mData);
     }
 
     RefreshListener mRefreshListener;
@@ -305,6 +306,9 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                     list.addAll(response.data.goodArray);
                 }
                 mData.goodArray = list;
+            }
+            if (mRefreshListener != null && refresh) {
+                mRefreshListener.onRequestCompletion(mData);
             }
             mAdapter.setData(mData);
         }

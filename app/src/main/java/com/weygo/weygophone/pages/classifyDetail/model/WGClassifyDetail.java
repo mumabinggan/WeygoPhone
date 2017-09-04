@@ -25,7 +25,7 @@ public class WGClassifyDetail extends WGObject {
 
     public WGCarouselFigureItem carouselFigureItem;
 
-    public List<WGClassifyItem> subClassifyArray;
+    public List<WGClassifyItem> subArray;
 
     public List<WGHomeFloorContentGoodItem> goodArray;
 
@@ -45,7 +45,7 @@ public class WGClassifyDetail extends WGObject {
     }
 
     public boolean hasSubClassify() {
-        return (subClassifyArray != null && subClassifyArray.size() > 0);
+        return (subArray != null && subArray.size() > 0);
     }
 
     public boolean hasGoods() {

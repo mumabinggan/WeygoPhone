@@ -92,7 +92,7 @@ public class WGApplicationRequestUtils {
         Log.e("___store", "___store");
         String storeValue = "mobilecn";
         //String storeValue = "mobilecn";
-        //String storeValue = getResources().getString(R.string.request_StoreValue);
+        storeValue = mContext.getResources().getString(R.string.request_StoreValue);
         Log.e("storeValue", storeValue);
         buffer.append(storeValue);
 
@@ -126,6 +126,27 @@ public class WGApplicationRequestUtils {
 //        }
 //        return versionString.toString();
         //return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue + "&app=" + "";
+    }
+
+    public String paySign() {
+        StringBuffer buffer = new StringBuffer(this.signPrefix());
+        buffer.append("app");
+        buffer.append(WGConstants.WGBundlerId);
+        buffer.append("os");
+        buffer.append("Android");
+        String sessionKey = WGApplicationUserUtils.getInstance().sessionKey();
+        if (!JHStringUtils.isNullOrEmpty(sessionKey)) {
+            buffer.append("sessionKey");
+            buffer.append(sessionKey);
+        }
+        String paySign = "sign=" + JHStringUtils.md5(buffer.toString());
+        return paySign;
+    }
+    public String payUrl(String url) {
+        return url + paySign() +
+                "&sessionKey=" +
+                WGApplicationUserUtils.getInstance().sessionKey() +
+                "&app=" + WGConstants.WGBundlerId + "&os=iOS";
     }
 
     void showWarning(String message) {

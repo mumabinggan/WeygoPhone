@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.setting;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -107,9 +108,6 @@ public class WGSettingActivity extends WGTitleActivity {
 
     void handlePostCap() {
         WGPostPopView popupView = (WGPostPopView) getLayoutInflater().inflate(R.layout.common_cap_pop, null);
-//        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
-//                JHAdaptScreenUtils.deviceDpWidth(getContext()),
-//                JHAdaptScreenUtils.deviceDpHeight(getContext()));
         popupView.setListener(new WGPostPopView.OnItemListener() {
             @Override
             public void onSuccess() {
@@ -120,6 +118,7 @@ public class WGSettingActivity extends WGTitleActivity {
                 JHAdaptScreenUtils.devicePixelWidth(this),
                 JHAdaptScreenUtils.devicePixelHeight(this));
         popupView.setPopupWindow(window);
+        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
     }
 
     void handleSelectedLanguage() {

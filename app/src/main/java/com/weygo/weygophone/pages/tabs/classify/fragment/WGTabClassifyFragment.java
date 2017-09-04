@@ -154,7 +154,7 @@ public class WGTabClassifyFragment extends WGFragment {
     void handleSubClassifyItemClick(View view, WGClassifyItem item) {
         Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item);
         intent.putExtras(bundle);
         startActivity(intent);
     }

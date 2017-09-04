@@ -43,4 +43,8 @@ public class WGBaseViewHolder extends JHBaseViewHolder {
             }
         }
     }
+
+    public View getView() {
+        return mView;
+    }
 }

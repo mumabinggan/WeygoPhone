@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHRequest;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGConstants;
 
 import java.util.Map;
 import java.util.Set;
@@ -16,9 +17,9 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
-    public String app = "com.weygo.test";
+    public String app = WGConstants.WGBundlerId;
 
-    public String os = "iOS";
+    public String os = "Android";
 
     // eg. www.example.com, default ""
     //"m.preview.weygo.com";

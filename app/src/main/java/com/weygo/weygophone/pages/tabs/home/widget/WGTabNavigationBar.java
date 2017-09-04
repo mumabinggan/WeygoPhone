@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.tabs.home.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.util.AttributeSet;
 import android.view.View;
@@ -98,6 +99,10 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         mTitleLabel.setText(resId);
     }
 
+    public void setTitle(String title) {
+        mTitleLabel.setText(title);
+    }
+
     public void setSearchHidden(boolean hidden) {
         View view = findViewById(R.id.navigationBar_search);
         if (hidden) {
@@ -105,6 +110,18 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         }
         else {
             view.setVisibility(VISIBLE);
+        }
+    }
+
+    public void setTitleDrawableRight(boolean show) {
+        TextView titleTV = (TextView)findViewById(R.id.navigationBar_title);
+        if (!show) {
+            titleTV.setCompoundDrawables(null, null, null, null);
+        }
+        else {
+            Drawable drawable = getResources().getDrawable(R.drawable.home_navigationbar_jiantou);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            titleTV.setCompoundDrawables(null, null, drawable, null);
         }
     }
 }

@@ -88,5 +88,7 @@ public class WGConstants {
 
     public static final int WGOrderListTypeAll = 1;
     public static final int WGOrderListTypeDelivering = 2;
+
+    public static final String WGBundlerId  = "com.weygo.test";
 }
 

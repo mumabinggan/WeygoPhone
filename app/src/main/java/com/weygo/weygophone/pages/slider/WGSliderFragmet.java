@@ -176,40 +176,40 @@ public class WGSliderFragmet extends WGFragment {
     }
 
     void  test() {
-//        WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
-////        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
-////                JHAdaptScreenUtils.deviceDpWidth(getContext()),
-////                JHAdaptScreenUtils.deviceDpHeight(getContext()));
+        WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
 //        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
-//                JHAdaptScreenUtils.devicePixelWidth(getContext()),
-//                JHAdaptScreenUtils.devicePixelHeight(getContext()));
-//        popupView.setPopupWindow(window);
-//        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
-        WGOverHeightDetail item = new WGOverHeightDetail();
-        item.maxRise = "100.0";
-        WGOverHeightGoodItem good = new WGOverHeightGoodItem();
-        good.name= "郑要苛要";
-        good.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
-        good.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
-        good.goodCount = 2;
-        good.rise = 23;
-        List list = new ArrayList<WGOverHeightGoodItem>();
-        list.add(good);
-        list.add(good);
-        list.add(good);
-        item.goods = list;
-        List goods = new ArrayList<WGOverHeightDetail>();
-        goods.add(item);
-        WGCommitOrderOverWeightPopView popupView = (WGCommitOrderOverWeightPopView) getActivity()
-                .getLayoutInflater()
-                .inflate(R.layout.commitorder_overheight_pop, null);
-        popupView.setGoods(goods);
+//                JHAdaptScreenUtils.deviceDpWidth(getContext()),
+//                JHAdaptScreenUtils.deviceDpHeight(getContext()));
         JHBasePopupWindow window = new JHBasePopupWindow(popupView,
                 JHAdaptScreenUtils.devicePixelWidth(getContext()),
                 JHAdaptScreenUtils.devicePixelHeight(getContext()));
         popupView.setPopupWindow(window);
         window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+//        WGOverHeightDetail item = new WGOverHeightDetail();
+//        item.maxRise = "100.0";
+//        WGOverHeightGoodItem good = new WGOverHeightGoodItem();
+//        good.name= "郑要苛要";
+//        good.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
+//        good.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
+//        good.goodCount = 2;
+//        good.rise = 23;
+//        List list = new ArrayList<WGOverHeightGoodItem>();
+//        list.add(good);
+//        list.add(good);
+//        list.add(good);
+//        item.goods = list;
+//        List goods = new ArrayList<WGOverHeightDetail>();
+//        goods.add(item);
+//        WGCommitOrderOverWeightPopView popupView = (WGCommitOrderOverWeightPopView) getActivity()
+//                .getLayoutInflater()
+//                .inflate(R.layout.commitorder_overheight_pop, null);
+//        popupView.setGoods(goods);
+//        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+//                JHAdaptScreenUtils.devicePixelWidth(getContext()),
+//                JHAdaptScreenUtils.devicePixelHeight(getContext()));
+//        popupView.setPopupWindow(window);
+//        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
     }
 
     void handleSliderLoginClick(View view) {
