@@ -31,6 +31,7 @@ import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
 import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
 import com.weygo.weygophone.pages.search.WGSearchActivity;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -350,6 +351,21 @@ public class WGTabHomeFragment extends WGFragment {
         }
     }
 
+    void handleSwitchTab(WGHomeFloorContentClassifyItem item) {
+        if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyHomeTab) {
+
+        }
+        else if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodBenefitTab) {
+
+        }
+        else if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodNoTab) {
+
+        }
+        else if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyNoTab) {
+
+        }
+    }
+
     private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
 
         private List<WGTitleItem> mTitleList;
@@ -393,10 +409,15 @@ public class WGTabHomeFragment extends WGFragment {
             if (fragment == null) {
                 Log.e("fragment=null", "frag");
                 fragment = new WGTabHomeItemFragment();
-                fragment.setListener(new WGTabHomeItemFragment.RefreshListener() {
+                fragment.setListener(new WGTabHomeItemFragment.OnListener() {
                     @Override
                     public void onRefresh() {
                         loadTabContentDataWithMenuId(menuIdWithIndex(position), WGConstants.WGCacheTypeCachePrior);
+                    }
+
+                    @Override
+                    public void onSwitchTab(WGHomeFloorContentClassifyItem item) {
+                        handleSwitchTab(item);
                     }
                 });
                 mContentFragmentMap.put(position, fragment);

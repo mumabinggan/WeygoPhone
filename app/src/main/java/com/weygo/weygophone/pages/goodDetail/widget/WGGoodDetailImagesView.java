@@ -10,6 +10,9 @@ import com.weygo.common.base.JHLinearLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.widget.WGRotationImagesView;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
+import com.jude.rollviewpager.OnItemClickListener;
+import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
+
 
 import java.util.List;
 
@@ -20,6 +23,14 @@ import java.util.List;
 public class WGGoodDetailImagesView extends JHLinearLayout {
 
     List mlist;
+
+    public interface OnItemListener {
+        void onItemClick(int index);
+    }
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
+    }
 
     WGRotationImagesView mScrollImageView;
 
@@ -39,6 +50,14 @@ public class WGGoodDetailImagesView extends JHLinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mScrollImageView = (WGRotationImagesView) findViewById(R.id.scrollImageView);
+        mScrollImageView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (mListener != null) {
+                    mListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     public void showWithArray(List list) {

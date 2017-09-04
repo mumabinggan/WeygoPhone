@@ -1,8 +1,10 @@
 package com.weygo.weygophone.pages.tabs.home.widget;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.weygo.common.base.JHInterface;
 import com.weygo.common.base.JHLinearLayout;
@@ -21,13 +23,16 @@ public class WGHomeContentFloorGoodsGridCellView extends JHLinearLayout {
 
     WGHomeContentFloorGoodsGridItemView mRightItemView;
 
+    List mData;
+
     OnPurchaseListener mListener;
     public void setListener(OnPurchaseListener listener) {
         mListener = listener;
     }
 
     public interface OnPurchaseListener extends JHInterface {
-        void onPurchase(WGHomeFloorContentGoodItem item);
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point);
+        void onGoodDetail(WGHomeFloorContentGoodItem item);
     }
 
     public WGHomeContentFloorGoodsGridCellView(Context context) {
@@ -42,9 +47,15 @@ public class WGHomeContentFloorGoodsGridCellView extends JHLinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    void handlePurchase(WGHomeFloorContentGoodItem item) {
+    void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
         if (mListener != null) {
-            mListener.onPurchase(item);
+            mListener.onPurchase(item, view, point);
+        }
+    }
+
+    void handleGoodDetail(WGHomeFloorContentGoodItem item) {
+        if (mListener != null) {
+            mListener.onGoodDetail(item);
         }
     }
 
@@ -52,17 +63,29 @@ public class WGHomeContentFloorGoodsGridCellView extends JHLinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mLeftItemView = (WGHomeContentFloorGoodsGridItemView) findViewById(R.id.itemViewLeft);
-        mRightItemView = (WGHomeContentFloorGoodsGridItemView) findViewById(R.id.itemViewRight);
         mLeftItemView.setListener(new WGHomeContentFloorGoodsGridItemView.OnPurchaseListener() {
             @Override
-            public void onPurchase(WGHomeFloorContentGoodItem item) {
-                handlePurchase(item);
+            public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
+                handlePurchase(item, view, point);
             }
         });
+        mLeftItemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleGoodDetail((WGHomeFloorContentGoodItem)mData.get(0));
+            }
+        });
+        mRightItemView = (WGHomeContentFloorGoodsGridItemView) findViewById(R.id.itemViewRight);
         mRightItemView.setListener(new WGHomeContentFloorGoodsGridItemView.OnPurchaseListener() {
             @Override
-            public void onPurchase(WGHomeFloorContentGoodItem item) {
-                handlePurchase(item);
+            public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
+                handlePurchase(item, view, point);
+            }
+        });
+        mRightItemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleGoodDetail((WGHomeFloorContentGoodItem)mData.get(1));
             }
         });
     }
@@ -70,6 +93,7 @@ public class WGHomeContentFloorGoodsGridCellView extends JHLinearLayout {
     @Override
     public void showWithArray(List list) {
         super.showWithArray(list);
+        mData = list;
         int count = list.size();
         for (int num = 0; num < 2; ++num) {
             if (num == 0) {

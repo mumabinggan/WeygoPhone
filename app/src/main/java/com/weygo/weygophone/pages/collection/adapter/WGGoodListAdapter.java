@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.collection.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -77,8 +78,13 @@ public class WGGoodListAdapter extends JHRecyclerViewAdapter {
         WGGoodListViewHolder holder = new WGGoodListViewHolder(view);
         ((WGGoodListView)view).setInnerTouchListener(new WGGoodListView.GoodListItemOnListener() {
             @Override
-            public void onTouchShopCart() {
+            public void onTouchShopCart(WGHomeFloorContentGoodItem item, View view, Point point) {
                 handleTouchShopCartItem(view);
+            }
+
+            @Override
+            public void onTouchItem(WGHomeFloorContentGoodItem item) {
+
             }
         });
         view.setOnClickListener(new View.OnClickListener() {

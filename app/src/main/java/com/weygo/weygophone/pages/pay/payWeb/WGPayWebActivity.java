@@ -8,7 +8,9 @@ import android.webkit.WebViewClient;
 
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.JHUriUtils;
+import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.base.WGWebActivity;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderData;
@@ -40,7 +42,7 @@ public class WGPayWebActivity extends WGWebActivity {
     public void initSubView() {
         super.initSubView();
         if (mData!= null) {
-            mWebView.loadUrl(mData.action);
+            mWebView.loadUrl(WGApplicationRequestUtils.getInstance().payUrl(mData.action));
             mWebView.setWebViewClient(new PayWebViewClient());
         }
     }

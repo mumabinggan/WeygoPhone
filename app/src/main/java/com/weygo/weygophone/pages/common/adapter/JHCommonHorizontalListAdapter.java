@@ -9,10 +9,7 @@ import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHLinearLayout;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHRelativeLayout;
-import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGObject;
-import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
-import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodItemViewHolder;
 
 import java.util.List;
 

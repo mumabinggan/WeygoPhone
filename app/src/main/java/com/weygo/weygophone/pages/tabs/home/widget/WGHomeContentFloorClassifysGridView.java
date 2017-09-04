@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorItem;
 
 import java.util.List;
@@ -31,7 +33,15 @@ public class WGHomeContentFloorClassifysGridView extends JHRelativeLayout {
     GridView mGridView;
     GridViewAdapter mAdapter;
 
-    List mList;
+    List<WGHomeFloorContentClassifyItem> mList;
+
+    public interface OnItemListener {
+        void onItemClick(WGHomeFloorContentClassifyItem item);
+    }
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
+    }
 
     public WGHomeContentFloorClassifysGridView(Context context) {
         super(context);
@@ -51,6 +61,19 @@ public class WGHomeContentFloorClassifysGridView extends JHRelativeLayout {
         mGridView = (GridView) findViewById(R.id.gridView);
         mAdapter = new GridViewAdapter(getContext());
         mGridView.setAdapter(mAdapter);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                handleItemClick(position);
+            }
+        });
+    }
+
+    public void handleItemClick(int position) {
+        WGHomeFloorContentClassifyItem item = mList.get(position);
+        if (mListener != null) {
+            mListener.onItemClick(mList.get(position));
+        }
     }
 
     public void showWithArray(List data) {

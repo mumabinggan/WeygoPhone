@@ -52,13 +52,13 @@ public class WGConstants {
     //跳转类型
     public static final int WGAppJumpTypeNone = 0;
     public static final int WGAppJumpTypeRegister = 1;          //注册
-    public static final int WGAppJumpTypeGoodDetail = 3;        //商品详情
-    public static final int WGAppJumpTypeInvitation = 4;        //邀请
-    public static final int WGAppJumpTypeClassifyDetail = 5;    //分类详情
-    public static final int WGAppJumpTypeSpecailClassifyHomeTab = 6;        //特殊专题:Home Tab
-    public static final int WGAppJumpTypeSpecailClassifyGoodBenefitTab = 7;     //特殊专题（只显示商品）：Benefit Tab
-    public static final int WGAppJumpTypeSpecailClassifyNoTab = 8;              //没有 Tab 的特殊专题
-    public static final int WGAppJumpTypeSpecailClassifyGoodNoTab = 9;          //没有 Tab 的特殊专题（只显示商品）
+    public static final int WGAppJumpTypeGoodDetail = 2;        //商品详情
+    public static final int WGAppJumpTypeInvitation = 3;        //邀请
+    public static final int WGAppJumpTypeClassifyDetail = 4;    //分类详情
+    public static final int WGAppJumpTypeSpecailClassifyHomeTab = 5;        //特殊专题:Home Tab
+    public static final int WGAppJumpTypeSpecailClassifyGoodBenefitTab = 6;     //特殊专题（只显示商品）：Benefit Tab
+    public static final int WGAppJumpTypeSpecailClassifyNoTab = 7;              //没有 Tab 的特殊专题
+    public static final int WGAppJumpTypeSpecailClassifyGoodNoTab = 8;          //没有 Tab 的特殊专题（只显示商品）
 
     //Home floor数据类型
     public static final int WGHomeFloorItemTypeNone = 0;

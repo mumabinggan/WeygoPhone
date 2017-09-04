@@ -14,4 +14,6 @@ public class WGHomeFloorBaseContentItem extends WGObject {
 
     public String pictureURL;
 
+    public int jumpType;
+
 }

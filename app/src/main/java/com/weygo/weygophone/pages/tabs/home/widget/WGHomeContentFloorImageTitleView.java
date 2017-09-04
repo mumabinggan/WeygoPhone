@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.tabs.home.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,16 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
 
     TextView mMoreTV;
 
+    WGHomeFloorItem mData;
+
+    public interface OnItemListener {
+        void onItemClick(Object object);
+    }
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
+    }
+
     public WGHomeContentFloorImageTitleView(Context context) {
         super(context);
     }
@@ -45,20 +56,28 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
         mNameTV = (TextView) findViewById(R.id.nameTV);
         mBreifDesTV = (TextView) findViewById(R.id.breifDesTV);
         mMoreTV = (TextView) findViewById(R.id.moreTV);
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onItemClick(mData);
+                }
+            }
+        });
     }
 
     public void showWithData(Object data) {
         if (data instanceof WGHomeFloorItem) {
-            WGHomeFloorItem item = (WGHomeFloorItem) data;
-            JHImageUtils.getInstance().loadImage(item.pictureURL, R.drawable.common_image_loading_small, mImageView);
-            mNameTV.setText(item.pictureName);
-            mBreifDesTV.setText(item.pictureBriefDescription);
-            if (JHStringUtils.isNullOrEmpty(item.pictureBtnName)) {
+            mData = (WGHomeFloorItem) data;
+            JHImageUtils.getInstance().loadImage(mData.pictureURL, R.drawable.common_image_loading_small, mImageView);
+            mNameTV.setText(mData.pictureName);
+            mBreifDesTV.setText(mData.pictureBriefDescription);
+            if (JHStringUtils.isNullOrEmpty(mData.pictureBtnName)) {
                 mMoreTV.setVisibility(INVISIBLE);
             }
             else {
                 mMoreTV.setVisibility(VISIBLE);
-                String moreString = "    " + item.pictureBtnName + "    ";
+                String moreString = "    " + mData.pictureBtnName + "    ";
                 mMoreTV.setText(moreString);
             }
         }

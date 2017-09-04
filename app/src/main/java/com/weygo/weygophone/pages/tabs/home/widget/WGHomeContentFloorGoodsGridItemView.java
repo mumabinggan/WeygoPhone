@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.tabs.home.widget;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -48,7 +49,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
     }
 
     public interface OnPurchaseListener extends JHInterface {
-        void onPurchase(WGHomeFloorContentGoodItem item);
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point);
     }
 
     public WGHomeContentFloorGoodsGridItemView(Context context) {
@@ -63,9 +64,9 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    void handlePurchase() {
+    void handlePurchase(View view) {
         if (mListener != null) {
-            mListener.onPurchase(mData);
+            mListener.onPurchase(mData, view, null);
         }
     }
 
@@ -82,7 +83,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
         mPurchaseTV.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                handlePurchase();
+                handlePurchase(v);
             }
         });
         mUnPurchaseTV = (TextView) findViewById(R.id.unPurchaseTV);

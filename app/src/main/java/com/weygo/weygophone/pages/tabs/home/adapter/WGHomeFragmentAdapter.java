@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.tabs.home.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,31 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
+import com.weygo.weygophone.pages.common.widget.WGCommonHorizontalListView;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
+import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailImagesView;
+import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHome;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorBaseContentItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentCountryItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorClassifyColumnView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorClassifyListItemView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorClassifysGridView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorCountryColumnView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsColumnView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorImageTitleView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentRotationView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeTopicsView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +52,21 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
     public WGHomeFragmentAdapter(Context context, WGHome data) {
         this.mHome = data;
         this.mContext = context;
+    }
+
+    public interface OnItemListener {
+        void onCarouselFigures(int index);
+        void onTopicItem(WGTopicItem item);
+        void onFloorHead(WGHomeFloorItem item);
+        void onFloorCountryItem(WGHomeFloorBaseContentItem item);
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint);
+        void onGoodItem(WGHomeFloorContentGoodItem item);
+        void onClassifyItem(WGHomeFloorBaseContentItem item);
+    }
+
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
     }
 
     public enum Item_Type {
@@ -108,6 +140,7 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                     for (WGHomeFloorContentItem contentItem : item.content) {
                         WGHomeFloorBaseContentItem goodItem = contentItem
                                 .contentItemWithType(item.type);
+                        goodItem.jumpType = contentItem.jumpType;
                         HomeCellData value = null;
                         if (item.type == WGConstants.WGHomeFloorItemTypeGoodList) {
                             value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorGoodListItem, goodItem);
@@ -130,6 +163,7 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                         for (WGHomeFloorContentItem contentItem : item.content) {
                             WGHomeFloorBaseContentItem goodItem = contentItem
                                     .contentItemWithType(item.type);
+                            goodItem.jumpType = contentItem.jumpType;
                             list.add(goodItem);
                         }
                         HomeCellData value = null;
@@ -192,15 +226,29 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
         View view = null;
         if (viewType == Item_Type.ITEM_TYPE_HomeCarouselFigures.ordinal()) {
             resourceId = R.layout.wghome_content_rotation;
-            view = LayoutInflater.from(
+            WGHomeContentRotationView temp = (WGHomeContentRotationView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGGoodDetailImagesView.OnItemListener() {
+                @Override
+                public void onItemClick(int index) {
+                    handleCarouselFigures(index);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeTopics.ordinal()) {
             resourceId = R.layout.wghome_content_topics;
-            view = LayoutInflater.from(
+            WGHomeTopicsView temp = (WGHomeTopicsView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGCommonHorizontalListView.OnItemListener() {
+                @Override
+                public void onItemClick(Object object) {
+                    handleTopicItem((WGTopicItem)object);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorTitle.ordinal()) {
             resourceId = R.layout.wghome_content_floor_title;
@@ -216,69 +264,117 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorImageTitle.ordinal()) {
             resourceId = R.layout.wghome_content_floor_imagetitle;
-            view = LayoutInflater.from(
+            WGHomeContentFloorImageTitleView temp = (WGHomeContentFloorImageTitleView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnClickListener(new View.OnClickListener() {
+            temp.setListener(new WGHomeContentFloorImageTitleView.OnItemListener() {
                 @Override
-                public void onClick(View view) {
-                    //handleClickView(view);
+                public void onItemClick(Object object) {
+                    handleFloorHead((WGHomeFloorItem)object);
                 }
             });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorGoodListItem.ordinal()) {
             resourceId = R.layout.wggood_list_item;
-            view = LayoutInflater.from(
+            WGGoodListView temp = (WGGoodListView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnClickListener(new View.OnClickListener() {
+            temp.setListener(new WGGoodListView.GoodListItemOnListener() {
                 @Override
-                public void onClick(View view) {
-                    //handleClickView(view);
+                public void onTouchShopCart(WGHomeFloorContentGoodItem item, View view1, Point point) {
+                    handlePurchase(item, view1, point);
+                }
+
+                @Override
+                public void onTouchItem(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
                 }
             });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorGoodColumn.ordinal()) {
             resourceId = R.layout.wghome_content_goods_column;
-            view = LayoutInflater.from(
+            WGHomeContentFloorGoodsColumnView temp = (WGHomeContentFloorGoodsColumnView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGCommonHorizontalListView.OnItemListener() {
+                @Override
+                public void onItemClick(Object object) {
+                    handleGoodItem((WGHomeFloorContentGoodItem)object);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorGoodGrid.ordinal()) {
             resourceId = R.layout.wghome_content_floor_good_grid_cell;
-            view = LayoutInflater.from(
+            WGHomeContentFloorGoodsGridCellView temp = (WGHomeContentFloorGoodsGridCellView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGHomeContentFloorGoodsGridCellView.OnPurchaseListener() {
+                @Override
+                public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
+                    handlePurchase(item, view, point);
+                }
+
+                @Override
+                public void onGoodDetail(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorClassifyListCellItem.ordinal()) {
             resourceId = R.layout.wghome_content_floor_classify_list_item;
-            view = LayoutInflater.from(
+            WGHomeContentFloorClassifyListItemView temp = (WGHomeContentFloorClassifyListItemView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnClickListener(new View.OnClickListener() {
+            temp.setListener(new WGHomeContentFloorClassifyListItemView.OnItemListener() {
                 @Override
-                public void onClick(View view) {
-                    //handleClickView(view);
+                public void onItemClick(WGHomeFloorContentClassifyItem data) {
+                    handleClassifyItem(data);
                 }
             });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorClassifyGrid.ordinal()) {
             resourceId = R.layout.wghome_content_floor_classify_grid;
-            view = LayoutInflater.from(
+            WGHomeContentFloorClassifysGridView temp = (WGHomeContentFloorClassifysGridView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGHomeContentFloorClassifysGridView.OnItemListener() {
+                @Override
+                public void onItemClick(WGHomeFloorContentClassifyItem item) {
+                    handleClassifyItem(item);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorClassifyColumn.ordinal()) {
             resourceId = R.layout.wghome_content_classify_column;
-            view = LayoutInflater.from(
+            WGHomeContentFloorClassifyColumnView temp = (WGHomeContentFloorClassifyColumnView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGCommonHorizontalListView.OnItemListener() {
+                @Override
+                public void onItemClick(Object object) {
+                    handleClassifyItem((WGHomeFloorContentClassifyItem)object);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorCountryColumn.ordinal()) {
             resourceId = R.layout.wghome_content_country_column;
-            view = LayoutInflater.from(
+            WGHomeContentFloorCountryColumnView temp = (WGHomeContentFloorCountryColumnView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGCommonHorizontalListView.OnItemListener() {
+                @Override
+                public void onItemClick(Object object) {
+                    handleFloorCountryItem((WGHomeFloorBaseContentItem)object);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_HomeFloorSeparateLine.ordinal()) {
             resourceId = R.layout.wghome_content_separateline;
@@ -312,6 +408,48 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
             return data.mType.ordinal();
         }
         return Item_Type.ITEM_TYPE_None.ordinal();
+    }
+
+    void handleCarouselFigures(int index) {
+        if (mListener != null) {
+            mListener.onCarouselFigures(index);
+        }
+    }
+
+    void handleTopicItem(WGTopicItem item) {
+        if (mListener != null) {
+            mListener.onTopicItem(item);
+        }
+    }
+
+    void handleFloorHead(WGHomeFloorItem item) {
+        if (mListener != null) {
+            mListener.onFloorHead(item);
+        }
+    }
+
+    void handleFloorCountryItem(WGHomeFloorBaseContentItem item) {
+        if (mListener != null) {
+            mListener.onFloorCountryItem(item);
+        }
+    }
+
+    void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+        if (mListener != null) {
+            mListener.onPurchase(item, view, fromPoint);
+        }
+    }
+
+    void handleGoodItem(WGHomeFloorContentGoodItem item) {
+        if (mListener != null) {
+            mListener.onGoodItem(item);
+        }
+    }
+
+    void handleClassifyItem(WGHomeFloorBaseContentItem item) {
+        if (mListener != null) {
+            mListener.onClassifyItem(item);
+        }
     }
 
     //Classify

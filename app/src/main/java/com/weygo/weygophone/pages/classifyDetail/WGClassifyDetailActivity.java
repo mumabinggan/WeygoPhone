@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
@@ -104,13 +105,9 @@ public class WGClassifyDetailActivity extends WGBaseActivity {
             @Override
             public void onRequestCompletion(WGClassifyDetail data) {
                 mData = data;
-//                if (mData != null && mData.subClassifyArray != null
-//                        && mData.subClassifyArray.size() > 0) {
-//                    mNavigationBar.setTitleDrawableRight(true);
-//                }
-//                else {
-//                    mNavigationBar.setTitleDrawableRight(false);
-//                }
+                if (mData != null && !JHStringUtils.isNullOrEmpty(mData.name)) {
+                    mNavigationBar.setTitle(mData.name);
+                }
             }
         });
         fragmentTransaction.add(R.id.container, fragment);
