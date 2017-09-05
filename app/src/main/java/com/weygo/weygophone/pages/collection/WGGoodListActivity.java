@@ -1,21 +1,35 @@
 package com.weygo.weygophone.pages.collection;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHDividerItemDecoration;
+import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHStringUtils;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
@@ -95,8 +109,8 @@ public class WGGoodListActivity extends WGTitleActivity {
                 handleTouchGoodItem(view, item);
             }
             @Override
-            public void onTouchAddCart(View view, WGHomeFloorContentGoodItem item) {
-                handleTouchAddCart(view, item);
+            public void onTouchAddCart(View view, WGHomeFloorContentGoodItem item, Point point) {
+                handleTouchAddCart(view, item, point);
             }
             @Override
             public void onItemClick(View view, int position) {
@@ -128,14 +142,18 @@ public class WGGoodListActivity extends WGTitleActivity {
     }
 
     void handleTouchGoodItem(View view, WGHomeFloorContentGoodItem item) {
-
+        Intent intent = new Intent(this, WGGoodDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void handleLongTouchGoodItem(View view, WGHomeFloorContentGoodItem item) {
     }
 
-    void handleTouchAddCart(View view, WGHomeFloorContentGoodItem item) {
-
+    void handleTouchAddCart(View view, WGHomeFloorContentGoodItem item, Point point) {
+        handlePurchase(item, view, point);
     }
 
     public void refreshUI() {
@@ -148,5 +166,49 @@ public class WGGoodListActivity extends WGTitleActivity {
 
     void loadDeleteGood(WGHomeFloorContentGoodItem item) {
 
+    }
+
+    void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+        if (JHStringUtils.isNullOrEmpty(WGApplicationUserUtils.getInstance().currentPostCode())) {
+            WGPostPopView popupView = (WGPostPopView) getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+            popupView.setListener(new WGPostPopView.OnItemListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+            });
+            JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                    JHAdaptScreenUtils.devicePixelWidth(this),
+                    JHAdaptScreenUtils.devicePixelHeight(this));
+            popupView.setPopupWindow(window);
+            window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+            return;
+        }
+        WGApplicationRequestUtils.getInstance().loadAddGoodToCart(item.id, 1, new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+                handleShopCartCount((WGAddGoodToCartResponse) response);
+            }
+
+            @Override
+            public void onFailCompletion(WGResponse response) {
+
+            }
+        });
+//        if (mData != null && mData.carouselFigures != null && mData.carouselFigures.size() > 0) {
+//            //动画
+//            int[] distance = {0,0};
+//            WGApplicationAnimationUtils.add(this, mLayout, view,
+//                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+//        }
+    }
+
+    void handleShopCartCount(WGAddGoodToCartResponse response) {
+        if (response.success()) {
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        }
+        else {
+            showWarning(response.message);
+        }
     }
 }

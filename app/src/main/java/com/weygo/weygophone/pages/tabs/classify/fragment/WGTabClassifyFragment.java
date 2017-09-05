@@ -24,6 +24,8 @@ import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
 import com.weygo.weygophone.pages.classifyFilter.WGClassifyDetailFilterActivity;
 import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
+import com.weygo.weygophone.pages.search.WGSearchActivity;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyHotGoodItem;
@@ -80,21 +82,22 @@ public class WGTabClassifyFragment extends WGFragment {
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
-                /*
-                Intent intent = new Intent(getActivity(), WGSliderActivity.class);
-                startActivity(intent);
-                */
+//                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
+//                startActivity(intent);
+                //startActivity(new Intent(getActivity(), ZopimChatActivity.class));
                 activity.openSlider();
             }
 
             @Override
             public void onClickSearch(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGSearchActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onClickCart(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
+                startActivity(intent);
             }
 
             @Override

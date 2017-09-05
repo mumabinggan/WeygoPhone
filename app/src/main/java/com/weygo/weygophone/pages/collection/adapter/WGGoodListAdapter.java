@@ -32,7 +32,7 @@ public class WGGoodListAdapter extends JHRecyclerViewAdapter {
 
         void onLongTouchGoodItem(View view, WGHomeFloorContentGoodItem item);
 
-        void onTouchAddCart(View view, WGHomeFloorContentGoodItem item);
+        void onTouchAddCart(View view, WGHomeFloorContentGoodItem item, Point point);
     }
 
     public WGGoodListAdapter(Context context, List<WGHomeFloorContentGoodItem> data) {
@@ -65,7 +65,7 @@ public class WGGoodListAdapter extends JHRecyclerViewAdapter {
         if (mOnItemClickListener != null) {
             WGGoodListOnItemClickListener listener = (WGGoodListOnItemClickListener) mOnItemClickListener;
             WGHomeFloorContentGoodItem item = mArray.get((int) view.getTag());
-            listener.onTouchAddCart(view, item);
+            listener.onTouchAddCart(view, item, null);
         }
     }
 

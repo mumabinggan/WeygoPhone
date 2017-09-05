@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">W</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="app_name">Weygo</string>
     <string name="hello">你好</string>
     <string name="main_home">首页</string>
     <string name="main_classify">分类</string>

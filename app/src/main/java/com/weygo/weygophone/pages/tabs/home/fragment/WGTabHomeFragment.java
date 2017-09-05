@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,17 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHWarningUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
@@ -92,14 +96,10 @@ public class WGTabHomeFragment extends WGFragment {
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
-                /*
-                Intent intent = new Intent(getActivity(), WGSliderActivity.class);
-                startActivity(intent);
-                */
-                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
+//                startActivity(intent);
                 //startActivity(new Intent(getActivity(), ZopimChatActivity.class));
-                //activity.openSlider();
+                activity.openSlider();
             }
 
             @Override
@@ -116,7 +116,18 @@ public class WGTabHomeFragment extends WGFragment {
 
             @Override
             public void onClickTitle(View var1) {
+                WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+                popupView.setListener(new WGPostPopView.OnItemListener() {
+                    @Override
+                    public void onSuccess() {
 
+                    }
+                });
+                JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                        JHAdaptScreenUtils.devicePixelWidth(getActivity()),
+                        JHAdaptScreenUtils.devicePixelHeight(getActivity()));
+                popupView.setPopupWindow(window);
+                window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
             }
         });
 

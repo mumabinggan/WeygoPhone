@@ -25,6 +25,9 @@ import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGOnUserInfoCompletionInteface;
 import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.models.JHTests;
@@ -61,6 +64,7 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 import com.weygo.weygophone.pages.tabs.mine.fragment.WGTabMineFragment;
+import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 import com.weygo.weygophone.pages.test.WGTestRequest;
 
 import org.parceler.Parcels;
@@ -115,6 +119,15 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testModelToMap();
         //this.testPostClassifyGetRequest();
         getWindow();
+
+//        if (WGApplicationUserUtils.getInstance().isLogined()) {
+//            WGApplicationRequestUtils.getInstance().loadUserInfoOnCompletion(this, new WGOnUserInfoCompletionInteface() {
+//                @Override
+//                public void onUserInfoCompletion(WGUserInfoResponse response) {
+//
+//                }
+//            });
+//        }
 
         Log.e("--width---", "width : " + JHAdaptScreenUtils.devicePixelWidth(this) + "height:" +
                 JHAdaptScreenUtils.devicePixelHeight(this));

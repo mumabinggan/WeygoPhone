@@ -23,6 +23,7 @@ import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGCellStyle7View;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.search.WGSearchActivity;
 import com.weygo.weygophone.pages.search.adapter.WGSearchResultAdapter;
 import com.weygo.weygophone.pages.search.model.WGSearchData;
@@ -101,7 +102,7 @@ public class WGSearchResultFragment extends WGFragment {
         mAdapter.setListener(new WGSearchResultAdapter.OnItemListener() {
             @Override
             public void onGoodItem(WGHomeFloorContentGoodItem item) {
-                Log.e("====", item.name);
+                handleGoodItem(item);
             }
 
             @Override
@@ -133,6 +134,14 @@ public class WGSearchResultFragment extends WGFragment {
         Intent intent = new Intent(getActivity(), WGSearchActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(WGConstants.WGIntentDataKey, item.name);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    void handleGoodItem(WGHomeFloorContentGoodItem item) {
+        Intent intent = new Intent(getActivity(), WGGoodDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
         intent.putExtras(bundle);
         startActivity(intent);
     }

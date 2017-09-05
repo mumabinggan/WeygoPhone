@@ -159,19 +159,13 @@ public class WGApplicationRequestUtils {
 
     public void loadUserInfoOnCompletion(Context context, final WGOnUserInfoCompletionInteface inteface) {
         WGUserInfoRequest request = new WGUserInfoRequest();
-//        final boolean showLoading = request.showsLoadingView;
-//        if (showLoading) {
-//            mShowDialog = JHDialogUtils.showLoadingDialog(context);
-//        }
+        request.showsLoadingView = false;
         JHNetworkUtils.getInstance().postAsyn(request, WGUserInfoResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
                 Log.e("onSuccess", JSON.toJSONString(result));
                 WGUserInfoResponse response = (WGUserInfoResponse) result;
                 handleUserInfo(response);
-//                if (showLoading) {
-//                    JHDialogUtils.hideLoadingDialog(mShowDialog);
-//                }
                 if (inteface != null) {
                     inteface.onUserInfoCompletion(response);
                 }

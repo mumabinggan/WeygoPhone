@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.tabs.benefit.fragment;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,8 @@ import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.fragment.WGClassifyDetailContentFragment;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
+import com.weygo.weygophone.pages.search.WGSearchActivity;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.benefit.model.request.WGBenefitRequest;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeItemFragment;
@@ -89,21 +92,22 @@ public class WGTabBenefitFragment extends WGFragment {
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
-                /*
-                Intent intent = new Intent(getActivity(), WGSliderActivity.class);
-                startActivity(intent);
-                */
+//                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
+//                startActivity(intent);
+                //startActivity(new Intent(getActivity(), ZopimChatActivity.class));
                 activity.openSlider();
             }
 
             @Override
             public void onClickSearch(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGSearchActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onClickCart(View var1) {
-
+                Intent intent = new Intent(getActivity(), WGShopCartListActivity.class);
+                startActivity(intent);
             }
 
             @Override

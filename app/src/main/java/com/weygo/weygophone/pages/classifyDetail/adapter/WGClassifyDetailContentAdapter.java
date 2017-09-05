@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.classifyDetail.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyDetail;
 import com.weygo.weygophone.pages.classifyDetail.widget.WGClassifyDetailFilterView;
+import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorBaseContentItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentItem;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +35,8 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
         void onSort(View view);
         void onFilter(View view);
         void onGrid(View view);
+        void onGoodItem(WGHomeFloorContentGoodItem item);
+        void onShopCart(WGHomeFloorContentGoodItem item, View view, Point point);
     }
 
     public WGClassifyDetailContentAdapter(Context context, WGClassifyDetail data) {
@@ -124,6 +129,24 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
 
     Map<Integer, CellData> mPostionValueMap = new HashMap<>();
 
+    void handleGoodItem(WGHomeFloorContentGoodItem item) {
+        if (mOnItemClickListener != null) {
+            OnItemClickListener temp = (OnItemClickListener)mOnItemClickListener;
+            if (temp != null) {
+                temp.onGoodItem(item);
+            }
+        }
+    }
+
+    void handleShopCart(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+        if (mOnItemClickListener != null) {
+            OnItemClickListener temp = (OnItemClickListener)mOnItemClickListener;
+            if (temp != null) {
+                temp.onShopCart(item, view, fromPoint);
+            }
+        }
+    }
+
     @Override
     public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int resourceId = 0;
@@ -137,22 +160,40 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
         else if (viewType == WGClassifyDetailContentAdapter.Item_Type.
                         ITEM_TYPE_GoodListItem.ordinal()) {
             resourceId = R.layout.wggood_list_item;
-            view = LayoutInflater.from(
+            WGGoodListView temp = (WGGoodListView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnClickListener(new View.OnClickListener() {
+            temp.setListener(new WGGoodListView.GoodListItemOnListener() {
                 @Override
-                public void onClick(View view) {
-                    //handleClickView(view);
+                public void onTouchShopCart(WGHomeFloorContentGoodItem item, View view, Point point) {
+                    handleShopCart(item, view, point);
+                }
+
+                @Override
+                public void onTouchItem(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
                 }
             });
+            view = temp;
         }
         else if (viewType == WGClassifyDetailContentAdapter.Item_Type.
                 ITEM_TYPE_GoodGridItem.ordinal()) {
             resourceId = R.layout.wghome_content_floor_good_grid_cell;
-            view = LayoutInflater.from(
+            WGHomeContentFloorGoodsGridCellView temp = (WGHomeContentFloorGoodsGridCellView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGHomeContentFloorGoodsGridCellView.OnPurchaseListener() {
+                @Override
+                public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
+                    handleShopCart(item, view, point);
+                }
+
+                @Override
+                public void onGoodDetail(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_GoodFilter.ordinal()) {
             resourceId = R.layout.classifydetail_filter_view;

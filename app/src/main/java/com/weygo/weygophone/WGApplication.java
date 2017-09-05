@@ -12,7 +12,9 @@ import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGOnUserInfoCompletionInteface;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
+import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 import com.zopim.android.sdk.api.ZopimChat;
 
 import java.util.HashMap;

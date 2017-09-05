@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.slider;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,12 +23,19 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.common.WGCommonAlertView;
+import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGPostPopView;
+import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
+import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
+import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightDetail;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightGoodItem;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderExpirePopView;
 import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
+import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
+import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
 import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartFailurePopView;
 import com.weygo.weygophone.pages.shopcart.widget.WGShopCartGiftPopView;
@@ -102,33 +110,56 @@ public class WGSliderFragmet extends WGFragment {
 
             @Override
             public void onOrderClick(View view) {
-
+                closeSlider();
+                Intent intent = new Intent(getActivity(), WGOrderListActivity.class);
+                Bundle bundle = new Bundle();
+                int type = WGConstants.WGOrderListTypeAll;
+                bundle.putSerializable(WGConstants.WGIntentDataKey, type);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
             public void onCouponClick(View view) {
-
+                closeSlider();
+                Intent intent = new Intent(getActivity(), WGCouponListActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onMessageCenterClick(View view) {
-                Log.e("========", "00000");
+                closeSlider();
                 startActivity(new Intent(getActivity(), ZopimChatActivity.class));
             }
 
             @Override
             public void onFootPrintsClick(View view) {
-
+                closeSlider();
+                Intent intent = new Intent(getActivity(), WGFootprintActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onTopicItemClick(View view, WGTopicItem item) {
-
+                closeSlider();
+                Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
+                Bundle bundle = new Bundle();
+                WGClassifyItem data = new WGClassifyItem();
+                data.id = item.id;
+                data.name = item.name;
+                bundle.putSerializable(WGConstants.WGIntentDataKey, data);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
             public void onSubClassifyItemClick(View view, WGClassifyItem item) {
-
+                closeSlider();
+                Intent intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(WGConstants.WGIntentDataKey, item);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
@@ -185,50 +216,43 @@ public class WGSliderFragmet extends WGFragment {
                 JHAdaptScreenUtils.devicePixelHeight(getContext()));
         popupView.setPopupWindow(window);
         window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+    }
 
-//        WGOverHeightDetail item = new WGOverHeightDetail();
-//        item.maxRise = "100.0";
-//        WGOverHeightGoodItem good = new WGOverHeightGoodItem();
-//        good.name= "郑要苛要";
-//        good.briefDescription = "asdfasdfasdfasdiuhewoifsdalkf;a;sldfkalksdfjkasl;kdfkjaksldflka";
-//        good.pictureURL = "http://m.preview.weygo.com//media//wysiwyg//app//Italy//App__1.jpg";
-//        good.goodCount = 2;
-//        good.rise = 23;
-//        List list = new ArrayList<WGOverHeightGoodItem>();
-//        list.add(good);
-//        list.add(good);
-//        list.add(good);
-//        item.goods = list;
-//        List goods = new ArrayList<WGOverHeightDetail>();
-//        goods.add(item);
-//        WGCommitOrderOverWeightPopView popupView = (WGCommitOrderOverWeightPopView) getActivity()
-//                .getLayoutInflater()
-//                .inflate(R.layout.commitorder_overheight_pop, null);
-//        popupView.setGoods(goods);
-//        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
-//                JHAdaptScreenUtils.devicePixelWidth(getContext()),
-//                JHAdaptScreenUtils.devicePixelHeight(getContext()));
-//        popupView.setPopupWindow(window);
-//        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+    void closeSlider() {
+        WGMainActivity activity = (WGMainActivity)getActivity();
+        activity.closeSlider();
     }
 
     void handleSliderLoginClick(View view) {
-        WGMainActivity activity = (WGMainActivity)getActivity();
-        activity.closeSlider();
+        closeSlider();
         Intent intent = new Intent(getContext(), WGLoginActivity.class);
         startActivity(intent);
     }
 
     void handleSliderPersonInfoClick(View view) {
-        test();
+        closeSlider();
+        Intent intent = new Intent(getActivity(), WGPersonInfoActivity.class);
+        startActivity(intent);
     }
 
     void handleSliderScanClick(View view) {
-        test();
+        closeSlider();
     }
 
     void handleSliderPostCodeClick(View view) {
-        tests();
+        closeSlider();
+        WGPostPopView popupView = (WGPostPopView) getActivity().getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+        popupView.setListener(new WGPostPopView.OnItemListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+        });
+        JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                JHAdaptScreenUtils.devicePixelWidth(getActivity()),
+                JHAdaptScreenUtils.devicePixelHeight(getActivity()));
+        popupView.setPopupWindow(window);
+        window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
     }
 
     void handleSliderOrderClick(View view) {

@@ -24,7 +24,7 @@ public class WGChangeAppLanguageLogic {
     public static final int WGAppLanguageItalin = 1;
     public static final int WGAppLanguageChiness = 2;
 
-    static Locale mCurrentAppLocale;
+    static Locale mCurrentAppLocale = Locale.ITALIAN;;
 
     public static boolean isItalin() {
         return mCurrentAppLocale.toString().contains("it");
@@ -98,7 +98,10 @@ public class WGChangeAppLanguageLogic {
     }
 
     public static boolean hasChangeAppLocale(Context context) {
-        Locale currentLocale = context.getResources().getConfiguration().locale;
-        return !currentLocale.toString().contains(mCurrentAppLocale.toString());
+        if (mCurrentAppLocale != null) {
+            Locale currentLocale = context.getResources().getConfiguration().locale;
+            return !currentLocale.toString().contains(mCurrentAppLocale.toString());
+        }
+        return false;
     }
 }
