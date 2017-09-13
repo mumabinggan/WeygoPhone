@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.media.Image;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,6 +57,8 @@ public class WGGoodListView extends JHRelativeLayout {
 
     ImageView mAddCartImageView;
 
+    Button mUnPurchaseBtn;
+
     View mAddCartView;
 
     WGHomeFloorContentGoodItem mData;
@@ -105,6 +108,7 @@ public class WGGoodListView extends JHRelativeLayout {
                 }
             }
         });
+        mUnPurchaseBtn = (Button) findViewById(R.id.unShopCartBtn);
     }
 
     public void setInnerTouchListener(GoodListItemOnListener listener) {
@@ -125,6 +129,14 @@ public class WGGoodListView extends JHRelativeLayout {
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(mData.reducePrice) ? INVISIBLE : VISIBLE);
             mPriceTextView.setText(" " + mData.price + " ");
             mPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(mData.price) ? INVISIBLE : VISIBLE);
+            if (mData.inStock == 1) {
+                mAddCartImageView.setVisibility(VISIBLE);
+                mUnPurchaseBtn.setVisibility(INVISIBLE);
+            }
+            else {
+                mAddCartImageView.setVisibility(INVISIBLE);
+                mUnPurchaseBtn.setVisibility(VISIBLE);
+            }
             if (object instanceof WGOrderGoodItem) {
                 WGOrderGoodItem orderItem = (WGOrderGoodItem) object;
                 mCountTextView.setText("x" + orderItem.goodCount);

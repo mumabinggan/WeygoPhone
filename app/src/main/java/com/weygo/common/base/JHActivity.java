@@ -24,6 +24,8 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class JHActivity extends FragmentActivity {
     public final String mBroadcastLoadTypeKey = "com.muma";
     public final int JHBroadcastLoadTypeLazy = 1;
     public final int JHBroadcastLoadTypeImmediately = 2;
+    public final String mBroadcastDataKey = "com.muma.data";
 
     JHBroadcastReceiver mRefreshReceiver;
 
@@ -234,7 +237,7 @@ public class JHActivity extends FragmentActivity {
     private void handleBroadcastLoadType(Context context, Intent intent) {
         if (intent.getIntExtra(mBroadcastLoadTypeKey, -1) == JHBroadcastLoadTypeLazy) {
             //懒刷新
-            _didReceivedRefreshNotification(intent.getIntExtra(JHRefreshNotificationKey, -1));
+            _didReceivedRefreshNotification(intent.getIntExtra(JHRefreshNotificationKey, -1), intent);
         }
         else {
             //立即刷新
@@ -244,10 +247,11 @@ public class JHActivity extends FragmentActivity {
 
     //子类重写
     public void handleImmediatelyLoadBroadcast(Context context, Intent intent) {
-
+        int notification = intent.getIntExtra(JHRefreshNotificationKey, -1);
+        didReceivedNotification(notification, (JHObject) intent.getSerializableExtra(mBroadcastDataKey));
     }
 
-    void _didReceivedRefreshNotification(int notification) {
+    void _didReceivedRefreshNotification(int notification, Intent intent) {
         addRefreshNotification(notification);
     }
 
@@ -270,6 +274,15 @@ public class JHActivity extends FragmentActivity {
     public void sendRefreshNotification(int notification) {
         Intent intent = new Intent(mRefreshAction);
         intent.putExtra(JHRefreshNotificationKey, notification);
+        intent.putExtra(mBroadcastLoadTypeKey, JHBroadcastLoadTypeLazy);
+        sendBroadcast(intent);
+    }
+
+    public void sendRefreshNotification(int notification, JHObject data) {
+        Intent intent = new Intent(mRefreshAction);
+        intent.putExtra(JHRefreshNotificationKey, notification);
+        intent.putExtra(mBroadcastLoadTypeKey, JHBroadcastLoadTypeLazy);
+        intent.putExtra(mBroadcastDataKey, data);
         sendBroadcast(intent);
     }
 
@@ -278,12 +291,35 @@ public class JHActivity extends FragmentActivity {
 
     }
 
+    //接收到 Lazy加载后的处理
+    public void didReceivedRefreshNotification(int notification, Intent intent) {
+        didReceivedRefreshNotification(notification);
+    }
+
     public void didReceivedNotification(int notification) {
 
+    }
+
+    public void didReceivedNotification(int notification, JHObject object) {
+        didReceivedNotification(notification);
     }
 
     public boolean containsRefreshNotification(int notification) {
         return mRefreshNotificationList.contains(notification);
     }
 
+    public void sendNotification(int notification) {
+        Intent intent = new Intent(mRefreshAction);
+        intent.putExtra(JHRefreshNotificationKey, notification);
+        intent.putExtra(mBroadcastLoadTypeKey, JHBroadcastLoadTypeImmediately);
+        sendBroadcast(intent);
+    }
+
+    public void sendNotification(int notification, JHObject data) {
+        Intent intent = new Intent(mRefreshAction);
+        intent.putExtra(JHRefreshNotificationKey, notification);
+        intent.putExtra(mBroadcastLoadTypeKey, JHBroadcastLoadTypeImmediately);
+        intent.putExtra(mBroadcastDataKey, data);
+        sendBroadcast(intent);
+    }
 }

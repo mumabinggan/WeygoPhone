@@ -35,6 +35,7 @@ import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.benefit.model.request.WGBenefitRequest;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeItemFragment;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -174,6 +175,18 @@ public class WGTabBenefitFragment extends WGFragment {
     public void loadRequest() {
         super.loadRequest();
         loadTitleData();
+    }
+
+    public void handleSwitchHomeItemTab(WGHomeFloorContentClassifyItem item) {
+        if (mDataResponse != null && mDataResponse.data != null) {
+            for (int num = 0; num < mDataResponse.data.size(); ++num) {
+                WGTitleItem item1 = mDataResponse.data.get(num);
+                if (item.id == item1.id) {
+                    mIndicatorViewPager.setCurrentItem(num, true);
+                    break;
+                }
+            }
+        }
     }
 
     //Request

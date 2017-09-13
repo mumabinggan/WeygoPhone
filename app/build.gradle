@@ -50,6 +50,8 @@ android {
                     'src/main/res/layouts/clientService',
                     'src/main/res/layouts/collection',
                     'src/main/res/layouts/footprint',
+                    'src/main/res/layouts/specialClassifyGood',
+                    'src/main/res/layouts/specialClassify',
                     'src/main/res/layouts/integration/myIntegration',
                     'src/main/res/layouts/integration/useIntegration',
                     'src/main/res/layouts/order/list',

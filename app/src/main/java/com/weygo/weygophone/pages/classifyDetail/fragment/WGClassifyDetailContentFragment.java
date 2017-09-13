@@ -191,6 +191,10 @@ public class WGClassifyDetailContentFragment extends WGFragment {
         });
     }
 
+    public void stopRefreshing() {
+        mRefreshLayout.finishRefreshing();
+    }
+
     void handleOnRefresh() {
 
     }

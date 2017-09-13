@@ -94,7 +94,7 @@ public class JHDividerItemDecoration extends RecyclerView.ItemDecoration {
 //            outRect.set(0, 0, 20, 0);
 //        }
         if (mOrientation == VERTICAL_LIST) {
-            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+            outRect.set(0, 0, 0, 1);
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }

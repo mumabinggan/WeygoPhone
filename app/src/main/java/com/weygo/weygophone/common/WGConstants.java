@@ -41,6 +41,8 @@ public class WGConstants {
     //Notification
     public static final int WGNotificationTypeLogin = 1;
     public static final int WGNotificationTypeLogout = 2;
+    public static final int WGNotificationTypeHomeTab = 3;
+    public static final int WGNotificationTypeBenefitTab = 4;
 
     //Special Notification
     public static final String WGSpecialNotificationTypeShopCartCountAction = "WGSpecialNotificationTypeShopCartCountAction";

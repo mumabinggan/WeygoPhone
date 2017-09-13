@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.tabs.home.fragment;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
@@ -29,13 +30,17 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGPostPopView;
+import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
 import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.pay.paySuccess.WGPaySuccessActivity;
 import com.weygo.weygophone.pages.pay.payWeb.WGPayWebActivity;
 import com.weygo.weygophone.pages.search.WGSearchActivity;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
+import com.weygo.weygophone.pages.specialClassifyGood.WGSpecialClassifyGoodActivity;
+import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -364,7 +369,7 @@ public class WGTabHomeFragment extends WGFragment {
 
     void handleSwitchTab(WGHomeFloorContentClassifyItem item) {
         if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyHomeTab) {
-
+            //handleSwitchHomeTab(item);
         }
         else if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodBenefitTab) {
 
@@ -374,6 +379,18 @@ public class WGTabHomeFragment extends WGFragment {
         }
         else if (item.jumpType == WGConstants.WGAppJumpTypeSpecailClassifyNoTab) {
 
+        }
+    }
+
+    public void handleSwitchHomeItemTab(WGHomeFloorContentClassifyItem item) {
+        if (mDataResponse != null && mDataResponse.data != null) {
+            for (int num = 0; num < mDataResponse.data.size(); ++num) {
+                WGTitleItem item1 = mDataResponse.data.get(num);
+                if (item.id == item1.id) {
+                    mIndicatorViewPager.setCurrentItem(num, true);
+                    break;
+                }
+            }
         }
     }
 

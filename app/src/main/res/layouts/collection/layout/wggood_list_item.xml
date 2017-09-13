@@ -109,5 +109,13 @@
         android:layout_marginBottom="@dimen/x14"
         android:layout_marginRight="@dimen/x14"
         android:src="@drawable/common_add_cart"/>
+    
+    <Button
+        android:id="@+id/unShopCartBtn"
+        android:layout_width="@dimen/x61"
+        android:layout_height="@dimen/x17"
+        android:text="@string/GoodDetail_Without"
+        android:textSize="@dimen/x10"
+        android:background="@drawable/goodlistitem_unpurchase_bg"/>
 
 </com.weygo.weygophone.pages.collection.widget.WGGoodListView>

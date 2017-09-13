@@ -82,16 +82,17 @@ public class WGBaseActivity extends JHActivity {
         return true;
     }
 
-    //子类重写
-    public void handleImmediatelyLoadBroadcast(Context context, Intent intent) {
-        super.handleImmediatelyLoadBroadcast(context, intent);
-        int notification = intent.getIntExtra(WGNotificationTypeKey, -1);
-        didReceivedNotification(notification);
-    }
-
-    public void sendNotification(int notification) {
-        Intent intent = new Intent(super.mRefreshAction);
-        intent.putExtra(WGNotificationTypeKey, notification);
-        sendBroadcast(intent);
-    }
+//    //子类重写
+//    public void handleImmediatelyLoadBroadcast(Context context, Intent intent) {
+//        super.handleImmediatelyLoadBroadcast(context, intent);
+//        int notification = intent.getIntExtra(WGNotificationTypeKey, -1);
+//        didReceivedNotification(notification);
+//    }
+//
+//    public void sendNotification(int notification) {
+//        Intent intent = new Intent(super.mRefreshAction);
+//        intent.putExtra(JHRefreshNotificationKey, notification);
+//        intent.putExtra(WGNotificationTypeKey)
+//        sendBroadcast(intent);
+//    }
 }

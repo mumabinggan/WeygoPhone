@@ -20,13 +20,17 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.weygo.common.base.JHFragment;
+import com.weygo.common.base.JHObject;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.WGOnUserInfoCompletionInteface;
 import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
@@ -62,6 +66,7 @@ import com.weygo.common.tools.loadwebimage.JHImageLoaderListener;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 import com.weygo.weygophone.pages.tabs.mine.fragment.WGTabMineFragment;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
@@ -120,17 +125,24 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testPostClassifyGetRequest();
         getWindow();
 
-//        if (WGApplicationUserUtils.getInstance().isLogined()) {
-//            WGApplicationRequestUtils.getInstance().loadUserInfoOnCompletion(this, new WGOnUserInfoCompletionInteface() {
-//                @Override
-//                public void onUserInfoCompletion(WGUserInfoResponse response) {
-//
-//                }
-//            });
-//        }
+        if (WGApplicationUserUtils.getInstance().isLogined()) {
+            WGApplicationRequestUtils.getInstance().loadUserInfoOnCompletion(this, new WGOnUserInfoCompletionInteface() {
+                @Override
+                public void onUserInfoCompletion(WGUserInfoResponse response) {
+                    WGApplicationRequestUtils.getInstance().loadShopCartCount(new WGApplicationRequestUtils.WGOnCompletionInteface() {
+                        @Override
+                        public void onSuccessCompletion(WGResponse response) {
+                            handleShopCartCount();
+                        }
 
-        Log.e("--width---", "width : " + JHAdaptScreenUtils.devicePixelWidth(this) + "height:" +
-                JHAdaptScreenUtils.devicePixelHeight(this));
+                        @Override
+                        public void onFailCompletion(WGResponse response) {
+
+                        }
+                    });
+                }
+            });
+        }
     }
 
     void initTabBar() {
@@ -155,6 +167,37 @@ public class WGMainActivity extends WGBaseActivity {
         mTabBar.setSelectIndex(0);
     }
 
+    void handleShopCartCount() {
+        WGApplicationRequestUtils.getInstance().loadShopCartCount(new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+
+            }
+
+            @Override
+            public void onFailCompletion(WGResponse response) {
+
+            }
+        });
+    }
+
+    public void didReceivedNotification(int notification, JHObject data) {
+        if (notification == WGConstants.WGNotificationTypeHomeTab) {
+            mTabBar.setSelectIndex(0);
+            WGTabHomeFragment fragment = (WGTabHomeFragment) mTabBar.getSelectFragement(0);
+            if (fragment != null) {
+                fragment.handleSwitchHomeItemTab((WGHomeFloorContentClassifyItem)data);
+            }
+        }
+        else if (notification == WGConstants.WGNotificationTypeBenefitTab) {
+            mTabBar.setSelectIndex(2);
+            WGTabBenefitFragment fragment = (WGTabBenefitFragment) mTabBar.getSelectFragement(2);
+            if (fragment != null) {
+                fragment.handleSwitchHomeItemTab((WGHomeFloorContentClassifyItem)data);
+            }
+        }
+    }
+
     void initDrawerLayout() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_wgmain);
     }
@@ -162,62 +205,6 @@ public class WGMainActivity extends WGBaseActivity {
     void initSlider() {
         mSliderFragment = (WGSliderFragmet) getSupportFragmentManager().
                 findFragmentById(R.id.slider_fragment);
-//        mSliderFragment.setListener(new SliderOnItemClickListener() {
-//            @Override
-//            public void onLoginClick(View view) {
-//                mDrawerLayout.closeDrawer(GravityCompat.START);
-//            }
-//
-//            @Override
-//            public void onPersonInfoClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onScanClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onPostCodeClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onOrderClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onCouponClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onMessageCenterClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onFootPrintsClick(View view) {
-//
-//            }
-//
-//            @Override
-//            public void onTopicItemClick(View view, WGTopicItem item) {
-//
-//            }
-//
-//            @Override
-//            public void onSubClassifyItemClick(View view, WGClassifyItem item) {
-//
-//            }
-//
-//            @Override
-//            public void onItemClick(View view, int position) {
-//
-//            }
-//        });
     }
 
     public void onOptionPicker(View view) {

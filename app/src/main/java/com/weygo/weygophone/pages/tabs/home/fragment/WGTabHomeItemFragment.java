@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.tabs.home.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHDividerItemDecoration;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHStringUtils;
@@ -32,6 +34,8 @@ import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
+import com.weygo.weygophone.pages.specialClassify.WGSpecialClassifyActivity;
+import com.weygo.weygophone.pages.specialClassifyGood.WGSpecialClassifyGoodActivity;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
 import com.weygo.weygophone.pages.tabs.home.model.WGHome;
@@ -85,8 +89,11 @@ public class WGTabHomeItemFragment extends WGFragment {
     //@Override
     public void initSubView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+//        //JHDividerItemDecoration decoration = new JHDividerItemDecoration(getContext(),
+//                JHDividerItemDecoration.VERTICAL_LIST);
         mRecyclerView.addItemDecoration(new JHDividerItemDecoration(getContext(),
                 JHDividerItemDecoration.VERTICAL_LIST));
+        //mRecyclerView.setBackgroundColor(Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new WGHomeFragmentAdapter(getContext(), null);
         mAdapter.setListener(new WGHomeFragmentAdapter.OnItemListener() {
@@ -237,26 +244,57 @@ public class WGTabHomeItemFragment extends WGFragment {
             intent.putExtras(bundle);
             startActivity(intent);
         }
-        else if (jumpType == WGConstants.WGAppJumpTypeSpecailClassifyHomeTab ||
-                jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodBenefitTab ||
-                jumpType == WGConstants.WGAppJumpTypeSpecailClassifyNoTab ||
-                jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodNoTab) {
-            intent = new Intent(getActivity(), WGClassifyDetailActivity.class);
-            Bundle bundle = new Bundle();
-            WGClassifyItem data = new WGClassifyItem();
+        else if (jumpType == WGConstants.WGAppJumpTypeSpecailClassifyHomeTab) {
+            WGHomeFloorContentClassifyItem data = new WGHomeFloorContentClassifyItem();
             data.id = id;
             data.name = name;
-            bundle.putSerializable(WGConstants.WGIntentDataKey, data);
-            intent.putExtras(bundle);
-            startActivity(intent);
-//            WGHomeFloorContentClassifyItem data = new WGHomeFloorContentClassifyItem();
-//            data.id = id;
-//            data.name = name;
-//            data.jumpType = jumpType;
-//            if (mListener != null) {
-//                mListener.onSwitchTab(data);
-//            }
+            data.jumpType = jumpType;
+            JHActivity activity = (JHActivity) getActivity();
+            if (activity != null) {
+                activity.sendNotification(WGConstants.WGNotificationTypeHomeTab, data);
+            }
         }
+        else if (jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodBenefitTab) {
+            WGHomeFloorContentClassifyItem data = new WGHomeFloorContentClassifyItem();
+            data.id = id;
+            data.name = name;
+            data.jumpType = jumpType;
+            JHActivity activity = (JHActivity) getActivity();
+            if (activity != null) {
+                activity.sendNotification(WGConstants.WGNotificationTypeBenefitTab, data);
+            }
+        }
+        else if (jumpType == WGConstants.WGAppJumpTypeSpecailClassifyNoTab) {
+            WGHomeFloorContentClassifyItem data = new WGHomeFloorContentClassifyItem();
+            data.id = id;
+            data.name = name;
+            data.jumpType = jumpType;
+            handleSwitchSpecialClassify(data, false);
+        }
+        else if (jumpType == WGConstants.WGAppJumpTypeSpecailClassifyGoodNoTab) {
+            WGHomeFloorContentClassifyItem data = new WGHomeFloorContentClassifyItem();
+            data.id = id;
+            data.name = name;
+            data.jumpType = jumpType;
+            handleSwitchSpecialClassify(data, true);
+        }
+    }
+
+    void handleSwitchSpecialClassify(WGHomeFloorContentClassifyItem item, boolean isGood) {
+        Intent intent = null;
+        if (isGood) {
+            intent = new Intent(getActivity(), WGSpecialClassifyGoodActivity.class);
+        }
+        else {
+            intent = new Intent(getActivity(), WGSpecialClassifyActivity.class);
+        }
+        Bundle bundle = new Bundle();
+        WGClassifyItem data = new WGClassifyItem();
+        data.id = item.id;
+        data.name = item.name;
+        bundle.putSerializable(WGConstants.WGIntentDataKey, data);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void stopRefreshing() {

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.asm.Label;
 import com.weygo.common.base.JHInterface;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGApplication;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -111,6 +113,7 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         else {
             view.setVisibility(VISIBLE);
         }
+
     }
 
     public void setTitleDrawableRight(boolean show) {

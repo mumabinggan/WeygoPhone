@@ -1,7 +1,9 @@
 package com.weygo.common.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,6 +17,10 @@ import com.weygo.common.base.JHActivity;
 import com.weygo.common.base.JHFragment;
 import com.weygo.common.tools.JHArrayUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGApplication;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,6 +135,11 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         mItemArray.get(index).performClick();
     }
 
+    public Fragment getSelectFragement(Integer index) {
+        Fragment fragment = mFragmentMap.get(mItemIdArray.get(index));
+        return fragment;
+    }
+
     @Override
     public void onClick(View view) {
         for (View item : mItemArray) {
@@ -138,6 +149,12 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
             mFragmentMap = new HashMap<>();
         }
 
+        int tag = view.getId();
+        if (tag == 5 && !WGApplicationUserUtils.getInstance().isLogined()) {
+            Intent intent = new Intent(mContext, WGLoginActivity.class);
+            mActivity.startActivity(intent);
+            return;
+        }
         FragmentTransaction transaction = mActivity.getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
 

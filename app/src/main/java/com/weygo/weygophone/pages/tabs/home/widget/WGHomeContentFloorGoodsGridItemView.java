@@ -92,6 +92,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
     public void showWithData(Object data) {
         if (data instanceof WGHomeFloorContentGoodItem) {
             WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) data;
+            mData = item;
             JHImageUtils.getInstance().loadImage(item.pictureURL,
                     R.drawable.common_image_loading_small, mImageView);
             mNameTextView.setText(item.name);

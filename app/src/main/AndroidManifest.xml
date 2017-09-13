@@ -52,6 +52,8 @@
         <activity android:name=".pages.pay.payWeb.WGPayWebActivity"></activity>
         <activity android:name=".pages.pay.paySuccess.WGPaySuccessActivity"></activity>
         <activity android:name=".pages.search.WGSearchActivity"></activity>
+        <activity android:name=".pages.specialClassifyGood.WGSpecialClassifyGoodActivity"></activity>
+        <activity android:name=".pages.specialClassify.WGSpecialClassifyActivity"></activity>
     </application>
 
     <!-- Include following permission if you load images from Internet -->

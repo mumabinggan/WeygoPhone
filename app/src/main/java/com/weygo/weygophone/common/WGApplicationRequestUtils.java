@@ -32,7 +32,9 @@ import com.weygo.weygophone.pages.order.detail.model.response.WGRebuyResponse;
 import com.weygo.weygophone.pages.register.model.request.WGGetVerificationCodeRequest;
 import com.weygo.weygophone.pages.register.model.response.WGGetVerificationCodeResponse;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGLogoutRequest;
+import com.weygo.weygophone.pages.tabs.home.model.request.WGShopCartCountRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGLogoutResponse;
+import com.weygo.weygophone.pages.tabs.home.model.response.WGShopCartCountResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 
@@ -338,5 +340,28 @@ public class WGApplicationRequestUtils {
                 showWarning(R.string.Request_Fail_Tip);
             }
         });
+    }
+
+    public void loadShopCartCount(final WGOnCompletionInteface inteface) {
+        WGShopCartCountRequest request = new WGShopCartCountRequest();
+        JHNetworkUtils.getInstance().postAsyn(request, WGShopCartCountResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                WGShopCartCountResponse response = (WGShopCartCountResponse) result;
+                handleShopCartCount(response);
+                if (inteface != null) {
+                    inteface.onSuccessCompletion(response);
+                }
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                showWarning(R.string.Request_Fail_Tip);
+            }
+        });
+    }
+
+    void handleShopCartCount(WGShopCartCountResponse response) {
+        WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
     }
 }

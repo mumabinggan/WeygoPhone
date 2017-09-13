@@ -15,6 +15,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
