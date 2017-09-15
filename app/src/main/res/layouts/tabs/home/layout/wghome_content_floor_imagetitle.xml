@@ -42,4 +42,12 @@
         android:background="@drawable/wghome_content_floor_imagetitle_more"
         android:textAlignment="center" />
 
+    <include
+        android:id="@+id/countdownTimeView"
+        layout="@layout/countdown_time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x91"
+        android:layout_marginTop="@dimen/x13"
+        android:layout_marginLeft="@dimen/x10" />
+
 </com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorImageTitleView>

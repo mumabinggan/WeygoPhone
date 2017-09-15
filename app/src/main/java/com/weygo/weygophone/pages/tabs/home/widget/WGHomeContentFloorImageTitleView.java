@@ -11,7 +11,10 @@ import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.common.widget.WGCountDownTimeView;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorItem;
+
+import java.util.Date;
 
 /**
  * Created by muma on 2017/6/4.
@@ -28,6 +31,8 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
     TextView mMoreTV;
 
     WGHomeFloorItem mData;
+
+    WGCountDownTimeView mTimeView;
 
     public interface OnItemListener {
         void onItemClick(Object object);
@@ -64,6 +69,7 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
                 }
             }
         });
+        mTimeView = (WGCountDownTimeView) findViewById(R.id.countdownTimeView);
     }
 
     public void showWithData(Object data) {
@@ -80,6 +86,7 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
                 String moreString = "    " + mData.pictureBtnName + "    ";
                 mMoreTV.setText(moreString);
             }
+            mTimeView.showWithData(mData.snappedUpExpiredTime);
         }
     }
 }

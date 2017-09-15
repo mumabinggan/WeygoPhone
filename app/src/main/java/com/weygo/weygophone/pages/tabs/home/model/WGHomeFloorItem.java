@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.tabs.home.model;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.base.WGObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class WGHomeFloorItem extends WGObject {
     public List<WGHomeFloorContentItem> content;
 
     public int jumpType;
+
+    public long snappedUpExpiredTime;
 
     public boolean onlyName() {
         return JHStringUtils.isNullOrEmpty(breifDescription);

@@ -12,6 +12,7 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.classifyDetail.model.WGHomeRotation;
 import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.common.widget.WGCommonHorizontalListView;
 import com.weygo.weygophone.pages.goodDetail.model.WGCarouselFigureItem;
@@ -114,7 +115,10 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
             for (WGCarouselFigureItem item : home.carouselFigures) {
                 list.add(item.pictureURL);
             }
-            HomeCellData value = new HomeCellData(Item_Type.ITEM_TYPE_HomeCarouselFigures, list);
+            WGHomeRotation model = new WGHomeRotation();
+            model.mList = list;
+            model.time = 0;
+            HomeCellData value = new HomeCellData(Item_Type.ITEM_TYPE_HomeCarouselFigures, model);
             mPostionValueMap.put(key, value);
             key += 1;
         }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.common.widget.WGCountDownTimeView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x171"
+    android:layout_height="@dimen/x91">
+
+    <ImageView
+        android:id="@+id/bgIV"
+        android:layout_width="@dimen/x171"
+        android:layout_height="@dimen/x91"
+        android:src="@drawable/countdowntime_cn_bg"/>
+
+    <TextView
+        android:id="@+id/dayTV"
+        android:layout_width="@dimen/x36"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft25"
+        android:textColor="#FFFFFF"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/hourTV"
+        android:layout_width="@dimen/x36"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft25"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/dayTV"
+        android:layout_marginLeft="@dimen/x10" />
+
+    <TextView
+        android:id="@+id/minuteTV"
+        android:layout_width="@dimen/x36"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft25"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/hourTV"
+        android:layout_marginLeft="@dimen/x9" />
+
+    <TextView
+        android:id="@+id/secondTV"
+        android:layout_width="@dimen/x36"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/ft25"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/minuteTV"
+        android:layout_marginLeft="@dimen/x9" />
+
+</com.weygo.weygophone.common.widget.WGCountDownTimeView>

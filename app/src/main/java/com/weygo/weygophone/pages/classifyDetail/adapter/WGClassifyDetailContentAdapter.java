@@ -12,6 +12,7 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyDetail;
+import com.weygo.weygophone.pages.classifyDetail.model.WGHomeRotation;
 import com.weygo.weygophone.pages.classifyDetail.widget.WGClassifyDetailFilterView;
 import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
@@ -56,8 +57,11 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
         if (mData.hasCarousel()) {
             List list = new ArrayList();
             list.add(mData.carouselFigureItem.pictureURL);
+            WGHomeRotation model = new WGHomeRotation();
+            model.mList = list;
+            model.time = mData.snappedUpExpiredTime;
             CellData cellData = new CellData(Item_Type.ITEM_TYPE_CarouselFigures,
-                    list);
+                    model);
             mPostionValueMap.put(key, cellData);
             key++;
         }
