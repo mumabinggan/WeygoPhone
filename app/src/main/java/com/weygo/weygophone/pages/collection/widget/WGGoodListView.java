@@ -17,6 +17,7 @@ import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGInterface;
 import com.weygo.weygophone.base.WGObject;
+import com.weygo.weygophone.common.widget.WGDiscountView;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorBaseContentItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
@@ -60,6 +61,8 @@ public class WGGoodListView extends JHRelativeLayout {
     Button mUnPurchaseBtn;
 
     View mAddCartView;
+
+    WGDiscountView mDiscountView;
 
     WGHomeFloorContentGoodItem mData;
 
@@ -109,6 +112,7 @@ public class WGGoodListView extends JHRelativeLayout {
             }
         });
         mUnPurchaseBtn = (Button) findViewById(R.id.unShopCartBtn);
+        mDiscountView = (WGDiscountView) findViewById(R.id.discountView);
     }
 
     public void setInnerTouchListener(GoodListItemOnListener listener) {
@@ -142,6 +146,7 @@ public class WGGoodListView extends JHRelativeLayout {
                 mCountTextView.setText("x" + orderItem.goodCount);
                 mCountTextView.setVisibility(orderItem.goodCount > 0 ? VISIBLE : INVISIBLE);
             }
+            mDiscountView.setDiscountText(mData.discount);
         }
     }
 }

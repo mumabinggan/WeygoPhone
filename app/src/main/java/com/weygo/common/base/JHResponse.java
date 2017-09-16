@@ -5,4 +5,7 @@ package com.weygo.common.base;
  */
 
 public class JHResponse extends JHObject {
+    public boolean reLogin() {
+        return false;
+    }
 }

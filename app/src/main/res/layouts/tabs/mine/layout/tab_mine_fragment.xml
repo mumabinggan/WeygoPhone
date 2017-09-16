@@ -45,6 +45,7 @@
                     android:layout_height="@dimen/x20"
                     android:layout_below="@+id/headImageView"
                     android:layout_marginTop="@dimen/x5"
+                    android:textColor="#ffffff"
                     android:gravity="center"/>
 
                 <ImageView
@@ -61,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x20"
                     android:gravity="center"
+                    android:textColor="#ffffff"
                     android:layout_below="@+id/localImageView"
                     />
 

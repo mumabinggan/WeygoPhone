@@ -1,7 +1,10 @@
 package com.weygo.weygophone;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -51,6 +54,7 @@ import com.weygo.weygophone.pages.order.detail.WGOrderDetailActivity;
 import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
+import com.weygo.weygophone.pages.search.widget.WGShopCartView;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
 import com.weygo.weygophone.pages.slider.WGSliderFragmet;
 import com.weygo.weygophone.pages.slider.model.SliderOnItemClickListener;
@@ -99,6 +103,8 @@ public class WGMainActivity extends WGBaseActivity {
     private AlertDialog alert = null;
     private AlertDialog.Builder builder = null;
 
+    WGReLoginBroadcastReceiver mReLoginReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +124,7 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testLanguageSwitch();
         this.initTabBar();
         this.initDrawerLayout();
+        this.initReLoginReceiver();
         this.initSlider();
 
         //this.testPrintDic();
@@ -205,6 +212,28 @@ public class WGMainActivity extends WGBaseActivity {
     void initSlider() {
         mSliderFragment = (WGSliderFragmet) getSupportFragmentManager().
                 findFragmentById(R.id.slider_fragment);
+    }
+
+    class WGReLoginBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            handleReLogin();
+        }
+    }
+
+    void handleReLogin() {
+        WGApplicationUserUtils.getInstance().reset();
+        gotoHome();
+        mTabBar.setSelectIndex(0);
+    }
+
+    void initReLoginReceiver() {
+        if (mReLoginReceiver == null) {
+            mReLoginReceiver = new WGReLoginBroadcastReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(WGConstants.WGReLoginAction);
+            registerReceiver(mReLoginReceiver, filter);
+        }
     }
 
     public void onOptionPicker(View view) {

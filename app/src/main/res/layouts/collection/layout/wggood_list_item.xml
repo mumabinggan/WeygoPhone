@@ -118,4 +118,8 @@
         android:textSize="@dimen/x10"
         android:background="@drawable/goodlistitem_unpurchase_bg"/>
 
+    <include
+        android:id="@+id/discountView"
+        layout="@layout/common_discount_bg" />
+
 </com.weygo.weygophone.pages.collection.widget.WGGoodListView>

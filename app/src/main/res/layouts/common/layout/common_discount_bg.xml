@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.weygo.weygophone.common.widget.WGDiscountView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x40"
+    android:layout_height="@dimen/x40">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/discount_bg"/>
+
+    <TextView
+        android:id="@+id/discountTV"
+        android:layout_width="@dimen/x26"
+        android:layout_height="@dimen/x12"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/ft10"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/x9"
+        android:visibility="invisible"/>
+
+</com.weygo.weygophone.common.widget.WGDiscountView>

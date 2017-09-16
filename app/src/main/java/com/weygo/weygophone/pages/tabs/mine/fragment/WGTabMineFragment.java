@@ -25,6 +25,7 @@ import com.weygo.weygophone.pages.collection.WGCollectionActivity;
 import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
 import com.weygo.weygophone.pages.footprint.WGFootprintActivity;
+import com.weygo.weygophone.pages.integral.myIntegral.WGMyIntegralActivity;
 import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
 import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
@@ -91,32 +92,29 @@ public class WGTabMineFragment extends WGFragment {
 
         //HeadImageView
         mHeadImageView = (CircleImageView) view.findViewById(R.id.headImageView);
-        mHeadImageView.setImageResource(WGApplicationUserUtils.getInstance().userAvatar());
+//        mHeadImageView.setImageResource(WGApplicationUserUtils.getInstance().userAvatar());
 
         //Name
         mNameTextView = (TextView) view.findViewById(R.id.nameTextView);
-        mNameTextView.setText(WGApplicationUserUtils.getInstance().fullName());
+//        mNameTextView.setText(WGApplicationUserUtils.getInstance().fullName());
 
         //Cap
         mPostCodeTextView = (TextView) view.findViewById(R.id.postCodeTextView);
-        mPostCodeTextView.setText(WGApplicationUserUtils.getInstance().currentPostCode());
+//        mPostCodeTextView.setText(WGApplicationUserUtils.getInstance().currentPostCode());
 
         //All Order
         mOrderTextView = (TextView) view.findViewById(R.id.allOrderCountTextView);
-        mOrderTextView.setText(WGApplicationUserUtils.getInstance().orderCount() + "");
+//        mOrderTextView.setText(WGApplicationUserUtils.getInstance().orderCount() + "");
         mOrderTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleOrder(false);
             }
         });
-//        int unicodeJoy = 0x1F602;
-//        String emojiString = new String(Character.toChars(unicodeJoy));
-//        mOrderTextView.setText(emojiString);
 
         //Deliver Order
         mDeliverTextView = (TextView) view.findViewById(R.id.deliverOrderCountTextView);
-        mDeliverTextView.setText(WGApplicationUserUtils.getInstance().deliverOrderCount() + "");
+//        mDeliverTextView.setText(WGApplicationUserUtils.getInstance().deliverOrderCount() + "");
         mDeliverTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +127,7 @@ public class WGTabMineFragment extends WGFragment {
         mIntegralView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleIntegral();;
+                handleIntegral();
             }
         });
 
@@ -206,6 +204,23 @@ public class WGTabMineFragment extends WGFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mHeadImageView.setImageResource(WGApplicationUserUtils.getInstance().userAvatar());
+
+        //Name
+        mNameTextView.setText(WGApplicationUserUtils.getInstance().fullName());
+
+        //Cap
+        mPostCodeTextView.setText(WGApplicationUserUtils.getInstance().currentPostCode());
+
+        mOrderTextView.setText(WGApplicationUserUtils.getInstance().orderCount() + "");
+
+        //Deliver Order
+        mDeliverTextView.setText(WGApplicationUserUtils.getInstance().deliverOrderCount() + "");
+    }
+
     void handleAddress() {
         Intent intent = new Intent(getActivity(), WGAddressListActivity.class);
         Bundle bundle = new Bundle();
@@ -250,7 +265,8 @@ public class WGTabMineFragment extends WGFragment {
     }
 
     void handleIntegral() {
-
+        Intent intent = new Intent(getActivity(), WGMyIntegralActivity.class);
+        startActivity(intent);
     }
 
     void handleExit() {

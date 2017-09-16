@@ -150,7 +150,7 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
         }
 
         int tag = view.getId();
-        if (tag == 5 && !WGApplicationUserUtils.getInstance().isLogined()) {
+        if (mItemIdArray.indexOf(tag) == mItemArray.size()-1 && !WGApplicationUserUtils.getInstance().isLogined()) {
             Intent intent = new Intent(mContext, WGLoginActivity.class);
             mActivity.startActivity(intent);
             return;

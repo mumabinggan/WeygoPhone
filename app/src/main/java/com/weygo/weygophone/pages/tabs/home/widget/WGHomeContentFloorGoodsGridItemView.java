@@ -16,6 +16,7 @@ import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.common.widget.WGDiscountView;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
@@ -42,6 +43,8 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
     TextView mPurchaseTV;
 
     TextView mUnPurchaseTV;
+
+    WGDiscountView mDiscountView;
 
     OnPurchaseListener mListener;
     public void setListener(OnPurchaseListener listener) {
@@ -87,6 +90,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
             }
         });
         mUnPurchaseTV = (TextView) findViewById(R.id.unPurchaseTV);
+        mDiscountView = (WGDiscountView) findViewById(R.id.discountView);
     }
 
     public void showWithData(Object data) {
@@ -107,6 +111,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
                 mPurchaseTV.setVisibility(GONE);
                 mUnPurchaseTV.setVisibility(VISIBLE);
             }
+            mDiscountView.setDiscountText(item.discount);
         }
     }
 }

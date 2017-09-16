@@ -16,17 +16,26 @@ import okhttp3.Call;
 
 public class JHNetworkUtils extends JHObject {
 
-    private static final JHNetworkUtils ourInstance = new JHNetworkUtils();
+    private static JHNetworkUtils ourInstance;
+
+    public static JHNetworkUtils getInstance(Context context) {
+        if (ourInstance == null) {
+            ourInstance = new JHNetworkUtils(context);
+        }
+        return ourInstance;
+    }
 
     public static JHNetworkUtils getInstance() {
         return ourInstance;
     }
 
+    private Context mContext;
+
     JHBaseNetworkInterface network = null;
 
-    private JHNetworkUtils() {
+    private JHNetworkUtils(Context context) {
         super();
-        network = new JHOKHTTPNewwork();
+        network = new JHOKHTTPNewwork(context);
     }
 
     public Call getAsyn(JHRequest request, Class clazz, JHResponseCallBack callBack) {

@@ -27,10 +27,16 @@ public class WGChangeAppLanguageLogic {
     static Locale mCurrentAppLocale = Locale.ITALIAN;;
 
     public static boolean isItalin() {
-        return mCurrentAppLocale.toString().contains("it");
+        if (mCurrentAppLocale != null) {
+            return mCurrentAppLocale.toString().contains("it");
+        }
+        return false;
     }
     public static boolean isChiness() {
-        return mCurrentAppLocale.toString().contains("zh");
+        if (mCurrentAppLocale != null) {
+            return mCurrentAppLocale.toString().contains("zh");
+        }
+        return false;
     }
 
     public static List mSupportLanguageList = Arrays.asList(WGAppLanguageItalin, WGAppLanguageChiness);

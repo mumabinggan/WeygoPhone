@@ -24,7 +24,9 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
+import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 
 import java.util.ArrayList;
@@ -205,7 +207,7 @@ public class JHActivity extends FragmentActivity {
         });
     }
 
-    public void postAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
+    public void postAsyn(final JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
             mShowDialog = JHDialogUtils.showLoadingDialog(this);
@@ -214,6 +216,8 @@ public class JHActivity extends FragmentActivity {
             @Override
             public void onSuccess(JHResponse result) {
                 Log.e("onSuccess", JSON.toJSONString(result));
+                WGResponse response = (WGResponse)result;
+
                 if (showLoading) {
                     JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }

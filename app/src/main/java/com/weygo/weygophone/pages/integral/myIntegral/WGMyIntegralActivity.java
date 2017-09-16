@@ -40,6 +40,8 @@ public class WGMyIntegralActivity extends WGTitleActivity {
 
     TextView mIntegrationTextView;
 
+    TextView mHistoryTV;
+
     RelativeLayout mContentLayout;
 
     @Override
@@ -75,6 +77,8 @@ public class WGMyIntegralActivity extends WGTitleActivity {
         mIntegrationTextView = (TextView) findViewById(R.id.integralCountTextView);
 
         mContentLayout = (RelativeLayout) findViewById(R.id.contentLayout);
+
+        mHistoryTV = (TextView) findViewById(R.id.historyTextView);
     }
 
     @Override
@@ -83,10 +87,11 @@ public class WGMyIntegralActivity extends WGTitleActivity {
     }
 
     void refreshUI() {
-        if (mIntegrationDetail!= null) {
+        if (mIntegrationDetail != null) {
             mContentLayout.setVisibility(View.VISIBLE);
             mIntegrationTextView.setText(JHResourceUtils.getInstance().getString(R.string.MyIntegral_Number) +
                     mIntegrationDetail.totalCount);
+            mHistoryTV.setVisibility((mIntegrationDetail.historyCount() > 0) ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

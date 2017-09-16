@@ -46,6 +46,7 @@ public class WGConstants {
 
     //Special Notification
     public static final String WGSpecialNotificationTypeShopCartCountAction = "WGSpecialNotificationTypeShopCartCountAction";
+    public static final String WGReLoginAction = "WGReLoginAction";
 
     //Intent Data key
     public static final String WGIntentDataKey = "WGIntentDataKey";

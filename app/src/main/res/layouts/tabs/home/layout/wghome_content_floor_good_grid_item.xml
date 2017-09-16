@@ -85,4 +85,8 @@
         android:text="@string/GoodDetail_Without"
         android:background="@drawable/wghome_content_floor_good_grid_item_unpurchase"/>
 
+    <include
+        android:id="@+id/discountView"
+        layout="@layout/common_discount_bg" />
+
 </com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridItemView>

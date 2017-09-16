@@ -1,5 +1,7 @@
 package com.weygo.common.tools.network;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
@@ -10,6 +12,7 @@ import com.weygo.common.base.JHRequest;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.base.WGResponse;
+import com.weygo.weygophone.common.WGConstants;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -36,7 +39,10 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
 
     private Handler okHttpHandler;//全局处理子线程和M主线程通信
 
-    public JHOKHTTPNewwork() {
+    private Context mContext;
+
+    public JHOKHTTPNewwork(Context context) {
+        mContext = context;
         mOkHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)//设置超时时间
                 .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
@@ -153,6 +159,11 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
                 return;
             }
             final JHResponse resultResponse = (JHResponse) JSON.parseObject(resultString, clazz);
+            if (resultResponse.reLogin()) {
+                Intent intent = new Intent(WGConstants.WGReLoginAction);
+                mContext.sendBroadcast(intent);
+                return;
+            }
             okHttpHandler.post(new Runnable() {
                 @Override
                 public void run() {

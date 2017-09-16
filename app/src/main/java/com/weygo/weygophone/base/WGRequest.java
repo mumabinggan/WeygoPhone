@@ -17,9 +17,11 @@ import java.util.Set;
 
 public class WGRequest extends JHRequest {
 
-    public String app = WGConstants.WGBundlerId;
+    public String app = "com.weygo.test";
 
-    public String os = "Android";
+//    public String app = WGConstants.WGBundlerId;
+
+    public String os = "iOS";
 
     // eg. www.example.com, default ""
     //"m.preview.weygo.com";
