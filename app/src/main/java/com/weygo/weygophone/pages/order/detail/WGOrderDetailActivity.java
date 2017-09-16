@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.order.detail;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -178,8 +179,13 @@ public class WGOrderDetailActivity extends WGBaseActivity {
         }
         //动画
         int[] distance = {0,0};
-        WGApplicationAnimationUtils.add(this, mLayout, view,
-                null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+        int[] startPoint = new int[2];
+        view.getLocationInWindow(startPoint);
+        Point point = new Point();
+        point.x = startPoint[0] + view.getWidth()/2;
+        point.y = startPoint[1] - view.getHeight();
+        WGApplicationAnimationUtils.add(this, mLayout, point,
+                null, R.drawable.common_add_cart, mNavigationBar.getShopCartViewPoint(), distance);
 
     }
 }

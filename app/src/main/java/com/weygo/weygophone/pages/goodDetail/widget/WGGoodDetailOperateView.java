@@ -19,7 +19,7 @@ public class WGGoodDetailOperateView extends RelativeLayout {
 
     WGGoodCountView mCountView;
 
-    Button mAddShopCartBtn;
+    public Button mAddShopCartBtn;
 
     ImageView mCollectionIV;
 

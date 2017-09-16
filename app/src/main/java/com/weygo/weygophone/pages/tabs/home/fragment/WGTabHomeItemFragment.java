@@ -61,6 +61,7 @@ public class WGTabHomeItemFragment extends WGFragment {
     public interface OnListener {
         void onRefresh();
         void onSwitchTab(WGHomeFloorContentClassifyItem item);
+        void onAddShopCart(WGHomeFloorContentGoodItem item, Point fromPoint);
     }
 
     OnListener mListener;
@@ -189,12 +190,9 @@ public class WGTabHomeItemFragment extends WGFragment {
 
             }
         });
-//        if (mData != null && mData.carouselFigures != null && mData.carouselFigures.size() > 0) {
-//            //动画
-//            int[] distance = {0,0};
-//            WGApplicationAnimationUtils.add(this, mLayout, view,
-//                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
-//        }
+        if (mListener != null) {
+            mListener.onAddShopCart(item, fromPoint);
+        }
     }
 
     void handleShopCartCount(WGAddGoodToCartResponse response) {

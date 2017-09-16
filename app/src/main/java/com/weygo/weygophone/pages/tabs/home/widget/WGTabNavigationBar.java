@@ -75,6 +75,15 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         return findViewById(R.id.navigationBar_cart);
     }
 
+    public int[] getShopCartViewPoint() {
+        View view = findViewById(R.id.navigationBar_cart);
+        int[] endPoint = new int[2];
+        view.getLocationInWindow(endPoint);
+        endPoint[0] = endPoint[0] - view.getWidth()/2;
+        endPoint[1] = endPoint[1] - view.getHeight();
+        return endPoint;
+    }
+
     @Override
     public void onClick(View view) {
         if (mListener != null) {

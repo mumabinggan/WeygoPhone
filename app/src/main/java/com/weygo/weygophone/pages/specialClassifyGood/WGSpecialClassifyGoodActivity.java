@@ -1,10 +1,12 @@
 package com.weygo.weygophone.pages.specialClassifyGood;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
@@ -16,6 +18,7 @@ import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGBaseActivity;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.fragment.WGClassifyDetailContentFragment;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyDetail;
@@ -25,6 +28,7 @@ import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.foreign.fragment.WGTabAsiaFragment;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeItemFragment;
 import com.weygo.weygophone.pages.tabs.home.model.WGHome;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.response.WGHomeTabContentResponse;
 import com.weygo.weygophone.pages.tabs.home.widget.WGTabNavigationBar;
@@ -42,6 +46,8 @@ public class WGSpecialClassifyGoodActivity extends WGBaseActivity {
     WGClassifyItem mItem;
 
     WGTabHomeItemFragment mFragment;
+
+    ViewGroup mLayout;
 
     public interface OnRequestCompletion {
         void onHomeContentCompletion(WGHomeTabContentResponse response);
@@ -109,12 +115,25 @@ public class WGSpecialClassifyGoodActivity extends WGBaseActivity {
 //                    mNavigationBar.setTitle(mData.name);
 //                }
             }
+
+            @Override
+            public void onAddShopCart(WGHomeFloorContentGoodItem item, Point fromPoint) {
+                handleAddShopCartAnimation(item, fromPoint);
+            }
         });
         fragmentTransaction.add(R.id.container, fragment);
         fragmentTransaction.commit();
         if (mItem != null) {
             fragment.setClassifyId(mItem.id);
         }
+        mLayout = (ViewGroup) findViewById(R.id.container);
+    }
+
+    void handleAddShopCartAnimation(WGHomeFloorContentGoodItem item, Point fromPoint) {
+        int[] distance = {0,0};
+        int[] endPoint = mNavigationBar.getShopCartViewPoint();
+        WGApplicationAnimationUtils.add(this, mLayout, fromPoint,
+                item.pictureURL, R.drawable.common_add_cart, endPoint, distance);
     }
 
 //    //Request

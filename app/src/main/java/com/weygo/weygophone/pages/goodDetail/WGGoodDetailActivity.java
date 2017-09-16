@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.goodDetail;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -175,8 +176,13 @@ public class WGGoodDetailActivity extends WGBaseActivity {
             WGCarouselFigureItem item = mData.carouselFigures.get(0);
             //动画
             int[] distance = {0,0};
-            WGApplicationAnimationUtils.add(this, mLayout, mOperateView,
-                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
+            int[] startPoint = new int[2];
+            mOperateView.mAddShopCartBtn.getLocationInWindow(startPoint);
+            Point point = new Point();
+            point.x = startPoint[0] + mOperateView.mAddShopCartBtn.getWidth()/2;
+            point.y = startPoint[1] - mOperateView.mAddShopCartBtn.getHeight();
+            WGApplicationAnimationUtils.add(this, mLayout, point,
+                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartViewPoint(), distance);
         }
     }
 

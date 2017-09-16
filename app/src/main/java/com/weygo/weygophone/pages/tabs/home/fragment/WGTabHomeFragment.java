@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.tabs.home.fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.classifyDetail.WGClassifyDetailActivity;
@@ -72,6 +74,8 @@ public class WGTabHomeFragment extends WGFragment {
 
     WGHomeTitlesResponse mDataResponse;
 
+    ViewGroup mLayout;
+
     //Cache
     boolean mHadReadTitlesCache;
     Map<Long, Boolean> mHadReadContentCacheMap;
@@ -96,6 +100,7 @@ public class WGTabHomeFragment extends WGFragment {
     @Override
     public void initSubView(View view) {
         super.initSubView(view);
+        mLayout = (ViewGroup) view.findViewById(R.id.layout);
         final WGMainActivity activity = (WGMainActivity) getActivity();
         mNavigationBar = (WGTabNavigationBar) view.findViewById(R.id.home_navigationBar);
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
@@ -447,10 +452,22 @@ public class WGTabHomeFragment extends WGFragment {
                     public void onSwitchTab(WGHomeFloorContentClassifyItem item) {
                         handleSwitchTab(item);
                     }
+
+                    @Override
+                    public void onAddShopCart(WGHomeFloorContentGoodItem item, Point fromPoint) {
+                        handleAddShopCartAnimation(item, fromPoint);
+                    }
                 });
                 mContentFragmentMap.put(position, fragment);
             }
             return fragment;
+        }
+
+        void handleAddShopCartAnimation(WGHomeFloorContentGoodItem item, Point fromPoint) {
+            int[] distance = {0,0};
+            int[] endPoint = mNavigationBar.getShopCartViewPoint();
+            WGApplicationAnimationUtils.add(getContext(), mLayout, fromPoint,
+                    item.pictureURL, R.drawable.common_add_cart, endPoint, distance);
         }
 
 //        @Override

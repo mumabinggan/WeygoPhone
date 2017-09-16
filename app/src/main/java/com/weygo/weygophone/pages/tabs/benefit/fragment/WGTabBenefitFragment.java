@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.tabs.benefit.fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,14 +22,17 @@ import com.shizhefei.view.indicator.slidebar.ScrollBar;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHLocalSettingUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.JHWarningUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.classifyDetail.fragment.WGClassifyDetailContentFragment;
+import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyDetail;
 import com.weygo.weygophone.pages.common.widget.WGSegmentView;
 import com.weygo.weygophone.pages.search.WGSearchActivity;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
@@ -36,6 +40,7 @@ import com.weygo.weygophone.pages.tabs.benefit.model.request.WGBenefitRequest;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeFragment;
 import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeItemFragment;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGTitleItem;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTabContentRequest;
 import com.weygo.weygophone.pages.tabs.home.model.request.WGHomeTitlesRequest;
@@ -54,6 +59,8 @@ import java.util.Map;
 public class WGTabBenefitFragment extends WGFragment {
     //navigationbar
     WGTabNavigationBar mNavigationBar;
+
+    ViewGroup mLayout;
 
     //Segment and page
     WGSegmentView mSegmentView;
@@ -131,6 +138,7 @@ public class WGTabBenefitFragment extends WGFragment {
                 //loadTabContentDataWithMenuId(menuIdWithIndex(currentItem), WGConstants.WGCacheTypeCachePrior);
             }
         });
+        mLayout = (ViewGroup) view.findViewById(R.id.container);
     }
 
     long menuIdWithIndex(int index) {
@@ -187,6 +195,13 @@ public class WGTabBenefitFragment extends WGFragment {
                 }
             }
         }
+    }
+
+    void handleAddShopCartAnimation(WGHomeFloorContentGoodItem item, Point fromPoint) {
+        int[] distance = {0,0};
+        int[] endPoint = mNavigationBar.getShopCartViewPoint();
+        WGApplicationAnimationUtils.add(getActivity(), mLayout, fromPoint,
+                item.pictureURL, R.drawable.common_add_cart, endPoint, distance);
     }
 
     //Request
@@ -303,6 +318,22 @@ public class WGTabBenefitFragment extends WGFragment {
                 Log.e("fragment=null", "frag");
                 fragment = new WGClassifyDetailContentFragment();
                 fragment.setClassifyId(menuIdWithIndex(position));
+                fragment.setListener(new WGClassifyDetailContentFragment.RefreshListener() {
+                    @Override
+                    public void onRefresh() {
+
+                    }
+
+                    @Override
+                    public void onRequestCompletion(WGClassifyDetail data) {
+
+                    }
+
+                    @Override
+                    public void onAddShopCart(WGHomeFloorContentGoodItem item, Point fromPoint) {
+                        handleAddShopCartAnimation(item, fromPoint);
+                    }
+                });
 //                fragment.setListener(new WGTabHomeItemFragment.RefreshListener() {
 //                    @Override
 //                    public void onRefresh() {

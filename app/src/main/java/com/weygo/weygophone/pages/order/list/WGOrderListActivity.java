@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.order.list;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -182,9 +183,14 @@ public class WGOrderListActivity extends WGBaseActivity {
         }
         //动画
         int[] distance = {0,0};
-        WGApplicationAnimationUtils.add(this, mLayout, view,
-                null, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
-
+        int[] startPoint = new int[2];
+        view.getLocationInWindow(startPoint);
+        startPoint[1] = startPoint[1] + view.getHeight()/2;
+        Point point = new Point();
+        point.x = startPoint[0];
+        point.y = startPoint[1];
+        WGApplicationAnimationUtils.add(this, mLayout, point,
+                null, R.drawable.common_add_cart, mNavigationBar.getShopCartViewPoint(), distance);
     }
 
     void handleGoodItem(WGOrderGoodItem item) {

@@ -115,6 +115,10 @@
         android:layout_width="@dimen/x61"
         android:layout_height="@dimen/x17"
         android:text="@string/GoodDetail_Without"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/x14"
+        android:layout_marginRight="@dimen/x14"
         android:textSize="@dimen/x10"
         android:background="@drawable/goodlistitem_unpurchase_bg"/>
 

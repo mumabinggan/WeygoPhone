@@ -95,6 +95,14 @@ public class WGShopCartNavigationView extends JHRelativeLayout {
         return mShopCartView;
     }
 
+    public int[] getShopCartViewPoint() {
+        int[] endPoint = new int[2];
+        mShopCartView.getLocationInWindow(endPoint);
+        endPoint[0] = endPoint[0] - mShopCartView.getWidth()/2;
+        endPoint[1] = endPoint[1] - mShopCartView.getHeight()/2;
+        return endPoint;
+    }
+
     public void setShopCartHidden(boolean hidden) {
         if (hidden) {
             mShopCartView.setVisibility(INVISIBLE);

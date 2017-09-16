@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -20,8 +21,10 @@ import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
@@ -30,6 +33,9 @@ import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.collection.adapter.WGGoodListAdapter;
 import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
+import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
+import com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView;
+import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
@@ -39,7 +45,7 @@ import java.util.List;
  * Created by muma on 2017/5/19.
  */
 
-public class WGGoodListActivity extends WGTitleActivity {
+public class WGGoodListActivity extends WGBaseActivity {
 
     protected TwinklingRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
@@ -47,56 +53,34 @@ public class WGGoodListActivity extends WGTitleActivity {
 
     protected List mList;
 
+    ViewGroup mLayout;
+
+    public WGShopCartNavigationView mNavigationBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadGoodList(true, false);
     }
 
-//    @Override
-//    public void initData() {
-//        super.initData();
-//        mList = new ArrayList();
-//        WGHomeFloorContentGoodItem item = new WGHomeFloorContentGoodItem();
-//        item.pictureURL = "";
-//        item.name = "郑少要";
-//        item.chineseName = "sss";
-//        item.briefDescription = "asdfasdfasdfas";
-//        item.price = "12d";
-//        item.currentPrice = "fss";
-//        item.reducePrice = "fs2323";
-//        mList.add(item);
-//
-//        WGHomeFloorContentGoodItem item2 = new WGHomeFloorContentGoodItem();
-//        item2.pictureURL = "";
-//        item2.name = "郑少要";
-//        item2.chineseName = "sss";
-//        item2.briefDescription = "asdfasdfasdfas";
-//        item2.price = "12d";
-//        item2.currentPrice = "fss";
-//        item2.reducePrice = "fs2323";
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);mList.add(item);mList.add(item);mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);
-//        mList.add(item);mList.add(item);mList.add(item);
-//        mList.add(item);
-//        mList.add(item);mList.add(item);
-//    }
-
     @Override
     public void initSubView() {
         super.initSubView();
 
+        mNavigationBar = (WGShopCartNavigationView) findViewById(R.id.titlebar);
         mNavigationBar.setTitle(R.string.Collection_Title);
+        mNavigationBar.setListener(new WGShopCartNavigationView.OnItemListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+
+            @Override
+            public void onRight() {
+                Intent intent = new Intent(WGGoodListActivity.this, WGShopCartListActivity.class);
+                startActivity(intent);
+            }
+        });
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.addItemDecoration(new JHDividerItemDecoration(this,
                 JHDividerItemDecoration.VERTICAL_LIST));
@@ -134,11 +118,8 @@ public class WGGoodListActivity extends WGTitleActivity {
                 loadGoodList(false, true);
             }
         });
-    }
 
-    @Override
-    public void handleRightBarItem() {
-        super.handleRightBarItem();
+        mLayout = (ViewGroup) findViewById(R.id.mLayout);
     }
 
     void handleTouchGoodItem(View view, WGHomeFloorContentGoodItem item) {
@@ -195,12 +176,10 @@ public class WGGoodListActivity extends WGTitleActivity {
 
             }
         });
-//        if (mData != null && mData.carouselFigures != null && mData.carouselFigures.size() > 0) {
-//            //动画
-//            int[] distance = {0,0};
-//            WGApplicationAnimationUtils.add(this, mLayout, view,
-//                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
-//        }
+        int[] distance = {0,0};
+        int[] endPoint = mNavigationBar.getShopCartViewPoint();
+        WGApplicationAnimationUtils.add(this, mLayout, fromPoint,
+                item.pictureURL, R.drawable.common_add_cart, endPoint, distance);
     }
 
     void handleShopCartCount(WGAddGoodToCartResponse response) {

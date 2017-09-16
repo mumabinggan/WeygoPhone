@@ -75,7 +75,7 @@ public class WGHomeContentFloorImageTitleView extends JHRelativeLayout {
     public void showWithData(Object data) {
         if (data instanceof WGHomeFloorItem) {
             mData = (WGHomeFloorItem) data;
-            JHImageUtils.getInstance().loadImage(mData.pictureURL, R.drawable.common_image_loading_small, mImageView);
+            JHImageUtils.getInstance().loadImage(mData.pictureURL, R.drawable.common_image_loading_floor, mImageView);
             mNameTV.setText(mData.pictureName);
             mBreifDesTV.setText(mData.pictureBriefDescription);
             if (JHStringUtils.isNullOrEmpty(mData.pictureBtnName)) {

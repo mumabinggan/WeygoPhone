@@ -23,6 +23,7 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.base.WGResponse;
+import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
@@ -71,6 +72,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
     public interface RefreshListener {
         void onRefresh();
         void onRequestCompletion(WGClassifyDetail mData);
+        void onAddShopCart(WGHomeFloorContentGoodItem item, Point fromPoint);
     }
 
     RefreshListener mRefreshListener;
@@ -234,12 +236,9 @@ public class WGClassifyDetailContentFragment extends WGFragment {
 
             }
         });
-//        if (mData != null && mData.carouselFigures != null && mData.carouselFigures.size() > 0) {
-//            //动画
-//            int[] distance = {0,0};
-//            WGApplicationAnimationUtils.add(this, mLayout, view,
-//                    item.pictureURL, R.drawable.common_add_cart, mNavigationBar.getShopCartView(), distance);
-//        }
+        if (mRefreshListener != null) {
+            mRefreshListener.onAddShopCart(item, fromPoint);
+        }
     }
 
     void handleShopCartCount(WGAddGoodToCartResponse response) {
