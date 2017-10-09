@@ -29,6 +29,15 @@
         android:textColor="#000000"
         android:textSize="@dimen/x12"
         android:maxLines="1"/>
+
+    <include
+        android:id="@+id/addView"
+        android:layout_width="@dimen/x80"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/briefTextView"
+        android:layout_below="@+id/priceView"
+        android:layout_marginTop="@dimen/x5"
+        layout="@layout/common_addgood" />
     
     <View
         android:layout_width="match_parent"

@@ -80,11 +80,10 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
         notifyDataSetChanged();
         if (mData.hasGoods()) {
             if (mData.isGrid()) {
-                List list = new ArrayList();
                 List<WGHomeFloorContentGoodItem> goodArray = mData.goodArray;
                 int count = goodArray.size();
                 for (int num = 0; num < Math.ceil(count/2.0); ++num) {
-                    list.clear();
+                    List list = new ArrayList();
                     WGHomeFloorContentGoodItem goodItem = null;
                     if (count > 2 * num) {
                         goodItem = goodArray.get(2 * num);

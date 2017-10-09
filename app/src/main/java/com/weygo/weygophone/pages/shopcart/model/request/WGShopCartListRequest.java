@@ -9,7 +9,7 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
 
 public class WGShopCartListRequest extends WGGuestRequest {
 
-    String cap = WGApplicationUserUtils.getInstance().currentPostCode();
+    public String cap = WGApplicationUserUtils.getInstance().currentPostCode();
 
     public String api() {
         return "cart/list?";

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.weygo.common.base.JHRelativeLayout;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.common.widget.WGAddGoodView;
 import com.weygo.weygophone.pages.order.commit.model.WGOverHeightGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
@@ -28,6 +29,8 @@ public class WGCommitOrderOverWeightItemView extends JHRelativeLayout {
     TextView mNameTV;
 
     TextView mBriefTV;
+
+    WGAddGoodView mAddView;
 
     OnItemListener mListener;
     public void setListener(OnItemListener listener) {
@@ -54,6 +57,24 @@ public class WGCommitOrderOverWeightItemView extends JHRelativeLayout {
         mImageView = (ImageView) findViewById(R.id.imageView);
         mNameTV = (TextView) findViewById(R.id.nameTextView);
         mBriefTV = (TextView) findViewById(R.id.briefTextView);
+        mAddView = (WGAddGoodView) findViewById(R.id.addView);
+        mAddView.setListener(new WGAddGoodView.OnItemListener() {
+            @Override
+            public void onAdd(int count) {
+                if (mListener != null) {
+                    mData.goodCount++;
+                    mListener.onAdd(mData);
+                }
+            }
+
+            @Override
+            public void onSub(int count) {
+                if (mListener != null) {
+                    mData.goodCount--;
+                    mListener.onSub(mData);
+                }
+            }
+        });
     }
 
     @Override
@@ -64,6 +85,8 @@ public class WGCommitOrderOverWeightItemView extends JHRelativeLayout {
             JHImageUtils.getInstance().loadImage(mData.pictureURL, R.drawable.common_image_loading_small, mImageView);
             mNameTV.setText(mData.name);
             mBriefTV.setText(mData.briefDescription);
+            mAddView.setCount(mData.goodCount);
+
         }
     }
 }

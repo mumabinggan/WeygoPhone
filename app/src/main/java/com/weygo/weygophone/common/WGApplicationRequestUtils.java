@@ -362,6 +362,8 @@ public class WGApplicationRequestUtils {
     }
 
     void handleShopCartCount(WGShopCartCountResponse response) {
-        WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        if (response != null && response.success()) {
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.base.WGResponse;
@@ -219,8 +220,10 @@ public class WGTabHomeItemFragment extends WGFragment {
     void handleItem(long id, String name, int jumpType) {
         Intent intent = null;
         if (jumpType == WGConstants.WGAppJumpTypeRegister) {
-            intent = new Intent(getActivity(), WGRegisterActivity.class);
-            startActivity(intent);
+            if (!WGApplicationUserUtils.getInstance().isLogined()) {
+                intent = new Intent(getActivity(), WGRegisterActivity.class);
+                startActivity(intent);
+            }
         }
         else if (jumpType == WGConstants.WGAppJumpTypeInvitation) {
 
@@ -300,6 +303,7 @@ public class WGTabHomeItemFragment extends WGFragment {
     }
 
     public void refresh(WGHome data) {
+        mData = data;
         mAdapter.setHome(data);
     }
 

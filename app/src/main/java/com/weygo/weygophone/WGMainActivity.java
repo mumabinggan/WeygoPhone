@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +29,7 @@ import com.weygo.common.base.JHFragment;
 import com.weygo.common.base.JHObject;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHDeviceUtils;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGResponse;
@@ -39,7 +43,10 @@ import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.models.JHTests;
 import com.weygo.weygophone.pages.base.model.request.WGBaseServiceRequest;
+import com.weygo.weygophone.pages.base.model.request.WGUpdateData;
+import com.weygo.weygophone.pages.base.model.request.WGUpdateRequest;
 import com.weygo.weygophone.pages.base.model.response.WGBaseServiceResponse;
+import com.weygo.weygophone.pages.base.model.response.WGUpdateResponse;
 import com.weygo.weygophone.pages.clientCenter.detail.WGClientServiceDetailActivity;
 import com.weygo.weygophone.pages.clientCenter.list.WGClientServiceActivity;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
@@ -132,6 +139,7 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testPostClassifyGetRequest();
         getWindow();
 
+        Log.e("==versioname==", JHDeviceUtils.getInstance().getVersionName());
         if (WGApplicationUserUtils.getInstance().isLogined()) {
             WGApplicationRequestUtils.getInstance().loadUserInfoOnCompletion(this, new WGOnUserInfoCompletionInteface() {
                 @Override
@@ -150,6 +158,8 @@ public class WGMainActivity extends WGBaseActivity {
                 }
             });
         }
+
+        checkAppUpdate();
     }
 
     void initTabBar() {
@@ -234,6 +244,75 @@ public class WGMainActivity extends WGBaseActivity {
             filter.addAction(WGConstants.WGReLoginAction);
             registerReceiver(mReLoginReceiver, filter);
         }
+    }
+
+    void checkAppUpdate() {
+        WGUpdateRequest request = new WGUpdateRequest();
+        this.postAsyn(request, WGUpdateResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleAppUpdateResponse((WGUpdateResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleAppUpdateResponse(final WGUpdateResponse response) {
+        if (response.success() && response.data != null) {
+            if (response.data.versionStatus == 1) {
+                String [] newArray = response.data.versionCode.split(".");
+                if (newArray.length == 3) {
+                    int newVersionCode = Integer.parseInt(newArray[0]) * 1000 + Integer.parseInt(newArray[1]) * 100 + Integer.parseInt(newArray[2]);
+                    String kAppVersion = JHDeviceUtils.getInstance().getVersionCode();
+                    String [] oldArray = kAppVersion.split(".");
+                    int oldVersionCode = Integer.parseInt(oldArray[0]) * 1000 + Integer.parseInt(oldArray[1]) * 100 + Integer.parseInt(oldArray[2]);
+                    if (newVersionCode > oldVersionCode) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+                        builder.setMessage(response.data.updateTips);
+                        builder.setPositiveButton(R.string.Mine_Logout_Ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                handleConfirmUpdate(response.data);
+                            }
+                        });
+                        builder.setNegativeButton(R.string.Mine_Logout_Cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                }
+            }
+        }
+    }
+
+    void handleConfirmUpdate(WGUpdateData data) {
+        if (!isHaveMarket(this)) {
+            Toast.makeText(this, "您手机中没有安装应用市场！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(data.linkUrl));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    private static boolean isHaveMarket(Context context) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.MAIN");
+        intent.addCategory("android.intent.category.APP_MARKET");
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> infos = pm.queryIntentActivities(intent, 0);
+        return infos.size() > 0;
     }
 
     public void onOptionPicker(View view) {

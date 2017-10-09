@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -69,7 +70,12 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
 
     void handlePurchase(View view) {
         if (mListener != null) {
-            mListener.onPurchase(mData, view, null);
+            int[] position = new int[2];
+            mImageView.getLocationInWindow(position);
+            Point point = new Point();
+            point.x = position[0] + mImageView.getWidth()/2;
+            point.y = position[1];
+            mListener.onPurchase(mData, view, point);
         }
     }
 
@@ -97,6 +103,7 @@ public class WGHomeContentFloorGoodsGridItemView extends JHRelativeLayout {
         if (data instanceof WGHomeFloorContentGoodItem) {
             WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) data;
             mData = item;
+            Log.e("===url====", item.pictureURL);
             JHImageUtils.getInstance().loadImage(item.pictureURL,
                     R.drawable.common_image_loading_small, mImageView);
             mNameTextView.setText(item.name);

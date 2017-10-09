@@ -54,7 +54,7 @@ public class WGPersonInfoActivity extends WGTitleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadOrderList(true, false);
+        loadUserInfo();
     }
 
     @Override
@@ -66,14 +66,6 @@ public class WGPersonInfoActivity extends WGTitleActivity {
     public void initData() {
         super.initData();
         mData = new WGUser();
-        mData.userId = 3443;
-        mData.surname = "郑";
-        mData.name = "itio 谦";
-        mData.mobile = "23233223";
-        mData.email = "mumabinggan@163.com";
-        mData.sex = 1;
-        mData.tax = "Tax:de34334";
-        mData.birth = "1933.23.22";
     }
 
     @Override

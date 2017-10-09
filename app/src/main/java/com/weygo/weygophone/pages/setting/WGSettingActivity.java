@@ -84,7 +84,7 @@ public class WGSettingActivity extends WGTitleActivity {
 
         mVersionView = (WGCellStyle4View) findViewById(R.id.versionView);
         mVersionView.setTitle(R.string.Setting_Version);
-        mVersionView.setDetailTitle(JHDeviceUtils.getInstance().getVersion());
+        mVersionView.setDetailTitle(JHDeviceUtils.getInstance().getVersionName());
         mVersionView.setStyle(WGCellStyle4View.WGCellStyleTextAndDetailAndArr);
 
         mCleanCacheView = (WGCellStyle4View) findViewById(R.id.cleanCacheView);

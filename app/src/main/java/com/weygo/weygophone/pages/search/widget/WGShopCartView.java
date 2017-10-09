@@ -85,7 +85,7 @@ public class WGShopCartView extends JHRelativeLayout {
         }
     }
 
-    void handelShopCart() {
+    public void handelShopCart() {
         mCountTV.setText(WGApplicationGlobalUtils.getInstance().mShopCartGoodCount + "");
         showShopCartCountStatus();
     }

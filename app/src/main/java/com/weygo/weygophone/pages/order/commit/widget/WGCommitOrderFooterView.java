@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHLinearLayout;
@@ -27,6 +29,8 @@ public class WGCommitOrderFooterView extends JHRelativeLayout {
     TextView mReducePriceTV;
 
     Button mBtn;
+
+    RelativeLayout vv;
 
     public interface OnItemListener {
         void onCommit();
@@ -57,6 +61,7 @@ public class WGCommitOrderFooterView extends JHRelativeLayout {
         mBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("---------", "====");
                 handleCommitBtn();
             }
         });
@@ -84,10 +89,10 @@ public class WGCommitOrderFooterView extends JHRelativeLayout {
         else {
             WGCommitOrderDetail item = (WGCommitOrderDetail) object;
             if (JHStringUtils.isNullOrEmpty(item.minPriceTips)) {
-                mBtn.setEnabled(false);
+                mBtn.setEnabled(true);
             }
             else {
-                mBtn.setEnabled(true);
+                mBtn.setEnabled(false);
             }
         }
     }

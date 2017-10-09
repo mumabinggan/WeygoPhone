@@ -41,7 +41,7 @@
         <!--android:src="@drawable/common_shopcart" />-->
 
     <include
-        android:id="@+id/main_frame"
+        android:id="@+id/shopCartView"
         layout="@layout/common_shopcart_withcount"
         android:layout_width="@dimen/x26"
         android:layout_height="@dimen/x24"

@@ -54,6 +54,7 @@
                     android:textColorHint="@color/WGAppBaseTitleAAAColor"
                     android:background="@null"
                     android:textSize="@dimen/ft12"
+                    android:inputType="textPassword"
                     android:textColor="@color/WGAppBaseTitleAColor"
                     />
 

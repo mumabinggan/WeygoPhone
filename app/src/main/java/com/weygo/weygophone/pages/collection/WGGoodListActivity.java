@@ -141,7 +141,7 @@ public class WGGoodListActivity extends WGBaseActivity {
         mAdapter.setData(mList);
     }
 
-    void loadGoodList(boolean refresh, boolean pulling) {
+    public void loadGoodList(boolean refresh, boolean pulling) {
 
     }
 

@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.search.fragment;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import com.alibaba.fastjson.JSON;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHDividerItemDecoration;
+import com.weygo.common.base.JHInterface;
+import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -32,6 +35,7 @@ import com.weygo.weygophone.pages.search.model.request.WGHotSearchRequest;
 import com.weygo.weygophone.pages.search.model.request.WGSearchRequest;
 import com.weygo.weygophone.pages.search.model.response.WGHotSearchResponse;
 import com.weygo.weygophone.pages.search.model.response.WGSearchResponse;
+import com.weygo.weygophone.pages.tabs.home.fragment.WGTabHomeItemFragment;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -52,6 +56,14 @@ public class WGSearchResultFragment extends WGFragment {
     WGSearchResultAdapter mAdapter;
 
     WGSearchData mData;
+
+    public interface OnListener extends JHInterface {
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint);
+    }
+    OnListener mListener;
+    public void setListener(OnListener listener) {
+        mListener = listener;
+    }
 
     String mSearchName;
     public void setSearchName(String searchName) {
@@ -111,8 +123,14 @@ public class WGSearchResultFragment extends WGFragment {
             }
 
             @Override
-            public void onItemClick(View view, int position) {
+            public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+                if (mListener != null) {
+                    mListener.onPurchase(item, view, fromPoint);
+                }
+            }
 
+            @Override
+            public void onItemClick(View view, int position) {
             }
         });
         mRecyclerView.setAdapter(mAdapter);

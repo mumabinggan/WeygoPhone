@@ -27,8 +27,9 @@ public class WGRequest extends JHRequest {
     //"m.preview.weygo.com";
     //m.delong6688.develop.weygo.com
     //m.weygo.com
+    //http://m.app.developer.weygo.com
     public String host() {
-        return "m.preview.weygo.com";
+        return "m.app.developer.weygo.com";
     }
 
     // eg. app/ default ""

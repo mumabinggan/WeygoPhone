@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.shopcart;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,7 @@ import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGCommonAlertView;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
@@ -95,15 +97,15 @@ public class WGShopCartListActivity extends WGTitleActivity {
         mRecyclerView.addItemDecoration(new JHDividerItemDecoration(this,
                 JHDividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.addOnItemTouchListener(new SwipeItemLayout.OnSwipeItemTouchListener(this));
-        mAdapter.setOnItemClickListener(new WGShopCartListAdater.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
+        mAdapter.setListener(new WGShopCartListAdater.OnListener() {
 
             @Override
             public void onGoodItemClick(View view, WGShopCartGoodItem item) {
-
+                Intent intent = new Intent(WGShopCartListActivity.this, WGGoodDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
@@ -114,6 +116,21 @@ public class WGShopCartListActivity extends WGTitleActivity {
             @Override
             public void onUpdateGoodItem(WGShopCartGoodItem item) {
 
+            }
+
+            @Override
+            public void onAddGoodItem(View view, WGShopCartGoodItem item) {
+                loadUpdateGood(item, item.goodCount + 1);
+            }
+
+            @Override
+            public void onSubGoodItem(View view, WGShopCartGoodItem item) {
+                loadUpdateGood(item, item.goodCount - 1);
+            }
+
+            @Override
+            public void onLongTouchItem(View view, WGShopCartGoodItem item) {
+                handleDelete(item);
             }
         });
         mCleanLayout = (LinearLayout) findViewById(R.id.cleanLayout);
@@ -135,7 +152,7 @@ public class WGShopCartListActivity extends WGTitleActivity {
     }
 
     void handleDelete(final WGShopCartGoodItem item) {
-        WGCommonAlertView builder = new WGCommonAlertView(getBaseContext(), R.style.MyDialogTheme)
+        WGCommonAlertView builder = new WGCommonAlertView(this, R.style.MyDialogTheme)
                 .setCustomMessage(R.string.ShopCart_Clean_One_Tip)
                 .setCustomCancelEnable(true)
                 .setCustomPositiveButton(R.string.Collection_Delete_OK, new DialogInterface.OnClickListener() {
@@ -234,6 +251,7 @@ public class WGShopCartListActivity extends WGTitleActivity {
 
     void loadShopCartList() {
         WGShopCartListRequest request = new WGShopCartListRequest();
+        request.cap = WGApplicationUserUtils.getInstance().currentPostCode();
         this.postAsyn(request, WGShopCartListResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
@@ -254,6 +272,13 @@ public class WGShopCartListActivity extends WGTitleActivity {
             mData = response.data;
             mAdapter.setData(mData);
             refreshFooter();
+            if (mData != null && mData.goods != null) {
+                int goodCount = 0;
+                for (WGShopCartGoodItem item : mData.goods) {
+                    goodCount += item.goodCount;
+                }
+                WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(goodCount);
+            }
         }
         else {
             showWarning(response.message);

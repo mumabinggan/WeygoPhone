@@ -57,6 +57,10 @@ public class WGBaseActivity extends JHActivity {
         }
     }
 
+    protected void onSaveInstanceState(Bundle outState) {
+        //super.onSaveInstanceState(outState);
+    }
+
     @Override
     public void initSubView() {
         super.initSubView();

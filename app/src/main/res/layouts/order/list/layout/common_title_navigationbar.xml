@@ -22,6 +22,7 @@
         android:layout_marginRight="50dp"
         android:gravity="center"
         android:textSize="16sp"
+        android:lines="1"
         android:textColor="@color/navigationBar_title"/>
 
     <include

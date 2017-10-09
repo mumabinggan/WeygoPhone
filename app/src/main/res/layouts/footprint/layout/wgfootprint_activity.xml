@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/base_titlebar"
-        layout="@layout/common_navigationbar" />
+        android:id="@+id/titlebar"
+        layout="@layout/common_title_navigationbar" />
 
     <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
         android:id="@+id/refreshLayout"

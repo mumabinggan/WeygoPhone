@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.goodDetail.model.request;
 
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.WGApplication;
+import com.weygo.weygophone.base.WGGuestRequest;
 import com.weygo.weygophone.base.WGRequest;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 
@@ -9,7 +10,7 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
  * Created by muma on 2017/9/3.
  */
 
-public class WGAddGoodToCartRequest extends WGRequest {
+public class WGAddGoodToCartRequest extends WGGuestRequest {
 
     public long goodId;
 

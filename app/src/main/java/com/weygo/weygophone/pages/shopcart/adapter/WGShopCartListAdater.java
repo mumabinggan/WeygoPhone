@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.shopcart.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.weygo.weygophone.pages.shopcart.widget.WGShopCartItemView;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -40,13 +42,24 @@ public class WGShopCartListAdater extends JHRecyclerViewAdapter {
         ITEM_TYPE_ShopCartSeparateLine,
     }
 
-    public static interface OnItemClickListener extends OnBaseItemClickListener {
+    public interface OnListener {
 
         void onGoodItemClick(View view, WGShopCartGoodItem item);
 
         void onDeleteGoodItem(View view, WGShopCartGoodItem item);
 
         void onUpdateGoodItem(WGShopCartGoodItem item);
+
+        void onAddGoodItem(View view, WGShopCartGoodItem item);
+
+        void onSubGoodItem(View view, WGShopCartGoodItem item);
+
+        void onLongTouchItem(View view, WGShopCartGoodItem item);
+    }
+
+    OnListener mListener;
+    public void setListener(OnListener listener) {
+        mListener = listener;
     }
 
     WGShopCart mData;
@@ -69,39 +82,44 @@ public class WGShopCartListAdater extends JHRecyclerViewAdapter {
         }
     }
 
-    void handleLongGoodItemView(View view) {
-        if (mOnItemClickListener != null) {
-            if (mOnItemClickListener instanceof OnItemClickListener) {
-                int tag = (int) view.getTag();
-                ((OnItemClickListener) mOnItemClickListener).onDeleteGoodItem(view, mData.goods.get(tag));
-            }
-        }
-    }
-
-    void handleGoodItemView(View view) {
-        if (mOnItemClickListener != null) {
-            if (mOnItemClickListener instanceof OnItemClickListener) {
-                int tag = (int) view.getTag();
-                ((OnItemClickListener) mOnItemClickListener).onGoodItemClick(view, mData.goods.get(tag));
-            }
-        }
-    }
-
     @Override
     public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == Item_Type.ITEM_TYPE_ShopCartGoodItem.ordinal()) {
             int resourceId = R.layout.wgshopcart_list_item;
-            view = LayoutInflater.from(
+            WGShopCartItemView temp = (WGShopCartItemView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnLongClickListener(new View.OnLongClickListener() {
+            temp.setLister(new WGShopCartItemView.GoodListItemOnListener() {
                 @Override
-                public boolean onLongClick(View v) {
-                    handleLongGoodItemView(v);
-                    return false;
+                public void onTouchShopCart(WGHomeFloorContentGoodItem item) {
+                    if (mListener != null) {
+                        mListener.onGoodItemClick(null, (WGShopCartGoodItem) item);
+                    }
+                }
+
+                @Override
+                public void onAddGood(WGHomeFloorContentGoodItem item) {
+                    if (mListener != null) {
+                        mListener.onAddGoodItem(null, (WGShopCartGoodItem) item);
+                    }
+                }
+
+                @Override
+                public void onSubGood(WGHomeFloorContentGoodItem item) {
+                    if (mListener != null) {
+                        mListener.onSubGoodItem(null, (WGShopCartGoodItem) item);
+                    }
+                }
+
+                @Override
+                public void onLongTouch(WGHomeFloorContentGoodItem item) {
+                    if (mListener != null) {
+                        mListener.onLongTouchItem(null, (WGShopCartGoodItem) item);
+                    }
                 }
             });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_ShopCartMinTips.ordinal()) {
             int resourceId = R.layout.common_cell_type3;
@@ -116,12 +134,6 @@ public class WGShopCartListAdater extends JHRecyclerViewAdapter {
                     false);
         }
         ShopCartViewHolder holder = new ShopCartViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleGoodItemView(view);
-            }
-        });
         return holder;
     }
 

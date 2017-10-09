@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -85,6 +86,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     WGCommitOrderOverWeightPopView mOverWeightView;
 
+    JHBasePopupWindow mWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,24 +103,24 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                 if (resultCode == WGConstants.WGCommitOrderReceiptReturn) {
                     WGReceipt receipt = (WGReceipt) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.receipt = receipt;
-                    mAdapter.setData(mData);
+                    refreshUI();
                 }
                 else if (resultCode == WGConstants.WGCommitOrderCouponReturn) {
                     WGActiveCouponData couponData = (WGActiveCouponData) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.coupon = couponData.coupon;
                     mData.consumePrice = couponData.price;
-                    mAdapter.setData(mData);
+                    refreshUI();
                 }
                 else if (resultCode == WGConstants.WGCommitOrderAddressReturn) {
                     WGAddress address = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.address = address;
-                    mAdapter.setData(mData);
+                    refreshUI();
                 }
                 else if (resultCode == WGConstants.WGCommitOrderIntegralReturn) {
                     WGUseIntegrationData integral = (WGUseIntegrationData) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.useIntegration = integral.use;
                     mData.consumePrice = integral.price;
-                    mAdapter.setData(mData);
+                    refreshUI();
                 }
             }
         }
@@ -197,14 +200,14 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         });
     }
 
-    void touchCommitBtn() {
+    public void touchCommitBtn() {
         if (enableConfirm()) {
-            loadCommitOrder();;
+            loadCommitOrder();
         }
     }
 
     boolean enableConfirm() {
-        if (mData != null && !JHStringUtils.isNullOrEmpty(mData.minPriceTips)) {
+        if (mData != null && JHStringUtils.isNullOrEmpty(mData.minPriceTips)) {
             return true;
         }
         return false;
@@ -214,10 +217,10 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         mExpireView = (WGCommitOrderExpirePopView) getLayoutInflater()
                 .inflate(R.layout.commitorder_expire_good_pop, null);
         mExpireView.setGoods(expireGood.goods);
-        JHBasePopupWindow window = new JHBasePopupWindow(mExpireView,
+        mWindow = new JHBasePopupWindow(mExpireView,
                 JHAdaptScreenUtils.devicePixelWidth(this),
                 JHAdaptScreenUtils.devicePixelHeight(this));
-        mExpireView.setPopupWindow(window);
+        mExpireView.setPopupWindow(mWindow);
         mExpireView.setListener(new WGCommitOrderExpirePopView.OnItemListener() {
             @Override
             public void onOk() {
@@ -229,17 +232,19 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                 handleDeleteExpireGood();
             }
         });
-        window.showAtLocation(mExpireView, Gravity.CENTER, 0, 0);
+        mWindow.setFocusable(false);
+        mWindow.setOutsideTouchable(false);
+        mWindow.showAtLocation(mExpireView, Gravity.CENTER, 0, 0);
     }
 
     void showOverWeightGood(List<WGOverHeightDetail> overHeightDetail) {
         mOverWeightView = (WGCommitOrderOverWeightPopView) getLayoutInflater()
                 .inflate(R.layout.commitorder_overheight_pop, null);
         mOverWeightView.setGoods(overHeightDetail);
-        JHBasePopupWindow window = new JHBasePopupWindow(mOverWeightView,
+        mWindow = new JHBasePopupWindow(mOverWeightView,
                 JHAdaptScreenUtils.devicePixelWidth(this),
                 JHAdaptScreenUtils.devicePixelHeight(this));
-        mOverWeightView.setPopupWindow(window);
+        mOverWeightView.setPopupWindow(mWindow);
         mOverWeightView.setListener(new WGCommitOrderOverWeightPopView.OnItemListener() {
             @Override
             public void onDeleteAll() {
@@ -251,7 +256,17 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                 loadOverHeightReset(overWeightList);
             }
         });
-        window.showAtLocation(mOverWeightView, Gravity.CENTER, 0, 0);
+        mWindow.setFocusable(false);
+        mWindow.setOutsideTouchable(false);
+        mWindow.showAtLocation(mOverWeightView, Gravity.CENTER, 0, 0);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        if(mWindow!=null&&mWindow.isShowing()){
+            return false;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     void handleChangeTime() {
@@ -453,6 +468,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                     response.data.expireGood != null) {
                 response.data.expireGood.canChangeTime = true;
                 showExpireGood(response.data.expireGood);
+                refreshUI();
             }
         }
         else {
@@ -658,7 +674,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         }
         if (idBuilder.length() > 0) {
             idBuilder.deleteCharAt(idBuilder.length()-1);
-            countBuilder.deleteCharAt(idBuilder.length()-1);
+            countBuilder.deleteCharAt(countBuilder.length()-1);
         }
         request.goodIds = idBuilder.toString();
         request.goodCounts = countBuilder.toString();

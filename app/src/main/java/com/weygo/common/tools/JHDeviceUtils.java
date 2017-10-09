@@ -27,7 +27,7 @@ public class JHDeviceUtils {
     private JHDeviceUtils() {
     }
 
-    public String getVersion() {
+    public String getVersionName() {
         try {
             PackageManager manager = mContext.getPackageManager();
             PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), 0);
@@ -36,5 +36,9 @@ public class JHDeviceUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getVersionCode() {
+        return getVersionName();
     }
 }

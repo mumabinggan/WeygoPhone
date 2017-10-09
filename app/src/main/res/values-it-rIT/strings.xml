@@ -58,6 +58,7 @@
     <string name="Login_ForgetPW">Password dimenticata？</string>
     <string name="Login_Facebook">Facebook</string>
     <string name="Login_Wechat">WeChat</string>
+    <string name="Mine_Logout_Tips">您确认退出吗?</string>
 
     //注册
     <string name="Register_Title">Registrati</string>
@@ -287,5 +288,13 @@
     <string name="Search_Hot_Title">I più cercati</string>
     <string name="Search_History_Title">Cronologia di ricerca</string>
     <string name="Search_Keyword">Risultati per \"%s\"</string>
+
+    //升级
+    <string name="Mine_Logout_Ok">conferma</string>
+    <string name="Mine_Logout_Cancel">annulla</string>
+
+    <string name="facebook_app_id">1884965248417106</string>
+    <string name="fb_login_protocol_scheme">fb1884965248417106</string>
+
 
 </resources>

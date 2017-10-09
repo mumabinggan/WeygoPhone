@@ -94,6 +94,11 @@ public class JHAndroidUniversalImageLoader implements JHBaseImageLoaderInterface
     void initImageLoaderConfig(Context ctx) {
         if (config == null) {
             File cacheDir = StorageUtils.getOwnCacheDirectory(ctx, "Imageloader/Cache");
+//            config = new ImageLoaderConfiguration.Builder(ctx)
+//                    .threadPriority(Thread.NORM_PRIORITY - 2)//设置当前线程的优先级
+//                    .denyCacheImageMultipleSizesInMemory()
+//                    .diskCacheSize(100 * 1024 * 1024)// sd卡(本地)缓存的最大值
+//                    .tasksProcessingOrder(QueueProcessingType.LIFO).diskCache(new UnlimitedDiskCache(cacheDir));
             config = new ImageLoaderConfiguration.Builder(ctx);
             config.threadPriority(Thread.NORM_PRIORITY - 2);
             config.denyCacheImageMultipleSizesInMemory();
@@ -102,8 +107,6 @@ public class JHAndroidUniversalImageLoader implements JHBaseImageLoaderInterface
             config.diskCache(new UnlimitedDiskCache(cacheDir)); //自定义缓存路径
             config.tasksProcessingOrder(QueueProcessingType.LIFO);
             config.writeDebugLogs(); // Remove for release app
-
-            // Initialize ImageLoader with configuration.
             ImageLoader.getInstance().init(config.build());
         }
     }

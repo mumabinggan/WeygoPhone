@@ -1,8 +1,10 @@
 package com.weygo.weygophone.pages.tabs.mine.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaDrmException;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGFragment;
 import com.weygo.weygophone.base.WGResponse;
+import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.common.WGApplicationPageUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
@@ -270,21 +274,41 @@ public class WGTabMineFragment extends WGFragment {
     }
 
     void handleExit() {
-//        WGApplicationRequestUtils.getInstance().loadLogoutRequest(new WGApplicationRequestUtils.WGOnCompletionInteface() {
-//            @Override
-//            public void onSuccessCompletion(WGResponse response) {
-//                handleLogoutCompletion();
-//            }
-//
-//            @Override
-//            public void onFailCompletion(WGResponse response) {
-//
-//            }
-//        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+        builder.setMessage(R.string.Mine_Logout_Tips);
+        builder.setPositiveButton(R.string.Mine_Logout_Ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                handleConfirmExit();
+            }
+        });
+        builder.setNegativeButton(R.string.Mine_Logout_Cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    void handleLogoutCompletion() {
+    void  handleConfirmExit() {
+        WGApplicationRequestUtils.getInstance().loadLogoutRequest(new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+                handleLogoutCompletion();
+            }
 
+            @Override
+            public void onFailCompletion(WGResponse response) {
+
+            }
+        });
+    }
+
+
+    void handleLogoutCompletion() {
+        WGApplicationPageUtils.getInstance().switchTab(0);
     }
 
     void handleOrder(boolean deliver) {

@@ -35,17 +35,16 @@ public class WGBaseServiceActivity extends WGBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baseservice_activity);
+        mLayout = (WelcomeCoordinatorLayout) findViewById(R.id.coordinator);
         boolean isFirst = JHLocalSettingUtils.getBooleanLocalSetting(this, WGConstants.WGLocalSettingWelcome);
         if (!isFirst) {
             JHLocalSettingUtils.setBooleanLocalSetting(this, WGConstants.WGLocalSettingWelcome, true);
-            mLayout = (WelcomeCoordinatorLayout) findViewById(R.id.coordinator);
             if (WGChangeAppLanguageLogic.isItalin()) {
                 mLayout.addPage(R.layout.welcome_00, R.layout.welcome_01, R.layout.welcome_02);
             }
             else {
                 mLayout.addPage(R.layout.welcome_10, R.layout.welcome_11, R.layout.welcome_12);
             }
-            mLayout.addPage(R.layout.welcome_00, R.layout.welcome_01, R.layout.welcome_02);
             mLayout.setOnPageScrollListener(new WelcomeCoordinatorLayout.OnPageScrollListener() {
                 @Override
                 public void onScrollPage(View v, float progress, float maximum) {
@@ -57,6 +56,9 @@ public class WGBaseServiceActivity extends WGBaseActivity {
                     handlePageSelected(pageSelected);
                 }
             });
+        }
+        else {
+            mLayout.setVisibility(View.GONE);
         }
         this.loadBaseService();
         Intent intent = new Intent(WGBaseServiceActivity.this, WGMainActivity.class);

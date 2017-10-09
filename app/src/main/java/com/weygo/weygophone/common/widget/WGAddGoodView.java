@@ -44,7 +44,7 @@ public class WGAddGoodView extends JHLinearLayout {
         mFromType = fromType;
     }
 
-    interface OnItemListener {
+    public interface OnItemListener {
         void onAdd(int count);
         void onSub(int count);
     }

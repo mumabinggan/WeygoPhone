@@ -14,8 +14,12 @@ import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGInterface;
+import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGAddGoodView;
 import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCart;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 /**
@@ -25,10 +29,16 @@ import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 public class WGShopCartItemView extends JHRelativeLayout {
 
     public interface GoodListItemOnListener extends WGInterface {
-        void onTouchShopCart();
+        void onTouchShopCart(WGHomeFloorContentGoodItem item);
+        void onAddGood(WGHomeFloorContentGoodItem item);
+        void onSubGood(WGHomeFloorContentGoodItem item);
+        void onLongTouch(WGHomeFloorContentGoodItem item);
     }
 
-    WGGoodListView.GoodListItemOnListener mListener;
+    GoodListItemOnListener mListener;
+    public void setLister(GoodListItemOnListener lister) {
+        mListener = lister;
+    }
 
     ImageView mImageView;
 
@@ -41,6 +51,10 @@ public class WGShopCartItemView extends JHRelativeLayout {
     TextView mReducePriceTextView;
 
     TextView mPriceTextView;
+
+    WGAddGoodView mAddGoodView;
+
+    WGHomeFloorContentGoodItem mData;
 
     public WGShopCartItemView(Context context) {
         super(context);
@@ -64,16 +78,31 @@ public class WGShopCartItemView extends JHRelativeLayout {
         mReducePriceTextView = (TextView) findViewById(R.id.reducePriceTextView);
         mReducePriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
         mPriceTextView = (TextView) findViewById(R.id.priceTextView);
-    }
-
-    public void setInnerTouchListener(WGGoodListView.GoodListItemOnListener listener) {
-        mListener = listener;
+        mAddGoodView = (WGAddGoodView) findViewById(R.id.addView);
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onTouchShopCart(mData);
+                }
+            }
+        });
+        this.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mListener != null) {
+                    mListener.onLongTouch(mData);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
     public void showWithData(Object object) {
         if (object instanceof WGHomeFloorContentGoodItem) {
-            WGHomeFloorContentGoodItem item = (WGHomeFloorContentGoodItem) object;
+            final WGShopCartGoodItem item = (WGShopCartGoodItem) object;
+            mData = item;
             JHImageUtils.getInstance().loadImage(item.pictureURL,
                     R.drawable.common_image_loading_small, mImageView);
             mNameTextView.setText(item.name);
@@ -83,6 +112,23 @@ public class WGShopCartItemView extends JHRelativeLayout {
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.reducePrice) ? INVISIBLE : VISIBLE);
             mPriceTextView.setText(" " + item.price + " ");
             mPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
+            mAddGoodView.setCount(item.goodCount);
+            mAddGoodView.setFromType(WGConstants.WGGoodAddViewFromCart);
+            mAddGoodView.setListener(new WGAddGoodView.OnItemListener() {
+                @Override
+                public void onAdd(int count) {
+                    if (mListener != null) {
+                        mListener.onAddGood(mData);
+                    }
+                }
+
+                @Override
+                public void onSub(int count) {
+                    if (mListener != null) {
+                        mListener.onSubGood(item);
+                    }
+                }
+            });
         }
     }
 }

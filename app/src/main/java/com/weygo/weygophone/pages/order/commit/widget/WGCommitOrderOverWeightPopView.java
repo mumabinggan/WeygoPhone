@@ -38,6 +38,7 @@ public class WGCommitOrderOverWeightPopView extends JHPopView {
     TextView mDeleteAllTV;
 
     TextView mConfirmTV;
+    TextView mUnableConfirmTV;
 
     public interface OnItemListener {
         void onDeleteAll();
@@ -97,6 +98,9 @@ public class WGCommitOrderOverWeightPopView extends JHPopView {
                 }
             }
         });
+        mUnableConfirmTV = (TextView) findViewById(R.id.unableConfirmTV);
+        mConfirmTV.setVisibility(INVISIBLE);
+        mUnableConfirmTV.setVisibility(INVISIBLE);
     }
 
     public void setGoods(List<WGOverHeightDetail> overWeightList) {
@@ -119,22 +123,60 @@ public class WGCommitOrderOverWeightPopView extends JHPopView {
         }
         mLayout.removeAllViews();
         for (WGOverHeightGoodItem item : overWeightItem.goods) {
-            WGCommitOrderOverWeightItemView view = (WGCommitOrderOverWeightItemView) LayoutInflater.from(mContext)
+            final WGCommitOrderOverWeightItemView view = (WGCommitOrderOverWeightItemView) LayoutInflater.from(mContext)
                     .inflate(R.layout.commitorder_overheight_good_item, null);
             view.setListener(new WGCommitOrderOverWeightItemView.OnItemListener() {
                 @Override
                 public void onAdd(WGOverHeightGoodItem item) {
-                    showWithData(mData);
+                    refreshItem(view, item);
                 }
 
                 @Override
                 public void onSub(WGOverHeightGoodItem item) {
-                    showWithData(mData);
+                    refreshItem(view, item);
                 }
             });
             view.setGravity(Gravity.CENTER);
             view.showWithData(item);
             mLayout.addView(view);
+        }
+        setConfirmVisible();
+    }
+
+    void refreshItem(WGCommitOrderOverWeightItemView view, WGOverHeightGoodItem item) {
+        for (WGOverHeightDetail detail : mData) {
+            for (WGOverHeightGoodItem goodItem : detail.goods) {
+                if (item.id == goodItem.id) {
+                    goodItem.goodCount = item.goodCount;
+                    break;
+                }
+            }
+        }
+        WGOverHeightDetail overWeightItem = mData.get(0);
+        mCurrentRiseTV.setText(" " + JHResourceUtils.getInstance()
+                .getString(R.string.CommitOrder_OverHeight_CurrentRise)+
+                overWeightItem.currentRise()+
+                JHResourceUtils.getInstance().getString(R.string.CommitOrder_OverHeight_Rise) + " ");
+        if (Float.parseFloat(overWeightItem.maxRise) > overWeightItem.currentRise()) {
+            mCurrentRiseTV.setBackgroundResource(R.drawable.commitorder_currentrise_less_max_bg);
+        }
+        else {
+            mCurrentRiseTV.setBackgroundResource(R.drawable.commitorder_currentrise_more_max_bg);
+        }
+        setConfirmVisible();
+        view.showWithData(item);
+    }
+
+    void setConfirmVisible() {
+        WGOverHeightDetail overWeightItem = mData.get(0);
+        boolean displayConfirm = (Float.parseFloat(overWeightItem.maxRise) >= overWeightItem.currentRise());
+        if (displayConfirm) {
+            mUnableConfirmTV.setVisibility(INVISIBLE);
+            mConfirmTV.setVisibility(VISIBLE);
+        }
+        else {
+            mUnableConfirmTV.setVisibility(VISIBLE);
+            mConfirmTV.setVisibility(INVISIBLE);
         }
     }
 }

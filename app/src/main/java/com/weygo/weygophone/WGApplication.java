@@ -21,6 +21,8 @@ import com.weygo.weygophone.pages.search.widget.WGShopCartView;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
 import com.zopim.android.sdk.api.ZopimChat;
 
+import com.facebook.*;
+
 import java.util.HashMap;
 import java.util.Map;
 

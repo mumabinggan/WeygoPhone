@@ -94,7 +94,6 @@ public class WGGoodDetailActivity extends WGBaseActivity {
         super.initSubView();
         mLayout = (LinearLayout) findViewById(R.id.mLayout);
         mNavigationBar = (WGShopCartNavigationView) findViewById(R.id.titlebar);
-        mNavigationBar.setTitle(R.string.OrderDetail_Title);
         mNavigationBar.setListener(new WGShopCartNavigationView.OnItemListener() {
             @Override
             public void onLeft() {
@@ -219,6 +218,9 @@ public class WGGoodDetailActivity extends WGBaseActivity {
             }
             mAdapter.setData(mData);
             mOperateView.showWithData(mData);
+            if (mData != null) {
+                mNavigationBar.setTitle(mData.name);
+            }
         }
         else {
             showWarning(response.message);

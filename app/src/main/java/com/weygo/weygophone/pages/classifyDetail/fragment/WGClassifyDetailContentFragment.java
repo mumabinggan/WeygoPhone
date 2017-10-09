@@ -154,7 +154,11 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                 super.onScrolled(recyclerView, dx, dy);
                 totalDy += dy;
                 Log.e("---------", "dx:" + dx + "=totalDy:" + totalDy + "vs" + JHAdaptScreenUtils.pixelWidth(getActivity(), 150));
-                if (totalDy >= JHAdaptScreenUtils.pixelWidth(getActivity(), 150)) {
+                int hotHeight = 0;
+                if (mData != null && mData.hasRecommendedArray()) {
+                    hotHeight = 106 * mData.recommendedArray.size();
+                }
+                if (totalDy >= JHAdaptScreenUtils.pixelWidth(getActivity(), 150 + hotHeight)) {
                     mFilterView.setVisibility(View.VISIBLE);
                 }
                 else {

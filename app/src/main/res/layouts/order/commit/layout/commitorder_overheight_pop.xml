@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/overWeightTitleTV"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x40"
+            android:layout_height="@dimen/x45"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/x12"
             android:textColor="#000000"
@@ -79,6 +79,21 @@
 
         <TextView
             android:id="@+id/confirmTV"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x24"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/deleteAllTV"
+            android:layout_marginTop="@dimen/x12"
+            android:textAlignment="center"
+            android:textSize="@dimen/ft11"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:background="@drawable/shopcart_gift_no_bg"
+            android:text="@string/CommitOrder_OverHeight_Confirm"/>
+
+        <TextView
+            android:id="@+id/unableConfirmTV"
             android:layout_width="@dimen/x160"
             android:layout_height="@dimen/x24"
             android:layout_centerHorizontal="true"

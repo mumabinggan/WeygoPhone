@@ -14,6 +14,7 @@ import com.weygo.common.base.JHInterface;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
+import com.weygo.weygophone.pages.search.widget.WGShopCartView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,8 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
     TextView mTitleLabel;
 
     ImageView mLeftImageView;
+
+    WGShopCartView mShopCartView;
 
     public void setLeftImage(int resId) {
         if (mLeftImageView == null) {
@@ -63,20 +66,22 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         mTitleLabel = (TextView) findViewById(R.id.navigationBar_title);
 
         List<Integer> itemIdArray = Arrays.asList(R.id.navigationBar_simpleIntro,
-                R.id.navigationBar_search, R.id.navigationBar_cart,
+                R.id.navigationBar_search, R.id.shopCartView,
                 R.id.navigationBar_title);
         for (Integer id : itemIdArray) {
             View item = findViewById(id);
             item.setOnClickListener(this);
         }
+        mShopCartView = (WGShopCartView) findViewById(R.id.shopCartView);
+        mShopCartView.handelShopCart();
     }
 
     public View getShopCartView() {
-        return findViewById(R.id.navigationBar_cart);
+        return findViewById(R.id.shopCartView);
     }
 
     public int[] getShopCartViewPoint() {
-        View view = findViewById(R.id.navigationBar_cart);
+        View view = findViewById(R.id.shopCartView);
         int[] endPoint = new int[2];
         view.getLocationInWindow(endPoint);
         endPoint[0] = endPoint[0] - view.getWidth()/2;
@@ -93,7 +98,7 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
             if (view.getId() == R.id.navigationBar_search) {
                 mListener.onClickSearch(view);
             }
-            if (view.getId() == R.id.navigationBar_cart) {
+            if (view.getId() == R.id.shopCartView) {
                 mListener.onClickCart(view);
             }
             if (view.getId() == R.id.navigationBar_title) {

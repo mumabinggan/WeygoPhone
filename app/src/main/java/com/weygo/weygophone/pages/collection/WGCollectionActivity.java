@@ -47,7 +47,7 @@ public class WGCollectionActivity extends WGGoodListActivity {
 
     }
 
-    void loadGoodList(final boolean refresh, final boolean pulling) {
+    public void loadGoodList(final boolean refresh, final boolean pulling) {
         final WGCollectionListRequest request = new WGCollectionListRequest();
         request.pageId = refresh ? 0 : mList.size();
         if (pulling) {

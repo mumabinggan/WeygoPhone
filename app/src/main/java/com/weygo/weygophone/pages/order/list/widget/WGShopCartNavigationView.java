@@ -79,6 +79,7 @@ public class WGShopCartNavigationView extends JHRelativeLayout {
                 }
             }
         });
+        mShopCartView.handelShopCart();
     }
 
     @Override

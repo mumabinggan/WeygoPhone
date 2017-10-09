@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.search.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseViewHolder;
 import com.weygo.weygophone.common.widget.WGCellStyle6View;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
@@ -27,6 +29,7 @@ import com.weygo.weygophone.pages.search.widget.WGSearchResultHotView;
 import com.weygo.weygophone.pages.tabs.home.adapter.WGHomeFragmentAdapter;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsColumnView;
+import com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorGoodsGridCellView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +50,7 @@ public class WGSearchResultAdapter extends JHRecyclerViewAdapter {
     public interface OnItemListener extends OnBaseItemClickListener {
         void onGoodItem(WGHomeFloorContentGoodItem item);
         void onHotItem(WGSearchKeywordItem item);
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint);
     }
 
     public void setListener(OnItemListener listener) {
@@ -145,21 +149,45 @@ public class WGSearchResultAdapter extends JHRecyclerViewAdapter {
         }
         else if (viewType == Item_Type.ITEM_TYPE_GoodListItem.ordinal()) {
             resourceId = R.layout.wggood_list_item;
-            view = LayoutInflater.from(
+            WGGoodListView temp = (WGGoodListView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
-            view.setOnClickListener(new View.OnClickListener() {
+            temp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleGoodItem(view);
+
                 }
             });
+            temp.setListener(new WGGoodListView.GoodListItemOnListener() {
+                @Override
+                public void onTouchShopCart(WGHomeFloorContentGoodItem item, View view, Point point) {
+                    handlePurchase(item, view, point);
+                }
+
+                @Override
+                public void onTouchItem(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
+                }
+            });
+            view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_GoodGrid.ordinal()) {
             resourceId = R.layout.wghome_content_floor_good_grid_cell;
-            view = LayoutInflater.from(
+            WGHomeContentFloorGoodsGridCellView temp = (WGHomeContentFloorGoodsGridCellView)LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            temp.setListener(new WGHomeContentFloorGoodsGridCellView.OnPurchaseListener() {
+                @Override
+                public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point point) {
+                    handlePurchase(item, view, point);
+                }
+
+                @Override
+                public void onGoodDetail(WGHomeFloorContentGoodItem item) {
+                    handleGoodItem(item);
+                }
+            });
+            view = temp;
         }
         WGBaseViewHolder holder = new WGBaseViewHolder(view);
         return holder;
@@ -189,11 +217,15 @@ public class WGSearchResultAdapter extends JHRecyclerViewAdapter {
         return WGHomeFragmentAdapter.Item_Type.ITEM_TYPE_None.ordinal();
     }
 
-    void handleGoodItem(View view) {
-        Log.e("-----", "-----handleGoodItem----");
+    void handleGoodItem(WGHomeFloorContentGoodItem item) {
         if (mOnItemClickListener instanceof OnItemListener) {
-            WGHomeFloorContentGoodItem data = (WGHomeFloorContentGoodItem)mPostionValueMap.get(view.getTag()).mObject;
-            ((OnItemListener) mOnItemClickListener).onGoodItem(data);
+            ((OnItemListener) mOnItemClickListener).onGoodItem(item);
+        }
+    }
+
+    void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener) mOnItemClickListener).onPurchase(item, view, fromPoint);
         }
     }
 

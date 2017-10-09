@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.tabs.home.adapter;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -190,11 +191,10 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                     }
                 }
                 else if (item.type == WGConstants.WGHomeFloorItemTypeGoodGrid) {
-                    List list = new ArrayList();
                     HomeCellData value = null;
                     int count = item.content.size();
                     for (int num = 0; num < Math.ceil(count/2.0); ++num) {
-                        list.clear();
+                        List list = new ArrayList();
                         WGHomeFloorBaseContentItem goodItem = null;
                         WGHomeFloorContentItem contentItem = null;
                         if (count > 2 * num) {
@@ -202,12 +202,14 @@ public class WGHomeFragmentAdapter extends JHRecyclerViewAdapter {
                             goodItem = contentItem
                                     .contentItemWithType(item.type);
                             list.add(goodItem);
+                            Log.e("==test===", goodItem.pictureURL);
                         }
                         if (count > 2 * num + 1) {
                             contentItem = item.content.get(2 * num + 1);
                             goodItem = contentItem
                                     .contentItemWithType(item.type);
                             list.add(goodItem);
+                            Log.e("==test===", goodItem.pictureURL);
                         }
                         value = new HomeCellData(Item_Type.ITEM_TYPE_HomeFloorGoodGrid, list);
                         mPostionValueMap.put(key, value);

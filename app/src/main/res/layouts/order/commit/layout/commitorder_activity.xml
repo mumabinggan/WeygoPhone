@@ -24,8 +24,6 @@
 
         <include
             android:id="@+id/footerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x91"
             layout="@layout/commitorder_footer_view" />
 
     </LinearLayout>

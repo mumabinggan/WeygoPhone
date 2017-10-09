@@ -38,6 +38,7 @@ public class WGSearchNavigationView extends JHRelativeLayout {
         void onVista();
         void onLeft();
         void onSearch(String searchName);
+        void onShopCart();
     }
 
     OnItemListener mListener;
@@ -114,6 +115,24 @@ public class WGSearchNavigationView extends JHRelativeLayout {
             }
         });
         mShopCartView = (WGShopCartView) findViewById(R.id.shopCartView);
+        mShopCartView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onShopCart();
+                }
+            }
+        });
+        mShopCartView.handelShopCart();
+    }
+
+    public int[] getShopCartViewPoint() {
+        View view = findViewById(R.id.shopCartView);
+        int[] endPoint = new int[2];
+        view.getLocationInWindow(endPoint);
+        endPoint[0] = endPoint[0] - view.getWidth()/2;
+        endPoint[1] = endPoint[1] - view.getHeight();
+        return endPoint;
     }
 
     @Override

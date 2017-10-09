@@ -1,7 +1,5 @@
 package com.weygo.weygophone.pages.footprint;
 
-import android.view.View;
-
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -9,7 +7,6 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.collection.WGGoodListActivity;
 import com.weygo.weygophone.pages.footprint.model.request.WGFootPrintRequest;
 import com.weygo.weygophone.pages.footprint.model.response.WGFootPrintResponse;
-import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.ArrayList;
 
@@ -29,7 +26,7 @@ public class WGFootprintActivity extends WGGoodListActivity {
         mNavigationBar.setTitle(R.string.Printfoot_Title);
     }
 
-    void loadGoodList(final boolean refresh, final boolean pulling) {
+    public void loadGoodList(final boolean refresh, final boolean pulling) {
         final WGFootPrintRequest request = new WGFootPrintRequest();
         request.pageId = refresh ? 0 : mList.size();
         if (pulling) {
