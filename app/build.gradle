@@ -62,6 +62,7 @@ android {
                     'src/main/res/layouts/goodDetail',
                     'src/main/res/layouts/search/history',
                     'src/main/res/layouts/search/result',
+                    'src/main/res/layouts/bind',
                     'src/main/res/layouts',
                     'src/main/res'
                     ]

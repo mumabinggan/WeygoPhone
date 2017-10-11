@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.facebook.appevents.AppEventsLogger;
 import com.weygo.common.tools.JHDeviceUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
@@ -48,6 +49,8 @@ public class WGApplication extends Application {
 
     public void initConfig() {
         ZopimChat.init("3posW2IznifTuXsiwtKNJ2u6Su8uXDiG");
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 
     public static Context getContext() {

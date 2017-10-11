@@ -93,5 +93,9 @@ public class WGConstants {
     public static final int WGOrderListTypeDelivering = 2;
 
     public static final String WGBundlerId  = "com.weygo.test";
+
+    //绑定类型
+    public static final int WGBindTypeFaceBook = 1;
+    public static final int WGBindTypeWechat = 2;
 }
 

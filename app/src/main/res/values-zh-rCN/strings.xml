@@ -293,6 +293,9 @@
     <string name="Mine_Logout_Ok">确认</string>
     <string name="Mine_Logout_Cancel">取消</string>
 
+    <string name="ThirdPartyBing_HadRegister">注册</string>
+    <string name="ThirdPartyBing_UnRegister">未注册</string>
+
     <string name="facebook_app_id">1884965248417106</string>
     <string name="fb_login_protocol_scheme">fb1884965248417106</string>
 

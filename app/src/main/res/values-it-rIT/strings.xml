@@ -293,8 +293,10 @@
     <string name="Mine_Logout_Ok">conferma</string>
     <string name="Mine_Logout_Cancel">annulla</string>
 
+    <string name="ThirdPartyBing_HadRegister">Registrato</string>
+    <string name="ThirdPartyBing_UnRegister">Non registrato</string>
+
     <string name="facebook_app_id">1884965248417106</string>
     <string name="fb_login_protocol_scheme">fb1884965248417106</string>
-
 
 </resources>

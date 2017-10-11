@@ -47,8 +47,6 @@ public class WGSettingActivity extends WGTitleActivity {
 
     TextView mLogoutBtn;
 
-    int m = 1;
-
     @Override
     public void initContentView() {
         setContentView(R.layout.wgsetting_activity);

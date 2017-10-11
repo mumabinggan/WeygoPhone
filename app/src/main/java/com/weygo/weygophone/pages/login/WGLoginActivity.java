@@ -8,6 +8,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookAuthorizationException;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -15,9 +22,14 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.pages.bind.WGBindActivity;
+import com.weygo.weygophone.pages.bind.model.WGBindData;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.login.model.request.WGLoginRequest;
 import com.weygo.weygophone.pages.login.model.response.WGLoginResponse;
 import com.weygo.weygophone.pages.register.WGRegisterActivity;
+
+import java.util.Arrays;
 
 /**
  * Created by muma on 2017/5/17.
@@ -43,6 +55,8 @@ public class WGLoginActivity extends WGBaseActivity {
 
     View mFacebookView;
 
+    CallbackManager mCallbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +70,27 @@ public class WGLoginActivity extends WGBaseActivity {
     @Override
     public void initData() {
         super.initData();
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(mCallbackManager,new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                String userId = accessToken.getUserId();
+                handleBind(userId);
+            }
+            @Override
+            public void onCancel() {
+                // App code
+            }
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+                if (exception instanceof FacebookAuthorizationException) {
+                    LoginManager.getInstance().logOut();
+                    // TODO：
+                }
+            }
+        });
     }
 
     @Override
@@ -118,8 +153,30 @@ public class WGLoginActivity extends WGBaseActivity {
 
     }
 
-    void handleFacebook() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mCallbackManager != null) {
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
+    void handleFacebook() {
+        final String PERMISSION = "public_profile";
+        LoginManager loginManager = LoginManager.getInstance();
+        loginManager.setDefaultAudience(loginManager.getDefaultAudience());
+        loginManager.setLoginBehavior(loginManager.getLoginBehavior());
+        loginManager.logInWithReadPermissions(this, Arrays.asList(PERMISSION));
+    }
+
+    void handleBind(String id) {
+        Intent intent = new Intent(this, WGBindActivity.class);
+        Bundle bundle = new Bundle();
+        WGBindData item = new WGBindData();
+        item.type = WGConstants.WGBindTypeFaceBook;
+        item.uniqueId = id;
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void loadLogin() {

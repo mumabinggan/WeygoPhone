@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/x16"
+    android:paddingRight="@dimen/x16">
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:hint="@string/Login_Email"
+        android:textColorHint="@color/WGAppBaseTitleAAAColor"
+        android:background="@null"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigaiotnBar_separate_color"></View>
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x41"
+        android:hint="@string/Login_Password"
+        android:textColorHint="@color/WGAppBaseTitleAAAColor"
+        android:background="@null"
+        android:textSize="@dimen/ft12"
+        android:inputType="textPassword"
+        android:textColor="@color/WGAppBaseTitleAColor"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigaiotnBar_separate_color"></View>
+
+    <!--<TextView-->
+        <!--android:id="@+id/forgetPWTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/x32"-->
+        <!--android:textColor="@color/WGAppBaseTitleAAAColor"-->
+        <!--android:text="@string/Login_ForgetPW"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/ft10"/>-->
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"></View>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x34"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/ft12"
+        android:background="@drawable/register_btn_bg"
+        android:text="@string/CommitOrder_OverHeight_Confirm"/>
+
+</LinearLayout>

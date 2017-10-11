@@ -21,7 +21,7 @@ public class WGRequest extends JHRequest {
 
 //    public String app = WGConstants.WGBundlerId;
 
-    public String os = "iOS";
+    public String os = "Android";
 
     // eg. www.example.com, default ""
     //"m.preview.weygo.com";

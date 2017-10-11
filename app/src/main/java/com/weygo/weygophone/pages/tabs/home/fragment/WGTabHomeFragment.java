@@ -399,7 +399,7 @@ public class WGTabHomeFragment extends WGFragment {
         }
     }
 
-    private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
+    public class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
 
         private List<WGTitleItem> mTitleList;
 
