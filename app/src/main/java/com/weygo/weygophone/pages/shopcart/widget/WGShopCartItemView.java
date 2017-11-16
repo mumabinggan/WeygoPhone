@@ -48,9 +48,9 @@ public class WGShopCartItemView extends JHRelativeLayout {
 
     TextView mCurrentPriceTextView;
 
-    TextView mReducePriceTextView;
+    TextView mOriginPriceTextView;
 
-    TextView mPriceTextView;
+    TextView mReducePriceTextView;
 
     WGAddGoodView mAddGoodView;
 
@@ -75,9 +75,9 @@ public class WGShopCartItemView extends JHRelativeLayout {
         mNameTextView = (TextView) findViewById(R.id.nameTextView);
         mBriefTextView = (TextView) findViewById(R.id.briefTextView);
         mCurrentPriceTextView = (TextView) findViewById(R.id.currentPriceTextView);
+        mOriginPriceTextView = (TextView) findViewById(R.id.originPriceTextView);
+        mOriginPriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
         mReducePriceTextView = (TextView) findViewById(R.id.reducePriceTextView);
-        mReducePriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
-        mPriceTextView = (TextView) findViewById(R.id.priceTextView);
         mAddGoodView = (WGAddGoodView) findViewById(R.id.addView);
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -108,10 +108,10 @@ public class WGShopCartItemView extends JHRelativeLayout {
             mNameTextView.setText(item.name);
             mBriefTextView.setText(item.briefDescription);
             mCurrentPriceTextView.setText(item.currentPrice);
-            mReducePriceTextView.setText(item.reducePrice);
+            mOriginPriceTextView.setText(item.price);
+            mOriginPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
+            mReducePriceTextView.setText(" " + item.reducePrice + " ");
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.reducePrice) ? INVISIBLE : VISIBLE);
-            mPriceTextView.setText(" " + item.price + " ");
-            mPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(item.price) ? INVISIBLE : VISIBLE);
             mAddGoodView.setCount(item.goodCount);
             mAddGoodView.setFromType(WGConstants.WGGoodAddViewFromCart);
             mAddGoodView.setListener(new WGAddGoodView.OnItemListener() {

@@ -43,7 +43,10 @@ public class WGCouponListActivity extends WGTitleActivity {
     WGCouponListInputView mHeaderView;
 
     WGCoupon mCoupon;
-    boolean mIsSelected;
+    boolean mIsSelected;    //选择优惠卷
+
+    View mEmptyView;
+    View mContentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,10 @@ public class WGCouponListActivity extends WGTitleActivity {
         else {
             mHeaderView.setVisibility(View.GONE);
         }
+        mEmptyView = findViewById(R.id.emptyView);
+        mContentView = findViewById(R.id.contentView);
+        mContentView.setVisibility(View.INVISIBLE);
+        mContentView.setVisibility(View.INVISIBLE);
     }
 
     void handleClick(int position) {
@@ -125,6 +132,16 @@ public class WGCouponListActivity extends WGTitleActivity {
 
     void refreshUI() {
         mAdapter.setData(mData);
+        if (!mIsSelected) {
+            if (mData == null || mData.size() == 0) {
+                mContentView.setVisibility(View.INVISIBLE);
+                mEmptyView.setVisibility(View.VISIBLE);
+            }
+            else {
+                mContentView.setVisibility(View.VISIBLE);
+                mEmptyView.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     void loadCouponListRequest() {

@@ -1,5 +1,6 @@
 package com.weygo.weygophone;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -294,25 +295,14 @@ public class WGMainActivity extends WGBaseActivity {
     }
 
     void handleConfirmUpdate(WGUpdateData data) {
-        if (!isHaveMarket(this)) {
-            Toast.makeText(this, "您手机中没有安装应用市场！", Toast.LENGTH_SHORT).show();
-            return;
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(data.linkUrl));
+            startActivity(i);
+        } catch (Exception e) {
+            Toast.makeText(this, "您的手机没有安装Android应用市场", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(data.linkUrl));
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
-
-    private static boolean isHaveMarket(Context context) {
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.MAIN");
-        intent.addCategory("android.intent.category.APP_MARKET");
-        PackageManager pm = context.getPackageManager();
-        List<ResolveInfo> infos = pm.queryIntentActivities(intent, 0);
-        return infos.size() > 0;
     }
 
     public void onOptionPicker(View view) {

@@ -299,4 +299,9 @@
     <string name="facebook_app_id">1884965248417106</string>
     <string name="fb_login_protocol_scheme">fb1884965248417106</string>
 
+
+    <string name="Collection_Empty_Title">Non hai nessun articolo preferito</string>
+    <string name="EmptyPage_NoOrderList">Non hai ordini nel lista</string>
+    <string name="EmptyPage_NoShopCart">Non hai articoli nel carrello</string>
+
 </resources>

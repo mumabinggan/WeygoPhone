@@ -369,7 +369,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
 
     void handleSuccessClassifyDetail(WGClassifyDetailResponse response, final boolean refresh, final boolean pulling) {
         Log.e("onSuccess", JSON.toJSONString(response));
-        mRefreshLayout.finishRefreshing();
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response.success()) {
             if (refresh) {
                 mData = response.data;
@@ -377,9 +377,11 @@ public class WGClassifyDetailContentFragment extends WGFragment {
             else {
                 mData.recommendedArray = response.data.recommendedArray;
                 List list = new ArrayList<>();
-                if (mData != null && mData.goodArray != null &&
-                        mData.goodArray.size() > 0) {
-                    list.addAll(mData.goodArray);
+                if (!refresh) {
+                    if (mData != null && mData.goodArray != null &&
+                            mData.goodArray.size() > 0) {
+                        list.addAll(mData.goodArray);
+                    }
                 }
                 if (response.data != null && response.data.goodArray != null &&
                         response.data.goodArray.size() > 0) {

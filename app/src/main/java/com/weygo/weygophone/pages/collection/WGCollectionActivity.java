@@ -67,7 +67,7 @@ public class WGCollectionActivity extends WGGoodListActivity {
     }
 
     void handleCollectionListResponse(WGCollectionListResponse response, boolean refresh, boolean pulling) {
-        mRefreshLayout.finishRefreshing();
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response == null) {
             showWarning(R.string.Request_Fail_Tip);
             return;
@@ -76,13 +76,24 @@ public class WGCollectionActivity extends WGGoodListActivity {
             if (mList == null) {
                 mList = new ArrayList();
             }
+            if (refresh) {
+                mList.clear();
+            }
             if (response.data != null) {
                 mList.addAll(response.data);
-                mAdapter.setData(mList);
             }
+            mAdapter.setData(mList);
         }
         else {
             showWarning(response.message);
+        }
+        if (mList == null || mList.size() == 0) {
+            mContentView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mContentView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.INVISIBLE);
         }
     }
 

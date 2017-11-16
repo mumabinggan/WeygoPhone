@@ -122,7 +122,7 @@ public class WGShopCartListAdater extends JHRecyclerViewAdapter {
             view = temp;
         }
         else if (viewType == Item_Type.ITEM_TYPE_ShopCartMinTips.ordinal()) {
-            int resourceId = R.layout.common_cell_type3;
+            int resourceId = R.layout.shopcart_minprice;
             view = LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);

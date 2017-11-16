@@ -68,9 +68,9 @@ public class WGPaySuccessActivity extends WGTitleActivity {
                 gotoHome();
             }
         });
-        if (mPaySuccessData != null) {
+        if (!JHStringUtils.isNullOrEmpty(mOrderId)) {
             mOrderTitleTV.setText(JHResourceUtils.getInstance().getString(R.string.PaySuccess_SubTitle2)
-                    + mPaySuccessData.orderId);
+                    + mOrderId);
         }
     }
 

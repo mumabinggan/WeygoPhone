@@ -7,19 +7,39 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-        android:id="@+id/refreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:divider="#ff000000"
-            android:dividerHeight="10dp"
+        <RelativeLayout
+            android:id="@+id/emptyView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+            <ImageView
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x200"
+                android:src="@drawable/empty_collection"/>
 
+        </RelativeLayout>
+
+
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ff000000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

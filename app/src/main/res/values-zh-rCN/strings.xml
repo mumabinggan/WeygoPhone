@@ -103,6 +103,7 @@
     <string name="Collection_Delete_Tip">删除收藏提示</string>
     <string name="Collection_Delete_OK">确定</string>
     <string name="Collection_Delete_Cancel">取消</string>
+    <string name="Collection_Empty_Title">您还未收藏任何商品哦</string>
 
     //足迹
     <string name="Printfoot_Title">我的足迹</string>
@@ -298,5 +299,8 @@
 
     <string name="facebook_app_id">1884965248417106</string>
     <string name="fb_login_protocol_scheme">fb1884965248417106</string>
+
+    <string name="EmptyPage_NoOrderList">您还未下过任何订单赶紧下单吧</string>
+    <string name="EmptyPage_NoShopCart">您的购物车里空空如也</string>
 
 </resources>

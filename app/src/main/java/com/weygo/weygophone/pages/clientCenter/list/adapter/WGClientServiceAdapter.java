@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHRecyclerViewAdapter;
+import com.weygo.common.tools.JHColorUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.clientCenter.list.model.WGClientServiceItem;
 import com.weygo.weygophone.pages.clientCenter.list.model.response.WGClientServiceResponse;
@@ -48,6 +50,7 @@ public class WGClientServiceAdapter extends JHRecyclerViewAdapter {
                 mContext).inflate(resourceId, parent,
                 false);
         WGCommonCellStyle2ViewHolder holder = new WGCommonCellStyle2ViewHolder(view);
+        holder.textView.setTextColor(JHResourceUtils.getInstance().getColor(R.color.WGAppBaseTitleAAAColor));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

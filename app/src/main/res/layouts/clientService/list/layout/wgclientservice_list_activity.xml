@@ -14,24 +14,43 @@
         android:layout_weight="1">
     </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/x60"
-        android:background="#ffffff"
-        android:gravity="center">
+        android:background="#ffffff">
 
         <Button
             android:id="@+id/chatBtn"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/x294"
             android:layout_height="@dimen/x34"
             android:textColor="#ffffff"
             android:textSize="@dimen/ft12"
-            android:layout_marginLeft="@dimen/x13"
-            android:layout_marginRight="@dimen/x13"
             android:background="@drawable/register_btn_bg"
-            android:text="@string/Live_Chat"/>
+            android:layout_centerInParent="true"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="match_parent"
+                android:src="@drawable/chat_live"/>
+
+            <View
+                android:layout_width="@dimen/x10"
+                android:layout_height="1px"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Live_Chat"
+                android:gravity="center"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

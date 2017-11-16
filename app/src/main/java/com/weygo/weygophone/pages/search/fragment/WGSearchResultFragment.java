@@ -204,7 +204,7 @@ public class WGSearchResultFragment extends WGFragment {
     }
 
     void handleSearchResponse(WGSearchResponse response, boolean refresh, boolean pulling, int pageSize) {
-        mRefreshLayout.finishRefreshing();
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response.success()) {
             if (mData == null) {
                 mData = response.data;

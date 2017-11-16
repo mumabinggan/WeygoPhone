@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.personInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGOnUserInfoCompletionInteface;
 import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
+import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
 import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
@@ -143,7 +145,8 @@ public class WGPersonInfoActivity extends WGTitleActivity {
     }
 
     void handleChangePW(WGUser user) {
-
+        Intent intent = new Intent(this, WGFindPasswordActivity.class);
+        startActivity(intent);
     }
 
     void loadUserInfo() {

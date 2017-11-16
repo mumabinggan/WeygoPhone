@@ -119,7 +119,7 @@ public class WGMyIntegralActivity extends WGTitleActivity {
     }
 
     void handleIntegrationDetailResponse(WGIntegrationDetailResponse response, boolean refresh, boolean pulling) {
-        mRefreshLayout.finishRefreshing();
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response == null) {
             showWarning(R.string.Request_Fail_Tip);
             return;
@@ -129,6 +129,9 @@ public class WGMyIntegralActivity extends WGTitleActivity {
                 mIntegrationDetail = response.data;
             }
             else {
+                if (refresh) {
+                    mIntegrationDetail.history.clear();
+                }
                 if (response.data.hasHistory()) {
                     mIntegrationDetail.history.addAll(response.data.history);
                     mAdapter.setData(mIntegrationDetail);

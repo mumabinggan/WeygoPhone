@@ -64,6 +64,9 @@ public class WGOrderListActivity extends WGBaseActivity {
 
     List mArray;
 
+    View mEmptyView;
+    View mContentView;
+
     int mType;
 
     @Override
@@ -148,6 +151,9 @@ public class WGOrderListActivity extends WGBaseActivity {
             }
         });
 
+        mEmptyView = findViewById(R.id.emptyView);
+        mContentView = findViewById(R.id.contentView);
+        mEmptyView.setVisibility(View.INVISIBLE);
     }
 
     void handleOrderDetail(WGOrderListItem item) {
@@ -222,7 +228,7 @@ public class WGOrderListActivity extends WGBaseActivity {
     }
 
     void handleOrderListResponse(WGOrderListResponse response, boolean refresh, boolean pulling) {
-        mRefreshLayout.finishRefreshing();
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response == null) {
             showWarning(R.string.Request_Fail_Tip);
             return;
@@ -234,11 +240,21 @@ public class WGOrderListActivity extends WGBaseActivity {
             if (refresh) {
                 mArray.clear();
             }
-            mArray.addAll(response.data);
+            if (response.data != null) {
+                mArray.addAll(response.data);
+            }
             mAdapter.setData(mArray);
         }
         else {
             showWarning(response.message);
+        }
+        if (mArray == null || mArray.size() == 0) {
+            mContentView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mContentView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.INVISIBLE);
         }
     }
 }

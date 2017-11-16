@@ -53,7 +53,10 @@ public class WGGoodListActivity extends WGBaseActivity {
 
     protected List mList;
 
-    ViewGroup mLayout;
+    protected ViewGroup mLayout;
+
+    protected View mContentView;
+    protected View mEmptyView;
 
     public WGShopCartNavigationView mNavigationBar;
 
@@ -120,6 +123,9 @@ public class WGGoodListActivity extends WGBaseActivity {
         });
 
         mLayout = (ViewGroup) findViewById(R.id.mLayout);
+        mContentView = findViewById(R.id.refreshLayout);
+        mEmptyView = findViewById(R.id.emptyView);
+        mEmptyView.setVisibility(View.INVISIBLE);
     }
 
     void handleTouchGoodItem(View view, WGHomeFloorContentGoodItem item) {

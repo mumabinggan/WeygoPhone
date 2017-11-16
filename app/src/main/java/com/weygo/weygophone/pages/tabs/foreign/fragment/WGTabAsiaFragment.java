@@ -141,7 +141,6 @@ public class WGTabAsiaFragment extends WGFragment {
                 JHWarningUtils.showToast(getContext(), R.string.Request_Fail_Tip);
             }
         });
-
     }
 
     void handleTabContentDataSuccess(WGHomeTabContentResponse response) {

@@ -68,7 +68,7 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/reducePriceTextView"
+            android:id="@+id/originPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/currentPriceTextView"
@@ -80,10 +80,10 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/priceTextView"
+            android:id="@+id/reduceTextView"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/x14"
-            android:layout_toRightOf="@+id/reducePriceTextView"
+            android:layout_toRightOf="@+id/originPriceTextView"
             android:layout_marginLeft="@dimen/x7"
             android:textColor="@color/WGAppBaseTitleAAAColor"
             android:textSize="@dimen/ft10"

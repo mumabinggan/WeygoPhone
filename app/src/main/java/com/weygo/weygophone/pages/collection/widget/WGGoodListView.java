@@ -52,9 +52,9 @@ public class WGGoodListView extends JHRelativeLayout {
 
     TextView mCurrentPriceTextView;
 
-    TextView mReducePriceTextView;
+    TextView mOriginPriceTextView;
 
-    TextView mPriceTextView;
+    TextView mReducePriceTextView;
 
     ImageView mAddCartImageView;
 
@@ -87,9 +87,9 @@ public class WGGoodListView extends JHRelativeLayout {
         mBriefTextView = (TextView) findViewById(R.id.briefTextView);
         mChineseTextView = (TextView) findViewById(R.id.chineseTextView);
         mCurrentPriceTextView = (TextView) findViewById(R.id.currentPriceTextView);
-        mReducePriceTextView = (TextView) findViewById(R.id.reducePriceTextView);
-        mReducePriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
-        mPriceTextView = (TextView) findViewById(R.id.priceTextView);
+        mOriginPriceTextView = (TextView) findViewById(R.id.originPriceTextView);
+        mOriginPriceTextView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);
+        mReducePriceTextView = (TextView) findViewById(R.id.reduceTextView);
 
         mAddCartImageView = (ImageView) findViewById(R.id.shopCartBtn);
         mAddCartView = findViewById(R.id.shopCartView);
@@ -134,10 +134,10 @@ public class WGGoodListView extends JHRelativeLayout {
             mBriefTextView.setText(mData.briefDescription);
             mChineseTextView.setText(mData.chineseName);
             mCurrentPriceTextView.setText(mData.currentPrice);
-            mReducePriceTextView.setText(mData.reducePrice);
+            mOriginPriceTextView.setText(mData.price);
+            mOriginPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(mData.price) ? INVISIBLE : VISIBLE);
+            mReducePriceTextView.setText(" " + mData.reducePrice + " ");
             mReducePriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(mData.reducePrice) ? INVISIBLE : VISIBLE);
-            mPriceTextView.setText(" " + mData.price + " ");
-            mPriceTextView.setVisibility(JHStringUtils.isNullOrEmpty(mData.price) ? INVISIBLE : VISIBLE);
             if (mData.inStock == 1) {
                 mAddCartImageView.setVisibility(VISIBLE);
                 mUnPurchaseBtn.setVisibility(INVISIBLE);

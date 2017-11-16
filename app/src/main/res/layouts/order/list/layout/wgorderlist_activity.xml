@@ -9,24 +9,58 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-            android:id="@+id/refreshLayout"
+        <RelativeLayout
+            android:id="@+id/emptyView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:divider="#ff000000"
-                android:dividerHeight="10dp"
+            <ImageView
+                android:id="@+id/emptyIV"
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x100"
+                android:src="@drawable/empty_shopcart"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x90"/>
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="@dimen/x30"
+                android:text="@string/EmptyPage_NoOrderList"
+                android:textColor="@color/WGAppBaseTitleAAColor"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="@dimen/ft14"
+                android:layout_below="@+id/emptyIV"
+                android:layout_marginTop="@dimen/x30"/>
 
-        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:divider="#ff000000"
+                    android:dividerHeight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

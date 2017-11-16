@@ -11,10 +11,23 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_weight="1">
+        
+        <RelativeLayout
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            
+            <ImageView
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x200"
+                android:src="@drawable/shopcart_clean"/>
+            
+        </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/contentView"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

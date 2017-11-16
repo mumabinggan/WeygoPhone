@@ -1,5 +1,7 @@
 package com.weygo.weygophone.pages.footprint;
 
+import android.view.View;
+
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
@@ -40,26 +42,36 @@ public class WGFootprintActivity extends WGGoodListActivity {
 
             @Override
             public void onFailure(JHRequestError error) {
-                //mRefreshLayout.setRefreshing(false);
+                finishRefresh(mRefreshLayout, refresh, pulling);
                 showWarning(R.string.Request_Fail_Tip);
             }
         });
     }
 
     void handleFootPrintListResponse(WGFootPrintResponse response, boolean refresh, boolean pulling, int pageSize) {
-        //stopRefreshing(this, mRecyclerView, mRefreshLayout, refresh, pulling, pageSize);
+        finishRefresh(mRefreshLayout, refresh, pulling);
         if (response.success()) {
             if (mList == null) {
                 mList = new ArrayList();
             }
+            if (refresh) {
+                mList.clear();
+            }
             if (response.data != null) {
                 mList.addAll(response.data);
-                mAdapter.setData(mList);
             }
-
+            mAdapter.setData(mList);
         }
         else {
             showWarning(response.message);
+        }
+        if (mList == null || mList.size() == 0) {
+            mContentView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mContentView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.INVISIBLE);
         }
     }
 }

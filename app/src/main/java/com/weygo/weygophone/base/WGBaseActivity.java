@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHActivity;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.logic.WGChangeAppLanguageLogic;
@@ -84,6 +85,15 @@ public class WGBaseActivity extends JHActivity {
     @Override
     public boolean useActivityCollector() {
         return true;
+    }
+
+    protected void finishRefresh(TwinklingRefreshLayout refreshView, boolean refresh, boolean pulling) {
+        if (refresh) {
+            refreshView.finishRefreshing();
+        }
+        else {
+            refreshView.finishLoadmore();
+        }
     }
 
 //    //子类重写

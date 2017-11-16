@@ -1,5 +1,6 @@
 package com.weygo.weygophone.pages.shopcart.model;
 
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.base.WGObject;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public class WGShopCart extends WGObject {
             }
         }
         return false;
+    }
+
+    public boolean moreThanMinPrice() {
+        return JHStringUtils.isNullOrEmpty(minPriceTips);
     }
 }

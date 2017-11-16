@@ -2,11 +2,14 @@
 <com.weygo.weygophone.pages.coupon.widget.WGCouponListItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/x107"
-    android:layout_margin="@dimen/x7">
+    android:layout_marginLeft="@dimen/x7"
+    android:layout_marginTop="@dimen/x7"
+    android:layout_marginRight="@dimen/x7">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x107" />
+        android:layout_height="@dimen/x107"
+        android:src="@drawable/coupon_list_bg"/>
 
     <TextView
         android:id="@+id/priceTV"
@@ -37,6 +40,7 @@
         android:layout_toLeftOf="@+id/countTV"
         android:layout_marginRight="@dimen/x10"
         android:layout_alignBottom="@+id/priceTV"
+        android:maxLines="1"
         android:textSize="@dimen/ft13"/>
 
     <TextView

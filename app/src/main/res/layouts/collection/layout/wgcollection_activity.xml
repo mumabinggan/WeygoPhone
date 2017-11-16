@@ -9,18 +9,53 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-        android:id="@+id/refreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:divider="#ff000000"
-            android:dividerHeight="10dp"
+        <RelativeLayout
+            android:id="@+id/emptyView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+            <ImageView
+                android:id="@+id/emptyIV"
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x100"
+                android:src="@drawable/empty_collection"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x90"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:text="@string/Collection_Empty_Title"
+                android:textColor="@color/WGAppBaseTitleAAColor"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="@dimen/ft14"
+                android:layout_below="@+id/emptyIV"
+                android:layout_marginTop="@dimen/x30"/>
+
+        </RelativeLayout>
+
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ff000000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

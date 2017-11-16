@@ -149,7 +149,7 @@ public class WGSearchActivity extends WGBaseActivity {
 
     void handleEmpty() {
         mSearchName = null;
-        mNavigationBar.setInputText(mSearchName);
+        //mNavigationBar.setInputText(mSearchName);
         mNavigationBar.setVistaResId(R.drawable.search_vista_normal);
         handleRightStatus(true);
         showFragment();

@@ -20,6 +20,7 @@ import com.weygo.common.base.JHDividerItemDecoration;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
+import com.weygo.common.tools.JHDrawableUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
@@ -80,6 +81,9 @@ public class WGShopCartListActivity extends WGTitleActivity {
     TextView mTotalPriceTV;
 
     Button mCommitOrderBtn;
+
+    View mContentView;
+    View mEmptyView;
 
     @Override
     public void initContentView() {
@@ -149,6 +153,8 @@ public class WGShopCartListActivity extends WGTitleActivity {
                 handleInCommitOrder();
             }
         });
+        mEmptyView = findViewById(R.id.emptyView);
+        mContentView = findViewById(R.id.contentView);
     }
 
     void handleDelete(final WGShopCartGoodItem item) {
@@ -232,6 +238,12 @@ public class WGShopCartListActivity extends WGTitleActivity {
             mDeliverPriceTV.setText(mData.shopCartPrice.deliveryPrice);
             mTotalPriceTV.setText(JHResourceUtils.getInstance().getString(R.string.ShopCart_Totle) +
                     mData.shopCartPrice.totalePrice);
+            if (enableConfirm()) {
+                mCommitOrderBtn.setBackground(JHResourceUtils.getInstance().getDrawable(R.drawable.shopcart_footer_bg));
+            }
+            else {
+                mCommitOrderBtn.setBackground(JHResourceUtils.getInstance().getDrawable(R.drawable.shopcart_footer_disable_bg));
+            }
         }
     }
 
@@ -282,6 +294,14 @@ public class WGShopCartListActivity extends WGTitleActivity {
         }
         else {
             showWarning(response.message);
+        }
+        if (mData == null || mData.goods == null || mData.goods.size() == 0) {
+            mContentView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mContentView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.INVISIBLE);
         }
     }
 

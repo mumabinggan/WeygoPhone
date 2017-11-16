@@ -1,6 +1,8 @@
 package com.weygo.common.tools;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
 /**
  * Created by muma on 2017/5/10.
@@ -33,5 +35,9 @@ public class JHResourceUtils {
 
     public int getColor(int resId) {
         return mContext.getResources().getColor(resId);
+    }
+
+    public Drawable getDrawable(int resId) {
+        return ContextCompat.getDrawable(mContext, resId);
     }
 }

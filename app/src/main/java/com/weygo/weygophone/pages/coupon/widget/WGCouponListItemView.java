@@ -80,6 +80,6 @@ public class WGCouponListItemView extends JHRelativeLayout {
         mPriceTV.setText(mData.price);
         mCountTV.setText(mData.residueCount + "/" + mData.totalCount);
         mDesTV.setText(mData.briefDescription);
-        mDesTV.setText(mData.couponCode + " " + mData.time);
+        mTimeTV.setText(mData.couponCode + " " + mData.time);
     }
 }
