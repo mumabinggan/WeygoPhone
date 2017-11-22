@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +99,7 @@ public class WGTabHomeItemFragment extends WGFragment {
         //mRecyclerView.setBackgroundColor(Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new WGHomeFragmentAdapter(getContext(), null);
+        ((SimpleItemAnimator)mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setListener(new WGHomeFragmentAdapter.OnItemListener() {
             @Override
             public void onCarouselFigures(int index) {

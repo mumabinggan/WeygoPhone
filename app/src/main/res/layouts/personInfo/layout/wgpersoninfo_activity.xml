@@ -8,7 +8,7 @@
         android:id="@+id/base_titlebar"
         layout="@layout/common_navigationbar" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,17 +20,34 @@
             android:dividerHeight="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/x61"/>
+            android:layout_weight="1"/>
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true">-->
-            <!--<include-->
-                <!--android:id="@+id/rebuyView"-->
-                <!--layout="@layout/wgpersoninfo_save" />-->
-        <!--</LinearLayout>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x61">
 
-    </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separate_color"></View>
+
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x34"
+                android:text="@string/PersonInfo_Save"
+                android:layout_marginLeft="@dimen/x13"
+                android:layout_marginRight="@dimen/x13"
+                android:layout_marginTop="@dimen/x13"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:background="@drawable/register_btn_bg"
+                android:textSize="@dimen/ft10"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>

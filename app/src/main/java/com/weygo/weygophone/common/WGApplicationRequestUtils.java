@@ -92,21 +92,11 @@ public class WGApplicationRequestUtils {
         StringBuffer buffer = new StringBuffer(this.signPrefix());
         buffer.append("___store");
         Log.e("___store", "___store");
-        String storeValue = "mobilecn";
+        String storeValue = JHResourceUtils.getInstance().getString(R.string.request_StoreValue);
         //String storeValue = "mobilecn";
-        storeValue = mContext.getResources().getString(R.string.request_StoreValue);
+        //storeValue = mContext.getResources().getString(R.string.request_StoreValue);
         Log.e("storeValue", storeValue);
         buffer.append(storeValue);
-
-        //map.putAll(versionMap());
-
-//        Map<String, Object> sortMap = new TreeMap<String, Object>(
-//                new Comparator<String>() {
-//                    public int compare(String obj1, String obj2) {
-//                        // 降序排序
-//                        return obj1.compareTo(obj2);
-//                    }
-//                });
         TreeMap<String, Object> sortMap = new TreeMap<>(map);
         for (Map.Entry<String, Object> m :sortMap.entrySet())  {
             buffer.append(m.getKey());
@@ -121,13 +111,6 @@ public class WGApplicationRequestUtils {
         sortMap.clear();
         String baseString = "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
         return baseString;
-//        sortMap.putAll(versionMap());
-//        StringBuffer versionString = new StringBuffer(baseString);
-//        for (Map.Entry<String, Object> m :sortMap.entrySet())  {
-//            versionString.append("&" + m.getKey() + "=" + m.getValue());
-//        }
-//        return versionString.toString();
-        //return "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue + "&app=" + "";
     }
 
     public String paySign() {
@@ -148,7 +131,7 @@ public class WGApplicationRequestUtils {
         return url + paySign() +
                 "&sessionKey=" +
                 WGApplicationUserUtils.getInstance().sessionKey() +
-                "&app=" + WGConstants.WGBundlerId + "&os=iOS";
+                "&app=" + WGConstants.WGBundlerId + "&os=Android";
     }
 
     void showWarning(String message) {
@@ -344,6 +327,7 @@ public class WGApplicationRequestUtils {
 
     public void loadShopCartCount(final WGOnCompletionInteface inteface) {
         WGShopCartCountRequest request = new WGShopCartCountRequest();
+        request.showsLoadingView = false;
         JHNetworkUtils.getInstance().postAsyn(request, WGShopCartCountResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {

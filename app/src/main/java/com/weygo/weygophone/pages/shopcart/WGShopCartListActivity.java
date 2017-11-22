@@ -155,6 +155,7 @@ public class WGShopCartListActivity extends WGTitleActivity {
         });
         mEmptyView = findViewById(R.id.emptyView);
         mContentView = findViewById(R.id.contentView);
+        mEmptyView.setVisibility(View.INVISIBLE);
     }
 
     void handleDelete(final WGShopCartGoodItem item) {

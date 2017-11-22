@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.integral.myIntegral;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,15 +12,20 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHDividerItemDecoration;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.widget.WGIntegrationHelpView;
 import com.weygo.weygophone.pages.integral.myIntegral.adapter.WGMyIntegrationAdapter;
 import com.weygo.weygophone.pages.integral.myIntegral.model.WGIntegrationDetail;
 import com.weygo.weygophone.pages.integral.myIntegral.model.request.WGIntegrationDetailRequest;
 import com.weygo.weygophone.pages.integral.myIntegral.model.response.WGIntegrationDetailResponse;
+import com.weygo.weygophone.pages.order.commit.model.WGOverHeightDetail;
+import com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderOverWeightPopView;
 
 import org.w3c.dom.Text;
 
@@ -44,6 +50,9 @@ public class WGMyIntegralActivity extends WGTitleActivity {
 
     RelativeLayout mContentLayout;
 
+    WGIntegrationHelpView mHelpPopView;
+    JHBasePopupWindow mWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +69,7 @@ public class WGMyIntegralActivity extends WGTitleActivity {
         super.initSubView();
 
         mNavigationBar.setTitle(R.string.MyIntegral_Title);
+        mNavigationBar.setRightBarItem(R.drawable.integration_help);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.addItemDecoration(new JHDividerItemDecoration(this,
                 JHDividerItemDecoration.VERTICAL_LIST));
@@ -84,6 +94,16 @@ public class WGMyIntegralActivity extends WGTitleActivity {
     @Override
     public void handleRightBarItem() {
         super.handleRightBarItem();
+        mHelpPopView = (WGIntegrationHelpView) getLayoutInflater()
+                .inflate(R.layout.myintegration_help_pop, null);
+        mWindow = new JHBasePopupWindow(mHelpPopView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        mHelpPopView.setPopupWindow(mWindow);
+        mHelpPopView.setHelpContent(mIntegrationDetail.tip);
+        mWindow.setFocusable(false);
+        mWindow.setOutsideTouchable(false);
+        mWindow.showAtLocation(mHelpPopView, Gravity.CENTER, 0, 0);
     }
 
     void refreshUI() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.base.NoAlphaItemAnimator;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
@@ -70,6 +72,11 @@ public class WGTabClassifyFragment extends WGFragment {
     @Override
     public void loadRequest() {
         super.loadRequest();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadClassify();
     }
 
@@ -115,6 +122,7 @@ public class WGTabClassifyFragment extends WGFragment {
         mClassifyRecyclerView = (RecyclerView) view.findViewById(R.id.classifyRecyclerView);
         mClassifyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mClassifyAdapter = new WGClassifyAdapter(getContext(), null);
+        mClassifyAdapter.setHasStableIds(true);
         mClassifyRecyclerView.setAdapter(mClassifyAdapter);
         mClassifyAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnBaseItemClickListener() {
             @Override

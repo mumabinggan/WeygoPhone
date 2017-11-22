@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.ProviderInfo;
 import android.widget.ImageView;
 
+import com.weygo.common.tools.JHStringUtils;
+
 /**
  * Created by muma on 2016/11/29.
  */
@@ -45,5 +47,10 @@ public class JHImageUtils extends Object {
 
     public void loadImage(String imageUrl, int resId, ImageView imageView) {
         imageLoader.loadImage(JHImageToolHolder.instance.mContext, imageUrl, resId, imageView);
+//        String tag = (String) imageView.getTag();
+//        if (!JHStringUtils.equalString(tag, imageUrl)) {
+//            imageView.setTag(imageUrl);
+//            imageLoader.loadImage(JHImageToolHolder.instance.mContext, imageUrl, resId, imageView);
+//        }
     }
 }

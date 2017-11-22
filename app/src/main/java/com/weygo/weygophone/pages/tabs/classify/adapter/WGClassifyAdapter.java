@@ -2,6 +2,7 @@ package com.weygo.weygophone.pages.tabs.classify.adapter;
 
 import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHRecyclerViewAdapter;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
@@ -36,20 +38,22 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
 
     public void setData(List<WGClassifyItem> data) {
         mArray = data;
-        selectSelectedClassifyItem();
-        notifyDataSetChanged();
+        selectSelectedClassifyItem(null);
+        //notifyItemRangeChanged(0, mArray.size());
+//        notifyItemRangeChanged(0, mArray.size());
     }
 
-    void handleClickView(View view) {
+    void handleClickView(ClassifyViewHolder holder, View view) {
         if (mOnItemClickListener != null) {
             int tag = (int) view.getTag();
-            mOnItemClickListener.onItemClick(view, (int)view.getTag());
             mCurrentSelectedIndex = tag;
-            selectSelectedClassifyItem();
+            //notifyItemRangeChanged(0, mArray.size());
+            selectSelectedClassifyItem(holder);
+            mOnItemClickListener.onItemClick(view, (int)view.getTag());
         }
     }
 
-    void selectSelectedClassifyItem() {
+    void selectSelectedClassifyItem(ClassifyViewHolder holder) {
         if (mArray == null) {
             return;
         }
@@ -58,9 +62,20 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
         }
         for (int num = 0; num < mArray.size(); ++num) {
             WGClassifyItem item = mArray.get(num);
-            item.isSelected = (mCurrentSelectedIndex == num);
+            if (mCurrentSelectedIndex == num) {
+                item.isSelected = true;
+            }
+            else {
+                item.isSelected = false;
+            }
         }
+
         notifyDataSetChanged();
+//        notifyItemRangeChanged(0, mArray.size());
+        //notifyDataSetChanged();
+
+        //notifyItemChanged(mCurrentSelectedIndex);
+        //notifyItemChanged(oldIndex);
     }
 
     @Override
@@ -69,13 +84,14 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
         View view = LayoutInflater.from(
                 mContext).inflate(resourceId, parent,
                 false);
-        ClassifyViewHolder holder = new ClassifyViewHolder(view);
+        final ClassifyViewHolder holder = new ClassifyViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleClickView(view);
+                handleClickView(holder, view);
             }
         });
+        Log.e("-----", "==");
         return holder;
     }
 
@@ -83,6 +99,7 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
     public void onBindViewHolder(JHBaseViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         WGClassifyItem item = mArray.get(position);
+        Log.e("-----", "+++"+position);
         holder.showWithData(item);
     }
 
@@ -94,8 +111,13 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
         return mArray.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     //Classify
-    class ClassifyViewHolder extends JHBaseViewHolder {
+    public class ClassifyViewHolder extends JHBaseViewHolder {
 
         public TextView textView;
         public ImageView imageView;
@@ -115,7 +137,11 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
                 WGClassifyItem item = (WGClassifyItem) object;
                 arrImageView.setVisibility(item.isSelected ? View.VISIBLE : View.INVISIBLE);
                 textView.setText(item.name);
-                JHImageUtils.getInstance().loadImage(item.pictureURL, R.drawable.common_image_loading_carousel, imageView);
+                Object tag = imageView.getTag();
+                if(tag == null || !tag.equals(item.pictureURL)){
+                    imageView.setTag(item.pictureURL);
+                    JHImageUtils.getInstance().loadImage(item.pictureURL, R.drawable.common_image_loading_carousel, imageView);
+                }
             }
         }
     }

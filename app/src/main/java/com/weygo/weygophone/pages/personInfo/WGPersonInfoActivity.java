@@ -6,39 +6,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHDividerItemDecoration;
-import com.weygo.common.base.JHPaddingDecoration;
 import com.weygo.common.base.JHResponse;
-import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
-import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGOnUserInfoCompletionInteface;
 import com.weygo.weygophone.common.widget.WGDatePickerView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
 import com.weygo.weygophone.pages.findPassword.WGFindPasswordActivity;
-import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
-import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
-import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
-import com.weygo.weygophone.pages.order.detail.model.WGOrderFax;
-import com.weygo.weygophone.pages.order.detail.model.WGOrderStatus;
-import com.weygo.weygophone.pages.order.detail.model.WGOrderStatusItem;
-import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.personInfo.adapter.WGPersonInfoAdapter;
-import com.weygo.weygophone.pages.tabs.classify.model.request.WGClassifyRequest;
-import com.weygo.weygophone.pages.tabs.classify.model.response.WGClassifyResponse;
+import com.weygo.weygophone.pages.personInfo.model.request.WGCommitUserInfoRequest;
+import com.weygo.weygophone.pages.personInfo.model.response.WGCommitUserInfoResponse;
 import com.weygo.weygophone.pages.tabs.mine.model.WGUser;
-import com.weygo.weygophone.pages.tabs.mine.model.request.WGUserInfoRequest;
 import com.weygo.weygophone.pages.tabs.mine.model.response.WGUserInfoResponse;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -52,6 +39,8 @@ public class WGPersonInfoActivity extends WGTitleActivity {
     WGPersonInfoAdapter mAdapter;
 
     WGUser mData;
+
+    Button mSaveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +93,13 @@ public class WGPersonInfoActivity extends WGTitleActivity {
 
             }
         });
-
+        mSaveBtn = (Button) findViewById(R.id.saveBtn);
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCommitPersonInfo();
+            }
+        });
     }
 
     @Override
@@ -120,6 +115,14 @@ public class WGPersonInfoActivity extends WGTitleActivity {
                 handleSelectedSex(index);
             }
         });
+        int index = 0;
+        if (user.isBoy()) {
+            index = 1;
+        }
+        else if (user.isGirl()) {
+            index = 2;
+        }
+        picker.setSelectedIndex(index);
         picker.show();
     }
 
@@ -164,6 +167,40 @@ public class WGPersonInfoActivity extends WGTitleActivity {
             mAdapter.setData(mData);
         }
         else {
+            showWarning(response.message);
+        }
+    }
+
+    void loadCommitPersonInfo() {
+        WGCommitUserInfoRequest request = new WGCommitUserInfoRequest();
+        request.firstName = mData.name;
+        request.lastName = mData.surname;
+        request.phone = mData.mobile;
+        request.sex = mData.sex;
+        request.birth = mData.birth;
+        request.tax = mData.tax;
+        request.email = mData.email;
+        this.postAsyn(request, WGCommitUserInfoResponse.class, new JHResponseCallBack() {
+            @Override
+            public void onSuccess(JHResponse result) {
+                handleSuccessCommitUserInfoResponse((WGCommitUserInfoResponse) result);
+            }
+
+            @Override
+            public void onFailure(JHRequestError error) {
+                Log.e("onFailure", error.toString());
+            }
+        });
+    }
+
+    void handleSuccessCommitUserInfoResponse(WGCommitUserInfoResponse response) {
+        Log.e("onSuccess", JSON.toJSONString(response));
+        if (response.success()) {
+            WGApplicationUserUtils.getInstance().reset();
+            WGApplicationUserUtils.getInstance().setUser(response.data);
+            mData = response.data;
+            mAdapter.setData(mData);
+        } else {
             showWarning(response.message);
         }
     }

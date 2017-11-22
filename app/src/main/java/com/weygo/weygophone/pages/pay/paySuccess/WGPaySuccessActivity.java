@@ -3,6 +3,7 @@ package com.weygo.weygophone.pages.pay.paySuccess;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -13,6 +14,7 @@ import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
+import com.weygo.weygophone.common.WGApplicationPageUtils;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
 import com.weygo.weygophone.pages.pay.paySuccess.model.WGPaySuccessData;
@@ -32,6 +34,8 @@ public class WGPaySuccessActivity extends WGTitleActivity {
     WGPaySuccessData mPaySuccessData;
 
     TextView mOrderTitleTV;
+
+    Button mContinueBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,17 @@ public class WGPaySuccessActivity extends WGTitleActivity {
             mOrderTitleTV.setText(JHResourceUtils.getInstance().getString(R.string.PaySuccess_SubTitle2)
                     + mOrderId);
         }
+        mContinueBtn = (Button) findViewById(R.id.continueBtn);
+        mContinueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleContinueBtn();
+            }
+        });
+    }
+
+    void handleContinueBtn() {
+        gotoHome();
     }
 
     void loadPaySuccess() {

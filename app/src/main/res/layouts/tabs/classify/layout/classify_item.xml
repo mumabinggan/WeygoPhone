@@ -18,7 +18,9 @@
         android:layout_alignRight="@+id/imageView"
         android:layout_marginRight="-2dp"
         android:layout_centerVertical="true"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/textView"

@@ -148,7 +148,7 @@ public class WGMainActivity extends WGBaseActivity {
                     WGApplicationRequestUtils.getInstance().loadShopCartCount(new WGApplicationRequestUtils.WGOnCompletionInteface() {
                         @Override
                         public void onSuccessCompletion(WGResponse response) {
-                            handleShopCartCount();
+                            //handleShopCartCount();
                         }
 
                         @Override
@@ -161,6 +161,7 @@ public class WGMainActivity extends WGBaseActivity {
         }
 
         checkAppUpdate();
+        //handleConfirmUpdate(null);
     }
 
     void initTabBar() {
@@ -249,6 +250,7 @@ public class WGMainActivity extends WGBaseActivity {
 
     void checkAppUpdate() {
         WGUpdateRequest request = new WGUpdateRequest();
+        request.showsLoadingView = false;
         this.postAsyn(request, WGUpdateResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {

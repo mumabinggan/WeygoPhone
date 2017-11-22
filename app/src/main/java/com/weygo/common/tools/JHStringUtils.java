@@ -24,6 +24,25 @@ public class JHStringUtils extends JHObject {
         }
     }
 
+    public static boolean equalString(String str1, String str2) {
+        if (str1 == null) {
+            if (str2 == null) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (str2 == null) {
+                return false;
+            }
+            else {
+                return str1.equals(str2);
+            }
+        }
+    }
+
     public static String md5(String s) {
         char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f' };

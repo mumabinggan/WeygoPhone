@@ -105,7 +105,7 @@ public class WGCouponListActivity extends WGTitleActivity {
         mEmptyView = findViewById(R.id.emptyView);
         mContentView = findViewById(R.id.contentView);
         mContentView.setVisibility(View.INVISIBLE);
-        mContentView.setVisibility(View.INVISIBLE);
+        mEmptyView.setVisibility(View.INVISIBLE);
     }
 
     void handleClick(int position) {

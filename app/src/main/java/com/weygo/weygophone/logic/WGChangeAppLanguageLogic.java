@@ -24,7 +24,7 @@ public class WGChangeAppLanguageLogic {
     public static final int WGAppLanguageItalin = 1;
     public static final int WGAppLanguageChiness = 2;
 
-    static Locale mCurrentAppLocale = Locale.ITALIAN;;
+    static Locale mCurrentAppLocale = Locale.ITALY;
 
     public static boolean isItalin() {
         if (mCurrentAppLocale != null) {
@@ -64,11 +64,13 @@ public class WGChangeAppLanguageLogic {
         if (mCurrentAppLocale == null) {
             Locale locale = context.getResources().getConfiguration().locale;
             String language = locale.getLanguage();
-            if (!language.contains("zh") && !language.contains("it")) {
-                mCurrentAppLocale = Locale.ITALIAN;
-                JHLanguageUtils.setAppLanguage(context, mCurrentAppLocale);
-                JHLocalSettingUtils.setLocalSetting(context, kUserSetLanguageKey, locale);
+            if (language.contains("zh")) {
+                mCurrentAppLocale = Locale.CHINA;
             }
+            else {
+                mCurrentAppLocale = Locale.ITALY;
+            }
+            JHLanguageUtils.setAppLanguage(context, mCurrentAppLocale);
         }
         else {
             if (hasChangeAppLocale(context)) {
@@ -80,15 +82,15 @@ public class WGChangeAppLanguageLogic {
     public static void changeAppLanguage(Context context, int languageId, WGChangeLanguageCallBack callBack) {
         Locale locale;
         if (languageId == WGAppLanguageChiness) {
-            locale = Locale.CHINESE;
+            locale = Locale.CHINA;
         }
         else {
-            locale = Locale.ITALIAN;
+            locale = Locale.ITALY;
         }
-        changeAppLanguage(context, locale, callBack);
+        schangeAppLanguage(context, locale, callBack);
     }
 
-    static void changeAppLanguage(Context context, Locale locale, WGChangeLanguageCallBack callBack) {
+    static void schangeAppLanguage(Context context, Locale locale, WGChangeLanguageCallBack callBack) {
         if (!canChangeLanguage) {
             return;
         }

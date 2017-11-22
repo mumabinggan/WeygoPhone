@@ -106,9 +106,6 @@ public class WGTabHomeFragment extends WGFragment {
         mNavigationBar.setOnClickListener(new WGTabNavigationBar.OnClickHomeNavigationBarListener() {
             @Override
             public void onClickBriefIntro(View var1) {
-//                Intent intent = new Intent(getActivity(), WGClientServiceActivity.class);
-//                startActivity(intent);
-                //startActivity(new Intent(getActivity(), ZopimChatActivity.class));
                 activity.openSlider();
             }
 
@@ -230,6 +227,7 @@ public class WGTabHomeFragment extends WGFragment {
 
         final WGHomeTitlesRequest request = new WGHomeTitlesRequest();
         request.showsLoadingView = mDataResponse != null ? false : true;
+//        request.showsLoadingView = false;
         postAsyn(request, WGHomeTitlesResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {
@@ -331,6 +329,7 @@ public class WGTabHomeFragment extends WGFragment {
         if (item.data != null) {
             request.showsLoadingView = false;
         }
+//        request.showsLoadingView = false;
         postAsyn(request, WGHomeTabContentResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {

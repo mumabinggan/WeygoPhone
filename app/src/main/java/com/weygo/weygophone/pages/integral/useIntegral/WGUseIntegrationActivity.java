@@ -2,17 +2,21 @@ package com.weygo.weygophone.pages.integral.useIntegral;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGIntegrationHelpView;
 import com.weygo.weygophone.pages.integral.myIntegral.model.WGIntegration;
 import com.weygo.weygophone.pages.integral.useIntegral.model.request.WGIntegrationRequest;
 import com.weygo.weygophone.pages.integral.useIntegral.model.request.WGUseIntegrationRequest;
@@ -32,6 +36,9 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
 
     WGIntegration mIntegration;
 
+    WGIntegrationHelpView mHelpPopView;
+    JHBasePopupWindow mWindow;
+
     @Override
     public void initContentView() {
         setContentView(R.layout.wguseintegration_activity);
@@ -42,6 +49,7 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
     public void initSubView() {
         super.initSubView();
         mNavigationBar.setTitle(R.string.UseIntegral_Title);
+        mNavigationBar.setRightBarItem(R.drawable.integration_help);
 
         mIntergalInfoTextView = (TextView) findViewById(R.id.integralCountTextView);
 
@@ -69,6 +77,21 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
             mUseBtn.setText(R.string.UseIntegral_OK);
             mUseBtn.setBackgroundResource(R.drawable.register_btn_bg);
         }
+    }
+
+    @Override
+    public void handleRightBarItem() {
+        super.handleRightBarItem();
+        mHelpPopView = (WGIntegrationHelpView) getLayoutInflater()
+                .inflate(R.layout.myintegration_help_pop, null);
+        mWindow = new JHBasePopupWindow(mHelpPopView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        mHelpPopView.setPopupWindow(mWindow);
+        mHelpPopView.setHelpContent(mIntegration.tip);
+        mWindow.setFocusable(false);
+        mWindow.setOutsideTouchable(false);
+        mWindow.showAtLocation(mHelpPopView, Gravity.CENTER, 0, 0);
     }
 
     void loadIntegration() {

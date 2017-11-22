@@ -128,7 +128,7 @@ public class WGSubClassifyAdapter extends JHRecyclerViewAdapter {
             else {
                 count = 1;
             }
-            Log.e("sss", position + " + " + count);
+            //Log.e("sss", position + " + " + count);
             WGClassifyHotGoodItem item = mData.goodArray.get(position - count);
             holder.showWithData(item);
         }
@@ -173,7 +173,7 @@ public class WGSubClassifyAdapter extends JHRecyclerViewAdapter {
                 type = Item_Type.ITEM_TYPE_HotGood;
             }
         }
-        Log.e("sss", position + ":" + type.ordinal());
+        //Log.e("sss", position + ":" + type.ordinal());
         return type;
     }
 

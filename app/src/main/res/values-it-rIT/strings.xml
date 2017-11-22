@@ -8,7 +8,7 @@
     <string name="main_foreign">foreign</string>
     <string name="main_mine">mine</string>
 
-    <string name="request_StoreValue">mobilecn</string>
+    <string name="request_StoreValue">mobileitaly</string>
 
     <string name="PersonInfo_Sex_Select">Seleziona</string>
     <string name="PersonInfo_Sex_Man">Maschile</string>
@@ -113,6 +113,8 @@
     <string name="MyIntegral_Number">Saldo punti: </string>
     <string name="MyIntegral_Use_Method_Btn">Come usarli</string>
     <string name="MyIntegral_History">History</string>
+    <string name="Integration_Help_Title">CODICE CLIENTE E PUNTI SPESA</string>
+    <string name="Integration_Help_Button">Chiudi</string>
 
     //使用积分
     <string name="UseIntegral_Title">Utilizza i punti spesa</string>
@@ -167,7 +169,7 @@
     <string name="GoodDetail_Deliver">Spedizione</string>
     <string name="GoodDetail_CommodityInfo">Descrizione</string>
     <string name="GoodDetail_Add">Aggiungi</string>
-    <string name="GoodDetail_Without">缺货</string>
+    <string name="GoodDetail_Without">Non Disp</string>
 
     //分类详情
     <string name="ClassifyDetail_Sort">Default</string>

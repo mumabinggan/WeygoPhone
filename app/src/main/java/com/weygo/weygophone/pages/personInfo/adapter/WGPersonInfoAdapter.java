@@ -35,10 +35,16 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
     WGUser mUser;
 
     public enum Item_Type {
-        ITEM_TYPE_None,
         ITEM_TYPE_PersonInfoHead,
-        ITEM_TYPE_PersonInfoCanEdit,        //可编辑,有Edit
-        ITEM_TYPE_PersonInfoCannotEdit,     //不可编辑，或者没有 Edit
+        ITEM_TYPE_FirstName,
+        ITEM_TYPE_Surname,
+        ITEM_TYPE_UserId,
+        ITEM_TYPE_Mobile,
+        ITEM_TYPE_Email,
+        ITEM_TYPE_Sex,
+        ITEM_TYPE_Birthday,
+        ITEM_TYPE_Fax,
+        ITEM_TYPE_ChangePW
     }
 
     public static interface PersonInfoOnItemClickListener extends OnBaseItemClickListener {
@@ -58,6 +64,24 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
     public void setData(WGUser user) {
         mUser = user;
         notifyDataSetChanged();
+    }
+
+    void handleEndEdit(int viewType, String string) {
+        if (viewType == Item_Type.ITEM_TYPE_FirstName.ordinal()) {
+            mUser.name = string;
+        }
+        else if (viewType == Item_Type.ITEM_TYPE_Surname.ordinal()) {
+            mUser.surname = string;
+        }
+        else if (viewType == Item_Type.ITEM_TYPE_Mobile.ordinal()) {
+            mUser.mobile = string;
+        }
+        else if (viewType == Item_Type.ITEM_TYPE_Email.ordinal()) {
+            mUser.email = string;
+        }
+        else if (viewType == Item_Type.ITEM_TYPE_Fax.ordinal()) {
+            mUser.tax = string;
+        }
     }
 
     void handleTouchGoodItem(View view) {
@@ -80,7 +104,7 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
     }
 
     @Override
-    public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         super.onCreateViewHolder(parent, viewType);
         View view = null;
         if (viewType == Item_Type.ITEM_TYPE_PersonInfoHead.ordinal()) {
@@ -88,12 +112,22 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
                     mContext).inflate(R.layout.wgpersoninfo_head, parent,
                     false);
         }
-        else if (viewType == Item_Type.ITEM_TYPE_PersonInfoCanEdit.ordinal()) {
-            view = LayoutInflater.from(
+        else if (viewType == Item_Type.ITEM_TYPE_FirstName.ordinal() ||
+                viewType == Item_Type.ITEM_TYPE_Surname.ordinal() ||
+                viewType == Item_Type.ITEM_TYPE_Mobile.ordinal() ||
+                viewType == Item_Type.ITEM_TYPE_Fax.ordinal()) {
+            WGCellStyle5View commonView = (WGCellStyle5View)LayoutInflater.from(
                     mContext).inflate(R.layout.common_cell_type5, parent,
                     false);
+            commonView.setListener(new WGCellStyle5View.OnListener() {
+                @Override
+                public void onEndEdit(View view, String text) {
+                    handleEndEdit(viewType, text);
+                }
+            });
+            view = commonView;
         }
-        else if (viewType == Item_Type.ITEM_TYPE_PersonInfoCannotEdit.ordinal()) {
+        else {
             WGCellStyle4View commonView = (WGCellStyle4View)LayoutInflater.from(
                     mContext).inflate(R.layout.common_cell_type4, parent,
                     false);
@@ -107,7 +141,6 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
             });
         }
         WGPersonInfoItemViewHolder holder = new WGPersonInfoItemViewHolder(view);
-        Log.e("==============", "" + holder.itemView.getTag());
         return holder;
     }
 
@@ -124,25 +157,7 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return getItemTypeWithPosition(position).ordinal();
-    }
-
-    Item_Type getItemTypeWithPosition(int position) {
-        Item_Type type;
-        if (position == 0) {
-            type = Item_Type.ITEM_TYPE_PersonInfoHead;
-        }
-        else if (position == 1 ||
-                position == 2 ||
-                position == 4 ||
-                position == 5 ||
-                position == 8) {
-            type = Item_Type.ITEM_TYPE_PersonInfoCanEdit;
-        }
-        else {
-            type = Item_Type.ITEM_TYPE_PersonInfoCannotEdit;
-        }
-        return type;
+        return position;
     }
 
     class WGPersonInfoItemViewHolder extends JHBaseViewHolder {
@@ -167,12 +182,24 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
             else if (tag == 1) {
                 WGCellStyle5View view = (WGCellStyle5View) mView;
                 view.mTextView.setText(R.string.PersonInfo_FirstName);
-                view.showWithData(mUser.surname);
+                view.showWithData(mUser.name);
+                view.setListener(new WGCellStyle5View.OnListener() {
+                    @Override
+                    public void onEndEdit(View view, String text) {
+                        mUser.name = text;
+                    }
+                });
             }
             else if (tag == 2) {
                 WGCellStyle5View view = (WGCellStyle5View) mView;
                 view.mTextView.setText(R.string.PersonInfo_LastName);
-                view.showWithData(mUser.name);
+                view.showWithData(mUser.surname);
+                view.setListener(new WGCellStyle5View.OnListener() {
+                    @Override
+                    public void onEndEdit(View view, String text) {
+                        mUser.surname = text;
+                    }
+                });
             }
             else if (tag == 3) {
                 WGCellStyle4View view = (WGCellStyle4View) mView;
@@ -184,11 +211,17 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
                 WGCellStyle5View view = (WGCellStyle5View) mView;
                 view.mTextView.setText(R.string.PersonInfo_Phone);
                 view.showWithData(mUser.mobile);
+                view.setListener(new WGCellStyle5View.OnListener() {
+                    @Override
+                    public void onEndEdit(View view, String text) {
+                        mUser.mobile = text;
+                    }
+                });
             }
             else if (tag == 5) {
-                WGCellStyle5View view = (WGCellStyle5View) mView;
-                view.mTextView.setText(R.string.PersonInfo_Email);
-                view.showWithData(mUser.email);
+                WGCellStyle4View view = (WGCellStyle4View) mView;
+                view.setTitle(R.string.PersonInfo_Email);
+                view.setDetailTitle(mUser.email);
             }
             else if (tag == 6) {
                 WGCellStyle4View view = (WGCellStyle4View) mView;
@@ -204,12 +237,17 @@ public class WGPersonInfoAdapter extends JHRecyclerViewAdapter {
                 WGCellStyle5View view = (WGCellStyle5View) mView;
                 view.mTextView.setText(R.string.PersonInfo_Fax);
                 view.showWithData(mUser.tax);
+                view.setListener(new WGCellStyle5View.OnListener() {
+                    @Override
+                    public void onEndEdit(View view, String text) {
+                        mUser.tax = text;
+                    }
+                });
             }
             else if (tag == 9) {
                 WGCellStyle4View view = (WGCellStyle4View) mView;
                 view.setTitle(R.string.PersonInfo_ChangePW);
             }
-
         }
     }
 }

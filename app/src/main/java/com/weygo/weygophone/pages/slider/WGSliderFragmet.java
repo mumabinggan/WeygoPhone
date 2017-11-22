@@ -287,6 +287,7 @@ public class WGSliderFragmet extends WGFragment {
 
     void loadHomeSlider() {
         WGHomeSliderRequest request = new WGHomeSliderRequest();
+        request.showsLoadingView = false;
         this.postAsyn(request, WGHomeSliderResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {

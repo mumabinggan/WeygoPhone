@@ -140,6 +140,14 @@ public class WGSettingActivity extends WGTitleActivity {
                     handleSelectedLanguage(index, item);
                 }
             });
+            int index = 0;
+            if (WGChangeAppLanguageLogic.isChiness()) {
+                index = 0;
+            }
+            else {
+                index = 1;
+            }
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }

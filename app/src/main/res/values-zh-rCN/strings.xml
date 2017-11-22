@@ -113,6 +113,8 @@
     <string name="MyIntegral_Number">积分点数：</string>
     <string name="MyIntegral_Use_Method_Btn">使用规则</string>
     <string name="MyIntegral_History">历史记录</string>
+    <string name="Integration_Help_Title">积分规则</string>
+    <string name="Integration_Help_Button">关闭</string>
 
     //使用积分
     <string name="UseIntegral_Title">使用积分</string>
