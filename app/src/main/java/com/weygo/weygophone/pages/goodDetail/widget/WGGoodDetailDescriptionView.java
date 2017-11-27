@@ -201,6 +201,7 @@ public class WGGoodDetailDescriptionView extends JHLinearLayout {
             result.setLayoutParams(params);
             result.setGravity(Gravity.CENTER_VERTICAL|Gravity.LEFT);
             result.setPadding(14, 0, 14, 0);
+//            result.setBackgroundColor(Color.GREEN); //设置背景颜色
             result.setBackgroundColor(Color.WHITE); //设置背景颜色
             return result;
         }

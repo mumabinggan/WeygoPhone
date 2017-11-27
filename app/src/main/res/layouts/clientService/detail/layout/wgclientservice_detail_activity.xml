@@ -9,33 +9,42 @@
         android:id="@+id/base_titlebar"
         layout="@layout/common_navigationbar" />
 
-    <LinearLayout
-        android:id="@id/contentView"
+    <FrameLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:progress="0"
-            android:max="100"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-        <com.jude.rollviewpager.RollPagerView
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            app:rollviewpager_play_delay="3000"/>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:progress="0"
+                android:max="100"
+                />
 
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>
+            <com.jude.rollviewpager.RollPagerView
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:rollviewpager_play_delay="3000"/>
 
-    </LinearLayout>
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></WebView>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

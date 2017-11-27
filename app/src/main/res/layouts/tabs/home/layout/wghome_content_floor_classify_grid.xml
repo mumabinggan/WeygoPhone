@@ -13,6 +13,7 @@
         android:gravity="center"
         android:listSelector="@null"
         android:background="#ffffff"
-        android:padding="1dp"></GridView>
+        android:padding="1dp"
+        android:scrollbars="none"></GridView>
 
 </com.weygo.weygophone.pages.tabs.home.widget.WGHomeContentFloorClassifysGridView>

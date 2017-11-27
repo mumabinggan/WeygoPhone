@@ -8,24 +8,31 @@
         android:id="@+id/base_titlebar"
         layout="@layout/common_navigationbar" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/contentView"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:divider="#ff000000"
-            android:dividerHeight="10dp"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/footerView"
-            layout="@layout/commitorder_footer_view" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ff000000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
-    </LinearLayout>
+            <include
+                android:id="@+id/footerView"
+                layout="@layout/commitorder_footer_view" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.dyhdyh.widget.loading.bar.LoadingBar;
 import com.weygo.common.tools.JHActivityCollector;
 import com.weygo.common.tools.JHDialogUtils;
 import com.weygo.common.tools.JHResourceUtils;
@@ -28,6 +29,7 @@ import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.WGLoadingView;
+import com.weygo.weygophone.common.widget.WGLoadingFactory;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 
@@ -53,7 +55,7 @@ public class JHActivity extends FragmentActivity {
 
     List mRefreshNotificationList;
 
-    View mLoadingContentView;
+    public View mLoadingContentView;
 
     class JHBroadcastReceiver extends BroadcastReceiver {
         @Override

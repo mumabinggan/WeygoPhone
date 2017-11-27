@@ -24,6 +24,7 @@ import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
 import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.WGLoadingView;
 import com.weygo.weygophone.common.widget.WGPostPopView;
 import com.weygo.weygophone.pages.collection.model.request.WGCancelCollectionGoodRequest;
 import com.weygo.weygophone.pages.collection.model.response.WGCancelCollectionGoodResponse;
@@ -197,6 +198,7 @@ public class WGGoodDetailActivity extends WGBaseActivity {
     void loadGoodDetail() {
         WGGoodDetailRequest request = new WGGoodDetailRequest();
         request.id = mGoodId;
+        request.showsLoadingView = true;
         this.postAsyn(request, WGGoodDetailResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {

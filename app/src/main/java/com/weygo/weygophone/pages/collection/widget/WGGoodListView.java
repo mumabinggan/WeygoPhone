@@ -97,12 +97,14 @@ public class WGGoodListView extends JHRelativeLayout {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    int[] position = new int[2];
-                    mImageView.getLocationInWindow(position);
-                    Point point = new Point();
-                    point.x = position[0] + mImageView.getWidth()/2;
-                    point.y = position[1];
-                    mListener.onTouchShopCart(mData, null, point);
+                    if (mData.inStock == 1) {
+                        int[] position = new int[2];
+                        mImageView.getLocationInWindow(position);
+                        Point point = new Point();
+                        point.x = position[0] + mImageView.getWidth()/2;
+                        point.y = position[1];
+                        mListener.onTouchShopCart(mData, null, point);
+                    }
                 }
             }
         };

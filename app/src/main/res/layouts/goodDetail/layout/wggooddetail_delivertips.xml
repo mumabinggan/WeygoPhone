@@ -11,7 +11,7 @@
         android:padding="@dimen/x14"
         android:textColor="@color/WGAppBaseTitleAAColor"
         android:textSize="@dimen/ft12"
-        android:background="@drawable/wggooddetail_des_grid_border"
+        android:background="@drawable/wggooddetail_delivertip"
         android:text="0" />
 
 </LinearLayout>

@@ -9,11 +9,10 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <LinearLayout
-        android:id="@id/contentView"
+    <RelativeLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/layout"
@@ -40,6 +39,6 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.goodDetail.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.weygo.common.base.JHInterface;
+import com.weygo.common.tools.JHColorUtils;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.goodDetail.model.WGGoodDetail;
 
@@ -73,6 +76,18 @@ public class WGGoodDetailOperateView extends RelativeLayout {
                 mCollectionIV.setImageResource(R.drawable.gooddetail_collection_normal);
             }
             mCountView.setCount(1);
+            int textId = 0;
+            int resId = 0;
+            if (goodDetail.hasInvalidGood()) {
+                resId = R.drawable.wggooddetail_add_unable_bg;
+                textId = R.string.GoodDetail_Without;
+            }
+            else {
+                resId = R.drawable.wggooddetail_add_bg;
+                textId = R.string.GoodDetail_Add;
+            }
+            mAddShopCartBtn.setBackgroundResource(resId);
+            mAddShopCartBtn.setText(textId);
         }
     }
 

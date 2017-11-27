@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.goodDetail.model;
 
 import com.weygo.weygophone.base.WGObject;
+import com.weygo.weygophone.pages.shopcart.model.WGShopCartGoodItem;
 import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
@@ -55,5 +56,9 @@ public class WGGoodDetail extends WGObject {
         public String name;
 
         public String value;
+    }
+
+    public boolean hasInvalidGood() {
+        return (inStock == 0);
     }
 }

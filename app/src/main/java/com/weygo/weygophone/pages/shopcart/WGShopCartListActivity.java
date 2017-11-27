@@ -154,7 +154,7 @@ public class WGShopCartListActivity extends WGTitleActivity {
             }
         });
         mEmptyView = findViewById(R.id.emptyView);
-        mContentView = findViewById(R.id.contentView);
+        mContentView = findViewById(R.id.dataContentView);
         mEmptyView.setVisibility(View.INVISIBLE);
     }
 
