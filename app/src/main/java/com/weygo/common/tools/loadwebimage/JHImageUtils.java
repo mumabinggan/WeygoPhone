@@ -47,10 +47,5 @@ public class JHImageUtils extends Object {
 
     public void loadImage(String imageUrl, int resId, ImageView imageView) {
         imageLoader.loadImage(JHImageToolHolder.instance.mContext, imageUrl, resId, imageView);
-//        String tag = (String) imageView.getTag();
-//        if (!JHStringUtils.equalString(tag, imageUrl)) {
-//            imageView.setTag(imageUrl);
-//            imageLoader.loadImage(JHImageToolHolder.instance.mContext, imageUrl, resId, imageView);
-//        }
     }
 }

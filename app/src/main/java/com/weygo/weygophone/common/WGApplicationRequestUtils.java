@@ -313,8 +313,13 @@ public class WGApplicationRequestUtils {
             @Override
             public void onSuccess(JHResponse result) {
                 WGAddGoodToCartResponse response = (WGAddGoodToCartResponse) result;
-                if (inteface != null) {
-                    inteface.onSuccessCompletion(response);
+                if (response.success()) {
+                    if (inteface != null) {
+                        inteface.onSuccessCompletion(response);
+                    }
+                }
+                else {
+                    showWarning(response.message);
                 }
             }
 

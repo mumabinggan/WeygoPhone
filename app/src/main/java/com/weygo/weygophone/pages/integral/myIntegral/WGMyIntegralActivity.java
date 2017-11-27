@@ -86,7 +86,7 @@ public class WGMyIntegralActivity extends WGTitleActivity {
 
         mIntegrationTextView = (TextView) findViewById(R.id.integralCountTextView);
 
-        mContentLayout = (RelativeLayout) findViewById(R.id.contentLayout);
+        mContentLayout = (RelativeLayout) findViewById(R.id.contentView);
 
         mHistoryTV = (TextView) findViewById(R.id.historyTextView);
     }

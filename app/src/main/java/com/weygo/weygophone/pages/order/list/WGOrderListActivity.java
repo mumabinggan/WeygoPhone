@@ -152,7 +152,7 @@ public class WGOrderListActivity extends WGBaseActivity {
         });
 
         mEmptyView = findViewById(R.id.emptyView);
-        mContentView = findViewById(R.id.contentView);
+        mContentView = findViewById(R.id.dataContentView);
         mEmptyView.setVisibility(View.INVISIBLE);
     }
 

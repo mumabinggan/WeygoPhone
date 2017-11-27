@@ -7,8 +7,8 @@
 
     <RelativeLayout
         android:layout_width="@dimen/x212"
-        android:layout_height="@dimen/x228"
-        android:background="@drawable/shopcart_failure_good_bg">
+        android:layout_height="@dimen/x238"
+        android:background="@drawable/post_input_bg">
 
         <ImageView
             android:id="@+id/imageView"

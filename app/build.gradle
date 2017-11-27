@@ -138,6 +138,8 @@ dependencies {
     compile 'com.facebook.android:facebook-login:4.27.0'
 
     compile 'com.android.support:multidex:'
+
+    compile 'com.dyhdyh.loadingbar:loadingbar:1.4.6'
 }
 
 configurations.all {

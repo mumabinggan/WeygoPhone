@@ -4,111 +4,116 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/headBackgroundImageView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x225"
-                android:src="@drawable/tab_mine_head_bg"
-                android:scaleType="centerCrop"
-                />
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/editText"
-                android:orientation="vertical"
-                android:layout_width="@dimen/x265"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/headBackgroundImageView"
-                android:layout_marginTop="@dimen/x14"
-                android:layout_centerHorizontal="true">
-
-                <EditText
-                    android:id="@+id/usernameEditText"
+                <ImageView
+                    android:id="@+id/headBackgroundImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x41"
-                    android:hint="@string/Login_Email"
-                    android:textColorHint="@color/WGAppBaseTitleAAAColor"
-                    android:background="@null"
-                    android:textSize="@dimen/ft12"
-                    android:textColor="@color/WGAppBaseTitleAColor"
+                    android:layout_height="@dimen/x225"
+                    android:src="@drawable/tab_mine_head_bg"
+                    android:scaleType="centerCrop"
                     />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/navigaiotnBar_separate_color"></View>
-
-                <EditText
-                    android:id="@+id/passwordEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x41"
-                    android:hint="@string/Login_Password"
-                    android:textColorHint="@color/WGAppBaseTitleAAAColor"
-                    android:background="@null"
-                    android:textSize="@dimen/ft12"
-                    android:inputType="textPassword"
-                    android:textColor="@color/WGAppBaseTitleAColor"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/navigaiotnBar_separate_color"></View>
-                
-                <TextView
-                    android:id="@+id/forgetPWTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x32"
-                    android:textColor="@color/WGAppBaseTitleAAAColor"
-                    android:text="@string/Login_ForgetPW"
-                    android:gravity="center"
-                    android:textSize="@dimen/ft10"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x30"></View>
-
-                <Button
-                    android:id="@+id/loginBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x34"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/ft12"
-                    android:background="@drawable/register_btn_bg"
-                    android:text="@string/Login_Title"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x21"></View>
-
-
-                <Button
-                    android:id="@+id/registerBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x34"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/ft12"
-                    android:background="@drawable/login_btn_bg"
-                    android:text="@string/Register_Title"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x30"></View>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/editText"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/x265"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_below="@+id/headBackgroundImageView"
+                    android:layout_marginTop="@dimen/x14"
+                    android:layout_centerHorizontal="true">
 
-                    <!--<RelativeLayout-->
+                    <EditText
+                        android:id="@+id/usernameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x41"
+                        android:hint="@string/Login_Email"
+                        android:textColorHint="@color/WGAppBaseTitleAAAColor"
+                        android:background="@null"
+                        android:textSize="@dimen/ft12"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/navigaiotnBar_separate_color"></View>
+
+                    <EditText
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x41"
+                        android:hint="@string/Login_Password"
+                        android:textColorHint="@color/WGAppBaseTitleAAAColor"
+                        android:background="@null"
+                        android:textSize="@dimen/ft12"
+                        android:inputType="textPassword"
+                        android:textColor="@color/WGAppBaseTitleAColor"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/navigaiotnBar_separate_color"></View>
+
+                    <TextView
+                        android:id="@+id/forgetPWTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/x32"
+                        android:textColor="@color/WGAppBaseTitleAAAColor"
+                        android:text="@string/Login_ForgetPW"
+                        android:gravity="center"
+                        android:textSize="@dimen/ft10"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/x30"></View>
+
+                    <Button
+                        android:id="@+id/loginBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x34"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/ft12"
+                        android:background="@drawable/register_btn_bg"
+                        android:text="@string/Login_Title"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/x21"></View>
+
+
+                    <Button
+                        android:id="@+id/registerBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x34"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/ft12"
+                        android:background="@drawable/login_btn_bg"
+                        android:text="@string/Register_Title"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/x30"></View>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <!--<RelativeLayout-->
                         <!--android:id="@+id/wechatView"-->
                         <!--android:layout_width="@dimen/x125"-->
                         <!--android:layout_height="@dimen/x34"-->
@@ -117,76 +122,79 @@
                         <!--android:gravity="center">-->
 
                         <!--<LinearLayout-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_centerInParent="true">-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerInParent="true">-->
 
-                            <!--<ImageView-->
-                                <!--android:layout_width="@dimen/x20"-->
-                                <!--android:layout_height="@dimen/x20"-->
-                                <!--android:src="@drawable/common_wechat"/>-->
+                        <!--<ImageView-->
+                        <!--android:layout_width="@dimen/x20"-->
+                        <!--android:layout_height="@dimen/x20"-->
+                        <!--android:src="@drawable/common_wechat"/>-->
 
-                            <!--<Spinner-->
-                                <!--android:layout_width="@dimen/x7"-->
-                                <!--android:layout_height="@dimen/x20"></Spinner>-->
+                        <!--<Spinner-->
+                        <!--android:layout_width="@dimen/x7"-->
+                        <!--android:layout_height="@dimen/x20"></Spinner>-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="@dimen/x17"-->
-                                <!--android:text="@string/Login_Wechat"-->
-                                <!--android:gravity="center"-->
-                                <!--android:textColor="@color/WGAppBaseTitleAAColor"/>-->
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="@dimen/x17"-->
+                        <!--android:text="@string/Login_Wechat"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textColor="@color/WGAppBaseTitleAAColor"/>-->
 
                         <!--</LinearLayout>-->
 
-                    <!--</RelativeLayout>-->
+                        <!--</RelativeLayout>-->
 
-                    <RelativeLayout
-                        android:id="@+id/facebookView"
-                        android:layout_width="@dimen/x125"
-                        android:layout_height="@dimen/x34"
-                        android:background="@drawable/common_wechat_btn_bg"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center">
+                        <RelativeLayout
+                            android:id="@+id/facebookView"
+                            android:layout_width="@dimen/x125"
+                            android:layout_height="@dimen/x34"
+                            android:background="@drawable/common_wechat_btn_bg"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true">
-
-                            <ImageView
-                                android:layout_width="@dimen/x20"
-                                android:layout_height="@dimen/x20"
-                                android:src="@drawable/common_facebook"/>
-
-                            <Spinner
-                                android:layout_width="@dimen/x7"
-                                android:layout_height="@dimen/x20"></Spinner>
-
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/x17"
-                                android:text="@string/Login_Facebook"
-                                android:gravity="center"
-                                android:textColor="@color/WGAppBaseTitleAAColor"/>
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
 
-                        </LinearLayout>
+                                <ImageView
+                                    android:layout_width="@dimen/x20"
+                                    android:layout_height="@dimen/x20"
+                                    android:src="@drawable/common_facebook"/>
+
+                                <Spinner
+                                    android:layout_width="@dimen/x7"
+                                    android:layout_height="@dimen/x20"></Spinner>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/x17"
+                                    android:text="@string/Login_Facebook"
+                                    android:gravity="center"
+                                    android:textColor="@color/WGAppBaseTitleAAColor"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
 
-                </RelativeLayout>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/x27"></View>
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x27"></View>
-
-            </LinearLayout>
+                </LinearLayout>
 
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/returnImageView"

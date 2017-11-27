@@ -159,7 +159,7 @@ public class WGSearchActivity extends WGBaseActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();  //Activity中
         if (JHStringUtils.isNullOrEmpty(mSearchName)) {
             mHotFragment = new WGSearchHotFragment();
-            transaction.replace(R.id.content, mHotFragment);
+            transaction.replace(R.id.contentView, mHotFragment);
             mNavigationBar.setVistaHidden(true);
         }
         else {
@@ -172,7 +172,7 @@ public class WGSearchActivity extends WGBaseActivity {
                     handlePurchase(item, view, fromPoint);
                 }
             });
-            transaction.replace(R.id.content, mResultFragment);
+            transaction.replace(R.id.contentView, mResultFragment);
             mNavigationBar.setVistaHidden(false);
         }
         transaction.commit();

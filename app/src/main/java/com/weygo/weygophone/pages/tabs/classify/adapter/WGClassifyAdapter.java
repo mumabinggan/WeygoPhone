@@ -99,7 +99,6 @@ public class WGClassifyAdapter extends JHRecyclerViewAdapter {
     public void onBindViewHolder(JHBaseViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         WGClassifyItem item = mArray.get(position);
-        Log.e("-----", "+++"+position);
         holder.showWithData(item);
     }
 

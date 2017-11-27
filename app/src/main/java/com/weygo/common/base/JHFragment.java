@@ -21,6 +21,7 @@ import com.weygo.common.tools.network.JHNetworkUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
+import com.weygo.weygophone.common.WGLoadingView;
 
 import java.util.List;
 
@@ -33,13 +34,17 @@ public class JHFragment extends Fragment {
     //Dialog
     Dialog mShowDialog;
 
+    View mLoadingContentView;
+
+    View mParentView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initData();
-        View view = inflater.inflate(fragmentResId(), container, false);
-        initSubView(view);
+        mParentView = inflater.inflate(fragmentResId(), container, false);
+        initSubView(mParentView);
         loadRequest();
-        return view;
+        return mParentView;
     }
 
     public int fragmentResId() {
@@ -66,18 +71,34 @@ public class JHFragment extends Fragment {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
     }
 
+    public void showLoading() {
+        mLoadingContentView = mParentView.findViewById(R.id.contentView);
+        if (mLoadingContentView != null) {
+            WGLoadingView.show(mLoadingContentView);
+        }
+    }
+
+    public void hideLoading() {
+        mLoadingContentView = mParentView.findViewById(R.id.contentView);
+        if (mLoadingContentView != null) {
+            WGLoadingView.hidden(mLoadingContentView);
+        }
+    }
+
     //Request
     public void getAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            mShowDialog = JHDialogUtils.showLoadingDialog(getContext());
+            this.showLoading();
+            //mShowDialog = JHDialogUtils.showLoadingDialog(getContext());
         }
         JHNetworkUtils.getInstance().getAsyn(request, clazz, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
                 Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -87,7 +108,8 @@ public class JHFragment extends Fragment {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);
@@ -99,7 +121,8 @@ public class JHFragment extends Fragment {
     public void postAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            mShowDialog = JHDialogUtils.showLoadingDialog(getContext());
+            this.showLoading();
+            //mShowDialog = JHDialogUtils.showLoadingDialog(getContext());
         }
         JHNetworkUtils.getInstance().postAsyn(request, clazz, new JHResponseCallBack() {
             @Override
@@ -107,7 +130,8 @@ public class JHFragment extends Fragment {
                 Log.e("--onSuccess--", "success");
                 Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -117,7 +141,8 @@ public class JHFragment extends Fragment {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);

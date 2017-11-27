@@ -9,7 +9,7 @@
         layout="@layout/common_navigationbar" />
 
     <LinearLayout
-        android:id="@+id/layout"
+        android:id="@+id/contentView"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

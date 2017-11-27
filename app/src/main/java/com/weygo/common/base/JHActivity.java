@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -26,6 +27,7 @@ import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGMainActivity;
 import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.WGLoadingView;
 import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
 
@@ -50,6 +52,8 @@ public class JHActivity extends FragmentActivity {
     JHBroadcastReceiver mRefreshReceiver;
 
     List mRefreshNotificationList;
+
+    View mLoadingContentView;
 
     class JHBroadcastReceiver extends BroadcastReceiver {
         @Override
@@ -106,6 +110,20 @@ public class JHActivity extends FragmentActivity {
 
     public void showWarning(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void showLoading() {
+        mLoadingContentView = findViewById(R.id.contentView);
+        if (mLoadingContentView != null) {
+            WGLoadingView.show(mLoadingContentView);
+        }
+    }
+
+    public void hideLoading() {
+        mLoadingContentView = findViewById(R.id.contentView);
+        if (mLoadingContentView != null) {
+            WGLoadingView.hidden(mLoadingContentView);
+        }
     }
 
     public interface OnTouchAlertListener extends JHInterface {
@@ -181,14 +199,16 @@ public class JHActivity extends FragmentActivity {
     public void getAsyn(JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            mShowDialog = JHDialogUtils.showLoadingDialog(this);
+            this.showLoading();
+            //mShowDialog = JHDialogUtils.showLoadingDialog(this);
         }
         JHNetworkUtils.getInstance().getAsyn(request, clazz, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
                 Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -198,7 +218,8 @@ public class JHActivity extends FragmentActivity {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);
@@ -210,7 +231,8 @@ public class JHActivity extends FragmentActivity {
     public void postAsyn(final JHRequest request, Class clazz, final JHResponseCallBack callBack) {
         final boolean showLoading = request.showsLoadingView;
         if (showLoading) {
-            mShowDialog = JHDialogUtils.showLoadingDialog(this);
+            this.showLoading();
+            //mShowDialog = JHDialogUtils.showLoadingDialog(this);
         }
         JHNetworkUtils.getInstance().postAsyn(request, clazz, new JHResponseCallBack() {
             @Override
@@ -219,7 +241,8 @@ public class JHActivity extends FragmentActivity {
                 WGResponse response = (WGResponse)result;
 
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);
@@ -229,7 +252,8 @@ public class JHActivity extends FragmentActivity {
             @Override
             public void onFailure(JHRequestError error) {
                 if (showLoading) {
-                    JHDialogUtils.hideLoadingDialog(mShowDialog);
+                    hideLoading();
+                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onFailure(error);
