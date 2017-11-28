@@ -249,12 +249,13 @@ public class WGMainActivity extends WGBaseActivity {
     }
 
     void checkAppUpdate() {
-        WGUpdateRequest request = new WGUpdateRequest();
+        final WGUpdateRequest request = new WGUpdateRequest();
         request.showsLoadingView = false;
         this.postAsyn(request, WGUpdateResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
-                handleAppUpdateResponse((WGUpdateResponse) result);
+                WGUpdateResponse response = (WGUpdateResponse) result;
+                handleAppUpdateResponse(response);
             }
 
             @Override
@@ -267,11 +268,11 @@ public class WGMainActivity extends WGBaseActivity {
     void handleAppUpdateResponse(final WGUpdateResponse response) {
         if (response.success() && response.data != null) {
             if (response.data.versionStatus == 1) {
-                String [] newArray = response.data.versionCode.split(".");
+                String [] newArray = response.data.versionCode.split("\\.");
                 if (newArray.length == 3) {
                     int newVersionCode = Integer.parseInt(newArray[0]) * 1000 + Integer.parseInt(newArray[1]) * 100 + Integer.parseInt(newArray[2]);
                     String kAppVersion = JHDeviceUtils.getInstance().getVersionCode();
-                    String [] oldArray = kAppVersion.split(".");
+                    String [] oldArray = kAppVersion.split("\\.");
                     int oldVersionCode = Integer.parseInt(oldArray[0]) * 1000 + Integer.parseInt(oldArray[1]) * 100 + Integer.parseInt(oldArray[2]);
                     if (newVersionCode > oldVersionCode) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);

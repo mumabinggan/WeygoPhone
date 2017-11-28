@@ -176,7 +176,7 @@ public class JHTabBar extends LinearLayout implements View.OnClickListener {
             transaction.show(fragment);
         }
 
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
         view.setSelected(true);
     }
 

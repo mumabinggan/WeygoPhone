@@ -39,6 +39,7 @@ import com.weygo.weygophone.pages.goodDetail.model.response.WGCollectGoodRespons
 import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailRecommendResponse;
 import com.weygo.weygophone.pages.goodDetail.model.response.WGGoodDetailResponse;
 import com.weygo.weygophone.pages.goodDetail.widget.WGGoodDetailOperateView;
+import com.weygo.weygophone.pages.login.WGLoginActivity;
 import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
 import com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView;
@@ -72,6 +73,12 @@ public class WGGoodDetailActivity extends WGBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadGoodDetail();
         loadRecommendGoods();
     }
@@ -230,37 +237,42 @@ public class WGGoodDetailActivity extends WGBaseActivity {
     }
 
     void loadCollectGood(boolean collection) {
-        if (collection) {
-            WGCollectGoodRequest request = new WGCollectGoodRequest();
-            request.productId = mGoodId;
-            this.postAsyn(request, WGCollectGoodResponse.class, new JHResponseCallBack() {
-                @Override
-                public void onSuccess(JHResponse response) {
-                    handleCollectGoodSuccessResponse((WGCollectGoodResponse )response);
-                }
+        if (WGApplicationUserUtils.getInstance().isLogined()) {
+            if (collection) {
+                WGCollectGoodRequest request = new WGCollectGoodRequest();
+                request.productId = mGoodId;
+                this.postAsyn(request, WGCollectGoodResponse.class, new JHResponseCallBack() {
+                    @Override
+                    public void onSuccess(JHResponse response) {
+                        handleCollectGoodSuccessResponse((WGCollectGoodResponse )response);
+                    }
 
-                @Override
-                public void onFailure(JHRequestError error) {
-                    showWarning(R.string.Request_Fail_Tip);
-                }
-            });
+                    @Override
+                    public void onFailure(JHRequestError error) {
+                        showWarning(R.string.Request_Fail_Tip);
+                    }
+                });
+            }
+            else {
+                WGCancelCollectionGoodRequest request = new WGCancelCollectionGoodRequest();
+                request.id = mData.favoritedId;
+                this.postAsyn(request, WGCancelCollectionGoodResponse.class, new JHResponseCallBack() {
+                    @Override
+                    public void onSuccess(JHResponse response) {
+                        handleCancelCollectGoodSuccessResponse((WGCancelCollectionGoodResponse )response);
+                    }
+
+                    @Override
+                    public void onFailure(JHRequestError error) {
+                        showWarning(R.string.Request_Fail_Tip);
+                    }
+                });
+            }
         }
         else {
-            WGCancelCollectionGoodRequest request = new WGCancelCollectionGoodRequest();
-            request.id = mData.favoritedId;
-            this.postAsyn(request, WGCancelCollectionGoodResponse.class, new JHResponseCallBack() {
-                @Override
-                public void onSuccess(JHResponse response) {
-                    handleCancelCollectGoodSuccessResponse((WGCancelCollectionGoodResponse )response);
-                }
-
-                @Override
-                public void onFailure(JHRequestError error) {
-                    showWarning(R.string.Request_Fail_Tip);
-                }
-            });
+            Intent intent = new Intent(WGGoodDetailActivity.this, WGLoginActivity.class);
+            startActivity(intent);
         }
-
     }
 
     void handleCollectGoodSuccessResponse(WGCollectGoodResponse response) {

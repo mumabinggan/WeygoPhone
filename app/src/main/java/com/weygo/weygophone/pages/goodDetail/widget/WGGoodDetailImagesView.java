@@ -66,6 +66,10 @@ public class WGGoodDetailImagesView extends JHRelativeLayout {
         mTimeView = (WGCountDownTimeView) findViewById(R.id.countdownTimeView);
     }
 
+    public void setPageControlUnSelectColor(int color) {
+        mScrollImageView.setHintUnSelectColor(color);
+    }
+
     public void showWithArray(List list) {
         if (mlist == null) {
             mlist = list;

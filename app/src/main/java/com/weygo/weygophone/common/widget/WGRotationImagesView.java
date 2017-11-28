@@ -1,13 +1,18 @@
 package com.weygo.weygophone.common.widget;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.jude.rollviewpager.HintView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.weygo.common.tools.loadwebimage.JHImageUtils;
 import com.weygo.weygophone.R;
 
@@ -38,6 +43,12 @@ public class WGRotationImagesView extends RollPagerView {
         RotationImagesViewAdapter adapter = new RotationImagesViewAdapter();
         adapter.setData(list);
         setAdapter(adapter);
+    }
+
+    public void setHintUnSelectColor(int color) {
+        setHintView(new ColorPointHintView(getContext(),
+                getResources().getColor(R.color.WGAppBaseColor),
+                color));
     }
 
     static class RotationImagesViewAdapter extends StaticPagerAdapter {

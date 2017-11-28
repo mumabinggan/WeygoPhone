@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.goodDetail.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -178,6 +179,7 @@ public class WGGoodDetailAdapter extends JHRecyclerViewAdapter {
             int tag = (int) mView.getTag();
             if (tag == 0) {
                 WGGoodDetailImagesView view = (WGGoodDetailImagesView) mView;
+                view.setPageControlUnSelectColor(Color.GRAY);
                 List list = new ArrayList();
                 for(WGCarouselFigureItem carouseItem : item.carouselFigures) {
                     list.add(carouseItem.pictureURL);
