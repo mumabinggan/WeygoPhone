@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.weygo.common.base.JHLinearLayout;
 import com.weygo.common.base.JHRelativeLayout;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyDetail;
 import com.weygo.weygophone.pages.classifyDetail.model.WGClassifyFilterCondition;
@@ -100,14 +101,10 @@ public class WGClassifyDetailFilterView extends JHLinearLayout {
 
     public void showWithData(Object data) {
         if (data instanceof WGClassifyDetail) {
-            mSortView.setTextView(((WGClassifyDetail) data).selectedSortTitleResId());
-            WGClassifyFilterCondition condition = ((WGClassifyDetail) data).filterCondition();
-            if (condition != null) {
-                mFilterView.setViewSelected(condition.isSelected());
-            }
-            else {
-                mFilterView.setViewSelected(false);
-            }
+            WGClassifyDetail classifyDetail = (WGClassifyDetail) data;
+            mSortView.setTextView(classifyDetail.selectedSortTitleResId());
+            mSortView.setViewSelected(!classifyDetail.isDefaultSort());
+            mFilterView.setViewSelected(!classifyDetail.isDefaultCondition());
             mGridView.setViewSelected(((WGClassifyDetail) data).isGrid());
         }
     }

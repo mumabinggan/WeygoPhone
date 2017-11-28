@@ -76,8 +76,8 @@ public class WGConstants {
     //分类详情排序类型
     public static final int WGClassifySortTypeDefault = 0;
     public static final int WGClassifySortTypeBranch = 1;
-    public static final int WGClassifySortTypePriceDown = 2;
-    public static final int WGClassifySortTypePriceUp = 3;
+    public static final int WGClassifySortTypePriceUp = 2;
+    public static final int WGClassifySortTypePriceDown = 3;
 
     //Intent Result
     public static final int WGCommitOrderReceiptReturn = 10;

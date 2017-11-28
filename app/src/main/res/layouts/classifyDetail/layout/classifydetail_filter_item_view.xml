@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/imageView"
         android:layout_centerVertical="true"
+        android:textColor="@color/WGAppBaseTitleAAColor"
         android:text="哈哈">
     </TextView>
 

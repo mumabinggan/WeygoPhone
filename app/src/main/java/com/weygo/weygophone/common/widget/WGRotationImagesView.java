@@ -43,12 +43,19 @@ public class WGRotationImagesView extends RollPagerView {
         RotationImagesViewAdapter adapter = new RotationImagesViewAdapter();
         adapter.setData(list);
         setAdapter(adapter);
+        setHintUnSelectColor(Color.WHITE);
+        //setHintAlpha(0);
     }
 
     public void setHintUnSelectColor(int color) {
-        setHintView(new ColorPointHintView(getContext(),
-                getResources().getColor(R.color.WGAppBaseColor),
-                color));
+        if (mList != null && mList.size() > 1) {
+            setHintView(new ColorPointHintView(getContext(),
+                    getResources().getColor(R.color.WGAppBaseColor),
+                    color));
+        }
+        else {
+            setHintView(null);
+        }
     }
 
     static class RotationImagesViewAdapter extends StaticPagerAdapter {

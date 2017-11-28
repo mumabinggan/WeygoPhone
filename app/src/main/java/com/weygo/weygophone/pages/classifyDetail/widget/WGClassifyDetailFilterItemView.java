@@ -28,6 +28,10 @@ public class WGClassifyDetailFilterItemView extends JHRelativeLayout {
         mTextView.setText(resId);
     }
 
+    public void setTextView(String string) {
+        mTextView.setText(string);
+    }
+
     public WGClassifyDetailFilterItemView(Context context) {
         super(context);
     }
@@ -48,7 +52,7 @@ public class WGClassifyDetailFilterItemView extends JHRelativeLayout {
     }
 
     public void setViewSelected(boolean selected) {
-        int resId = selected ? R.color.WGAppBlueButtonColor : R.color.WGAppBaseColor;
+        int resId = selected ? R.color.WGAppBlueButtonColor : R.color.WGAppBaseTitleAAColor;
         mTextView.setTextColor(JHResourceUtils.getInstance().getColor(resId));
     }
 }

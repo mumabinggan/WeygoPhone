@@ -8,6 +8,9 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
+import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.weygophone.R;
+
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -33,10 +36,17 @@ public class WGOptionPickerView extends OptionPicker {
         setHeight(400);
         setCanceledOnTouchOutside(false);
         setDividerRatio(WheelView.DividerConfig.FILL);
-        setShadowColor(Color.RED, 40);
+        setShadowColor(Color.WHITE);
         setSelectedIndex(1);
         setCycleDisable(true);
-        setTextSize(11);
+        setTextSize(14);
+        setLineSpaceMultiplier(3);
+        setTopLineVisible(false);
+        int color = JHResourceUtils.getInstance().getColor(R.color.WGAppBaseColor);
+        setCancelTextColor(color);
+        setSubmitTextColor(color);
+        setTextColor(color, Color.GRAY);
+        setDividerColor(Color.rgb(210, 210, 210));
     }
 
     @Override

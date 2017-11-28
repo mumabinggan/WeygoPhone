@@ -160,6 +160,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                 }
                 if (totalDy >= JHAdaptScreenUtils.pixelWidth(getActivity(), 150 + hotHeight)) {
                     mFilterView.setVisibility(View.VISIBLE);
+                    mFilterView.showWithData(mData);
                 }
                 else {
                     mFilterView.setVisibility(View.INVISIBLE);
@@ -261,7 +262,19 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                 JHResourceUtils.getInstance().getString(R.string.ClassifyDetail_Price_Up),
                 JHResourceUtils.getInstance().getString(R.string.ClassifyDetail_Price_Down)
         });
-//        WGOptionPickerView picker = new WGOptionPickerView(getActivity(), mData.mSortTitles);
+        int index = 0;
+        if (mData.sortType() == WGConstants.WGClassifySortTypeDefault) {
+            index = 0;
+        }
+        else if (mData.sortType() == WGConstants.WGClassifySortTypeBranch) {
+            index = 1;
+        }
+        else if (mData.sortType() == WGConstants.WGClassifySortTypePriceUp) {
+            index = 2;
+        }
+        else if (mData.sortType() == WGConstants.WGClassifySortTypePriceDown) {
+            index = 3;
+        }
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
             @Override
             public void onOptionPicked(int index, String item) {
@@ -270,6 +283,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                 selectSortType(index);
             }
         });
+        picker.setSelectedIndex(index);
         picker.show();
     }
 
@@ -312,7 +326,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
         request.classifyId = mClassifyId;
         StringBuilder subClassifyIds = new StringBuilder();
         if (mFilterCondition != null) {
-            for (WGClassifyKeyword item : mFilterCondition.brands) {
+            for (WGClassifyItem item : mFilterCondition.classifys) {
                 if (item.isSelected) {
                     subClassifyIds.append(item.id);
                     subClassifyIds.append(",");
@@ -326,18 +340,17 @@ public class WGClassifyDetailContentFragment extends WGFragment {
 
         StringBuilder keywords = new StringBuilder();
         if (mFilterCondition != null) {
-            for (WGClassifyItem item : mFilterCondition.classifys) {
+            for (WGClassifyKeyword item : mFilterCondition.brands) {
                 if (item.isSelected) {
-                    subClassifyIds.append(item.id);
-                    subClassifyIds.append(",");
+                    keywords.append(item.id);
+                    keywords.append(",");
                 }
             }
             if (keywords.length() > 0) {
                 keywords.deleteCharAt(keywords.length()-1);
             }
         }
-        request.subClassifyIds = keywords.toString();
-        request.brandIds = subClassifyIds.toString();
+        request.brandIds = keywords.toString();
         Integer count = 0;
         if (!refresh) {
             if (mData != null && mData.goodArray != null) {
@@ -372,7 +385,13 @@ public class WGClassifyDetailContentFragment extends WGFragment {
         finishRefresh(mRefreshLayout, refresh, pulling);
         if (response.success()) {
             if (refresh) {
-                mData = response.data;
+                if (mData == null) {
+                    mData = response.data;
+                }
+                else {
+                    mData.recommendedArray = response.data.recommendedArray;
+                    mData.goodArray = response.data.goodArray;
+                }
             }
             else {
                 mData.recommendedArray = response.data.recommendedArray;
@@ -412,6 +431,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
             Bundle bundle = data.getExtras();
             if (bundle != null) {
                 mFilterCondition = (WGClassifyFilterCondition) bundle.getSerializable(WGConstants.WGIntentDataKey);
+                mData.setFilterCondition(mFilterCondition);
                 loadClassifyDetail(true, false);
             }
         }

@@ -113,6 +113,9 @@ public class WGClassifyDetailActivity extends WGBaseActivity {
                 mData = data;
                 if (mData != null && !JHStringUtils.isNullOrEmpty(mData.name)) {
                     mNavigationBar.setTitle(mData.name);
+                    if (mData.subArray == null || mData.subArray.size() == 0) {
+                        mNavigationBar.setArrHidden();
+                    }
                 }
             }
 

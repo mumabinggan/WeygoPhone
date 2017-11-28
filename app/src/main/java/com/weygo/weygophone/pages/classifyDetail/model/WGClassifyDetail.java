@@ -68,6 +68,9 @@ public class WGClassifyDetail extends WGObject {
     public int selectedSortTitleResId() {
         return mSortTitles.get(mSortType);
     }
+    public boolean isDefaultSort() {
+        return (mSortType == WGConstants.WGClassifySortTypeDefault);
+    }
 
     //筛选
     WGClassifyFilterCondition mFilterCondition;
@@ -76,6 +79,9 @@ public class WGClassifyDetail extends WGObject {
     }
     public void setFilterCondition(WGClassifyFilterCondition filterCondition) {
         mFilterCondition = filterCondition;
+    }
+    public boolean isDefaultCondition() {
+        return (mFilterCondition == null || !mFilterCondition.isSelected());
     }
 
     //Vista

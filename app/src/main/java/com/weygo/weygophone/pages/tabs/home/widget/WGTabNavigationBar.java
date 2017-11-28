@@ -80,6 +80,10 @@ public class WGTabNavigationBar extends RelativeLayout implements View.OnClickLi
         return findViewById(R.id.shopCartView);
     }
 
+    public void setArrHidden() {
+        mTitleLabel.setCompoundDrawables(null, null, null, null);
+    }
+
     public int[] getShopCartViewPoint() {
         View view = findViewById(R.id.shopCartView);
         int[] endPoint = new int[2];

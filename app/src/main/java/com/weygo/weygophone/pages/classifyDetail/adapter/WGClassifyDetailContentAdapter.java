@@ -74,10 +74,9 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
             }
         }
         CellData cellData = new CellData(Item_Type.ITEM_TYPE_GoodFilter,
-                null);
+                mData);
         mPostionValueMap.put(key, cellData);
         key++;
-        notifyDataSetChanged();
         if (mData.hasGoods()) {
             if (mData.isGrid()) {
                 List<WGHomeFloorContentGoodItem> goodArray = mData.goodArray;
@@ -108,6 +107,7 @@ public class WGClassifyDetailContentAdapter extends JHRecyclerViewAdapter {
                 }
             }
         }
+        notifyDataSetChanged();
     }
 
     public enum Item_Type {
