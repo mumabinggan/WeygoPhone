@@ -263,6 +263,7 @@
 
     //发票
     <string name="AddReceipt_Title">Dati fattura</string>
+    <string name="Fax_Raginone">Raginone sociale</string>
     <string name="Fax_Cancel">Annulla</string>
     <string name="Fax_Apply">Invia</string>
     <string name="Fax_Italia">Italia</string>

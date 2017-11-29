@@ -40,6 +40,10 @@ public class WGCellStyle4View extends JHRelativeLayout {
         mtextView.setText(resId);
     }
 
+    public void setTitleColor(int color) {
+        mtextView.setTextColor(color);
+    }
+
     public void setDetailTitle(int resId) {
         mDetailTextView.setText(resId);
     }

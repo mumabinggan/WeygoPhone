@@ -66,7 +66,7 @@ public class WGAddressListItemView extends JHRelativeLayout {
         mAddressTV = (TextView) findViewById(R.id.addressValueTV);
         mPhoneTV = (TextView) findViewById(R.id.phoneValueTV);
         mDefaultTV = (TextView) findViewById(R.id.defaultTV);
-        mDefaultTV.setText("  " + JHResourceUtils.getInstance().getString(R.string.AddressList_Default) + "  ");
+        mDefaultTV.setText("   " + JHResourceUtils.getInstance().getString(R.string.AddressList_Default) + "   ");
         mUnDefaultTV = (TextView) findViewById(R.id.unDefaultTV);
         mUnDefaultTV.setText("  " + JHResourceUtils.getInstance().getString(R.string.AddressList_unDefault) + "  ");
         mUnDefaultTV.setOnClickListener(new OnClickListener() {

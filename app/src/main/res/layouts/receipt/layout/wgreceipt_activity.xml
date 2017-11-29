@@ -42,7 +42,7 @@
                         android:layout_height="@dimen/x41"
                         android:textColor="#000000"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Cognome"
+                        android:hint="@string/Fax_Raginone"
                         android:background="@null"
                         android:paddingLeft="@dimen/x13"
                         android:paddingRight="@dimen/x13"/>
@@ -149,7 +149,7 @@
                         android:layout_height="@dimen/x41"
                         android:textColor="#000000"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Citofono"
+                        android:hint="@string/Fax_fiscale"
                         android:background="@null"
                         android:paddingLeft="@dimen/x13"
                         android:paddingRight="@dimen/x13"/>

@@ -21,7 +21,7 @@
                 android:layout_height="@dimen/x20"
                 android:maxLines="1"
                 android:textSize="@dimen/ft12"
-                android:textColor="#000000"
+                android:textColor="@color/WGAppBaseTitleAAAColor"
                 android:text="@string/CommitOrder_Total"/>
 
             <TextView
@@ -30,7 +30,7 @@
                 android:layout_height="@dimen/x20"
                 android:maxLines="1"
                 android:textSize="@dimen/ft12"
-                android:textColor="#000000"
+                android:textColor="@color/WGAppBaseTitleAAAColor"
                 android:text="@string/CommitOrder_DeliverPrice"/>
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_height="@dimen/x20"
                 android:maxLines="1"
                 android:textSize="@dimen/ft12"
-                android:textColor="#000000"
+                android:textColor="@color/WGAppBaseTitleAAAColor"
                 android:text="@string/CommitOrder_CouponPrice"/>
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_height="@dimen/x20"
                 android:maxLines="1"
                 android:textSize="@dimen/ft12"
-                android:textColor="#000000"
+                android:textColor="@color/WGAppBaseTitleAAAColor"
                 android:text="@string/CommitOrder_Score"/>
 
         </LinearLayout>

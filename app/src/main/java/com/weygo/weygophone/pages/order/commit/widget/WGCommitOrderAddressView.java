@@ -45,7 +45,6 @@ public class WGCommitOrderAddressView extends JHRelativeLayout {
             WGAddress item = (WGAddress) object;
             mNameTV.setText(item.fullName + "  " +
                     item.address + "   " +
-                    item.cap + "   " +
                     item.phone);
         }
     }

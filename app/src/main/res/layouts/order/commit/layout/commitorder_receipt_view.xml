@@ -14,7 +14,7 @@
         android:src="@drawable/common_right_arr" />
 
     <TextView
-        android:id="@+id/companyTV"
+        android:id="@+id/addressTV"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x25"
         android:layout_centerVertical="true"
@@ -26,25 +26,25 @@
         android:textColor="@color/WGAppBaseTitleAAAColor" />
 
     <TextView
+        android:id="@+id/companyTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x25"
+        android:layout_alignLeft="@+id/addressTV"
+        android:layout_alignRight="@+id/addressTV"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/addressTV"
+        android:textSize="@dimen/ft12"
+        android:textColor="@color/WGAppBaseTitleAAAColor"
+        />
+
+    <TextView
         android:id="@+id/taxTV"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x25"
         android:layout_alignLeft="@+id/companyTV"
         android:layout_alignRight="@+id/companyTV"
         android:layout_gravity="center_horizontal"
-        android:layout_above="@+id/companyTV"
-        android:textSize="@dimen/ft12"
-        android:textColor="@color/WGAppBaseTitleAAAColor"
-        />
-
-    <TextView
-        android:id="@+id/capTV"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x25"
-        android:layout_alignLeft="@+id/companyTV"
-        android:layout_alignRight="@+id/companyTV"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/companyTV"
+        android:layout_below="@+id/addressTV"
         android:textSize="@dimen/ft12"
         android:textColor="@color/WGAppBaseTitleAAAColor"
         />

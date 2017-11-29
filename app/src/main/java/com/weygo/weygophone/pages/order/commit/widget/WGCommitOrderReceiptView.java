@@ -21,7 +21,7 @@ public class WGCommitOrderReceiptView extends JHRelativeLayout {
 
     TextView mCompanyTV;
 
-    TextView mCapTV;
+    TextView mAddressTV;
 
     public WGCommitOrderReceiptView(Context context) {
         super(context);
@@ -40,7 +40,7 @@ public class WGCommitOrderReceiptView extends JHRelativeLayout {
         super.onFinishInflate();
         mTaxTV = (TextView) findViewById(R.id.taxTV);
         mCompanyTV = (TextView) findViewById(R.id.companyTV);
-        mCapTV = (TextView) findViewById(R.id.capTV);
+        mAddressTV = (TextView) findViewById(R.id.addressTV);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class WGCommitOrderReceiptView extends JHRelativeLayout {
             WGReceipt item = (WGReceipt) object;
             mTaxTV.setText(item.taxCode);
             mCompanyTV.setText(item.companyName);
-            mCapTV.setText(item.cap);
+            mAddressTV.setText(item.address);
         }
     }
 

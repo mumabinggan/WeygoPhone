@@ -100,7 +100,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
         if (requestCode == 0 && data != null) {
             Bundle bundle = data.getExtras();
             if (bundle != null) {
-                if (resultCode == WGConstants.WGCommitOrderReceiptReturn) {
+                if (resultCode == WGConstants.WGCommitOrderReceiptCommitReturn) {
                     WGReceipt receipt = (WGReceipt) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.receipt = receipt;
                     refreshUI();
@@ -120,6 +120,12 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                     WGUseIntegrationData integral = (WGUseIntegrationData) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.useIntegration = integral.use;
                     mData.consumePrice = integral.price;
+                    refreshUI();
+                }
+            }
+            else {
+                if (resultCode == WGConstants.WGCommitOrderReceiptCancelReturn) {
+                    mData.receipt = null;
                     refreshUI();
                 }
             }
@@ -300,8 +306,16 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     void handleDeliverDate() {
         List<String> list = new ArrayList();
-        for (WGSettlementDate item : mData.deliverTime.deliverTimes) {
+        List<WGSettlementDate> times = mData.deliverTime.deliverTimes;
+        int index = 0;
+        for (int num = 0; num < times.size(); ++num) {
+            WGSettlementDate item = times.get(num);
             list.add(item.week + "  " + item.date);
+            if (mData.deliverTime.currentDateId != null) {
+                if (item.id.equals(mData.deliverTime.currentDateId)) {
+                    index = num;
+                }
+            }
         }
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
@@ -311,6 +325,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                     handleSelectDeliverDate(index, item);
                 }
             });
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }
@@ -324,9 +339,17 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     }
 
     void handleDeliverTime() {
+        List<WGSettlementTime> times = mData.deliverTime.getCurrentTimes();
+        int index = 0;
         List<String> list = new ArrayList();
-        for (WGSettlementTime item : mData.deliverTime.getCurrentTimes()) {
+        for (int num = 0; num < times.size(); ++num) {
+            WGSettlementTime item = times.get(num);
             list.add(item.time);
+            if (mData.deliverTime.currentTimeId != null) {
+                if (item.id.equals(mData.deliverTime.currentTimeId)) {
+                    index = num;
+                }
+            }
         }
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
@@ -336,6 +359,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                     handleSelectDeliverTime(index, item);
                 }
             });
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }

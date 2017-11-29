@@ -23,7 +23,8 @@
         android:gravity="left|center_vertical"
         android:layout_marginTop="@dimen/x7"
         android:layout_marginLeft="@dimen/x48"
-        android:layout_marginRight="@dimen/x20"/>
+        android:layout_marginRight="@dimen/x20"
+        android:lineSpacingMultiplier="1.5"/>
 
     <ImageView
         android:id="@+id/arrImageView"

@@ -40,7 +40,7 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/ft12"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/login_btn_bg"
+            android:background="@drawable/register_btn_bg"
             android:text="@string/CommitOrder_Confirm" />
 
     </RelativeLayout>

@@ -264,6 +264,7 @@
 
     //发票
     <string name="AddReceipt_Title">新增发票</string>
+    <string name="Fax_Raginone">公司名称</string>
     <string name="Fax_Cancel">取消</string>
     <string name="Fax_Apply">提交</string>
     <string name="Fax_Italia">意大利</string>

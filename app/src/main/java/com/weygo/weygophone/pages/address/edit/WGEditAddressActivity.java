@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.address.edit;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -121,6 +122,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
         mPianoET = (EditText) findViewById(R.id.floorET);
         mCityView = (WGCellStyle4View) findViewById(R.id.cityView);
         mCityView.setTitle(R.string.Address_Citta);
+        mCityView.setTitleColor(Color.BLACK);
         mCityView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

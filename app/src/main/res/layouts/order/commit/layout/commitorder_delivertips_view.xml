@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/ft12"
-        android:textColor="#000000"
+        android:textColor="@color/WGAppBaseTitleAAColor"
         android:padding="@dimen/x13" />
 
 </com.weygo.weygophone.pages.order.commit.widget.WGCommitOrderDeliverTipsView>

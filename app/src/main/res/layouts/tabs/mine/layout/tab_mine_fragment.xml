@@ -37,9 +37,7 @@
                     android:layout_height="@dimen/x68"
                     android:layout_marginTop="@dimen/x70"
                     android:layout_centerHorizontal="true"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#ffffff"/>
-
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:id="@+id/nameTextView"
@@ -386,5 +384,13 @@
         android:text="@string/Mine_Title"
         />
 
+    <include
+        android:id="@+id/shopCartView"
+        layout="@layout/common_shopcart_withcount"
+        android:layout_width="@dimen/x26"
+        android:layout_height="@dimen/x24"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginRight="@dimen/x3"/>
 
 </RelativeLayout>

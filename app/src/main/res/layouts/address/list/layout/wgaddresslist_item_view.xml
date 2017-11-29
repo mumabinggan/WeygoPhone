@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:textSize="@dimen/ft12"
-        android:textColor="#000000"
+        android:textColor="@color/WGAppBaseTitleAAColor"
         android:gravity="center_vertical"
         android:text="@string/AddressList_FullName"/>
 
@@ -33,7 +33,7 @@
         android:textSize="@dimen/ft12"
         android:layout_below="@+id/nameValueTV"
         android:layout_marginTop="@dimen/x10"
-        android:textColor="#000000"
+        android:textColor="@color/WGAppBaseTitleAAColor"
         android:gravity="center_vertical"
         android:text="@string/Address_Indirizzo"/>
 
@@ -59,9 +59,9 @@
         android:textSize="@dimen/ft12"
         android:layout_below="@+id/addressValueTV"
         android:layout_marginTop="@dimen/x10"
-        android:textColor="#000000"
+        android:textColor="@color/WGAppBaseTitleAAColor"
         android:gravity="center_vertical"
-        android:text="@string/Address_Indirizzo"/>
+        android:text="@string/Address_Telefono_Cellulare"/>
 
     <TextView
         android:id="@+id/phoneValueTV"
@@ -119,6 +119,7 @@
         android:textColor="#ffffff"
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
+        android:textAlignment="center"
         android:background="@drawable/address_default_bg"/>
 
     <TextView

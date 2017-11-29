@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
 import com.weygo.weygophone.R;
@@ -99,6 +100,7 @@ public class WGReceiptActivity extends WGTitleActivity {
                 handleCountry();
             }
         });
+        mCountryView.setTitleColor(JHResourceUtils.getInstance().getColor(R.color.WGAppBaseTitleAColor));
         mCodiceET = (EditText) findViewById(R.id.codiceET);
         mCommitBtn = (Button) findViewById(R.id.commitBtn);
         mCommitBtn.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +120,8 @@ public class WGReceiptActivity extends WGTitleActivity {
     }
 
     void handleCancel() {
+        Intent intent = new Intent();
+        setResult(WGConstants.WGCommitOrderReceiptCancelReturn, intent);
         finish();
     }
 
@@ -134,7 +138,7 @@ public class WGReceiptActivity extends WGTitleActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(WGConstants.WGIntentDataKey, mData);
         intent.putExtras(bundle);
-        setResult(WGConstants.WGCommitOrderReceiptReturn, intent);
+        setResult(WGConstants.WGCommitOrderReceiptCommitReturn, intent);
         finish();
     }
 
@@ -152,9 +156,14 @@ public class WGReceiptActivity extends WGTitleActivity {
     }
 
     void handleCountry() {
+        int index = 0;
         List<String> list = new ArrayList();
-        for (WGReceiptCountryListItem item : mCountryList) {
+        for (int num = 0; num < mCountryList.size(); ++num) {
+            WGReceiptCountryListItem item = mCountryList.get(num);
             list.add(item.label);
+            if (mData != null && mData.countryId.equals(item.value)) {
+                index = num;
+            }
         }
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
@@ -164,6 +173,7 @@ public class WGReceiptActivity extends WGTitleActivity {
                     handleSelectedCountry(index, item);
                 }
             });
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }

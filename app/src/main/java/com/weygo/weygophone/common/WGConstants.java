@@ -80,7 +80,8 @@ public class WGConstants {
     public static final int WGClassifySortTypePriceDown = 3;
 
     //Intent Result
-    public static final int WGCommitOrderReceiptReturn = 10;
+    public static final int WGCommitOrderReceiptCommitReturn = 10;
+    public static final int WGCommitOrderReceiptCancelReturn = 14;
     public static final int WGCommitOrderAddressReturn = 11;
     public static final int WGCommitOrderCouponReturn = 12;
     public static final int WGCommitOrderIntegralReturn = 13;
@@ -97,5 +98,7 @@ public class WGConstants {
     //绑定类型
     public static final int WGBindTypeFaceBook = 1;
     public static final int WGBindTypeWechat = 2;
+
+
 }
 

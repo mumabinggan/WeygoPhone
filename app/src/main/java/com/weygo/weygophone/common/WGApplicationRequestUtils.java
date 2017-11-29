@@ -53,8 +53,6 @@ public class WGApplicationRequestUtils {
 
     Context mContext;
 
-    Dialog mShowDialog;
-
     private static final WGApplicationRequestUtils ourInstance = new WGApplicationRequestUtils();
 
     public static WGApplicationRequestUtils getInstance(Context context) {
@@ -135,7 +133,7 @@ public class WGApplicationRequestUtils {
     }
 
     void showWarning(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_LONG);
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
     void showWarning(int resId) {

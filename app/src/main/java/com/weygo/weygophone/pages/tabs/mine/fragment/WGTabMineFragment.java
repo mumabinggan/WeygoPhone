@@ -33,6 +33,7 @@ import com.weygo.weygophone.pages.integral.myIntegral.WGMyIntegralActivity;
 import com.weygo.weygophone.pages.order.commit.WGCommitOrderActivity;
 import com.weygo.weygophone.pages.order.list.WGOrderListActivity;
 import com.weygo.weygophone.pages.personInfo.WGPersonInfoActivity;
+import com.weygo.weygophone.pages.search.widget.WGShopCartView;
 import com.weygo.weygophone.pages.setting.WGSettingActivity;
 
 import org.w3c.dom.Text;
@@ -50,6 +51,8 @@ public class WGTabMineFragment extends WGFragment {
     CircleImageView mHeadImageView;
 
     TextView mNameTextView;
+
+    WGShopCartView mShopCartView;
 
     TextView mPostCodeTextView;
 
@@ -101,6 +104,9 @@ public class WGTabMineFragment extends WGFragment {
         //Name
         mNameTextView = (TextView) view.findViewById(R.id.nameTextView);
 //        mNameTextView.setText(WGApplicationUserUtils.getInstance().fullName());
+
+        mShopCartView = (WGShopCartView) view.findViewById(R.id.shopCartView);
+        mShopCartView.handelShopCart();
 
         //Cap
         mPostCodeTextView = (TextView) view.findViewById(R.id.postCodeTextView);
