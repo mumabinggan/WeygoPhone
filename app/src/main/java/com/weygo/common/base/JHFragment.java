@@ -127,7 +127,6 @@ public class JHFragment extends Fragment {
         JHNetworkUtils.getInstance().postAsyn(request, clazz, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse result) {
-                Log.e("--onSuccess--", "success");
                 Log.e("onSuccess", JSON.toJSONString(result));
                 if (showLoading) {
                     hideLoading();

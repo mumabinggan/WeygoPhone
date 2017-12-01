@@ -29,4 +29,24 @@ public class JHWarningUtils extends JHObject {
         showToast(WGApplication.getContext(), message);
     }
 
+
+//    public static Request.Builder addCommonCookie(Request.Builder builder){    //添加http请求字段
+//        Map<String,String> cookieMap=new HashMap<>();    //添加sessionId
+//        String sessionId= SharedPreferencesUtil.getInstance(BaseApplication.getMyApplicationContext())
+//                .getString(ConstantsOpenSdk.LOGIN_SESSION_ID);
+//        if(sessionId!=null&&!sessionId.equals("")){
+//            cookieMap.put("Cookie",sessionId);
+//            Config.newInstance().setProperty(cookieMap);
+//        }
+//
+//        if (mConfig != null && mConfig.property != null
+//                && !mConfig.property.isEmpty()) {
+//            for (Map.Entry<String, String> map : mConfig.property.entrySet()) {
+//                if(!TextUtils.isEmpty(map.getValue())) {
+//                    builder.header(map.getKey(), map.getValue());
+//                }
+//            }
+//        }
+//        return builder;
+//    }
 }

@@ -42,7 +42,6 @@ public class WGOrderNumberView extends RelativeLayout {
     public void showWithData(WGOrderListItem item) {
         if (item != null) {
             String orderNumberString = JHResourceUtils.getInstance().getString(R.string.OrderList_OrderNumber);
-            Log.e("----------", orderNumberString);
             mOrderNumberTV.setText(String.format(orderNumberString, item.sn));
             mOrderStateTV.setText(item.status);
         }

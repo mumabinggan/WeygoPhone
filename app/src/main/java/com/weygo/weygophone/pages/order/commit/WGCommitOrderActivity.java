@@ -20,13 +20,16 @@ import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGIntegrationHelpView;
 import com.weygo.weygophone.common.widget.WGOptionPickerView;
+import com.weygo.weygophone.common.widget.WGWeightFloatView;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.list.WGAddressListActivity;
 import com.weygo.weygophone.pages.address.list.model.WGAddressListData;
 import com.weygo.weygophone.pages.coupon.WGCouponListActivity;
 import com.weygo.weygophone.pages.coupon.model.WGActiveCouponData;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.integral.useIntegral.WGUseIntegrationActivity;
 import com.weygo.weygophone.pages.integral.useIntegral.model.response.WGUseIntegrationData;
 import com.weygo.weygophone.pages.order.commit.adapter.WGCommitOrderAdapter;
@@ -86,6 +89,8 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
     WGCommitOrderOverWeightPopView mOverWeightView;
 
+    WGWeightFloatView mWeightFloatPopView;
+
     JHBasePopupWindow mWindow;
 
     @Override
@@ -114,7 +119,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                 else if (resultCode == WGConstants.WGCommitOrderAddressReturn) {
                     WGAddress address = (WGAddress) bundle.getSerializable(WGConstants.WGIntentDataKey);
                     mData.address = address;
-                    refreshUI();
+                    loadOverHeightDetail();
                 }
                 else if (resultCode == WGConstants.WGCommitOrderIntegralReturn) {
                     WGUseIntegrationData integral = (WGUseIntegrationData) bundle.getSerializable(WGConstants.WGIntentDataKey);
@@ -182,7 +187,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
 
             @Override
             public void onGoodItem(WGOrderGoodItem item) {
-
+                handleGood(item);
             }
 
             @Override
@@ -372,9 +377,15 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     }
 
     void handlePayMethod() {
+        int index = 0;
         List<String> list = new ArrayList();
-        for (WGSettlementPayMethod item : mData.payMothod.payMethods) {
+        List<WGSettlementPayMethod> payMethods = mData.payMothod.payMethods;
+        for (int num = 0; num < payMethods.size(); ++num) {
+            WGSettlementPayMethod item = payMethods.get(num);
             list.add(item.name);
+            if (item.id.equals(mData.payMothod.currentPayId)) {
+                index = num;
+            }
         }
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
@@ -384,6 +395,7 @@ public class WGCommitOrderActivity extends WGTitleActivity {
                     handleSelectPayMethod(index, item);
                 }
             });
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }
@@ -400,18 +412,35 @@ public class WGCommitOrderActivity extends WGTitleActivity {
     }
 
     void handleLookMore() {
+        mWeightFloatPopView = (WGWeightFloatView) getLayoutInflater()
+                .inflate(R.layout.commitorder_weight_float_pop, null);
+        mWindow = new JHBasePopupWindow(mWeightFloatPopView,
+                JHAdaptScreenUtils.devicePixelWidth(this),
+                JHAdaptScreenUtils.devicePixelHeight(this));
+        mWeightFloatPopView.setPopupWindow(mWindow);
+        mWeightFloatPopView.showWithData(mData.tip);
+        mWindow.showAtLocation(mWeightFloatPopView, Gravity.CENTER, 0, 0);
+    }
 
+    void handleGood(WGOrderGoodItem item) {
+        Intent intent = new Intent(this, WGGoodDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(WGConstants.WGIntentDataKey, item.id);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void handleCoupon() {
         Intent intent = new Intent(WGCommitOrderActivity.this, WGCouponListActivity.class);
-        if (mData != null && mData.coupon != null) {
+        if (mData != null) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(WGConstants.WGIntentDataKey, mData.coupon);
             bundle.putSerializable(WGConstants.WGIntentDataKey1, true);
+            if (mData.coupon != null) {
+                bundle.putSerializable(WGConstants.WGIntentDataKey, mData.coupon);
+            }
             intent.putExtras(bundle);
+            startActivityForResult(intent, 0);
         }
-        startActivityForResult(intent, 0);
     }
 
     void handleReceipt() {

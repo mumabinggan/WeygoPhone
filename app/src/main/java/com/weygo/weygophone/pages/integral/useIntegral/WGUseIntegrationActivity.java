@@ -123,10 +123,11 @@ public class WGUseIntegrationActivity extends WGTitleActivity {
         final int remove = mIntegration.hasUsed() ? 1 : 0;
         final WGUseIntegrationRequest request = new WGUseIntegrationRequest();
         request.remove = remove;
+        final int use = mIntegration.hasUsed() ? 0 : 1;
         this.postAsyn(request, WGUseIntegrationResponse.class, new JHResponseCallBack() {
             @Override
             public void onSuccess(JHResponse response) {
-                handleUseIntegrationResponse((WGUseIntegrationResponse)response, mIntegration.hasUsed() ? 0 : 1);
+                handleUseIntegrationResponse((WGUseIntegrationResponse)response, use);
             }
 
             @Override

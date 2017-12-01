@@ -1,7 +1,9 @@
 package com.weygo.weygophone.pages.order.commit.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,12 @@ import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.common.tools.JHStringUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseViewHolder;
+import com.weygo.weygophone.common.WGConstants;
 import com.weygo.weygophone.common.widget.WGCellStyle6View;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
+import com.weygo.weygophone.pages.common.widget.WGCommonHorizontalListView;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.goodDetail.WGGoodDetailActivity;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDeliverTime;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderDetail;
 import com.weygo.weygophone.pages.order.commit.model.WGCommitOrderPay;
@@ -396,6 +401,12 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             WGHomeContentFloorGoodsColumnView tempView = (WGHomeContentFloorGoodsColumnView) LayoutInflater.from(
                     mContext).inflate(resourceId, parent,
                     false);
+            tempView.setListener(new WGCommonHorizontalListView.OnItemListener() {
+                @Override
+                public void onItemClick(Object object) {
+                    handleTouchGood((WGOrderGoodItem)object);
+                }
+            });
             view = tempView;
         }
         else if (viewType == Item_Type.ITEM_TYPE_Remark.ordinal()) {
@@ -461,6 +472,12 @@ public class WGCommitOrderAdapter extends JHRecyclerViewAdapter {
             return data.mType.ordinal();
         }
         return WGHomeFragmentAdapter.Item_Type.ITEM_TYPE_None.ordinal();
+    }
+
+    void handleTouchGood(WGOrderGoodItem item) {
+        if (mOnItemClickListener instanceof OnItemListener) {
+            ((OnItemListener)mOnItemClickListener).onGoodItem(item);
+        }
     }
 
     void handleTouchAddress(WGAddress data) {

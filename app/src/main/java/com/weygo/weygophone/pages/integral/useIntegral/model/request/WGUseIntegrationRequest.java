@@ -8,7 +8,7 @@ import com.weygo.weygophone.base.WGGuestRequest;
 
 public class WGUseIntegrationRequest extends WGGuestRequest {
 
-    public int remove; //1, 取消  0, 使用
+    public int remove; //1:取消使用；0:使用
 
     public String api() {
         return "checkout/reward?";

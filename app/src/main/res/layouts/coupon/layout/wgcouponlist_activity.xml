@@ -13,18 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
-        
+
         <RelativeLayout
             android:id="@+id/emptyView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">
-            
+
             <ImageView
                 android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x200"
-                android:src="@drawable/shopcart_clean"/>
-            
+                android:layout_height="@dimen/x200" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -36,7 +35,7 @@
             <include
                 android:id="@+id/headerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x44"
                 layout="@layout/wgcouponlist_input_view" />
 
             <android.support.v7.widget.RecyclerView

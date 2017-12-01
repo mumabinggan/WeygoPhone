@@ -312,7 +312,7 @@ public class WGTabBenefitFragment extends WGFragment {
 
         @Override
         public Fragment getFragmentForPage(final int position) {
-            Log.e("-getFragmentForPage--", "" + position);
+//            Log.e("-getFragmentForPage--", "" + position);
             WGClassifyDetailContentFragment fragment = mContentFragmentMap.get(position);
             if (fragment == null) {
                 Log.e("fragment=null", "frag");

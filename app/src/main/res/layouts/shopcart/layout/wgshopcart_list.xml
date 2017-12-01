@@ -74,8 +74,8 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="@dimen/x20"
-                        android:layout_height="@dimen/x20"
+                        android:layout_width="@dimen/x14"
+                        android:layout_height="@dimen/x14"
                         android:src="@drawable/shopcart_clean"/>
 
                     <View

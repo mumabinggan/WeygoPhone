@@ -74,13 +74,14 @@ public class WGAddressListActivity extends WGTitleActivity {
     @Override
     public void handleReturn() {
         super.handleReturn();
-        handleChangeAddress(mChangeAddress);
+        //handleChangeAddress(mChangeAddress);
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        handleChangeAddress(mChangeAddress);
+        //handleChangeAddress(mChangeAddress);
     }
 
     @Override
@@ -152,7 +153,6 @@ public class WGAddressListActivity extends WGTitleActivity {
 
     void handleUse(WGAddress address) {
         handleChangeAddress(address);
-        finish();
     }
 
     void handleChangeAddress(WGAddress address) {
@@ -165,6 +165,7 @@ public class WGAddressListActivity extends WGTitleActivity {
             bundle.putSerializable(WGConstants.WGIntentDataKey, address);
             intent.putExtras(bundle);
             setResult(WGConstants.WGCommitOrderAddressReturn, intent);
+            finish();
         }
     }
 

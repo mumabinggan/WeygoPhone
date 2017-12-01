@@ -437,7 +437,7 @@ public class WGTabHomeFragment extends WGFragment {
 
         @Override
         public Fragment getFragmentForPage(final int position) {
-            Log.e("-getFragmentForPage--", "" + position);
+//            Log.e("-getFragmentForPage--", "" + position);
             WGTabHomeItemFragment fragment = mContentFragmentMap.get(position);
             if (fragment == null) {
                 Log.e("fragment=null", "frag");

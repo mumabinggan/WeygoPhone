@@ -140,7 +140,7 @@ public class WGMainActivity extends WGBaseActivity {
         //this.testPostClassifyGetRequest();
         getWindow();
 
-        Log.e("==versioname==", JHDeviceUtils.getInstance().getVersionName());
+//        Log.e("==versioname==", JHDeviceUtils.getInstance().getVersionName());
         if (WGApplicationUserUtils.getInstance().isLogined()) {
             WGApplicationRequestUtils.getInstance().loadUserInfoOnCompletion(this, new WGOnUserInfoCompletionInteface() {
                 @Override

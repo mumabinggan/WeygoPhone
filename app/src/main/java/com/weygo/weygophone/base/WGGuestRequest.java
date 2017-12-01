@@ -9,4 +9,5 @@ import com.weygo.weygophone.common.WGApplicationUserUtils;
 
 public class WGGuestRequest extends WGRequest {
     public String sessionKey = WGApplicationUserUtils.getInstance().sessionKey();
+    //public String sessionKey = "app_d6eaeb1f7aec39172d6f491250a91ce0";
 }

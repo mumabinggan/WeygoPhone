@@ -167,9 +167,14 @@ public class WGEditAddressActivity extends WGTitleActivity {
     }
 
     void handleCity() {
+        int index = 0;
         List<String> list = new ArrayList();
-        for (WGAddressCityListItem item : mCityList) {
+        for (int num = 0; num < mCityList.size(); ++num) {
+            WGAddressCityListItem item = mCityList.get(num);
             list.add(item.name);
+            if (item.value.equals(mAddress.cityId)) {
+                index = num;
+            }
         }
         if (list.size() > 0) {
             WGOptionPickerView picker = new WGOptionPickerView(this, list);
@@ -179,6 +184,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
                     handleSelectedCity(index, item);
                 }
             });
+            picker.setSelectedIndex(index);
             picker.show();
         }
     }
@@ -203,6 +209,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
                     handleSelectedAscensore(index, item);
                 }
             });
+            picker.setSelectedIndex(mAddress.ascensore);
             picker.show();
         }
     }
@@ -303,7 +310,7 @@ public class WGEditAddressActivity extends WGTitleActivity {
     void handleSuccessAddAddress(WGAddAddressResponse response) {
         Log.e("onSuccess", JSON.toJSONString(response));
         if (response.success()) {
-            if (mAddressData != null && mAddressData.needRefresh) {
+            if (mAddressData != null) {
                 Intent intent = getIntent();
                 Bundle bundle = new Bundle();
                 if (response.data != null) {

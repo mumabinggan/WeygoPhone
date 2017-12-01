@@ -81,7 +81,13 @@ public class WGCommitOrderFooterView extends JHRelativeLayout {
             mTotalPriceTV.setText(JHResourceUtils.getInstance().
                     getString(R.string.CommitOrder_Total_Pay) +
                     item.consumePrice.currentTotalPrice);
-            mReducePriceTV.setText(" " + item.consumePrice.reducePrice + " ");
+            if (JHStringUtils.isNullOrEmpty(item.consumePrice.reducePrice)) {
+                mReducePriceTV.setVisibility(INVISIBLE);
+            }
+            else {
+                mReducePriceTV.setText(" " + item.consumePrice.reducePrice + " ");
+                mReducePriceTV.setVisibility(VISIBLE);
+            }
         }
         if (object == null) {
             mBtn.setEnabled(false);

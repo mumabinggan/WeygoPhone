@@ -82,7 +82,6 @@ public class WGCountDownTimeView extends JHRelativeLayout {
 
         @Override
         public void run() {
-            Log.e("==========", "sss");
             if (mDistanceTime <= 0) {
                 this.timer.cancel();
             }

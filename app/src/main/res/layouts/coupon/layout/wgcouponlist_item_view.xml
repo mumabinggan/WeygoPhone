@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/x107"
     android:layout_marginLeft="@dimen/x7"
-    android:layout_marginTop="@dimen/x7"
+    android:layout_marginBottom="@dimen/x7"
     android:layout_marginRight="@dimen/x7">
 
     <ImageView
+        android:id="@+id/couponListItemBgIV"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x107"
         android:src="@drawable/coupon_list_bg"/>

@@ -9,9 +9,11 @@ import com.weygo.common.base.JHBaseViewHolder;
 import com.weygo.common.base.JHRecyclerViewAdapter;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseViewHolder;
+import com.weygo.weygophone.common.widget.WGCellStyle5View;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.address.list.adapter.WGAddressListAdapter;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
+import com.weygo.weygophone.pages.coupon.widget.WGCouponListItemView;
 
 import java.util.List;
 
@@ -20,6 +22,14 @@ import java.util.List;
  */
 
 public class WGCouponlistAdapter extends JHRecyclerViewAdapter {
+
+    public interface OnListener {
+        void onItem(WGCoupon coupon);
+    }
+    OnListener mListener;
+    public void setListener(OnListener listener) {
+        mListener = listener;
+    }
 
     List<WGCoupon> mData;
     public void setData(List<WGCoupon> data) {
@@ -35,11 +45,23 @@ public class WGCouponlistAdapter extends JHRecyclerViewAdapter {
     @Override
     public JHBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int resourceId = R.layout.wgcouponlist_item_view;
-        View view = LayoutInflater.from(
+        WGCouponListItemView view = (WGCouponListItemView)LayoutInflater.from(
                 mContext).inflate(resourceId, parent,
                 false);
+        view.setListener(new WGCouponListItemView.OnItemListener() {
+            @Override
+            public void onTouch(WGCoupon coupon) {
+                handleTouch(coupon);
+            }
+        });
         WGBaseViewHolder holder = new WGBaseViewHolder(view);
         return holder;
+    }
+
+    void handleTouch(WGCoupon coupon) {
+        if (mListener != null) {
+            mListener.onItem(coupon);
+        }
     }
 
     @Override

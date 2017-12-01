@@ -89,11 +89,8 @@ public class WGApplicationRequestUtils {
     public String sign(Map<String, Object> map) {
         StringBuffer buffer = new StringBuffer(this.signPrefix());
         buffer.append("___store");
-        Log.e("___store", "___store");
         String storeValue = JHResourceUtils.getInstance().getString(R.string.request_StoreValue);
-        //String storeValue = "mobilecn";
-        //storeValue = mContext.getResources().getString(R.string.request_StoreValue);
-        Log.e("storeValue", storeValue);
+//        storeValue = "mobilecn";
         buffer.append(storeValue);
         TreeMap<String, Object> sortMap = new TreeMap<>(map);
         for (Map.Entry<String, Object> m :sortMap.entrySet())  {
@@ -105,9 +102,11 @@ public class WGApplicationRequestUtils {
                 buffer.append(m.getValue());
             }
         }
-        Log.e("----buffer----", buffer.toString());
+//        Log.e("----buffer----", buffer.toString());
         sortMap.clear();
+//        String baseString = "sign=" + JHStringUtils.md5(buffer.toString());
         String baseString = "sign=" + JHStringUtils.md5(buffer.toString()) + "&___store=" + storeValue;
+
         return baseString;
     }
 

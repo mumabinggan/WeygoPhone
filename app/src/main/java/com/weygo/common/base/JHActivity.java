@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -57,6 +58,8 @@ public class JHActivity extends FragmentActivity {
 
     public View mLoadingContentView;
 
+    Handler mHandler;
+
     class JHBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive (Context context, Intent intent) {
@@ -67,6 +70,8 @@ public class JHActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mHandler = new Handler();
 
         initContentView();
 
@@ -106,6 +111,26 @@ public class JHActivity extends FragmentActivity {
 
     }
 
+    Runnable showLoadingRunnable = new Runnable(){
+        @Override
+        public void run() {
+            mLoadingContentView = findViewById(R.id.contentView);
+            if (mLoadingContentView != null) {
+                WGLoadingView.show(mLoadingContentView);
+            }
+        }
+    };
+
+    Runnable hiddenLoadingRunnable = new Runnable(){
+        @Override
+        public void run() {
+            mLoadingContentView = findViewById(R.id.contentView);
+            if (mLoadingContentView != null) {
+                WGLoadingView.hidden(mLoadingContentView);
+            }
+        }
+    };
+
     public void showWarning(int resId) {
         showWarning(JHResourceUtils.getInstance().getString(resId));
     }
@@ -115,17 +140,19 @@ public class JHActivity extends FragmentActivity {
     }
 
     public void showLoading() {
-        mLoadingContentView = findViewById(R.id.contentView);
-        if (mLoadingContentView != null) {
-            WGLoadingView.show(mLoadingContentView);
-        }
+        new Thread(){
+            public void run(){
+                mHandler.post(showLoadingRunnable);
+            }
+        }.start();
     }
 
     public void hideLoading() {
-        mLoadingContentView = findViewById(R.id.contentView);
-        if (mLoadingContentView != null) {
-            WGLoadingView.hidden(mLoadingContentView);
-        }
+        new Thread(){
+            public void run(){
+                mHandler.post(hiddenLoadingRunnable);
+            }
+        }.start();
     }
 
     public interface OnTouchAlertListener extends JHInterface {
@@ -244,7 +271,6 @@ public class JHActivity extends FragmentActivity {
 
                 if (showLoading) {
                     hideLoading();
-                    //JHDialogUtils.hideLoadingDialog(mShowDialog);
                 }
                 if (callBack != null) {
                     callBack.onSuccess(result);

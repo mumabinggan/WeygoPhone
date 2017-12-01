@@ -8,21 +8,33 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.StringCodec;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.weygo.common.base.JHRequest;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHLocalSettingUtils;
 import com.weygo.common.tools.JHStringUtils;
+import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.base.WGResponse;
 import com.weygo.weygophone.common.WGConstants;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,10 +55,13 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
 
     public JHOKHTTPNewwork(Context context) {
         mContext = context;
+        ClearableCookieJar cookieJar =
+                new JHPersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
         mOkHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)//设置超时时间
-                .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
-                .writeTimeout(10, TimeUnit.SECONDS)//设置写入超时时间
+                .connectTimeout(30, TimeUnit.SECONDS)//设置超时时间
+                .readTimeout(30, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(30, TimeUnit.SECONDS)//设置写入超时时间
+                .cookieJar(cookieJar)
                 .build();
         //初始化Handler
         okHttpHandler = new Handler();
@@ -65,12 +80,14 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
         }
         //补全请求地址
         String requestUrl = String.format("%s%s", originRequest.url(), paramsString.toString());
+//        Log.e("-requestUrl-", requestUrl);
+//        List<Cookie> cookies = mOkHttpClient.cookieJar().loadForRequest(request.url());
         final Request request = new Request.Builder()
                 .get()
                 .tag(originRequest)
                 .url(requestUrl)
+//                .addHeader("Cookie", cookieStringValue())
                 .build();
-        Log.e("-requestUrl-", requestUrl);
         //RequestBody.create(MEDIA_TYPE_JSON, params);
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -107,16 +124,24 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
 //            }
             pos++;
         }
-        Log.e("---paramsString----", paramsString.toString());
+//        Log.e("---paramsString----", paramsString.toString());
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+//        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+//        Log.e("==originUrl==", originRequest.url());
         //补全请求地址
         RequestBody body = RequestBody.create(mediaType, paramsString.toString());
         final Request request = new Request.Builder()
                 .post(body)
                 .tag(originRequest)
                 .url(originRequest.url())
+//                .header("Cookie", cookieStringValue())
+//                .header("Cookie", cookieStringValue())
+//                                .addHeader("Cookie", "store=mobilecn")
+
+//                .addHeader("Cookie", cookieStringValue())
+//                .addHeader("User-Agent", "zhengy")
+//                .removeHeader("User-Agent").addHeader("User-Agent",getUserAgent())
                 .build();
-        Log.e("==originUrl==", originRequest.url());
         //RequestBody.create(MEDIA_TYPE_JSON, params);
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -131,6 +156,24 @@ public class JHOKHTTPNewwork implements JHBaseNetworkInterface {
             }
         });
         return call;
+    }
+
+    private  static String getUserAgent(){
+        String userAgent = "";
+        StringBuffer sb = new StringBuffer();
+        userAgent = System.getProperty("http.agent");//Dalvik/2.1.0 (Linux; U; Android 6.0.1; vivo X9L Build/MMB29M)
+
+        for (int i = 0, length = userAgent.length(); i < length; i++) {
+            char c = userAgent.charAt(i);
+            if (c <= '\u001f' || c >= '\u007f') {
+                sb.append(String.format("\\u%04x", (int) c));
+            } else {
+                sb.append(c);
+            }
+        }
+
+        Log.e("User-Agent","User-Agent: "+ sb.toString());
+        return sb.toString();
     }
 
     void failCallBack(Call call, final JHResponseCallBack callBack, IOException e) {

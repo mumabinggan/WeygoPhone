@@ -49,10 +49,10 @@ public class WGOrderItemPriceView extends RelativeLayout {
         if (item != null) {
             mDeliverPriceTextView.setText(item.deliverPrice);
             String totalString = JHResourceUtils.getInstance().getString(R.string.OrderList_Total);
-            mTotalCountTextView.setText(String.format(totalString, item.totalPrice));
+            mTotalPriceTextView.setText(String.format(totalString, item.totalPrice));
             String totalCountString = JHResourceUtils.getInstance().getString(R.string.OrderList_How_Many_Good);
             if (item.goods != null) {
-                mTotalCountTextView.setText(String.format(totalCountString, item.goods.size()));
+                mTotalCountTextView.setText(String.format(totalCountString, item.getGoodsCount()));
             }
         }
     }

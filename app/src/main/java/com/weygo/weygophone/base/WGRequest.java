@@ -41,7 +41,7 @@ public class WGRequest extends JHRequest {
     // no need to override, except your url is not format with: scheme://domain/path/api
     public String url() {
         String url = this.scheme() + "://" + this.host() + "/" + this.userPath() + "/" + this.api() + this.apiSuffix();
-        Log.e("--url--", url);
+//        Log.e("--url--", url);
         return url;
     }
 

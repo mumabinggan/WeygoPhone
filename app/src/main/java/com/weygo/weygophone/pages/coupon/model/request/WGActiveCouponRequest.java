@@ -13,4 +13,8 @@ public class WGActiveCouponRequest extends WGGuestRequest {
     public int remove;          //0：添加优惠券; 1: 取消优惠券
 
     public long couponId;
+
+    public String api() {
+        return "checkout/discount?";
+    }
 }

@@ -29,4 +29,16 @@ public class WGOrderListItem extends WGObject {
         }
         return false;
     }
+
+    //for self use
+    int goodsCount = 0;
+    public int getGoodsCount() {
+        if (goodsCount != 0) {
+            return goodsCount;
+        }
+        for (WGOrderGoodItem item : goods) {
+            goodsCount += item.goodCount;
+        }
+        return goodsCount;
+    }
 }

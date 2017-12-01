@@ -110,6 +110,7 @@
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
         android:gravity="center"
+        android:textAlignment="center"
         android:background="@drawable/address_use_bg"/>
 
     <TextView
@@ -120,6 +121,7 @@
         android:layout_below="@+id/lineView"
         android:layout_marginTop="@dimen/x10"
         android:textAlignment="center"
+        android:gravity="center"
         android:background="@drawable/address_default_bg"/>
 
     <TextView

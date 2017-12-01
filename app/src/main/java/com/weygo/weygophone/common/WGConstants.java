@@ -98,7 +98,5 @@ public class WGConstants {
     //绑定类型
     public static final int WGBindTypeFaceBook = 1;
     public static final int WGBindTypeWechat = 2;
-
-
 }
 

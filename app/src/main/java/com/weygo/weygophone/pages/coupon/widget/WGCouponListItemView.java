@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.weygo.common.base.JHRelativeLayout;
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.address.edit.model.WGAddress;
 import com.weygo.weygophone.pages.coupon.model.WGCoupon;
@@ -16,6 +18,8 @@ import com.weygo.weygophone.pages.coupon.model.WGCoupon;
  */
 
 public class WGCouponListItemView extends JHRelativeLayout {
+
+    ImageView mBgIV;
 
     TextView mNameTV;
 
@@ -30,7 +34,7 @@ public class WGCouponListItemView extends JHRelativeLayout {
     WGCoupon mData;
 
     public interface OnItemListener {
-        void onTouch();
+        void onTouch(WGCoupon coupon);
     }
 
     OnItemListener mListener;
@@ -53,6 +57,7 @@ public class WGCouponListItemView extends JHRelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        mBgIV = (ImageView) findViewById(R.id.couponListItemBgIV);
         mNameTV = (TextView) findViewById(R.id.nameTV);
         mPriceTV = (TextView) findViewById(R.id.priceTV);
         mCountTV = (TextView) findViewById(R.id.countTV);
@@ -68,7 +73,7 @@ public class WGCouponListItemView extends JHRelativeLayout {
 
     void handleTouch() {
         if (mListener != null) {
-            mListener.onTouch();
+            mListener.onTouch(mData);
         }
     }
 
@@ -81,5 +86,13 @@ public class WGCouponListItemView extends JHRelativeLayout {
         mCountTV.setText(mData.residueCount + "/" + mData.totalCount);
         mDesTV.setText(mData.briefDescription);
         mTimeTV.setText(mData.couponCode + " " + mData.time);
+        int resId = 0;
+        if (mData.isSelected) {
+            resId = R.drawable.coupon_list_selected_bg;
+        }
+        else {
+            resId = R.drawable.coupon_list_bg;
+        }
+        mBgIV.setImageDrawable(JHResourceUtils.getInstance().getDrawable(resId));
     }
 }

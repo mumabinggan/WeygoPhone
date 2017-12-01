@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.weygo.weygophone.pages.coupon.widget.WGCouponListInputView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x38"
+    android:layout_height="@dimen/x45"
     android:gravity="center">
 
     <EditText
         android:id="@+id/inputET"
-        android:layout_width="@dimen/x224"
+        android:layout_width="@dimen/x214"
         android:layout_height="@dimen/x24"
         android:textColor="@color/WGAppBaseTitleAAAAColor"
         android:textSize="@dimen/ft13"
-        android:gravity="center_horizontal"
-        android:hint="@string/CouponList_Input_Holder"/>
+        android:gravity="center_vertical|left"
+        android:hint="@string/CouponList_Input_Holder"
+        android:background="#F8FAFA" />
 
     <View
         android:layout_width="@dimen/x10"

@@ -12,7 +12,6 @@
         android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_weight="1"
         android:background="#ffffff">
 
@@ -68,17 +67,17 @@
                         android:layout_height="1dip"
                         android:background="@color/separate_color"></View>
 
-                    <EditText
-                        android:id="@+id/countryET"
+                    <TextView
+                        android:id="@+id/countryTV"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x41"
                         android:textColor="#000000"
                         android:textSize="@dimen/ft12"
-                        android:hint="@string/Address_Italia"
-                        android:enabled="false"
+                        android:text="@string/Address_Italia"
                         android:background="@null"
                         android:paddingLeft="@dimen/x13"
-                        android:paddingRight="@dimen/x13"/>
+                        android:paddingRight="@dimen/x13"
+                        android:gravity="center_vertical"/>
 
                     <View
                         android:layout_width="match_parent"

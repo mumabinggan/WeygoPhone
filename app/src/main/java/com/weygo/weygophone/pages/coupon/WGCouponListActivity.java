@@ -83,10 +83,10 @@ public class WGCouponListActivity extends WGTitleActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGCouponlistAdapter(this, mData);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new JHRecyclerViewAdapter.OnBaseItemClickListener() {
+        mAdapter.setListener(new WGCouponlistAdapter.OnListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                handleClick(position);
+            public void onItem(WGCoupon coupon) {
+                handleClick(coupon);
             }
         });
         mHeaderView = (WGCouponListInputView) findViewById(R.id.headerView);
@@ -108,9 +108,8 @@ public class WGCouponListActivity extends WGTitleActivity {
         mEmptyView.setVisibility(View.INVISIBLE);
     }
 
-    void handleClick(int position) {
+    void handleClick(WGCoupon coupon) {
         if (mIsSelected) {
-            WGCoupon coupon = mData.get(position);
             if (coupon != null) {
                 loadUseCoupon(coupon, coupon.isSelected);
             }
@@ -132,15 +131,13 @@ public class WGCouponListActivity extends WGTitleActivity {
 
     void refreshUI() {
         mAdapter.setData(mData);
-        if (!mIsSelected) {
-            if (mData == null || mData.size() == 0) {
-                mContentView.setVisibility(View.INVISIBLE);
-                mEmptyView.setVisibility(View.VISIBLE);
-            }
-            else {
-                mContentView.setVisibility(View.VISIBLE);
-                mEmptyView.setVisibility(View.INVISIBLE);
-            }
+        if (mData == null || mData.size() == 0) {
+            mContentView.setVisibility(View.INVISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mContentView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.INVISIBLE);
         }
     }
 

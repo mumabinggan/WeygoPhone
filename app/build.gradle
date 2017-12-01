@@ -74,6 +74,8 @@ repositories {
     maven {
         // Zendesk public repo
         url 'https://zendesk.artifactoryonline.com/zendesk/repo/'
+
+        mavenCentral()
     }
 }
 
@@ -140,6 +142,8 @@ dependencies {
     compile 'com.android.support:multidex:'
 
     compile 'com.dyhdyh.loadingbar:loadingbar:1.4.6'
+
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }
 
 configurations.all {
