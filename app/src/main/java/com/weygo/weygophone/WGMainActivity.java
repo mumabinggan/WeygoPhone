@@ -215,6 +215,23 @@ public class WGMainActivity extends WGBaseActivity {
                 fragment.handleSwitchHomeItemTab((WGHomeFloorContentClassifyItem)data);
             }
         }
+        else if (notification == WGConstants.WGNotificationTypeLogin) {
+            WGApplicationRequestUtils.getInstance().loadShopCartCount(new WGApplicationRequestUtils.WGOnCompletionInteface() {
+                @Override
+                public void onSuccessCompletion(WGResponse response) {
+                    //handleShopCartCount();
+                }
+
+                @Override
+                public void onFailCompletion(WGResponse response) {
+
+                }
+            });
+        }
+        else if (notification == WGConstants.WGNotificationTypeLogout) {
+            WGApplicationUserUtils.getInstance().reset();
+            WGApplicationGlobalUtils.getInstance().reset();
+        }
     }
 
     void initDrawerLayout() {

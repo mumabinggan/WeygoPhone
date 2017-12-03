@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -14,10 +15,13 @@ import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.weygo.common.base.JHPaddingDecoration;
 import com.weygo.common.base.JHResponse;
+import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHDialogUtils;
 import com.weygo.common.tools.JHResourceUtils;
+import com.weygo.common.tools.JHStringUtils;
 import com.weygo.common.tools.network.JHRequestError;
 import com.weygo.common.tools.network.JHResponseCallBack;
+import com.weygo.common.widget.JHBasePopupWindow;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGResponse;
@@ -25,7 +29,10 @@ import com.weygo.weygophone.base.WGTitleActivity;
 import com.weygo.weygophone.common.WGApplicationAnimationUtils;
 import com.weygo.weygophone.common.WGApplicationGlobalUtils;
 import com.weygo.weygophone.common.WGApplicationRequestUtils;
+import com.weygo.weygophone.common.WGApplicationUserUtils;
 import com.weygo.weygophone.common.WGConstants;
+import com.weygo.weygophone.common.widget.WGPostPopView;
+import com.weygo.weygophone.pages.goodDetail.model.response.WGAddGoodToCartResponse;
 import com.weygo.weygophone.pages.order.detail.adapter.WGOrderDetailAdapter;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
@@ -45,6 +52,7 @@ import com.weygo.weygophone.pages.order.list.model.request.WGOrderListRequest;
 import com.weygo.weygophone.pages.order.list.model.response.WGOrderListResponse;
 import com.weygo.weygophone.pages.order.list.widget.WGShopCartNavigationView;
 import com.weygo.weygophone.pages.shopcart.WGShopCartListActivity;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -113,6 +121,12 @@ public class WGOrderDetailActivity extends WGBaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WGOrderDetailAdapter(this, mData);
+        mAdapter.setListener(new WGOrderDetailAdapter.OnItemListener() {
+            @Override
+            public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+                handlePurchase(item, view, fromPoint);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
         mRebuyView = (WGOrderDetailRebuyView) findViewById(R.id.rebuyView);
         mRebuyView.setListener(new WGOrderDetailRebuyView.OnRebuyListener() {
@@ -121,6 +135,49 @@ public class WGOrderDetailActivity extends WGBaseActivity {
                 loadRebuyOrder(view, mData);
             }
         });
+    }
+
+    void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+        if (JHStringUtils.isNullOrEmpty(WGApplicationUserUtils.getInstance().currentPostCode())) {
+            WGPostPopView popupView = (WGPostPopView) getLayoutInflater().inflate(R.layout.common_cap_pop, null);
+            popupView.setListener(new WGPostPopView.OnItemListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+            });
+            JHBasePopupWindow window = new JHBasePopupWindow(popupView,
+                    JHAdaptScreenUtils.devicePixelWidth(this),
+                    JHAdaptScreenUtils.devicePixelHeight(this));
+            popupView.setPopupWindow(window);
+            window.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+            return;
+        }
+        WGApplicationRequestUtils.getInstance().loadAddGoodToCart(item.id, 1, new WGApplicationRequestUtils.WGOnCompletionInteface() {
+            @Override
+            public void onSuccessCompletion(WGResponse response) {
+                handleShopCartCount((WGAddGoodToCartResponse) response);
+            }
+
+            @Override
+            public void onFailCompletion(WGResponse response) {
+
+            }
+        });
+
+        int[] distance = {0,0};
+        int[] endPoint = mNavigationBar.getShopCartViewPoint();
+        WGApplicationAnimationUtils.add(this, mLayout, fromPoint,
+                item.pictureURL, R.drawable.common_add_cart, endPoint, distance);
+    }
+
+    void handleShopCartCount(WGAddGoodToCartResponse response) {
+        if (response.success()) {
+            WGApplicationGlobalUtils.getInstance().handleShopCartGoodCount(response.data.goodCount);
+        }
+        else {
+            showWarning(response.message);
+        }
     }
 
     void loadOrderDetail() {

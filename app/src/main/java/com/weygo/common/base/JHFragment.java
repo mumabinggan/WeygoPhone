@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,9 +39,12 @@ public class JHFragment extends Fragment {
 
     View mParentView;
 
+    Handler mHandler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initData();
+        mHandler = new Handler();
         mParentView = inflater.inflate(fragmentResId(), container, false);
         initSubView(mParentView);
         loadRequest();
@@ -72,17 +76,35 @@ public class JHFragment extends Fragment {
     }
 
     public void showLoading() {
-        mLoadingContentView = mParentView.findViewById(R.id.contentView);
-        if (mLoadingContentView != null) {
-            WGLoadingView.show(mLoadingContentView);
-        }
+        new Thread(){
+            public void run(){
+                mHandler.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        mLoadingContentView = mParentView.findViewById(R.id.contentView);
+                        if (mLoadingContentView != null) {
+                            WGLoadingView.show(mLoadingContentView);
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     public void hideLoading() {
-        mLoadingContentView = mParentView.findViewById(R.id.contentView);
-        if (mLoadingContentView != null) {
-            WGLoadingView.hidden(mLoadingContentView);
-        }
+        new Thread(){
+            public void run(){
+                mHandler.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        mLoadingContentView = mParentView.findViewById(R.id.contentView);
+                        if (mLoadingContentView != null) {
+                            WGLoadingView.hidden(mLoadingContentView);
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     //Request

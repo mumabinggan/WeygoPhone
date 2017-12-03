@@ -55,4 +55,6 @@
         android:textAlignment="center"
         android:textColor="@color/WGAppBaseTitleAAAColor"/>
 
+
+
 </com.weygo.weygophone.pages.order.detail.widget.WGOrderDetailGoodItemView>

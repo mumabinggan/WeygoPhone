@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
@@ -51,10 +52,18 @@ public class WGOrderDetailUserInfoView extends LinearLayout {
 
     public void showWithData(WGOrderDeliver deliver) {
         if (deliver != null) {
-            mDeliverNameTV.setText(deliver.userName);
-            mDeliverAddressTV.setText(deliver.userAddress);
-            mDeliverPhoneTV.setText(deliver.phone);
-            mDeliverTimeTV.setText(deliver.deliverTime);
+            String nameTitle = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Deliver_Name);
+            mDeliverNameTV.setText(String.format(nameTitle,deliver.userName));
+            String addressTitle = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Deliver_Address);
+            mDeliverAddressTV.setText(String.format(addressTitle, deliver.userAddress));
+            String phoneTitle = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Deliver_Phone);
+            mDeliverPhoneTV.setText(String.format(phoneTitle, deliver.phone));
+            String timeTitle = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Deliver_Time);
+            mDeliverTimeTV.setText(String.format(timeTitle, deliver.deliverTime));
         }
     }
 }

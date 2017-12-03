@@ -1,8 +1,6 @@
 package com.weygo.common.base;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -60,13 +58,6 @@ public class JHActivity extends FragmentActivity {
 
     Handler mHandler;
 
-    class JHBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive (Context context, Intent intent) {
-            handleBroadcastLoadType(context, intent);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +84,12 @@ public class JHActivity extends FragmentActivity {
     private void initBroadcast() {
         if (mRefreshReceiver == null) {
             mRefreshReceiver = new JHBroadcastReceiver();
+            mRefreshReceiver.setListener(new JHBroadcastReceiver.OnListener() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    handleBroadcastLoadType(context, intent);
+                }
+            });
             IntentFilter filter = new IntentFilter();
             filter.addAction(mRefreshAction);
             registerReceiver(mRefreshReceiver, filter);
@@ -352,6 +349,7 @@ public class JHActivity extends FragmentActivity {
         didReceivedRefreshNotification(notification);
     }
 
+    //now refresh notification
     public void didReceivedNotification(int notification) {
 
     }

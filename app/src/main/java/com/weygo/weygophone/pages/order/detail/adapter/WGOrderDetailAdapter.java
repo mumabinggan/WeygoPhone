@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.order.detail.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.weygo.weygophone.pages.order.list.widget.WGOrderListGoodsView;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.adapter.WGSubClassifyAdapter;
 import com.weygo.weygophone.pages.tabs.classify.model.WGClassifyItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
 
 import java.util.List;
 
@@ -42,6 +44,15 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
     WGOrderDetail mOrderDetail;
 
     boolean mShowMoreGoods;
+
+    public interface OnItemListener {
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint);
+    }
+
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
+    }
 
     public enum Item_Type {
         ITEM_TYPE_None,
@@ -100,9 +111,18 @@ public class WGOrderDetailAdapter extends JHRecyclerViewAdapter {
         }
         else if (viewType == Item_Type.ITEM_TYPE_OrderGoods.ordinal()) {
             resId = R.layout.wgorderdetail_order_gooditem;
-            view = LayoutInflater.from(
+            WGOrderDetailGoodItemView itemView = (WGOrderDetailGoodItemView) LayoutInflater.from(
                     mContext).inflate(resId, parent,
                     false);
+            itemView.setListener(new WGOrderDetailGoodItemView.OnItemListener() {
+                @Override
+                public void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {
+                    if (mListener != null) {
+                        mListener.onPurchase(item, view, fromPoint);
+                    }
+                }
+            });
+            view = itemView;
             holder = new WGOrderDetailViewHolder(view);
         }
         else if (viewType == Item_Type.ITEM_TYPE_OrderGoodsMore.ordinal()) {

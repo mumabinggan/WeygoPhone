@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.weygo.common.base.JHActivity;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.WGApplication;
 import com.weygo.weygophone.WGMainActivity;
@@ -314,6 +315,9 @@ public class WGTabMineFragment extends WGFragment {
 
 
     void handleLogoutCompletion() {
+        JHActivity activity = (JHActivity)getActivity();
+        activity.sendRefreshNotification(WGConstants.WGRefreshNotificationTypeLogout);
+        activity.sendNotification(WGConstants.WGNotificationTypeLogout);
         WGApplicationPageUtils.getInstance().switchTab(0);
     }
 

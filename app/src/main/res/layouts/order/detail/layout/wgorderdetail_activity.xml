@@ -9,25 +9,30 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/contentView"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:divider="#ff000000"
-            android:dividerHeight="10dp"
-            android:layout_weight="1"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/rebuyView"
-            layout="@layout/wgorderdetail_order_rebuy" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ff000000"
+                android:dividerHeight="10dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    </LinearLayout>
+            <include
+                android:id="@+id/rebuyView"
+                layout="@layout/wgorderdetail_order_rebuy" />
 
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

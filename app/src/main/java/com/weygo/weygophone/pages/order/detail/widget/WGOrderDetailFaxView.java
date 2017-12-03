@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.weygo.common.tools.JHResourceUtils;
 import com.weygo.weygophone.R;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
@@ -44,9 +45,15 @@ public class WGOrderDetailFaxView extends LinearLayout {
 
     public void showWithData(WGOrderFax fax) {
         if (fax != null) {
-            mFaxNumberTV.setText(fax.taxCode);
-            mFaxCompanyTV.setText(fax.companyName);
-            mFaxCapTV.setText(fax.cap);
+            String number = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Fax_Number);
+            mFaxNumberTV.setText(String.format(number, fax.taxCode));
+            String company = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Fax_Company);
+            mFaxCompanyTV.setText(String.format(company, fax.companyName));
+            String cap = JHResourceUtils.getInstance()
+                    .getString(R.string.OrderDetail_Fax_Cap);
+            mFaxCapTV.setText(String.format(cap, fax.cap));
         }
     }
 }

@@ -74,4 +74,8 @@ public class WGApplicationGlobalUtils extends Object {
         }
         JHLocalSettingUtils.setLocalSetting(mContext, WGConstants.WGLocalSettingSearchHistory, historyList);
     }
+
+    public void reset() {
+        handleShopCartGoodCount(0);
+    }
 }

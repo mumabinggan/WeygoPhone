@@ -1,6 +1,7 @@
 package com.weygo.weygophone.pages.order.detail.widget;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -16,6 +17,10 @@ import com.weygo.weygophone.pages.collection.widget.WGGoodListView;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDeliver;
 import com.weygo.weygophone.pages.order.detail.model.WGOrderDetail;
 import com.weygo.weygophone.pages.order.list.model.WGOrderGoodItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorBaseContentItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorContentGoodItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGHomeFloorItem;
+import com.weygo.weygophone.pages.tabs.home.model.WGTopicItem;
 
 /**
  * Created by muma on 2017/5/22.
@@ -31,6 +36,16 @@ public class WGOrderDetailGoodItemView extends RelativeLayout {
     TextView mPriceTV;
 
     TextView mReducePriceTV;
+
+    public interface OnItemListener {
+        void onPurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint);
+        //void onGoodItem(WGHomeFloorContentGoodItem item);
+    }
+
+    OnItemListener mListener;
+    public void setListener(OnItemListener listener) {
+        mListener = listener;
+    }
 
     public WGOrderDetailGoodItemView(Context context) {
         this(context, null);
@@ -52,6 +67,19 @@ public class WGOrderDetailGoodItemView extends RelativeLayout {
         mTotalPriceTV = (TextView) findViewById(R.id.totalPriceTV);
         mPriceTV = (TextView) findViewById(R.id.priceTV);
         mReducePriceTV = (TextView) findViewById(R.id.reducePriceTV);
+        mGoodItemView.setListener(new WGGoodListView.GoodListItemOnListener() {
+            @Override
+            public void onTouchShopCart(WGHomeFloorContentGoodItem item, View view, Point point) {
+                if (mListener != null) {
+                    mListener.onPurchase(item, view, point);
+                }
+            }
+
+            @Override
+            public void onTouchItem(WGHomeFloorContentGoodItem item) {
+
+            }
+        });
     }
 
     public void showWithData(WGOrderGoodItem orderGoodItem) {
