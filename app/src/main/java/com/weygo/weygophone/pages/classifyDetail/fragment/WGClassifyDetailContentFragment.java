@@ -67,6 +67,8 @@ public class WGClassifyDetailContentFragment extends WGFragment {
 
     WGClassifyFilterCondition mFilterCondition;
 
+    View mUpIV;
+
     WGClassifyDetailContentAdapter mAdapter;
 
     public interface RefreshListener {
@@ -153,6 +155,7 @@ public class WGClassifyDetailContentFragment extends WGFragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 totalDy += dy;
+                handleScrolled(dx, totalDy);
                 Log.e("---------", "dx:" + dx + "=totalDy:" + totalDy + "vs" + JHAdaptScreenUtils.pixelWidth(getActivity(), 150));
                 int hotHeight = 0;
                 if (mData != null && mData.hasRecommendedArray()) {
@@ -196,6 +199,18 @@ public class WGClassifyDetailContentFragment extends WGFragment {
                 handleVista();
             }
         });
+        mUpIV = view.findViewById(R.id.upIV);
+        mUpIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+    }
+
+    void handleScrolled(int dx, int dy) {
+        int height = 352;
+        mUpIV.setVisibility((dy - height > 0) ? View.VISIBLE : View.INVISIBLE);
     }
 
     public void stopRefreshing() {

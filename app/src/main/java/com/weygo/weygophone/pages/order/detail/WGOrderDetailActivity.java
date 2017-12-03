@@ -75,6 +75,8 @@ public class WGOrderDetailActivity extends WGBaseActivity {
 
     WGOrderDetailRebuyView mRebuyView;
 
+    View mUpIV;
+
     long mOrderId;
 
     @Override
@@ -120,6 +122,15 @@ public class WGOrderDetailActivity extends WGBaseActivity {
         });
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int totalDy = 0;
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                totalDy -= dy;
+                handleScrolled(dx, dy);
+            }
+        });
         mAdapter = new WGOrderDetailAdapter(this, mData);
         mAdapter.setListener(new WGOrderDetailAdapter.OnItemListener() {
             @Override
@@ -135,6 +146,18 @@ public class WGOrderDetailActivity extends WGBaseActivity {
                 loadRebuyOrder(view, mData);
             }
         });
+        mUpIV = findViewById(R.id.upIV);
+        mUpIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+    }
+
+    void handleScrolled(int dx, int dy) {
+        int height = 352;
+        mUpIV.setVisibility((dy + height < 0) ? View.VISIBLE : View.INVISIBLE);
     }
 
     void handlePurchase(WGHomeFloorContentGoodItem item, View view, Point fromPoint) {

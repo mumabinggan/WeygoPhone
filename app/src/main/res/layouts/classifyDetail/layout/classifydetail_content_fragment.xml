@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,9 +25,13 @@
         </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 
         <ImageView
-            android:layout_width="@dimen/x100"
-            android:layout_height="@dimen/x100"
-            android:background="#00ff00"
+            android:id="@+id/upIV"
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/x40"
+            android:src="@drawable/scroll_up_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x20"
+            android:layout_alignParentRight="true"
             android:visibility="invisible"/>
 
         <include
@@ -35,6 +39,6 @@
             android:visibility="invisible"
             layout="@layout/classifydetail_filter_view" />
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dyhdyh.widget.loading.bar.LoadingBar;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -61,6 +63,8 @@ public class WGTabHomeItemFragment extends WGFragment {
     protected RecyclerView mRecyclerView;
     protected WGHomeFragmentAdapter mAdapter;
 
+    View mUpIV;
+
     protected WGHome mData;
 
     public interface OnListener {
@@ -101,6 +105,20 @@ public class WGTabHomeItemFragment extends WGFragment {
                 JHDividerItemDecoration.VERTICAL_LIST));
         //mRecyclerView.setBackgroundColor(Color.RED);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int totalDy = 0;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                totalDy -= dy;
+                handleScrolled(dx, totalDy);
+            }
+        });
         mAdapter = new WGHomeFragmentAdapter(getContext(), null);
         ((SimpleItemAnimator)mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mAdapter.setListener(new WGHomeFragmentAdapter.OnItemListener() {
@@ -148,6 +166,19 @@ public class WGTabHomeItemFragment extends WGFragment {
                 handleOnRefresh();
             }
         });
+
+        mUpIV = view.findViewById(R.id.upIV);
+        mUpIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+    }
+
+    void handleScrolled(int dx, int dy) {
+        int height = 352;
+        mUpIV.setVisibility((dy + height < 0) ? View.VISIBLE : View.INVISIBLE);
     }
 
     void handleCarouselFigures(int index) {

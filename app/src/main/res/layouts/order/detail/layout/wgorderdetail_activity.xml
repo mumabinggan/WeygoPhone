@@ -9,7 +9,7 @@
         android:id="@+id/titlebar"
         layout="@layout/common_title_navigationbar" />
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -33,6 +33,16 @@
 
         </LinearLayout>
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/upIV"
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/x40"
+            android:src="@drawable/scroll_up_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x20"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

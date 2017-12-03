@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,13 +25,15 @@
         </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 
         <ImageView
-            android:layout_width="@dimen/x100"
-            android:layout_height="@dimen/x100"
-            android:background="#00ff00"
+            android:id="@+id/upIV"
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/x40"
+            android:src="@drawable/scroll_up_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x20"
+            android:layout_alignParentRight="true"
             android:visibility="invisible"/>
 
-    </FrameLayout>
-
-
+    </RelativeLayout>
 
 </LinearLayout>
