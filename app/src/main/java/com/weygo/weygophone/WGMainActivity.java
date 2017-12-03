@@ -31,6 +31,7 @@ import com.weygo.common.base.JHObject;
 import com.weygo.common.base.JHResponse;
 import com.weygo.common.tools.JHAdaptScreenUtils;
 import com.weygo.common.tools.JHDeviceUtils;
+import com.weygo.common.tools.JHUpdateManager;
 import com.weygo.common.widget.JHTabBar;
 import com.weygo.weygophone.base.WGBaseActivity;
 import com.weygo.weygophone.base.WGResponse;
@@ -315,14 +316,16 @@ public class WGMainActivity extends WGBaseActivity {
     }
 
     void handleConfirmUpdate(WGUpdateData data) {
-        try {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(data.linkUrl));
-            startActivity(i);
-        } catch (Exception e) {
-            Toast.makeText(this, "您的手机没有安装Android应用市场", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+        //data.linkUrl = "http://gdown.baidu.com/data/wisegame/f98d235e39e29031/baiduxinwen.apk";
+        JHUpdateManager.getInstance(WGMainActivity.this).downloadWithUrl(data.linkUrl);
+//        try {
+//            Intent i = new Intent(Intent.ACTION_VIEW);
+//            i.setData(Uri.parse(data.linkUrl));
+//            startActivity(i);
+//        } catch (Exception e) {
+//            Toast.makeText(this, "您的手机没有安装Android应用市场", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
     }
 
     public void onOptionPicker(View view) {
